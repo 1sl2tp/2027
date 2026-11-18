@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta id="theme-color" name="theme-color" content="#ffffff">
+  <meta name="description" content="2027 Chat — khung giao diện Web sử dụng chung chuẩn thiết kế với Android native.">
+  <title>2027 — Chat</title>
+  <link rel="stylesheet" href="./web/styles.css">
+  <script type="module" src="./web/app.js"></script>
+</head>
+<body>
+<div class="app-shell" id="app">
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="sidebar" id="sidebar" aria-label="Điều hướng trò chuyện">
+    <div class="sidebar-top">
+      <strong class="wordmark">2027</strong>
+      <button class="icon-button mobile-close" id="closeMenu" aria-label="Đóng menu" title="Đóng menu"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <button class="icon-button new-chat" id="newChat" aria-label="Tạo bản nháp mới" title="Tạo bản nháp mới"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+    </div>
+    <nav class="side-nav" aria-label="Chức năng">
+      <button class="side-link is-active" id="sidebarChat" aria-current="page">
+        <svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l1.5-3.5A7.5 7.5 0 1 1 20 11.5Z"/></svg><span>Trò chuyện</span>
+      </button>
+      <button class="side-link" id="sidebarWork">
+        <svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M4 12h16"/></svg><span>Công việc</span>
+      </button>
+      <div class="side-caption">Hội thoại</div>
+      <p class="side-empty">Chưa kết nối dữ liệu</p>
+    </nav>
+    <div class="side-footer"><span class="footer-dot"></span><span>Thiết kế khung</span><span class="version">V01</span></div>
+  </aside>
+
+  <main class="chat-main" id="main">
+    <header class="chat-header">
+      <button class="icon-button" id="openMenu" aria-label="Mở menu" aria-expanded="false" aria-controls="sidebar" title="Mở menu">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </button>
+      <div class="top-tabs" role="tablist" aria-label="Chọn khu vực">
+        <button class="top-tab is-active" id="tabChat" role="tab" aria-selected="true" aria-controls="chatPanel">Trò chuyện</button>
+        <button class="top-tab" id="tabWork" role="tab" aria-selected="false" aria-controls="workPanel">Công việc</button>
+      </div>
+      <div class="header-right">
+        <button class="icon-button" id="searchButton" aria-label="Tìm kiếm" title="Tìm kiếm"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
+        <button class="icon-button" id="themeButton" aria-label="Đổi giao diện sáng tối" title="Đổi giao diện sáng tối"><svg viewBox="0 0 24 24"><path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5 8.5 8.5 0 1 0 20.5 15.2Z"/></svg></button>
+      </div>
+    </header>
+
+    <section class="chat-viewport" id="chatPanel" role="tabpanel" aria-labelledby="tabChat">
+      <div class="conversation-column">
+        <div class="empty-state" aria-label="Trạng thái hội thoại">
+          <span class="empty-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l1.5-3.5A7.5 7.5 0 1 1 20 11.5Z"/></svg></span>
+          <h1>Trò chuyện</h1>
+          <p>Chưa có hội thoại. Bố cục sẵn sàng để kết nối dữ liệu.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chat-viewport" id="workPanel" role="tabpanel" aria-labelledby="tabWork" hidden>
+      <div class="conversation-column">
+        <div class="empty-state">
+          <span class="empty-glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg></span>
+          <h1>Công việc</h1>
+          <p>Vùng nghiệp vụ chưa kết nối. Không hiển thị dữ liệu giả.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="composer-dock" id="composerDock">
+      <form class="composer" id="composerForm">
+        <button class="composer-icon" id="attachButton" type="button" aria-label="Đính kèm tệp" title="Chưa tích hợp đính kèm" disabled>
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <label class="sr-only" for="messageInput">Nội dung tin nhắn</label>
+        <textarea id="messageInput" rows="1" placeholder="Nhắn tin" autocomplete="off" enterkeyhint="enter"></textarea>
+        <button class="composer-icon" id="micButton" type="button" aria-label="Ghi âm" title="Chưa tích hợp ghi âm" disabled>
+          <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M8 21h8"/></svg>
+        </button>
+        <button class="send-button" id="sendButton" type="submit" disabled aria-label="Gửi tin nhắn" title="Chưa kết nối dịch vụ gửi tin">
+          <svg viewBox="0 0 24 24"><path d="m5 12 7-7 7 7M12 5v14"/></svg>
+        </button>
+      </form>
+      <div class="composer-note">2027 · UI-V01</div>
+    </footer>
+  </main>
+</div>
+<dialog class="search-dialog" id="searchDialog" aria-labelledby="searchHeading">
+  <div class="search-head"><h2 id="searchHeading">Tìm kiếm</h2><button class="icon-button" id="closeSearch" aria-label="Đóng tìm kiếm"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <input id="searchInput" type="search" placeholder="Tìm trong hội thoại" aria-label="Tìm trong hội thoại">
+  <p>Chưa có dữ liệu để tìm kiếm.</p>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
