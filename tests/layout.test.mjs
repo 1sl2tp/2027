@@ -30,7 +30,7 @@ test("TypeScript output does not exclude source; Pages copies matching script pa
   const input=config.compilerOptions.rootDir.replace(/^\.\//, "").replace(/\/$/,"");
   assert.ok(!input.startsWith(out+"/") && input!==out, "outDir must not encompass TypeScript source");
   const html=read("index.html");
-  assert.ok(html.includes('src="./'+out+'/app.js"'), "HTML references the compiler output");
+  assert.ok(html.includes('src="./'+out+'/app.js?v=2027-UI-V02"'), "HTML references versioned compiler output");
   const workflow=read(".github/workflows/pages.yml");
   assert.ok(workflow.includes("cp -R "+out+" _site/web/"), "Pages packages the same compiler output");
 });
@@ -48,4 +48,11 @@ test("V02 has a two-level composer and compact mobile header without losing util
   assert.match(css, /\.header-right #searchButton,\.header-right #themeButton\{display:none\}/);
   assert.match(css, /\.composer\-actions\{height:44px/);
   assert.match(css, /\.search-dialog\{[\s\S]*top:calc\(var\(--app-top\)/);
+});
+
+test("preview identifies UI version and busts stale stylesheet and script assets", () => {
+  const html=read("index.html");
+  assert.match(html,/data-ui-version="2027-UI-V02"/);
+  assert.match(html,/styles\.css\?v=2027-UI-V02/);
+  assert.match(html,/dist\/app\.js\?v=2027-UI-V02/);
 });
