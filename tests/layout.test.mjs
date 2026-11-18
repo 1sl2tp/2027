@@ -34,3 +34,18 @@ test("TypeScript output does not exclude source; Pages copies matching script pa
   const workflow=read(".github/workflows/pages.yml");
   assert.ok(workflow.includes("cp -R "+out+" _site/web/"), "Pages packages the same compiler output");
 });
+
+test("V02 has a two-level composer and compact mobile header without losing utilities", () => {
+  const html=read("index.html");
+  const css=read("web/styles.css");
+  const logic=read("web/src/app.ts");
+  assert.match(html, /class="composer-actions"/);
+  assert.ok(html.indexOf('id="messageInput"') < html.indexOf('class="composer-actions"'));
+  for (const id of ["newChatTop","searchMobile","themeMobile"]) {
+    assert.match(html, new RegExp('id="'+id+'"'));
+    assert.match(logic, new RegExp('"'+id+'".*addEventListener'));
+  }
+  assert.match(css, /\.header-right #searchButton,\.header-right #themeButton\{display:none\}/);
+  assert.match(css, /\.composer\-actions\{height:44px/);
+  assert.match(css, /\.search-dialog\{[\s\S]*top:calc\(var\(--app-top\)/);
+});

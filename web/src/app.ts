@@ -1,4 +1,4 @@
-// 2027-UI-V01 — DOM-only chat shell. No remote endpoint, authentication or message sending.
+// 2027-UI-V02 — DOM-only chat shell. No remote endpoint, authentication or message sending.
 type Area = "chat" | "work";
 function find<T extends HTMLElement>(id: string): T {
   const node = document.getElementById(id);
@@ -53,7 +53,7 @@ function showToast(message: string): void {
 }
 function resizeComposer(): void {
   input.style.height = "0px";
-  input.style.height = `${Math.max(44, Math.min(160, input.scrollHeight))}px`;
+  input.style.height = `${Math.max(36, Math.min(144, input.scrollHeight))}px`;
   send.disabled = !input.value.trim();
 }
 function syncViewport(): void {
@@ -79,22 +79,29 @@ tabChat.addEventListener("click", () => selectArea("chat"));
 tabWork.addEventListener("click", () => selectArea("work"));
 find<HTMLButtonElement>("sidebarChat").addEventListener("click", () => selectArea("chat"));
 find<HTMLButtonElement>("sidebarWork").addEventListener("click", () => selectArea("work"));
-find<HTMLButtonElement>("newChat").addEventListener("click", () => {
+function resetDraft(): void {
   input.value = "";
   resizeComposer();
   selectArea("chat");
-  showToast("Đã làm trống bản nháp trên thiết bị. Chưa kết nối gửi tin.");
+  showToast("Đã làm trống bản nháp. Chưa kết nối gửi tin.");
   input.focus();
-});
-find<HTMLButtonElement>("themeButton").addEventListener("click", () => {
+}
+find<HTMLButtonElement>("newChat").addEventListener("click", resetDraft);
+find<HTMLButtonElement>("newChatTop").addEventListener("click", resetDraft);
+function toggleTheme(): void {
   const dark = document.documentElement.dataset.theme === "dark";
   document.documentElement.dataset.theme = dark ? "light" : "dark";
   find<HTMLMetaElement>("theme-color").content = dark ? "#ffffff" : "#161616";
-});
-find<HTMLButtonElement>("searchButton").addEventListener("click", () => {
+}
+function openSearch(): void {
+  setMenu(false);
   search.showModal();
   find<HTMLInputElement>("searchInput").focus();
-});
+}
+find<HTMLButtonElement>("themeButton").addEventListener("click", toggleTheme);
+find<HTMLButtonElement>("themeMobile").addEventListener("click", toggleTheme);
+find<HTMLButtonElement>("searchButton").addEventListener("click", openSearch);
+find<HTMLButtonElement>("searchMobile").addEventListener("click", openSearch);
 find<HTMLButtonElement>("closeSearch").addEventListener("click", () => search.close());
 input.addEventListener("input", resizeComposer);
 form.addEventListener("submit", (event) => {
