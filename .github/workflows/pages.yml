@@ -25,7 +25,8 @@ jobs:
         run: |
           mkdir -p _site/web
           cp index.html _site/
-          cp web/styles.css web/app.js _site/web/
+          cp web/styles.css _site/web/
+          cp -R web/dist _site/web/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

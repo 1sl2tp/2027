@@ -23,3 +23,14 @@ test("native Compose scaffolding uses same fixed layout intentions", () => {
   for(const part of ["imePadding()","navigationBarsPadding()","ChatShell","ChatComposer","56.dp","Color(0xFF171717)"])
     assert.ok(kotlin.includes(part),part);
 });
+
+test("TypeScript output does not exclude source; Pages copies matching script path", () => {
+  const config=JSON.parse(read("tsconfig.json"));
+  const out=config.compilerOptions.outDir.replace(/^\.\//, "").replace(/\/$/,"");
+  const input=config.compilerOptions.rootDir.replace(/^\.\//, "").replace(/\/$/,"");
+  assert.ok(!input.startsWith(out+"/") && input!==out, "outDir must not encompass TypeScript source");
+  const html=read("index.html");
+  assert.ok(html.includes('src="./'+out+'/app.js"'), "HTML references the compiler output");
+  const workflow=read(".github/workflows/pages.yml");
+  assert.ok(workflow.includes("cp -R "+out+" _site/web/"), "Pages packages the same compiler output");
+});

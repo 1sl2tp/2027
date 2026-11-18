@@ -10,7 +10,7 @@ npm run verify
 python3 -m http.server 8000
 ```
 
-Mở `http://localhost:8000/`. `npm run verify` kiểm thử cấu trúc rồi compile TypeScript từ `web/src/app.ts` thành `web/app.js`.
+Mở `http://localhost:8000/`. `npm run verify` kiểm thử cấu trúc rồi compile TypeScript từ `web/src/app.ts` thành `web/dist/app.js`.
 
 ## Android
 
