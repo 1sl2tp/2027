@@ -3,93 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta id="theme-color" name="theme-color" content="#ffffff">
-  <meta name="description" content="2027 Chat — khung giao diện Web sử dụng chung chuẩn thiết kế với Android native.">
-  <title>2027 — Chat V02</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V02">
-  <script type="module" src="./web/dist/app.js?v=2027-UI-V02"></script>
+  <meta name="theme-color" content="#f5f5f4">
+  <meta name="description" content="2027 — Thư viện mẫu khung giao diện UI/UX cho mobile, PWA và desktop.">
+  <title>2027 · Thư viện khung UI</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V03">
+  <script type="module" src="./web/dist/app.js?v=2027-UI-V03"></script>
 </head>
-<body data-ui-version="2027-UI-V02">
-<div class="app-shell" id="app">
-  <div class="scrim" id="scrim" hidden></div>
-  <aside class="sidebar" id="sidebar" aria-label="Điều hướng trò chuyện">
-    <div class="sidebar-top">
-      <strong class="wordmark">2027</strong>
-      <button class="icon-button mobile-close" id="closeMenu" aria-label="Đóng menu" title="Đóng menu"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-      <button class="icon-button new-chat" id="newChat" aria-label="Tạo bản nháp mới" title="Tạo bản nháp mới"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
-    </div>
-    <nav class="side-nav" aria-label="Chức năng">
-      <button class="side-link is-active" id="sidebarChat" aria-current="page">
-        <svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l1.5-3.5A7.5 7.5 0 1 1 20 11.5Z"/></svg><span>Trò chuyện</span>
-      </button>
-      <button class="side-link" id="sidebarWork">
-        <svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M4 12h16"/></svg><span>Công việc</span>
-      </button>
-      <div class="side-caption">Hội thoại</div>
-      <p class="side-empty">Chưa kết nối dữ liệu</p>
-    </nav>
-    <div class="sidebar-utilities">
-      <button class="side-link" id="searchMobile" type="button"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><span>Tìm kiếm</span></button>
-      <button class="side-link" id="themeMobile" type="button"><svg viewBox="0 0 24 24"><path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5 8.5 8.5 0 1 0 20.5 15.2Z"/></svg><span>Giao diện sáng/tối</span></button>
-    </div>
-    <div class="side-footer"><span class="footer-dot"></span><span>2027 · Chat</span><span class="version">V02</span></div>
-  </aside>
-
-  <main class="chat-main" id="main">
-    <header class="chat-header">
-      <button class="icon-button" id="openMenu" aria-label="Mở menu" aria-expanded="false" aria-controls="sidebar" title="Mở menu">
-        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
-      </button>
-      <div class="top-tabs" role="tablist" aria-label="Chọn khu vực">
-        <button class="top-tab is-active" id="tabChat" role="tab" aria-selected="true" aria-controls="chatPanel">Trò chuyện</button>
-        <button class="top-tab" id="tabWork" role="tab" aria-selected="false" aria-controls="workPanel">Công việc</button>
+<body data-ui-version="2027-UI-V03">
+  <div class="library-app" id="app">
+    <header class="site-top">
+      <div class="top-identity">
+        <button class="icon-btn mobile-toggle" id="menuToggle" type="button" aria-label="Mở danh mục" aria-expanded="false"><span class="menu-lines" aria-hidden="true">☰</span></button>
+        <span class="mark">27</span>
+        <span class="wordmark">2027 <span class="slash">/</span> <span class="brand-sub">UI Library</span></span>
       </div>
-      <div class="header-right">
-        <button class="icon-button mobile-new-chat" id="newChatTop" aria-label="Bản nháp mới" title="Bản nháp mới"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l1.5-3.5A7.5 7.5 0 1 1 20 11.5Z"/></svg></button>
-        <button class="icon-button" id="searchButton" aria-label="Tìm kiếm" title="Tìm kiếm"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
-        <button class="icon-button" id="themeButton" aria-label="Đổi giao diện sáng tối" title="Đổi giao diện sáng tối"><svg viewBox="0 0 24 24"><path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5 8.5 8.5 0 1 0 20.5 15.2Z"/></svg></button>
+      <div class="top-actions">
+        <span class="top-note">Thư viện bố cục · 22/11/2026</span>
+        <span class="version-badge">V03</span>
+        <button class="icon-btn" id="themeToggle" type="button" title="Chuyển giao diện sáng / tối" aria-label="Chuyển giao diện sáng tối">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8 8 0 0 1 8.8 4 8 8 0 1 0 20 15.2Z"/></svg>
+        </button>
       </div>
     </header>
-
-    <section class="chat-viewport" id="chatPanel" role="tabpanel" aria-labelledby="tabChat">
-      <div class="conversation-column">
-        <div class="empty-state" aria-label="Trạng thái hội thoại"><p>Chưa có hội thoại</p></div>
-      </div>
-    </section>
-
-    <section class="chat-viewport" id="workPanel" role="tabpanel" aria-labelledby="tabWork" hidden>
-      <div class="conversation-column">
-        <div class="empty-state"><p>Chưa kết nối dữ liệu công việc</p></div>
-      </div>
-    </section>
-
-    <footer class="composer-dock" id="composerDock">
-      <form class="composer" id="composerForm">
-        <label class="sr-only" for="messageInput">Nội dung tin nhắn</label>
-        <textarea id="messageInput" rows="1" placeholder="Nhắn tin" autocomplete="off" enterkeyhint="enter"></textarea>
-        <div class="composer-actions">
-          <button class="composer-icon" id="attachButton" type="button" aria-label="Đính kèm tệp" title="Chưa tích hợp đính kèm" disabled>
-            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-          </button>
-          <div class="composer-end-actions">
-            <button class="composer-icon" id="micButton" type="button" aria-label="Ghi âm" title="Chưa tích hợp ghi âm" disabled>
-              <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M8 21h8"/></svg>
-            </button>
-            <button class="send-button" id="sendButton" type="submit" disabled aria-label="Gửi tin nhắn" title="Chưa kết nối dịch vụ gửi tin">
-              <svg viewBox="0 0 24 24"><path d="m5 12 7-7 7 7M12 5v14"/></svg>
-            </button>
-          </div>
+    <div class="layout">
+      <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+      <aside class="sidebar" id="sidebar" aria-label="Danh mục thư viện">
+        <div class="side-label">THƯ VIỆN</div>
+        <nav class="category-list" id="categoryList" aria-label="Lọc nhóm khung">
+          <button type="button" class="category-item active" data-category="all" aria-current="page"><span class="category-icon">▦</span><span>Tất cả khung</span><span class="category-count" id="countAll">08</span></button>
+          <button type="button" class="category-item" data-category="chat"><span class="category-icon">▤</span><span>Trò chuyện</span></button>
+          <button type="button" class="category-item" data-category="work"><span class="category-icon">▥</span><span>Công việc</span></button>
+          <button type="button" class="category-item" data-category="component"><span class="category-icon">◫</span><span>Thành phần</span></button>
+        </nav>
+        <div class="side-divider"></div>
+        <div class="side-label">TRẠNG THÁI</div>
+        <div class="side-info"><span class="state-dot"></span> Khung mẫu, không kết nối dữ liệu</div>
+        <div class="sidebar-spacer"></div>
+        <div class="side-foot">Khung → Bố cục → Thành phần → Tinh chỉnh</div>
+      </aside>
+      <main class="main" id="main">
+        <div class="main-heading">
+          <div><div class="eyebrow">BỘ SƯU TẬP · GIAO DIỆN</div><h1>Thư viện khung UI</h1><p>Tạo, xem và so sánh cấu trúc giao diện trước khi phát triển chi tiết.</p></div>
+          <div class="heading-counter"><strong id="visibleCount">08</strong><span>mẫu khung</span></div>
         </div>
-      </form>
-      <div class="composer-note">2027 · UI-V02</div>
-    </footer>
-  </main>
-</div>
-<dialog class="search-dialog" id="searchDialog" aria-labelledby="searchHeading">
-  <div class="search-head"><h2 id="searchHeading">Tìm kiếm</h2><button class="icon-button" id="closeSearch" aria-label="Đóng tìm kiếm"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
-  <input id="searchInput" type="search" placeholder="Tìm trong hội thoại" aria-label="Tìm trong hội thoại">
-  <p>Chưa có dữ liệu để tìm kiếm.</p>
-</dialog>
-<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+        <section class="collection" aria-labelledby="collectionHeading">
+          <div class="section-head"><div><h2 id="collectionHeading">Các mẫu khung</h2><p>Chọn một mẫu để xem bố cục và các trạng thái.</p></div><span class="section-meta" id="activeFilterLabel">Tất cả</span></div>
+          <div class="template-grid" id="templateGrid" aria-label="Các mẫu thiết kế"></div>
+        </section>
+        <section class="preview-section" id="previewSection" aria-labelledby="previewHeading">
+          <div class="section-head preview-heading"><div><div class="eyebrow">XEM TRƯỚC</div><h2 id="previewHeading">Khung đang chọn</h2><p id="previewDescription">Bố cục đơn sắc với các vùng chính và phụ.</p></div><span class="current-code" id="currentCode">FR-01</span></div>
+          <div class="preview-toolbar" role="group" aria-label="Công cụ xem trước">
+            <div class="segmented" id="deviceGroup" aria-label="Kích thước màn hình">
+              <button type="button" data-device="phone" class="selected">Mobile</button>
+              <button type="button" data-device="tablet">Tablet</button>
+              <button type="button" data-device="desktop">Desktop</button>
+            </div>
+            <div class="toolbar-spacer"></div>
+            <button type="button" class="tool-btn" id="top2Toggle" aria-pressed="true">Top 2: Bật</button>
+            <button type="button" class="tool-btn" id="keyboardToggle" aria-pressed="false">Bàn phím: Tắt</button>
+            <button type="button" class="tool-btn" id="compareToggle" aria-pressed="false">So sánh</button>
+          </div>
+          <div class="preview-stage" id="previewStage"><div class="preview-empty">Đang dựng khung…</div></div>
+          <div class="preview-foot"><span>Thay đổi chỉ ảnh hưởng bản xem trước.</span><span id="previewSizeLabel">Mobile · 390 × 780</span></div>
+        </section>
+      </main>
+      <aside class="details" aria-label="Chi tiết khung">
+        <div class="details-title">Cấu trúc mẫu</div>
+        <div class="detail-code" id="detailCode">FR-01</div>
+        <h3 id="detailTitle">Chat tập trung</h3>
+        <p id="detailDescription">Khung trò chuyện đơn giản, ưu tiên vùng nội dung.</p>
+        <div class="details-divider"></div>
+        <div class="detail-key">THÀNH PHẦN KHUNG</div>
+        <div class="zone-list">
+          <div><span class="zone-color z1"></span><strong>Top 1</strong><small>Điều hướng chính</small></div>
+          <div><span class="zone-color z2"></span><strong>Top 2</strong><small>Ngữ cảnh, có thể ẩn</small></div>
+          <div><span class="zone-color z3"></span><strong>Nội dung</strong><small>Phần lớn không gian</small></div>
+          <div><span class="zone-color z4"></span><strong>Vùng thao tác</strong><small>Đầu vào / hành động</small></div>
+        </div>
+        <div class="details-divider"></div>
+        <div class="detail-key">NGUYÊN TẮC TRÌNH BÀY</div>
+        <p class="details-caption">Chỉ mô tả cấu trúc cha–con và vị trí. Các ô mờ đại diện nội dung, không phải tin nhắn hay dữ liệu thật.</p>
+        <div class="details-bottom"><span class="state-dot"></span> Đang xây dựng thư viện mẫu</div>
+      </aside>
+    </div>
+  </div>
 </body>
 </html>
