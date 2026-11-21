@@ -1,7 +1,7 @@
 # 2027 — RULES.md
 
 > **Nguồn quy tắc duy nhất (Single Source of Truth)**  
-> Repo: `1sl2tp/2027` · Trạng thái: **R02 / UI-V01 — đang dựng khung** · Ngày: **18/11/2026 (giờ Việt Nam)**  
+> Repo: `1sl2tp/2027` · Trạng thái: **R03 / UI-V03 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
 > Phạm vi: Web App/PWA (TypeScript + HTML + CSS) và Android APK native (Kotlin + Jetpack Compose).
 
 ## RULE 01 — MỘT FILE RULE DUY NHẤT
@@ -187,3 +187,74 @@ flowchart TD
 ### 2.8. CI Android — sửa môi trường build sau V02 (18/11/2026)
 
 Lần chạy GitHub Actions của nhánh APK thất bại ở `android-actions/setup-android@v3`, vì `sdkmanager tools` trả lỗi `Failed to find package 'tools'` trước khi Gradle được chạy. Chỉ thay thế bước chuẩn bị SDK bằng công cụ có sẵn trên runner và cài đúng `platforms;android-35`, `build-tools;35.0.0`; không sửa mã nghiệp vụ hay token. Chỉ đánh dấu APK debug có khi `assembleDebug` và upload artifact thành công. Rollback: hoàn tác riêng bước setup Android nếu có lỗi runner tương thích mới.
+
+
+---
+
+## RULE 03 — NGUYÊN TẮC UX/UI CHO THƯ VIỆN MẪU 2027
+
+**Mã:** \`2027-R03\` · **Ngày:** 22/11/2026 (giờ Việt Nam) · **Trạng thái:** Áp dụng cho thiết kế mẫu; việc đáp ứng từng tiêu chí ở Web/PWA/Android phải được kiểm tra riêng.
+
+### 3.1. Phạm vi và cách sử dụng
+
+- \`2027\` là **kho thư viện mẫu UI/UX**. Giai đoạn hiện tại ưu tiên các mẫu font, cỡ chữ, kiểu chữ, màu nền, thành phần và cấu trúc khung; **không phải** ứng dụng CHAT đã kết nối dữ liệu. Các đặc tả chat trong R02 là tham chiếu lịch sử, không ép mọi mẫu UI phải giống chat.
+- Các ý tưởng của chuyên gia dưới đây là **nguyên tắc thiết kế**, không phải bộ kích thước pixel cố định hoặc lời chứng thực của họ dành cho dự án. Mỗi quy tắc có ví dụ áp dụng riêng cho 2027 và tiêu chí quan sát được.
+- Khi có mâu thuẫn, ưu tiên theo thứ tự: **an toàn/khả năng tiếp cận → hoàn thành tác vụ → nội dung dễ đọc → bố cục và nhất quán → trang trí**. Không tối giản bằng cách che thao tác cần thiết; không tăng chi tiết chỉ để lấp chỗ trống.
+- Chỉ cập nhật rule ở \`RULES.md\`; không tạo file rule song song. Việc sửa rule không tự động cấp phép sửa CHAT production, dữ liệu, gửi thông báo hoặc phát hành APK.
+
+### 3.2. Nguồn tư tưởng đã đối chiếu
+
+| Tác giả/nguồn | Ý chính có thể tham khảo | Nguồn gốc |
+|---|---|---|
+| **Jakob Nielsen** | 10 usability heuristics: trạng thái hệ thống, phù hợp ngôn ngữ thực tế, kiểm soát, nhất quán, ngăn lỗi, nhận biết thay vì nhớ, tối giản | [Nielsen Norman Group — 10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) |
+| **Don Norman** | Discoverability, signifiers, phản hồi, mô hình tư duy, quan hệ tự nhiên giữa điều khiển và kết quả | [Don Norman — Opportunities and Challenges for Touch](https://jnd.org/opportunities-and-challenges-for-touch-and-gesture-based-systems/) · [Design of Everyday Things](https://jnd.org/preface-design-of-everyday-things-revised-edition/) |
+| **Steve Krug** | \`Don't Make Me Think\`: điều hướng dễ hiểu, giảm các câu hỏi không cần thiết cho người dùng | [Tác giả và sách](https://sensible.com/dont-make-me-think/) |
+| **Luke Wroblewski** | Mobile first: giới hạn màn hình buộc ưu tiên tính năng, nội dung và thao tác quan trọng | [Mobile First — Constraints](https://www.lukew.com/mobilefirst/04-chapter-2/index.html) |
+| **Brad Frost** | Atomic Design: atoms, molecules, organisms, templates, pages; nhìn thành phần và toàn thể cùng lúc, **không phải** quy trình tuyến tính bắt buộc | [Atomic Design — Methodology](https://atomicdesign.bradfrost.com/chapter-2/) |
+| **Chuẩn bổ trợ, không phải tác giả nói trên** | WCAG 2.2: tương phản, mục tiêu tương tác; Apple HIG: vùng chạm và chữ có khả năng thích ứng | [W3C WCAG 2.2](https://www.w3.org/TR/WCAG22/) · [Apple HIG Accessibility](https://developer.apple.com/design/human-interface-guidelines/accessibility) |
+
+### 3.3. Các quy tắc thực hành, độc lập với phong cách thị giác
+
+| Mã | Quy tắc ứng dụng trong 2027 | Cách kiểm tra trong thư viện | Cơ sở |
+|---|---|---|---|
+| **UX-01 — Mục tiêu rõ** | Mỗi trang/mẫu phải có mục đích chính, một thứ bậc tiêu đề rõ, hành động chính dễ tìm; thành phần phụ không cạnh tranh sự chú ý. | Nhìn vào mẫu thấy nội dung ưu tiên và thao tác chính mà không cần đọc hướng dẫn dài. | Krug; Nielsen |
+| **UX-02 — Trạng thái hiển thị** | Tùy chọn font, palette, cỡ chữ, nút, tab phải phân biệt trạng thái đang chọn/không chọn; thao tác có phản hồi thật, không báo thành công giả. | Đổi một lựa chọn, cả điều khiển và preview cập nhật đồng bộ; screen reader nhận \`aria-pressed\` hoặc trạng thái phù hợp. | Nielsen; Norman |
+| **UX-03 — Ý nghĩa trước biểu tượng** | Label hành động dùng từ ngữ người dùng hiểu; icon chỉ bổ trợ. Signifier (dấu hiệu trực quan) phải gợi đúng nơi và cách tương tác. | Không cần đoán nút chỉ có biểu tượng lạ; thao tác và kết quả thống nhất. | Norman; Krug |
+| **UX-04 — Nhất quán toàn thư viện** | Cùng chức năng dùng cùng tên, trục căn, token và hành vi ở các mẫu; không tạo nhiều kiểu nút trông giống nhau nhưng có tác dụng khác. | Đặt hai mẫu cạnh nhau, cùng loại thành phần có cùng vai trò và quy tắc. | Nielsen; Frost |
+| **UX-05 — Tránh lỗi, có lối quay lại** | Hành động không hợp lệ được ngăn từ đầu; thay đổi thử nghiệm có thể \`Đặt lại\` hoặc hoàn tác. Thao tác nguy hiểm phải có biện pháp bảo vệ phù hợp. | Thử nhập/sửa/đặt lại; dữ liệu trong preview không bị mất ngoài dự kiến. | Nielsen |
+| **UX-06 — Nhận biết thay vì ghi nhớ** | Các lựa chọn quan trọng, tên nhóm và lựa chọn hiện tại nhìn thấy được; menu phụ chỉ chứa chức năng ít dùng. | Chuyển nhóm mẫu rồi quay lại vẫn biết đang chọn gì, không phải nhớ bước trước. | Nielsen |
+| **UX-07 — Tối giản có chủ đích** | Chỉ giữ thành phần cần cho mục đích của mẫu; khoảng trắng tạo nhóm và nhịp đọc, không tạo vùng rỗng hoặc thanh điều hướng vô ích. | Xóa một thành phần: nếu không giảm khả năng hiểu/thao tác thì có thể bỏ; nếu giảm thì giữ. | Krug; Nielsen |
+| **UX-08 — Mobile first thật** | Thiết kế ở màn hình hẹp và trạng thái bàn phím mở trước, rồi mới mở rộng ra tablet/desktop; hành động thiết yếu luôn tiếp cận được. | So sánh 320/360/390/430px; bật bàn phím, thử ô nhập dài, safe area, xoay ngang; không che nút chính. | Wroblewski + yêu cầu riêng 2027 |
+| **UX-09 — Thành phần có cấp** | Phân biệt token/atom (màu, font, nút), molecule (ô tìm + nút), organism (header/composer), template (khung), page (mẫu với nội dung). Thiết kế và kiểm tra hai chiều: phần ↔ toàn thể. | Sửa token trong một nguồn, các mẫu liên quan thay đổi nhất quán; không nhân bản bản vá CSS cho mỗi trang. | Frost |
+| **UX-10 — Chữ là hệ thống phân cấp** | Tiêu đề, nội dung, nhãn phụ khác nhau có chủ đích về cỡ, đậm, dòng và khoảng cách; hỗ trợ dấu tiếng Việt, xuống dòng và phóng to chữ. Không dùng chữ nhỏ làm giải pháp duy nhất để nhét đủ nội dung. | Thử 4 họ font của V03, độ đậm 400–700, cỡ chữ 13–21px; ở mọi cỡ mẫu phải không chồng/tràn/cắt chữ. | Krug; Apple typography + lựa chọn dự án |
+| **UX-11 — Tương phản đo được** | Với chữ thông thường, mục tiêu **WCAG 2.2 AA ≥ 4.5:1**; với chữ lớn đủ điều kiện, **≥ 3:1**. Không dùng màu sắc làm tín hiệu duy nhất. Palette chỉ là phương án thử đến khi đo và xác nhận độ tương phản cho đúng cặp chữ/nền. | Đo từng cặp chữ–nền của white/warm/mist/dark; đánh dấu \`chưa đạt\` nếu chưa đo, không ghi WCAG PASS theo cảm giác. | W3C WCAG 2.2 |
+| **UX-12 — Vùng chạm và thao tác** | Với mẫu iPhone/iPad, ưu tiên vùng chạm **ít nhất 44×44 pt** theo Apple HIG. Với web, WCAG 2.2 AA dùng ngưỡng **24×24 CSS px hoặc ngoại lệ theo tiêu chí 2.5.8**; đây là hai hệ đo/khuyến nghị khác nhau, không được coi tương đương. Các nút chính trên mobile của dự án ưu tiên hit area khoảng **44 CSS px** khi có đủ diện tích. | Kiểm tra hit box thực tế, khoảng cách các đích, focus bàn phím và khả năng thao tác bằng một tay; icon nhỏ vẫn có vùng chạm đủ lớn. | Apple HIG; W3C WCAG 2.2 + lựa chọn dự án |
+| **UX-13 — Không chồng quyền quản lý vùng** | Shell, Top 1, Top 2, Nội dung, vùng thao tác và overlay phải rõ cha–con; một vùng cuộn chính cho một bề mặt. Top 2 có thể ẩn khi không cần, composer giữ trong vùng nhìn thấy khi bàn phím mở. | Thử nội dung ngắn/dài, mobile/desktop, bàn phím đóng/mở; không double scroll, rung gõ hoặc nội dung bị che. | Áp dụng riêng 2027 từ mobile-first và discoverability |
+| **UX-14 — Mẫu thật về hành vi, trung thực về dữ liệu** | UI Library dùng dữ liệu minh họa/khung trung tính; không giả trạng thái đã gửi, đã lưu máy chủ hay đã thu tiền. Bộ chọn, reset, preview, copy CSS phải hoạt động được hoặc được ghi rõ chưa hỗ trợ. | Từng nút có kết quả đúng nhãn; không network đến backend CHAT/TAPHOA và không dùng dữ liệu khách thật. | Nielsen + giới hạn bảo vệ của dự án |
+
+### 3.4. Quy trình áp dụng khi tạo một mẫu mới
+
+1. **Xác định tác vụ**: người dùng cần xem gì, làm gì, trên thiết bị nào; không bắt đầu bằng màu trước khi biết cấu trúc.
+2. **Dựng khung cha–con**: Shell → Top 1/Top 2 → Nội dung → Thao tác/overlay; xác định vùng được phép co, cuộn, ẩn.
+3. **Chọn token**: font, các cấp cỡ chữ, spacing, palette, radius; ưu tiên dùng biến có sẵn, không nhân bản.
+4. **Tạo trạng thái đối chiếu**: bình thường/đang chọn/focus/disabled; sáng/tối; mobile/rộng; bàn phím đóng/mở nếu có input.
+5. **Kiểm tra bằng chứng**: tương phản, nhãn, vùng chạm, keyboard, overflow, focus, khả năng quay lại; lưu phiên bản mẫu để so sánh trước/sau.
+6. **Mới tinh chỉnh thẩm mỹ**: chỉnh lề, nhịp chữ, viền, độ bo, độ sâu, màu. Không tuyên bố giống 100% một ứng dụng khác khi chưa đo cùng viewport.
+
+### 3.5. Bài kiểm tra đầu tiên — trang Chữ & màu nền V03
+
+- Chọn một trong 4 palette → chỉ vùng preview đổi màu; toàn bộ nhãn và điều khiển thư viện vẫn nhận diện rõ.
+- Chọn System UI/Arial/Georgia/Mono → tiếng Việt còn dấu đúng, không vỡ chữ; thử nội dung dài.
+- Thay cỡ 13–21px, giãn dòng 1.20–1.90 và đậm 400/500/600/700 → thay đổi hiện ngay, không tràn khung mobile.
+- Bản rộng và mobile có cùng nội dung/ý nghĩa; không ép chữ nhỏ vì màn hình hẹp.
+- \`Đặt lại\` khôi phục lựa chọn mặc định; \`Sao chép CSS\` sao chép đúng token hiện hành hoặc báo rõ nếu không được cấp quyền.
+- **Chưa xác nhận** WCAG/thiết bị thật nếu chưa đo; kiểm thử tĩnh/CI không thay cho E4/E5.
+
+### 3.6. Thứ tự ưu tiên, lịch sử và hoàn tác
+
+| Mã | Nội dung | Trạng thái |
+|---|---|---|
+| **2027-R03** | Tổng hợp Nielsen, Norman, Krug, Wroblewski, Frost; cụ thể hóa thành UX-01 đến UX-14 cho kho UI | Đã ghi đặc tả; chỉ ghi E2/E3 sau khi CI thực tế đạt; chưa nghiệm thu thiết bị E4/E5 |
+
+**Ảnh hưởng:** Chỉ tài liệu chuẩn tắc của repo \`2027\` và kiểm thử hợp đồng tương ứng. Không thay giao diện CHAT production, không sửa backend, không thay Android APK. **Hoàn tác:** revert commit tài liệu R03; không tạo file quy tắc mới.
+
