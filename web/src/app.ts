@@ -29,17 +29,17 @@ function el<T extends HTMLElement>(id:string):T {
 const canvas=el<HTMLDivElement>("demoCanvas");
 const sizeRange=el<HTMLInputElement>("sizeRange");
 const leadingRange=el<HTMLInputElement>("leadingRange");
-const status=el<HTMLSpanElement>("statusText");
+const statusEl=el<HTMLSpanElement>("statusText");
 const styleLabel=el<HTMLSpanElement>("activeStyleLabel");
 
 function setChoice(selector:string,active:string,attribute:string):void {
-  for(const item of document.querySelectorAll<HTMLButtonElement>(selector)){
+  for(const item of Array.from(document.querySelectorAll<HTMLButtonElement>(selector))){
     const selected=item.getAttribute(attribute)===active;
     item.classList.toggle("selected",selected);
     item.setAttribute("aria-pressed",String(selected));
   }
 }
-function showStatus(message:string):void {status.textContent=message;}
+function showStatus(message:string):void {statusEl.textContent=message;}
 function render():void {
   const p=palettes[state.palette];
   const sizes={display:Math.round(state.size*2),title:Math.round(state.size*1.5),caption:Math.max(11,state.size-4)};
@@ -81,19 +81,19 @@ function pickFont(value:string):void {
     state.font=value as FontKey;render();showStatus("Font xem trước: "+fonts[state.font].label+".");
   }
 }
-for(const button of document.querySelectorAll<HTMLButtonElement>("[data-palette]")){
+for(const button of Array.from(document.querySelectorAll<HTMLButtonElement>("[data-palette]"))){
   button.addEventListener("click",()=>pickPalette(button.dataset.palette||""));
 }
-for(const button of document.querySelectorAll<HTMLButtonElement>("[data-font]")){
+for(const button of Array.from(document.querySelectorAll<HTMLButtonElement>("[data-font]"))){
   button.addEventListener("click",()=>pickFont(button.dataset.font||""));
 }
-for(const button of document.querySelectorAll<HTMLButtonElement>("[data-weight]")){
+for(const button of Array.from(document.querySelectorAll<HTMLButtonElement>("[data-weight]"))){
   button.addEventListener("click",()=>{
     const value=Number(button.dataset.weight);
     if([400,500,600,700].includes(value)){state.weight=value;render();showStatus("Độ đậm: "+value+".");}
   });
 }
-for(const button of document.querySelectorAll<HTMLButtonElement>("[data-viewport]")){
+for(const button of Array.from(document.querySelectorAll<HTMLButtonElement>("[data-viewport]"))){
   button.addEventListener("click",()=>{
     if(button.dataset.viewport==="mobile"||button.dataset.viewport==="desktop"){
       state.viewport=button.dataset.viewport;render();
@@ -143,7 +143,7 @@ el<HTMLInputElement>("sampleInput").addEventListener("input",(event)=>{
   const target=event.target as HTMLInputElement;
   el<HTMLDivElement>("sampleFeedback").textContent=target.value?"Đang thử kiểu chữ trong ô nhập.":"";
 });
-for(const link of document.querySelectorAll<HTMLAnchorElement>(".nav-link")){
+for(const link of Array.from(document.querySelectorAll<HTMLAnchorElement>(".nav-link"))){
   link.addEventListener("click",()=>{
     document.querySelectorAll(".nav-link").forEach(a=>a.classList.remove("active"));
     link.classList.add("active");
