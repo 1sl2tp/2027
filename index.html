@@ -3,89 +3,112 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f5f5f4">
-  <meta name="description" content="2027 — Thư viện mẫu khung giao diện UI/UX cho mobile, PWA và desktop.">
-  <title>2027 · Thư viện khung UI</title>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="2027 UI Library — Trang mẫu font, cỡ chữ, kiểu chữ và màu nền.">
+  <title>2027 · Thư viện UI — Chữ & màu nền</title>
   <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V03">
   <script type="module" src="./web/dist/app.js?v=2027-UI-V03"></script>
 </head>
 <body data-ui-version="2027-UI-V03">
-  <div class="library-app" id="app">
-    <header class="site-top">
-      <div class="top-identity">
-        <button class="icon-btn mobile-toggle" id="menuToggle" type="button" aria-label="Mở danh mục" aria-expanded="false"><span class="menu-lines" aria-hidden="true">☰</span></button>
-        <span class="mark">27</span>
-        <span class="wordmark">2027 <span class="slash">/</span> <span class="brand-sub">UI Library</span></span>
+<div class="app" id="app">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></div>
+    <div class="topbar-end"><span class="top-hint">Bộ sưu tập thiết kế</span><span class="version">V03</span></div>
+  </header>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="Danh mục thư viện">
+      <div class="sidebar-group-title">THƯ VIỆN MẪU</div>
+      <a class="nav-link active" href="#colors"><span class="nav-numeral">01</span><span>Màu nền</span></a>
+      <a class="nav-link" href="#typography"><span class="nav-numeral">02</span><span>Font & kiểu chữ</span></a>
+      <a class="nav-link" href="#preview"><span class="nav-numeral">03</span><span>Khung xem trước</span></a>
+      <div class="sidebar-separator"></div>
+      <div class="sidebar-group-title">BỘ KHUNG</div>
+      <div class="nav-muted"><span class="nav-numeral">04</span><span>Chat</span><small>Tiếp theo</small></div>
+      <div class="nav-muted"><span class="nav-numeral">05</span><span>Công việc</span><small>Tiếp theo</small></div>
+      <div class="sidebar-footer">Thư viện mẫu · Không dùng dữ liệu thật</div>
+    </aside>
+    <main class="main" id="main">
+      <div class="page-heading">
+        <span class="eyebrow">THƯ VIỆN THIẾT KẾ / MẪU 01</span>
+        <h1>Chữ & màu nền</h1>
+        <p>Chọn font, cỡ chữ, độ đậm và màu nền để so sánh trực tiếp trên cùng một giao diện.</p>
       </div>
-      <div class="top-actions">
-        <span class="top-note">Thư viện bố cục · 22/11/2026</span>
-        <span class="version-badge">V03</span>
-        <button class="icon-btn" id="themeToggle" type="button" title="Chuyển giao diện sáng / tối" aria-label="Chuyển giao diện sáng tối">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.2A8 8 0 0 1 8.8 4 8 8 0 1 0 20 15.2Z"/></svg>
-        </button>
-      </div>
-    </header>
-    <div class="layout">
-      <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
-      <aside class="sidebar" id="sidebar" aria-label="Danh mục thư viện">
-        <div class="side-label">THƯ VIỆN</div>
-        <nav class="category-list" id="categoryList" aria-label="Lọc nhóm khung">
-          <button type="button" class="category-item active" data-category="all" aria-current="page"><span class="category-icon">▦</span><span>Tất cả khung</span><span class="category-count" id="countAll">08</span></button>
-          <button type="button" class="category-item" data-category="chat"><span class="category-icon">▤</span><span>Trò chuyện</span></button>
-          <button type="button" class="category-item" data-category="work"><span class="category-icon">▥</span><span>Công việc</span></button>
-          <button type="button" class="category-item" data-category="component"><span class="category-icon">◫</span><span>Thành phần</span></button>
-        </nav>
-        <div class="side-divider"></div>
-        <div class="side-label">TRẠNG THÁI</div>
-        <div class="side-info"><span class="state-dot"></span> Khung mẫu, không kết nối dữ liệu</div>
-        <div class="sidebar-spacer"></div>
-        <div class="side-foot">Khung → Bố cục → Thành phần → Tinh chỉnh</div>
-      </aside>
-      <main class="main" id="main">
-        <div class="main-heading">
-          <div><div class="eyebrow">BỘ SƯU TẬP · GIAO DIỆN</div><h1>Thư viện khung UI</h1><p>Tạo, xem và so sánh cấu trúc giao diện trước khi phát triển chi tiết.</p></div>
-          <div class="heading-counter"><strong id="visibleCount">08</strong><span>mẫu khung</span></div>
+      <section id="colors" class="section">
+        <div class="section-heading"><div><span class="section-kicker">01 / MÀU SẮC</span><h2>Màu nền</h2><p>Đổi nền để kiểm tra độ tương phản giữa nền, chữ, đường viền và khối nội dung.</p></div><span class="section-number">01</span></div>
+        <div class="palette-grid" role="group" aria-label="Chọn bảng màu">
+          <button type="button" class="palette-item selected" data-palette="white" aria-pressed="true"><span class="palette-preview white"><i></i><i></i><i></i></span><span class="palette-name">Trắng tinh</span><code>#FFFFFF</code></button>
+          <button type="button" class="palette-item" data-palette="warm" aria-pressed="false"><span class="palette-preview warm"><i></i><i></i><i></i></span><span class="palette-name">Trắng ấm</span><code>#FAF9F6</code></button>
+          <button type="button" class="palette-item" data-palette="mist" aria-pressed="false"><span class="palette-preview mist"><i></i><i></i><i></i></span><span class="palette-name">Xám dịu</span><code>#F3F4F6</code></button>
+          <button type="button" class="palette-item" data-palette="dark" aria-pressed="false"><span class="palette-preview dark"><i></i><i></i><i></i></span><span class="palette-name">Đen than</span><code>#181818</code></button>
         </div>
-        <section class="collection" aria-labelledby="collectionHeading">
-          <div class="section-head"><div><h2 id="collectionHeading">Các mẫu khung</h2><p>Chọn một mẫu để xem bố cục và các trạng thái.</p></div><span class="section-meta" id="activeFilterLabel">Tất cả</span></div>
-          <div class="template-grid" id="templateGrid" aria-label="Các mẫu thiết kế"></div>
-        </section>
-        <section class="preview-section" id="previewSection" aria-labelledby="previewHeading">
-          <div class="section-head preview-heading"><div><div class="eyebrow">XEM TRƯỚC</div><h2 id="previewHeading">Khung đang chọn</h2><p id="previewDescription">Bố cục đơn sắc với các vùng chính và phụ.</p></div><span class="current-code" id="currentCode">FR-01</span></div>
-          <div class="preview-toolbar" role="group" aria-label="Công cụ xem trước">
-            <div class="segmented" id="deviceGroup" aria-label="Kích thước màn hình">
-              <button type="button" data-device="phone" class="selected">Mobile</button>
-              <button type="button" data-device="tablet">Tablet</button>
-              <button type="button" data-device="desktop">Desktop</button>
+      </section>
+      <section id="typography" class="section">
+        <div class="section-heading"><div><span class="section-kicker">02 / TYPOGRAPHY</span><h2>Font & kiểu chữ</h2><p>Thử từng kiểu chữ và quan sát sự khác biệt giữa tiêu đề, nội dung và nhãn phụ.</p></div><span class="section-number">02</span></div>
+        <div class="settings-grid">
+          <div class="setting-card">
+            <div class="setting-heading"><h3>Họ font</h3><span>Font có sẵn trên thiết bị</span></div>
+            <div class="font-list" role="group" aria-label="Chọn họ font">
+              <button type="button" class="font-choice selected" data-font="system" aria-pressed="true"><strong class="font-system">Aa</strong><span><b>System UI</b><small>Font hệ điều hành</small></span><span class="choice-dot"></span></button>
+              <button type="button" class="font-choice" data-font="arial" aria-pressed="false"><strong class="font-arial">Aa</strong><span><b>Arial</b><small>Sans-serif phổ biến</small></span><span class="choice-dot"></span></button>
+              <button type="button" class="font-choice" data-font="serif" aria-pressed="false"><strong class="font-serif">Aa</strong><span><b>Georgia</b><small>Serif cổ điển</small></span><span class="choice-dot"></span></button>
+              <button type="button" class="font-choice" data-font="mono" aria-pressed="false"><strong class="font-mono">Aa</strong><span><b>Mono</b><small>Chữ đơn cách</small></span><span class="choice-dot"></span></button>
             </div>
-            <div class="toolbar-spacer"></div>
-            <button type="button" class="tool-btn" id="top2Toggle" aria-pressed="true">Top 2: Bật</button>
-            <button type="button" class="tool-btn" id="keyboardToggle" aria-pressed="false">Bàn phím: Tắt</button>
-            <button type="button" class="tool-btn" id="compareToggle" aria-pressed="false">So sánh</button>
           </div>
-          <div class="preview-stage" id="previewStage"><div class="preview-empty">Đang dựng khung…</div></div>
-          <div class="preview-foot"><span>Thay đổi chỉ ảnh hưởng bản xem trước.</span><span id="previewSizeLabel">Mobile · 390 × 780</span></div>
-        </section>
-      </main>
-      <aside class="details" aria-label="Chi tiết khung">
-        <div class="details-title">Cấu trúc mẫu</div>
-        <div class="detail-code" id="detailCode">FR-01</div>
-        <h3 id="detailTitle">Chat tập trung</h3>
-        <p id="detailDescription">Khung trò chuyện đơn giản, ưu tiên vùng nội dung.</p>
-        <div class="details-divider"></div>
-        <div class="detail-key">THÀNH PHẦN KHUNG</div>
-        <div class="zone-list">
-          <div><span class="zone-color z1"></span><strong>Top 1</strong><small>Điều hướng chính</small></div>
-          <div><span class="zone-color z2"></span><strong>Top 2</strong><small>Ngữ cảnh, có thể ẩn</small></div>
-          <div><span class="zone-color z3"></span><strong>Nội dung</strong><small>Phần lớn không gian</small></div>
-          <div><span class="zone-color z4"></span><strong>Vùng thao tác</strong><small>Đầu vào / hành động</small></div>
+          <div class="setting-card">
+            <div class="setting-heading"><h3>Thông số chữ</h3><span>Thay đổi trực tiếp</span></div>
+            <div class="slider-setting"><div class="setting-row"><label for="sizeRange">Cỡ chữ nội dung</label><output id="sizeOutput" for="sizeRange">16 px</output></div><input id="sizeRange" type="range" min="13" max="21" value="16" step="1"></div>
+            <div class="slider-setting"><div class="setting-row"><label for="leadingRange">Giãn dòng</label><output id="leadingOutput" for="leadingRange">1.50</output></div><input id="leadingRange" type="range" min="1.2" max="1.9" step="0.05" value="1.5"></div>
+            <div class="setting-row weight-label"><span>Độ đậm nội dung</span><output id="weightOutput">400</output></div>
+            <div class="weight-options" role="group" aria-label="Độ đậm chữ">
+              <button type="button" data-weight="400" class="selected" aria-pressed="true">400</button>
+              <button type="button" data-weight="500" aria-pressed="false">500</button>
+              <button type="button" data-weight="600" aria-pressed="false">600</button>
+              <button type="button" data-weight="700" aria-pressed="false">700</button>
+            </div>
+            <div class="control-footnote">Thông số điều chỉnh cho phần xem trước, không thay đổi font của thanh công cụ.</div>
+          </div>
         </div>
-        <div class="details-divider"></div>
-        <div class="detail-key">NGUYÊN TẮC TRÌNH BÀY</div>
-        <p class="details-caption">Chỉ mô tả cấu trúc cha–con và vị trí. Các ô mờ đại diện nội dung, không phải tin nhắn hay dữ liệu thật.</p>
-        <div class="details-bottom"><span class="state-dot"></span> Đang xây dựng thư viện mẫu</div>
-      </aside>
-    </div>
+      </section>
+      <section id="preview" class="section section-last">
+        <div class="section-heading"><div><span class="section-kicker">03 / XEM TRƯỚC</span><h2>Áp dụng vào giao diện</h2><p>Kiểm tra chữ và màu trên các cấp tiêu đề, văn bản, thẻ và ô nhập.</p></div><span class="section-number">03</span></div>
+        <div class="preview-toolbar">
+          <div class="segmented" role="group" aria-label="Chiều rộng mô phỏng">
+            <button type="button" data-viewport="desktop" class="selected" aria-pressed="true">Rộng</button>
+            <button type="button" data-viewport="mobile" aria-pressed="false">Mobile</button>
+          </div>
+          <span class="toolbar-fill"></span>
+          <button type="button" class="minor-btn" id="resetButton">Đặt lại</button>
+          <button type="button" class="major-btn" id="copyButton">Sao chép CSS</button>
+        </div>
+        <div class="preview-stage">
+          <div class="demo-canvas" id="demoCanvas" data-viewport="desktop">
+            <div class="demo-shell">
+              <div class="demo-top"><span class="demo-top-title">Mẫu giao diện</span><span class="demo-top-icons" aria-hidden="true">○ &nbsp; ⋯</span></div>
+              <div class="demo-body">
+                <div class="type-specimens">
+                  <div class="specimen-block"><span class="specimen-name">DISPLAY <span id="displaySize">32 px</span></span><div class="sample-display">Thiết kế rõ ràng.</div></div>
+                  <div class="specimen-block"><span class="specimen-name">TIÊU ĐỀ <span id="titleSize">24 px</span></span><div class="sample-title">Phân cấp nội dung</div></div>
+                  <div class="specimen-block"><span class="specimen-name">NỘI DUNG <span id="bodySize">16 px</span></span><p class="sample-body">Một giao diện tốt giúp người dùng nhận biết điều quan trọng, đọc dễ dàng và thao tác chính xác trên mọi kích thước màn hình.</p></div>
+                  <div class="specimen-block"><span class="specimen-name">NHÃN PHỤ <span id="captionSize">12 px</span></span><p class="sample-caption">Thông tin bổ sung · Nhãn trạng thái · Thời gian</p></div>
+                </div>
+                <div class="component-specimens">
+                  <span class="specimen-name">THÀNH PHẦN</span>
+                  <div class="sample-card"><span class="sample-card-icon" aria-hidden="true">▤</span><div><strong>Thẻ nội dung</strong><p>Vùng phụ có nền khác biệt nhẹ.</p></div></div>
+                  <div class="sample-controls"><button class="sample-primary" type="button" id="sampleButton">Nút chính</button><button class="sample-secondary" type="button" id="sampleSecondary">Nút phụ</button></div>
+                  <label class="demo-input-label" for="sampleInput">Ô nhập</label>
+                  <input type="text" id="sampleInput" placeholder="Nhập thử nội dung…" autocomplete="off">
+                  <div class="sample-feedback" id="sampleFeedback" role="status" aria-live="polite"></div>
+                </div>
+              </div>
+              <div class="demo-bottom"><span>2027 · UI-V03</span><span id="activeStyleLabel">System UI · 16 px · Trắng tinh</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="preview-status"><span class="status-dot"></span><span id="statusText" role="status" aria-live="polite">Thay đổi mẫu trực tiếp. Không kết nối dữ liệu thật.</span></div>
+      </section>
+      <footer class="page-footer"><span>2027 UI Library</span><span>Mẫu nền tảng · V03</span></footer>
+    </main>
   </div>
+</div>
 </body>
 </html>
