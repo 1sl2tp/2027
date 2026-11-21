@@ -51,3 +51,19 @@ test("Pages builds the exact versioned assets shipped in HTML",()=>{
   assert.ok(workflow.includes("npm run verify"));
   assert.ok(workflow.includes("cp -R "+out+" _site/web/"));
 });
+
+test("R03 keeps attributed UX principles and accessibility checks in one rule file",()=>{
+  const rules=read("RULES.md");
+  assert.match(rules,/RULE 03 — NGUYÊN TẮC UX\/UI/);
+  for(const expert of ["Jakob Nielsen","Don Norman","Steve Krug","Luke Wroblewski","Brad Frost"]){
+    assert.ok(rules.includes(expert),expert);
+  }
+  for(let i=1;i<=14;i++) assert.ok(rules.includes("UX-"+String(i).padStart(2,"0")),String(i));
+  for(const source of ["nngroup.com/articles/ten-usability-heuristics","jnd.org/","sensible.com/dont-make-me-think","lukew.com/mobilefirst","atomicdesign.bradfrost.com","w3.org/TR/WCAG22","developer.apple.com/design/human-interface-guidelines"]){
+    assert.ok(rules.includes(source),source);
+  }
+  assert.match(rules,/44×44 pt/);
+  assert.match(rules,/24×24 CSS px/);
+  assert.match(rules,/4\.5:1/);
+  assert.match(rules,/không tự động cấp phép sửa CHAT production/);
+});
