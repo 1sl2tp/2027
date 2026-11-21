@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="2027 UI Library — ba bộ khung Chat, Công việc và Bán hàng trên cùng một hệ giao diện.">
+  <title>2027 · Ba bộ khung liên thông · V04</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V04">
+  <script type="module" src="./web/dist/flows.js?v=2027-UI-V04"></script>
+</head>
+<body data-ui-version="2027-UI-V04" class="flow-page">
+  <header class="topbar">
+    <a href="./" class="brand" aria-label="Về thư viện UI">
+      <span class="brand-mark">27</span><span class="brand-name">2027</span>
+      <span class="brand-separator">/</span><span class="brand-label">UI Library</span>
+    </a>
+    <div class="topbar-end">
+      <a class="flow-return" href="./">Chữ & màu nền</a>
+      <span class="version">V04</span>
+    </div>
+  </header>
+  <main class="flow-library">
+    <div class="flow-intro">
+      <div><span class="eyebrow">BỘ SƯU TẬP / KHUNG LIÊN THÔNG</span>
+      <h1>Ba luồng. Một hệ giao diện.</h1>
+      <p>Chat, Công việc và Bán hàng cùng sử dụng khách hàng, sản phẩm, đơn hàng, công nợ và một bộ CSS. Chọn một luồng để thử trực tiếp.</p></div>
+      <div class="flow-intro-tag">UI-V04 <span>·</span> Mẫu thử cục bộ</div>
+    </div>
+    <div class="flow-route-grid" role="group" aria-label="Chọn bộ khung">
+      <button class="flow-route-card is-active" data-module="chat" aria-pressed="true" type="button">
+        <span class="flow-route-top"><span class="flow-route-number">01</span><span class="flow-route-arrow">↗</span></span>
+        <strong>Trò chuyện</strong><span>Đăng nhập → Danh bạ → Chat → Text / Media</span>
+      </button>
+      <button class="flow-route-card" data-module="work" aria-pressed="false" type="button">
+        <span class="flow-route-top"><span class="flow-route-number">02</span><span class="flow-route-arrow">↗</span></span>
+        <strong>Công việc</strong><span>Thu tiền → Tổng hợp đơn → Ảnh đơn → Công nợ → Báo giá</span>
+      </button>
+      <button class="flow-route-card" data-module="sales" aria-pressed="false" type="button">
+        <span class="flow-route-top"><span class="flow-route-number">03</span><span class="flow-route-arrow">↗</span></span>
+        <strong>Bán hàng</strong><span>Chọn SP → Đơn tạm → Đã giao → Công nợ → Cài đặt</span>
+      </button>
+    </div>
+    <div class="flow-stage-title">
+      <div><span class="section-kicker">XEM THỬ CÁC THAO TÁC</span><h2>Khung tương tác</h2></div>
+      <div class="flow-toolbar" role="group" aria-label="Kích thước xem trước">
+        <button data-device="desktop" class="is-selected" aria-pressed="true" type="button">Rộng</button>
+        <button data-device="phone" aria-pressed="false" type="button">Mobile</button>
+        <button data-action="reset" class="flow-reset" type="button">Làm mới mẫu</button>
+      </div>
+    </div>
+    <div class="flow-preview-stage">
+      <div class="flow-app" id="flowApp" data-device="desktop">
+        <div class="flow-loading">Đang tải bộ khung…</div>
+      </div>
+    </div>
+    <div class="flow-legend">
+      <span class="flow-live-dot"></span>
+      <span id="flowStatus" role="status" aria-live="polite">Mọi dữ liệu và thao tác chỉ nằm trong bản mẫu của trình duyệt; không gửi tin, không thu tiền thật.</span>
+    </div>
+    <div class="flow-architecture">
+      <div class="flow-architecture-head"><span class="section-kicker">KIẾN TRÚC DÙNG CHUNG</span><h2>Một lớp giao diện, ba nhóm nghiệp vụ</h2></div>
+      <div class="flow-architecture-track" aria-label="Kiến trúc chia sẻ">
+        <div><strong>UI Foundation</strong><span>Font · màu · khoảng cách · trạng thái</span></div>
+        <div><strong>Thành phần chung</strong><span>Header · sidebar · thẻ · bảng · input · popup</span></div>
+        <div><strong>Dữ liệu chung</strong><span>Khách · hàng hóa · đơn · thu mẫu · nội dung chat</span></div>
+        <div><strong>3 mô-đun</strong><span>Chat · Công việc · Bán hàng</span></div>
+      </div>
+      <p>Trang này và thư viện font/màu sử dụng cùng <code>web/styles.css</code>. Các chức năng dùng một trạng thái demo chung; CSS không chứa dữ liệu nghiệp vụ. Không nối Supabase, không xác thực thật, không phát sinh giao dịch.</p>
+    </div>
+  </main>
+</body>
+</html>
