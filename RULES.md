@@ -496,6 +496,17 @@ Bổ sung **vào RULE 09 đã có**, không tạo bộ CSS bảng khác. Mẫu `
 - **Bằng chứng:** CI `npm run verify`, URL cache-safe V37 và Pages. E4/E5 xem thực tế Safari/Chrome trên desktop/mobile, mở 1/6/10/15/20 cột, kiểm cuộn ngang và scroll link trực tiếp vẫn cần nghiệm thu.
 
 ---
+### 9.9. V38: Mục 8 là MỘT bảng đầy đủ 20 cột, mỗi cột mang một định danh ổn định
+
+- **Cấu trúc điều hướng:** mục 1 chỉ có kiểu chữ/font, không chèn link hoặc mẫu bảng trong vùng 1. Bảng đặt sau mục 7 thành **mục 8. Bảng & dữ liệu · 20 cột** trong cùng giao diện danh sách đơn giản.
+- **Không sinh 20 bảng:** chỉ render một `<table>` chứa đủ 20 trường và 4 dòng ví dụ bằng `buildTable(COLUMN_SCHEMA, SAMPLE_ROWS, ...)`; không có danh sách 01–20 `<details>` mở 20 bảng khác nhau. R09 §9.8 là lịch sử V37 và được thay thế ở phần này.
+- **Thứ tự chuẩn 1-based:** cột 01=STT (`index`), 02=Tên hàng (`name`), 03=Số (`number`), 04=Số lượng (`quantity`), 05=Đơn giá (`price`), 06=Thành tiền (`total`), sau đó là mã hàng, đơn vị tính, ngày, giờ, nhóm, nhà cung cấp, giá vốn, chiết khấu, thuế, còn lại, trạng thái, người phụ trách, cập nhật, ghi chú.
+- **Truy xuất sau này:** `getColumnByPosition(n)` chỉ tra `COLUMN_SCHEMA[n-1]`, trả về một `ColumnSpec` hoặc undefined. Mỗi `<col>`, `<th>` và `<td>` mang `data-col-index` (số cột 1-based) cùng `data-col-key` (khóa ổn định). Đây là metadata demo, không tự tạo API/thu thập dữ liệu thật. Nếu thay tên hiển thị không được tự đổi key/position.
+- **Hình học:** duy nhất `ds-table ds-table--schema` và `colgroup` có `minPx`, `table-layout:fixed`; header và dòng dữ liệu dùng chung padding 10px; tên/ghi chú trái, số lượng/STT giữa, tiền phải. 20 cột cuộn ngang trong vùng thật, không ép nhỏ cột theo chiều rộng desktop/mobile.
+- **Giao diện:** dưới bảng có phần `Tra cứu thứ tự và tên 20 cột` có thể mở khi cần; phần đó chỉ là metadata bằng `<ol>`, không phải bảng thứ hai. Không dashboard, bộ lọc, thanh chọn số cột, bảng giả lập 360px ở giao diện công khai.
+- **Kiểm chứng:** test số bảng DOM của UI chính chỉ là một, số th/td/col đúng 20, mapping đủ key/position, thứ tự mục 1–8, URL cũ chuyển `#simpleTables` và version V38. E4/E5 vẫn phải thử Chrome/Safari di động và bàn phím.
+
+---
 ## RULE 10 — ĐẶT TÊN NÚT THEO ĐÚNG VAI TRÒ, KHÔNG ĐÁNH TRÁO KIỂU VÀ BỐ CỤC
 
 **Mã:** `2027-R10` · **Ngày:** 22/11/2026 (VN) · **Phạm vi:** mục 6 / 6.1 của UI Library Web. **Trạng thái:** E0–E1; E2, E3 và nghiệm thu thiết bị E4/E5 phải xác nhận bằng CI/deploy/bằng chứng riêng.
