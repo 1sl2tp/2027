@@ -324,7 +324,7 @@ export function initSimpleMasterTable():void{
  stage.setAttribute("role","region");
  stage.setAttribute("aria-label","Một bảng dữ liệu đủ 20 cột; dùng cuộn ngang để đọc hết các cột");
  const state:TableState={count:COLUMN_SCHEMA.length,mode:"scroll",width:"desktop",
-   borders:"rows",density:"standard",sortKey:null,descending:false,headerNames:{}};
+   borders:"grid",density:"standard",sortKey:null,descending:false,headerNames:{}};
  const render=()=>{
   const offset=stage.scrollLeft;
   stage.replaceChildren(buildTable(COLUMN_SCHEMA,sortedRows(SAMPLE_ROWS,state),state,render));
