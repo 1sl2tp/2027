@@ -5,6 +5,7 @@ import {
   applyDesignTokens,exportCss,auditPalette,
   type DesignSettings,type FontKey,type PaletteKey,type ViewportKey
 } from "./design.js";
+import { initComposerGallery } from "./composer-gallery.js";
 
 type BlockId="title"|"body"|"section"|"description"|"list"|"table"|"number"|"money"|"note"|"caption";
 type SelectId=BlockId|"all";
@@ -483,4 +484,12 @@ const initialGalleryCategory=galleryCategoryFromHash();
 if(initialGalleryCategory)activeGalleryCategory=initialGalleryCategory;
 updateGallery();
 
+initComposerGallery();
 render();
+// When a user opens #sample-inputs directly, filtering hides preceding sections.
+// Reposition the anchor once the visible layout has settled.
+if(initialGalleryCategory&&initialGalleryCategory!=="all"){
+ requestAnimationFrame(()=>{
+  document.getElementById("sample-"+initialGalleryCategory)?.scrollIntoView({block:"start"});
+ });
+}
