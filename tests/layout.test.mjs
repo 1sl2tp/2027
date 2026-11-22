@@ -3,20 +3,20 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const read = (file) => readFileSync(new URL("../"+file, import.meta.url),"utf8");
 
-test("V07 retains one interactive ChatGPT-like document and shared CSS",()=>{
+test("V08 retains one interactive ChatGPT-like document and shared CSS",()=>{
   const html=read("index.html");
-  assert.match(html,/data-ui-version="2027-UI-V07"/);
+  assert.match(html,/data-ui-version="2027-UI-V08"/);
   assert.match(html,/<h1>Chỉnh ngay trên một văn bản mẫu<\/h1>/);
   for(const id of ["document","controls","components","overlays","demoCanvas","fontSelect","sizeRange","sizeOutput","weightOutput","leadingRange","trackingRange","cssPreview","resetButton","copyButton"])
     assert.ok(html.includes('id="'+id+'"'),id);
   for(const block of ["title","body","section","description","list","table","number","money","note","caption"])
     assert.ok(html.includes('data-block="'+block+'"'),block);
-  assert.ok(html.includes("./web/styles.css?v=2027-UI-V07"));
-  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V07"));
+  assert.ok(html.includes("./web/styles.css?v=2027-UI-V08"));
+  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V08"));
   assert.doesNotMatch(html,/<script[^>]+src="https?:\/\//);
 });
 
-test("V07 retains working controls for tables, icons, numeric input, search, chat, menu and popup",()=>{
+test("V08 retains working controls for tables, icons, numeric input, search, chat, menu and popup",()=>{
   const html=read("index.html"),ts=read("web/src/app.ts");
   for(const id of ["quantityInput","qtyMinus","qtyPlus","searchInput","searchResults","chatDemoForm","chatInput","menuButton","sampleMenu","demoDialog","openPopupButton","dialogConfirmButton"])
     assert.ok(html.includes('id="'+id+'"'),id);
@@ -29,7 +29,7 @@ test("V07 retains working controls for tables, icons, numeric input, search, cha
   assert.doesNotMatch(ts,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:/i);
 });
 
-test("V07 colors and fonts still reuse the central semantic token module",()=>{
+test("V08 colors and fonts still reuse the central semantic token module",()=>{
   const html=read("index.html"),ts=read("web/src/app.ts"),css=read("web/styles.css");
   for(const palette of ["white","warm","mist","dark"])assert.ok(html.includes('data-palette="'+palette+'"'));
   for(const font of ["system","arial","serif","mono"])assert.ok(html.includes('<option value="'+font+'">'));
@@ -51,8 +51,8 @@ test("Pages still builds the exact versioned assets shipped in HTML",()=>{
   const html=read("index.html");
   const config=JSON.parse(read("tsconfig.json"));
   const out=config.compilerOptions.outDir.replace(/^\.\//,"").replace(/\/$/,"");
-  assert.ok(html.includes("web/styles.css?v=2027-UI-V07"));
-  assert.ok(html.includes(out+"/app.js?v=2027-UI-V07"));
+  assert.ok(html.includes("web/styles.css?v=2027-UI-V08"));
+  assert.ok(html.includes(out+"/app.js?v=2027-UI-V08"));
   const workflow=read(".github/workflows/pages.yml");
   assert.ok(workflow.includes("npm run verify"));
   assert.ok(workflow.includes("cp -R "+out+" _site/web/"));
@@ -147,11 +147,11 @@ test("V05 one source of semantic tokens, contrast math and safe persistence",asy
   assert.ok(design.exportCss(design.DEFAULT_SETTINGS).includes("--ui-font-style: normal;"));
 });
 
-test("V07 keeps the library font/color and three-flow screens on one CSS file",()=>{
+test("V08 keeps the library font/color and three-flow screens on one CSS file",()=>{
   const index=read("index.html"),flows=read("flows.html"),css=read("web/styles.css");
   assert.ok(index.includes('href="./flows.html"'));
   assert.ok(flows.includes('./web/styles.css?v=2027-UI-V04'));
-  assert.ok(index.includes('./web/styles.css?v=2027-UI-V07'));
+  assert.ok(index.includes('./web/styles.css?v=2027-UI-V08'));
   assert.equal((index.match(/<link rel="stylesheet"/g)||[]).length,1);
   assert.equal((flows.match(/<link rel="stylesheet"/g)||[]).length,1);
   assert.ok(css.includes(".flow-app-shell"));
@@ -187,4 +187,20 @@ test("V07 five independent quantity variants, six inputs, line clamps and compos
   for(const action of ["normalizeQty","variantClearInput","data-expand-lines","data-layout-action"])
     assert.ok(app.includes(action),action);
   assert.doesNotMatch(app,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:/i);
+});
+
+test("V08 gives grouped quantity and text inputs a single outer focus ring",()=>{
+  const css=read("web/styles.css");
+  const html=read("index.html");
+  assert.match(html,/data-ui-version="2027-UI-V08"/);
+  for(const grouped of [".studio-qty",".qty-joined",".qty-pill",".qty-inline",".input-variant-shell",".studio-search-field"])
+    assert.ok(css.includes(grouped),grouped);
+  assert.ok(css.includes(":focus-within"));
+  assert.ok(css.includes("border-color:var(--ui-focus-color,#597bda)"));
+  assert.ok(css.includes("--ui-focus-color:#597bda"));
+  assert.match(css,/\.qty-separated input:focus-visible,\.qty-minimal input:focus-visible/);
+  assert.ok(css.includes(") input:focus,"));
+  assert.ok(css.includes("outline:none;"));
+  assert.ok(css.includes("box-shadow:none;"));
+  assert.ok(css.includes("appearance:textfield;-webkit-appearance:textfield"));
 });
