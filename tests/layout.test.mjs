@@ -74,10 +74,10 @@ test("R03 keeps attributed UX principles and accessibility checks in one rule fi
   assert.match(rules,/không tự động cấp phép sửa CHAT production/);
 });
 
-test("V04 keeps original typography library and links three interactive frames",()=>{
+test("V06 preserves links to all three V04 interactive frames",()=>{
   const index=read("index.html");
   const flows=read("flows.html");
-  assert.match(index,/<h1>Chữ & màu nền<\/h1>/);
+  assert.match(index,/<h1>Chỉnh ngay trên một văn bản mẫu<\/h1>/);
   assert.ok(index.includes('href="./flows.html#chat/contacts"'));
   assert.ok(index.includes('href="./flows.html#work/summary"'));
   assert.ok(index.includes('href="./flows.html#sales/products"'));
