@@ -1,5 +1,8 @@
 # UI 2027 V28 — Quy tắc cấu tạo bên trong nút
 
+> **Lưu ý lịch sử (V30):** Các tài liệu V27–V29 chỉ ghi nhận quá trình thử. Quy tắc chuẩn tắc là [RULES.md](../RULES.md), đặc biệt RULE 06–08. Bản V29 đã tạo mục 6.1 kích thước và token `--ds-btn-*` song song là sai; V30 bỏ phần đó, trả mục 6.1 về cấu tạo nút, và dùng chung `.ui-button`, `.ui-icon`, `--ui-control-*`. Không lấy tên lớp `simple-button-demo-*` làm chuẩn mới.
+
+
 ## Phạm vi
 Chỉ **thư viện 2027**. Đây là quy tắc dành cho ứng dụng sẽ dựng mới; không sửa CHAT/TAPHOA/Songoku, không gửi tin thật, không ghi dữ liệu production.
 
