@@ -2408,6 +2408,105 @@ body.simple-first .topbar-end{gap:0}
 }
 
 
+/* UI-V32 · Streaming/text motion specimens (RULE 11).
+   Shared ui-button controls; these classes own only preview layouts/motion states. */
+.ui-motion-section{color:var(--ui-text)}
+.ui-motion-principle{
+ display:flex;align-items:center;flex-wrap:wrap;gap:9px;
+ padding:11px 13px;margin:5px 0 14px;
+ border:1px solid var(--ui-border);border-radius:12px;
+ background:var(--ui-surface);color:var(--ui-text-muted);
+ font:500 12px/1.4 var(--ui-font)
+}
+.ui-motion-principle span:nth-child(even){color:var(--ui-text-muted)}
+.ui-motion-list{display:grid;grid-template-columns:1fr;gap:12px}
+.ui-motion-card{
+ min-width:0;padding:15px 16px 13px;
+ border:1px solid var(--ui-border);border-radius:14px;
+ background:var(--ui-bg);color:var(--ui-text)
+}
+.ui-motion-head{display:flex;flex-direction:column;min-width:0;gap:5px}
+.ui-motion-title{font:650 14px/1.4 var(--ui-font);margin:0}
+.ui-motion-desc{font:400 12px/1.5 var(--ui-font);color:var(--ui-text-muted);margin:0}
+.ui-motion-preview{
+ display:flex;flex-direction:column;justify-content:center;
+ min-height:92px;min-width:0;margin:11px 0;
+ padding:16px 14px;border-radius:12px;
+ border:1px solid var(--ui-border);background:var(--ui-surface);
+ overflow-wrap:anywhere;white-space:normal
+}
+.ui-motion-preview[data-motion-state="streaming"]{justify-content:flex-start}
+.ui-motion-paragraph{
+ color:var(--ui-text);font:400 15px/1.6 var(--ui-font);
+ margin:0;white-space:pre-wrap;overflow-wrap:anywhere
+}
+.ui-motion-paragraph+.ui-motion-paragraph{margin-top:9px}
+.ui-motion-placeholder{color:var(--ui-text-muted);font-size:13px}
+.ui-motion-result{display:block;min-width:0}
+.ui-motion-controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ui-motion-controls .ui-button{min-height:var(--ui-control-hit)}
+.ui-motion-status{display:block;min-height:18px;margin-top:8px;
+ color:var(--ui-text-muted);font:500 11px/1.5 var(--ui-font)}
+.ui-motion-source{font:400 11px/1.5 var(--ui-font);margin:6px 0 0;color:var(--ui-text-muted)}
+.ui-motion-dots{display:flex;align-items:center;justify-content:flex-start;gap:6px;min-height:22px}
+.ui-motion-dots>span{
+ width:7px;height:7px;background:currentColor;color:var(--ui-text-muted);
+ border-radius:50%;animation:ui-motion-bounce 1.05s infinite ease-in-out
+}
+.ui-motion-dots>span:nth-child(2){animation-delay:.14s}
+.ui-motion-dots>span:nth-child(3){animation-delay:.28s}
+@keyframes ui-motion-bounce{
+ 0%,60%,100%{opacity:.35;transform:translateY(0)}
+ 30%{opacity:1;transform:translateY(-4px)}
+}
+.ui-motion-shimmer{
+ display:inline-block;width:fit-content;max-width:100%;
+ color:var(--ui-text-muted);margin:0;
+ font:600 14px/1.5 var(--ui-font);
+ background:linear-gradient(98deg,var(--ui-text-muted) 15%,var(--ui-text) 48%,var(--ui-text-muted) 80%);
+ background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+ -webkit-text-fill-color:transparent;
+ animation:ui-motion-shimmer-move 1.65s linear infinite
+}
+@keyframes ui-motion-shimmer-move{from{background-position:190% 0}to{background-position:-100% 0}}
+.ui-motion-skeleton{display:flex;flex-direction:column;gap:9px;width:100%;max-width:455px}
+.ui-motion-skeleton>span{
+ display:block;width:92%;height:11px;border-radius:6px;
+ background:linear-gradient(90deg,var(--ui-border) 10%,var(--ui-bg) 48%,var(--ui-border) 90%);
+ background-size:210% 100%;animation:ui-motion-skeleton-wash 1.35s linear infinite
+}
+.ui-motion-skeleton>span:nth-child(2){width:74%}
+.ui-motion-skeleton>span:nth-child(3){width:43%}
+@keyframes ui-motion-skeleton-wash{from{background-position:195% 0}to{background-position:-105% 0}}
+.ui-motion-caret{
+ display:inline-block;vertical-align:-.1em;flex:none;margin-left:3px;
+ background:var(--ui-text);animation:ui-motion-caret-pulse 1s steps(2,end) infinite
+}
+.ui-motion-caret--block{width:7px;height:1em;border-radius:1px}
+.ui-motion-caret--circle{width:7px;height:7px;vertical-align:middle;border-radius:50%}
+@keyframes ui-motion-caret-pulse{50%{opacity:.25}}
+.ui-motion-disclaimer{margin:14px 0 9px;font:400 12px/1.65 var(--ui-font);color:var(--ui-text-muted)}
+.ui-motion-disclaimer code{font:500 11px ui-monospace,monospace}
+.ui-motion-sources{font:400 12px/1.6 var(--ui-font);border-top:1px solid var(--ui-border);padding-top:12px}
+.ui-motion-sources summary{cursor:pointer;min-height:38px;display:flex;align-items:center;
+ font-weight:600;color:var(--ui-text)}
+.ui-motion-sources summary:focus-visible{outline:2px solid var(--ui-focus-color,#597bda);outline-offset:2px}
+.ui-motion-sources ul{margin:4px 0 10px;padding-left:19px}
+.ui-motion-sources li+li{margin-top:5px}
+.ui-motion-sources a{color:var(--ui-text);text-decoration:underline;text-underline-offset:3px}
+@media(max-width:760px){
+ .ui-motion-card{padding:13px 12px 11px}
+ .ui-motion-preview{min-height:84px;padding:14px 11px}
+ .ui-motion-principle{gap:5px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ui-motion-dots>span,.ui-motion-shimmer,.ui-motion-skeleton>span,.ui-motion-caret{
+  animation:none!important;transition:none!important
+ }
+ .ui-motion-shimmer{background:none;-webkit-text-fill-color:currentColor}
+ .ui-motion-dots>span{opacity:.75}
+}
+
 /* SOURCE-V01: GitHub source comparison laboratory. Shared 2027 tokens; no app-specific overrides. */
 .source-lab{background:var(--ui-bg,#fff);color:var(--ui-text,#171717);font-family:var(--ui-font,system-ui,sans-serif)}
 .source-main{width:min(100%,1160px);min-width:0;margin:auto;padding:42px clamp(16px,4vw,50px) 0}
