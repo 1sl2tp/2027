@@ -223,3 +223,57 @@ test("R04 grounds three vendor reference captures in the one canonical RULES fil
   assert.ok(comparison.includes("Không copy"));
   assert.ok(read("README.md").includes("CHATGPT_FACEBOOK_GEMINI_UI_COMPARISON_2026-11-22.md"));
 });
+
+test("V09 preserves V08 as a pinned original and names three Drive references",()=>{
+  const manifest=read("references/ORIGINAL_UI_SOURCES_AND_BASELINE_2026-11-22.md");
+  const rules=read("RULES.md"),readme=read("README.md");
+  assert.ok(manifest.includes("7e10663b72e85c63621462048a262897f36c3182"));
+  assert.ok(manifest.includes("archive/ui-v08-original-before-foundation-20261122"));
+  assert.ok(manifest.includes("1uPNFbeA_lbJjIEZW0O__g4lTWWXJEVSj"));
+  for(const id of ["14RXspORGw1X8MJV3nxA850ahdDAMa9nW","1A2A86yBaz42Gv1fZP7b5aHmObIER1qXe","1KSPGdSqEcxFcyR_N6fdVjoGxyhhxKwJV"])
+    assert.ok(manifest.includes(id),id);
+  assert.ok(rules.includes("## RULE 05"));
+  assert.ok(rules.includes("Bốn hướng, một DOM"));
+  assert.ok(readme.includes("base.html"));
+  assert.ok(readme.includes("ORIGINAL_UI_SOURCES_AND_BASELINE_2026-11-22.md"));
+});
+
+test("V09 base template ships four source-inspired modes on one CSS",()=>{
+  const html=read("base.html"),css=read("web/styles.css"),ts=read("web/src/base.ts");
+  assert.ok(html.includes('data-ui-version="2027-BASE-V09"'));
+  assert.ok(html.includes("./web/styles.css?v=2027-BASE-V09"));
+  assert.ok(html.includes("./web/dist/base.js?v=2027-BASE-V09"));
+  assert.equal((html.match(/<link rel="stylesheet"/g)||[]).length,1);
+  assert.doesNotMatch(html,/<script[^>]+src="https?:\/\//);
+  for(const preset of ["original","chatgpt","facebook","gemini"]){
+    assert.ok(html.includes('data-preset="'+preset+'"'),preset);
+    assert.ok(css.includes(".base-app[data-preset="+preset+"]") || (preset==="original" && css.includes(".base-app{")),preset);
+    assert.ok(ts.includes(preset),preset);
+  }
+  for(const view of ["chat","work","sales"]){
+    assert.ok(html.includes('data-panel="'+view+'"'),view);
+    assert.ok(html.includes('data-view="'+view+'"'),view);
+  }
+  for(const device of ["desktop","phone"])assert.ok(html.includes('data-device="'+device+'"'));
+  for(const id of ["basePreview","baseTokenOutput","baseReset","baseCopy","baseDialog","baseComposeForm","baseQty","baseSearch","baseMenu","baseFeedback"])
+    assert.ok(html.includes('id="'+id+'"'),id);
+  for(const component of [".base-rail",".base-side",".base-thread",".base-composer",".base-stepper",".base-dialog",".base-data-table"])
+    assert.ok(css.includes(component),component);
+  for(const functionName of ["cssText","changeQuantity","closeMenu","render"])
+    assert.ok(ts.includes(functionName),functionName);
+  assert.doesNotMatch(ts,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:/i);
+});
+
+test("V09 Pages bundles base.html and TS output without replacing original pages",()=>{
+  const index=read("index.html"),flows=read("flows.html"),base=read("base.html");
+  assert.ok(index.includes('data-ui-version="2027-UI-V08"'));
+  assert.ok(flows.includes('data-ui-version="2027-UI-V04"'));
+  assert.ok(index.includes('href="./base.html"'));
+  assert.ok(base.includes("Mẫu gốc 2027"));
+  const yaml=read(".github/workflows/pages.yml");
+  assert.ok(yaml.includes('"base.html"'));
+  assert.ok(yaml.includes("cp index.html flows.html base.html _site/"));
+  assert.ok(yaml.includes("cp web/styles.css _site/web/"));
+  assert.ok(yaml.includes("cp -R web/dist _site/web/"));
+  assert.ok(yaml.includes("npm run verify"));
+});
