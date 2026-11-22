@@ -694,3 +694,13 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 - **Chưa áp dụng toàn hệ:** nhãn DOM `MESSAGE-CONTENT-PARTS` ở phòng lab chưa phải là contract đã đăng ký và nghiệm thu trên CHAT production. Cần xử lý primitive đa cha (ví dụ cùng `DATA-TABLE` xuất hiện ở màn đơn và bên trong tin) trước khi đưa vào registry; không lách bằng hai bộ Table.
 - **Bằng chứng:** test tĩnh `tests/github-source-lab-v02.test.mjs`; quy trình E0–E5 vẫn bắt buộc và E4/E5 trên thiết bị thật chưa đạt. Không bổ sung rule song song hay dependency React cho 2027 hiện tại.
 
+
+### 12.7. V41 — Registry hỗ trợ primitive đa vị trí, mẫu Message nhiều phần
+
+**Đã thực thi trong 2027 Web demo:** [chi tiết V41](references/UI_V41_IMPLEMENTATION_2026-11-22.md), `web/src/message-parts.ts`, `tests/message-parts-v41.test.mjs`. Trang chính mang `data-ui-version="2027-UI-V41"`, package Pages dùng `dist-v41`.
+
+- **Định nghĩa ≠ vị trí mount:** `COMPONENT_CONTRACTS` vẫn có một `DATA-TABLE` canonical; `COMPONENT_PLACEMENTS` cho phép đặt cùng primitive vào `MESSAGE-TABLE-PART`. Không thêm bản sao CSS hoặc schema cột.
+- **Tin nhiều nội dung:** `CHAT-MESSAGE → MESSAGE-CONTENT-PARTS → TEXT/TABLE/MEDIA`; `CHAT-MESSAGE-ACTIONS` thuộc Message, không thuộc Text/Composer; copy lấy đúng message ID.
+- **Audit:** `auditComponentPlacements` bắt chu trình/host lỗi; `auditMessageTree` bắt sai vị trí parts/tables/tiles/actions. Dữ liệu mẫu không gửi thật.
+- **Ranh giới:** V41 mới là mẫu + contract; không tuyên bố đã xử lý scroll tin dài, media thật, PWA keyboard, popup, toàn bộ CHAT production hoặc E4/E5.
+
