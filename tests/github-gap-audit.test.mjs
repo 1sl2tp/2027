@@ -33,14 +33,14 @@ test("V41 source candidates are children or utilities of established R12 parents
  assert.ok(doc.includes("## 3. Gating"));
 });
 
-test("V41 only extends existing rule and README: current UI release stays V40",()=>{
+test("V41 extends RULE 12 and README: main page is published as V41",()=>{
  const html=read("index.html"),rules=read("RULES.md"),readme=read("README.md");
  assert.ok(rules.includes("### 12.5. Kiểm kê nguồn V41"));
  assert.ok(rules.includes("## RULE 12"));
  assert.ok(!rules.includes("## RULE 13"));
  assert.ok(readme.includes("GITHUB_UI_UX_COMPONENT_GAPS_V41.md"));
- assert.ok(readme.includes("giao diện vẫn V40"));
- assert.ok(html.includes('data-ui-version="2027-UI-V40"'));
- assert.ok(html.includes('<span class="version">V40</span>'));
- assert.ok(html.includes('src="./web/dist-v40/app.js"'));
+ assert.ok(readme.includes("UI-V41"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V41"'));
+ assert.ok(html.includes('<span class="version">V41</span>'));
+ assert.ok(html.includes('src="./web/dist-v41/app.js"'));
 });
