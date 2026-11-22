@@ -1,3 +1,4 @@
+export {}; // Isolate the interactive flow module from the typography page globals.
 // 2027 UI-V04 · One visual system and one in-memory data model for all three frames.
 // All records are invented, local demo values. No authentication, APIs, sends or transactions.
 type ModuleKey = "chat" | "work" | "sales";
