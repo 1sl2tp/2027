@@ -3,20 +3,20 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const read = (file) => readFileSync(new URL("../"+file, import.meta.url),"utf8");
 
-test("V06 starts with one interactive ChatGPT-like document and shared CSS",()=>{
+test("V07 retains one interactive ChatGPT-like document and shared CSS",()=>{
   const html=read("index.html");
-  assert.match(html,/data-ui-version="2027-UI-V06"/);
+  assert.match(html,/data-ui-version="2027-UI-V07"/);
   assert.match(html,/<h1>Chỉnh ngay trên một văn bản mẫu<\/h1>/);
   for(const id of ["document","controls","components","overlays","demoCanvas","fontSelect","sizeRange","sizeOutput","weightOutput","leadingRange","trackingRange","cssPreview","resetButton","copyButton"])
     assert.ok(html.includes('id="'+id+'"'),id);
   for(const block of ["title","body","section","description","list","table","number","money","note","caption"])
     assert.ok(html.includes('data-block="'+block+'"'),block);
-  assert.ok(html.includes("./web/styles.css?v=2027-UI-V06"));
-  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V06"));
+  assert.ok(html.includes("./web/styles.css?v=2027-UI-V07"));
+  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V07"));
   assert.doesNotMatch(html,/<script[^>]+src="https?:\/\//);
 });
 
-test("V06 has actual controls for tables, icons, numeric input, search, chat, menu and popup",()=>{
+test("V07 retains working controls for tables, icons, numeric input, search, chat, menu and popup",()=>{
   const html=read("index.html"),ts=read("web/src/app.ts");
   for(const id of ["quantityInput","qtyMinus","qtyPlus","searchInput","searchResults","chatDemoForm","chatInput","menuButton","sampleMenu","demoDialog","openPopupButton","dialogConfirmButton"])
     assert.ok(html.includes('id="'+id+'"'),id);
@@ -29,7 +29,7 @@ test("V06 has actual controls for tables, icons, numeric input, search, chat, me
   assert.doesNotMatch(ts,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:/i);
 });
 
-test("V06 colors and fonts still reuse the central semantic token module",()=>{
+test("V07 colors and fonts still reuse the central semantic token module",()=>{
   const html=read("index.html"),ts=read("web/src/app.ts"),css=read("web/styles.css");
   for(const palette of ["white","warm","mist","dark"])assert.ok(html.includes('data-palette="'+palette+'"'));
   for(const font of ["system","arial","serif","mono"])assert.ok(html.includes('<option value="'+font+'">'));
@@ -51,8 +51,8 @@ test("Pages still builds the exact versioned assets shipped in HTML",()=>{
   const html=read("index.html");
   const config=JSON.parse(read("tsconfig.json"));
   const out=config.compilerOptions.outDir.replace(/^\.\//,"").replace(/\/$/,"");
-  assert.ok(html.includes("web/styles.css?v=2027-UI-V06"));
-  assert.ok(html.includes(out+"/app.js?v=2027-UI-V06"));
+  assert.ok(html.includes("web/styles.css?v=2027-UI-V07"));
+  assert.ok(html.includes(out+"/app.js?v=2027-UI-V07"));
   const workflow=read(".github/workflows/pages.yml");
   assert.ok(workflow.includes("npm run verify"));
   assert.ok(workflow.includes("cp -R "+out+" _site/web/"));
@@ -147,14 +147,44 @@ test("V05 one source of semantic tokens, contrast math and safe persistence",asy
   assert.ok(design.exportCss(design.DEFAULT_SETTINGS).includes("--ui-font-style: normal;"));
 });
 
-test("V06 keeps the library font/color and three-flow screens on one CSS file",()=>{
+test("V07 keeps the library font/color and three-flow screens on one CSS file",()=>{
   const index=read("index.html"),flows=read("flows.html"),css=read("web/styles.css");
   assert.ok(index.includes('href="./flows.html"'));
   assert.ok(flows.includes('./web/styles.css?v=2027-UI-V04'));
-  assert.ok(index.includes('./web/styles.css?v=2027-UI-V06'));
+  assert.ok(index.includes('./web/styles.css?v=2027-UI-V07'));
   assert.equal((index.match(/<link rel="stylesheet"/g)||[]).length,1);
   assert.equal((flows.match(/<link rel="stylesheet"/g)||[]).length,1);
   assert.ok(css.includes(".flow-app-shell"));
   assert.ok(css.includes(".studio-document"));
   assert.ok(css.includes(".studio-dialog"));
+});
+
+test("V07 presents six table variations with distinct borders and density",()=>{
+  const html=read("index.html"),css=read("web/styles.css"),app=read("web/src/app.ts");
+  const types=["table-border","table-lines","table-clean","table-zebra","table-compact","table-stacked"];
+  for(const name of types){
+    assert.ok(html.includes('data-variant-select="'+name+'"'),name);
+    assert.ok(css.includes("."+name),name);
+  }
+  assert.equal((html.match(/data-variant-select=/g)||[]).length,6);
+  assert.ok(app.includes("variantTableFeedback"));
+  assert.ok(app.includes('setAttribute("aria-pressed",String(active))'));
+});
+
+test("V07 five independent quantity variants, six inputs, line clamps and compositional rows",()=>{
+  const html=read("index.html"),css=read("web/styles.css"),app=read("web/src/app.ts");
+  for(const name of ["joined","pill","separated","minimal","inline"])assert.ok(html.includes('data-qty-kind="'+name+'"'));
+  assert.equal((html.match(/data-qty-kind=/g)||[]).length,5);
+  for(const input of ["input-square","input-rounded","input-pill","input-underline","input-filled","input-variant-shell"])
+    assert.ok(html.includes(input),input);
+  for(const line of [1,2,3,4])assert.ok(html.includes('data-lines="'+line+'"'));
+  assert.equal((html.match(/data-expand-lines/g)||[]).length,4);
+  assert.equal((html.match(/class="icon-layout-row"/g)||[]).length,4);
+  assert.equal((html.match(/class="compound-row"/g)||[]).length,4);
+  for(const rule of [".qty-joined",".qty-pill",".qty-separated",".qty-minimal",".qty-inline",
+    ".input-square",".input-rounded",".input-pill",".input-underline",".input-filled",
+    ".line-preview[data-lines=\"4\"]",".layout-main",".layout-trailing",".layout-amount"])assert.ok(css.includes(rule),rule);
+  for(const action of ["normalizeQty","variantClearInput","data-expand-lines","data-layout-action"])
+    assert.ok(app.includes(action),action);
+  assert.doesNotMatch(app,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:/i);
 });
