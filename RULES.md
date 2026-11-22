@@ -1,7 +1,7 @@
 # 2027 — RULES.md
 
 > **Nguồn quy tắc duy nhất (Single Source of Truth)**  
-> Repo: `1sl2tp/2027` · Trạng thái: **R03 / UI-V03 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
+> Repo: `1sl2tp/2027` · Trạng thái: **R04 / UI-V08 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
 > Phạm vi: Web App/PWA (TypeScript + HTML + CSS) và Android APK native (Kotlin + Jetpack Compose).
 
 ## RULE 01 — MỘT FILE RULE DUY NHẤT
@@ -258,3 +258,35 @@ Lần chạy GitHub Actions của nhánh APK thất bại ở `android-actions/s
 
 **Ảnh hưởng:** Chỉ tài liệu chuẩn tắc của repo `2027` và kiểm thử hợp đồng tương ứng. Không thay giao diện CHAT production, không sửa backend, không thay Android APK. **Hoàn tác:** revert commit tài liệu R03; không tạo file quy tắc mới.
 
+---
+
+## RULE 04 — ĐỐI CHIẾU CÁC HỆ UI LỚN, NHƯNG GIỮ MỘT HỆ CSS RIÊNG
+
+**Mã:** 2027-R04 · **Ngày:** 22/11/2026 (VN) · **Trạng thái:** Đã ghi đặc tả, chưa áp lại giao diện hoặc nghiệm thu thiết bị thật.
+
+### 4.1. Mục đích và cơ sở
+
+Dùng các bản lưu nguồn **ChatGPT, Facebook, Gemini** do người dùng đặt trong [thư mục UI 2027](https://drive.google.com/drive/folders/1uPNFbeA_lbJjIEZW0O__g4lTWWXJEVSj?hl=vi) làm đối chứng khi chọn thành phần UI. Bảng đối chiếu có bằng chứng CSS và giới hạn nguồn tại [`references/CHATGPT_FACEBOOK_GEMINI_UI_COMPARISON_2026-11-22.md`](./references/CHATGPT_FACEBOOK_GEMINI_UI_COMPARISON_2026-11-22.md).
+
+- **ChatGPT:** lấy nguyên tắc typography, cột nội dung, Markdown, input/composer gọn, các trạng thái icon.
+- **Facebook:** lấy nguyên tắc danh sách, sidebar, nhãn trạng thái, mật độ hàng, icon + chữ + vùng bên phải, bubble và input (chỉ từ component có bằng chứng).
+- **Gemini:** lấy nguyên tắc nhịp spacing, bố cục co giãn, input đa chế độ, trạng thái viền/surface và menu.
+- **2027:** chỉ dùng **một `web/styles.css`** và bộ token riêng; không tạo các theme/hệ CSS cạnh tranh theo hãng, không copy nguyên stylesheet/class build/asset proprietary.
+
+### 4.2. Quy tắc bắt buộc
+
+| Mã | Quy tắc | Điều kiện kiểm tra |
+|---|---|---|
+| UI-REF-01 | Phân biệt **nguồn HTML/CSS đã lưu**, **quan sát từ ảnh** và **quyết định thiết kế 2027**. | Mỗi con số ghi đúng nguồn và giới hạn snapshot; không khẳng định là CSS ChatGPT/Facebook/Gemini hiện tại khi chưa kiểm chứng. |
+| UI-REF-02 | Mỗi thông số phải có **vai trò** trước khi có CSS; dùng token `font/color/spacing/radius/border/focus/hit-area` chung. | Thành phần bảng, nút, input số lượng, search, chat, menu và popup không sở hữu CSS nền tảng thứ hai. |
+| UI-REF-03 | Nhìn **cấu trúc cha–con và trạng thái tương tác** trước khi tinh chỉnh màu hoặc bo góc. | So sánh desktop/mobile, input được focus, bàn phím mở, nội dung 1–4 dòng, số tiền, menu/popover. |
+| UI-REF-04 | Không mang nội dung tài khoản, tên người, dữ liệu nhạy cảm, font file, hình thương hiệu hoặc đoạn CSS minified của bản Save Page vào repo demo. | Source Google Drive giữ nguyên, commit chỉ chứa mô tả, số liệu, các phần code do dự án tạo. |
+| UI-REF-05 | Tách **giá trị xác nhận trong CSS** khỏi **lựa chọn áp dụng**. | Không áp/đổi CSS hoặc tự gắn trạng thái hoàn tất kiểm thử thiết bị chỉ dựa vào một ảnh hay biến CSS. |
+
+### 4.3. Tác động, kiểm thử và hoàn tác
+
+**Tác động Web/APK:** vòng R04 chỉ ghi tài liệu cho kho Web UI 2027, chưa áp cho `web/styles.css`/APK hoặc dự án CHAT/TAPHOA. Khi triển khai component trong các vòng sau, dùng các nguyên tắc UX-09–UX-14 và kiểm thử tương phản, focus, hit area, cuộn/chồng bàn phím, dark/mobile.
+
+**Bằng chứng:** tài liệu đối chiếu trích các giá trị trong ba tệp HTML Save Page, liệt kê giới hạn trang Facebook Reel, preset ChatGPT Codex và các CSS theme/viewport Gemini; kiểm thử hợp đồng bảo đảm R04 và tài liệu không bị rơi khỏi repo. **Chưa có:** E4/E5 nghiệm thu trên thiết bị thực.
+
+**Hoàn tác:** revert commit R04 (tài liệu + kiểm thử hợp đồng), không có schema/backend/CSS/app data cần đảo ngược.
