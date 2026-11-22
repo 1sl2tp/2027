@@ -750,3 +750,6 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 - **Một định nghĩa, nhiều vị trí:** `DATA-TABLE` và `COLUMN_SCHEMA` ở library parent; `COMPONENT_PLACEMENTS` khai báo chỗ dùng cho Chat Message, Sales, Report; `QUANTITY-STEPPER` gắn tại Sales row mà không tạo stepper mới.
 - **Nguồn cải tiến:** assistant-ui, OpenAI Apps SDK UI, Radix/React Aria, shadcn/ui, Lucide, Streamdown, Zag và các nguồn GitHub khác là thông tin kỹ thuật công khai, áp dụng sau khi đánh giá giấy phép, focus, mobile, khả năng tái sử dụng. Không được gọi CSS ChatGPT private là source public.
 - **Mẫu V46:** `web/src/master-library-v46.ts` là demo hoàn toàn mới; dữ liệu giả, DOM được tạo bởi `createElement/textContent`, không gọi network/Auth/DB/tin thật. E0–E5 tách bạch: source+code+test+Pages khác kiểm thử thiết bị thật.
+
+
+**V46 runtime isolation:** `root-button-library.ts`, `root-button-data.ts` and `chat-live-map.ts` are archived historical references, never imported/mounted by 2027. Newly rendered buttons come exclusively from `ui-button` (2027), placed by the ComposerToolbar/QuantityStepper owner contracts.

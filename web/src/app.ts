@@ -7,7 +7,7 @@ import {
 } from "./design.js";
 import { initComposerGallery } from "./composer-gallery.js";
 import { initMessageActions } from "./action-gallery.js";
-import { initRootButtonCatalog } from "./root-button-library.js";
+
 import { initPatternKit } from "./pattern-kit.js";
 import { initInvoiceGallery } from "./invoice-gallery.js";
 import { initSimpleGallery } from "./simple-gallery.js";
@@ -534,7 +534,7 @@ initScrollAnchorLab();
 initIconMotionGallery();
 initPatternKit();
 initInvoiceGallery();
-initRootButtonCatalog(); // Build the source catalog before text-search discovers gallery content.
+ // Build the source catalog before text-search discovers gallery content.
 updateGallery();
 
 // UI-V12 · The SAME ui-button/ui-icon controls that are used by every chat composer.

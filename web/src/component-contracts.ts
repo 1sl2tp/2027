@@ -112,7 +112,9 @@ export const COMPONENT_PLACEMENTS:readonly ComponentPlacement[]=[
  {id:"sales-stepper",host:"SALES-QUANTITY-SLOT",child:"QUANTITY-STEPPER",cardinality:"one"},
  {id:"sales-table",host:"SALES-TABLE-SLOT",child:"DATA-TABLE",cardinality:"one"},
  {id:"report-table",host:"REPORT-TABLE-SLOT",child:"DATA-TABLE",cardinality:"one"},
- {id:"chat-search",host:"CHAT-SCREEN",child:"SEARCH-FIELD",cardinality:"optional"}
+ {id:"chat-search",host:"CHAT-SCREEN",child:"SEARCH-FIELD",cardinality:"optional"},
+ {id:"composer-ui-buttons",host:"COMPOSER-TOOLBAR",child:"UI-BUTTON",cardinality:"many"},
+ {id:"stepper-ui-buttons",host:"QUANTITY-STEPPER",child:"UI-BUTTON",cardinality:"many"}
 ];
 export function getAllowedComponentParents(id:string):string[]{
  const canonical=getComponentContract(id)?.parent;

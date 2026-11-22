@@ -842,35 +842,10 @@
   </div>
  </div>
 </section>
-        <section class="studio-component-card variant-wide ui-root-button-catalog" data-ui-library="root-buttons" aria-labelledby="rootButtonCatalogTitle">
-  <div class="studio-component-label"><strong id="rootButtonCatalogTitle">Danh mục nút gốc CHAT & TAPHOA</strong><span>Đối chiếu 88 nút theo khu vực, chức năng và nguồn gốc</span></div>
-  <div class="studio-component-content">
-    <p class="ui-action-library-description">Bản đồ này dựa trên <b>44 mục nút trong thư viện CHAT</b> và <b>44 mẫu nút được kiểm tra trong markup/CSS TAPHOA</b>. Chọn nhóm, xem hình dạng, trạng thái và nguồn tham chiếu. Không sao chép các handler nghiệp vụ vào 2027.</p>
-    <div class="ui-root-catalog-toolbar">
-      <div class="ui-root-origin-tabs" role="group" aria-label="Nguồn nút mẫu">
-        <button class="ui-button ui-button--secondary" type="button" data-root-origin="ALL" aria-pressed="true">Cả hai nguồn</button>
-        <button class="ui-button ui-button--secondary" type="button" data-root-origin="CHAT" aria-pressed="false">CHAT · 44</button>
-        <button class="ui-button ui-button--secondary" type="button" data-root-origin="TAPHOA" aria-pressed="false">TAPHOA · 44</button>
-      </div>
-      <div class="ui-root-search-row">
-        <label for="rootButtonQuery"><span>Tìm nút</span><input id="rootButtonQuery" type="search" placeholder="Nhập: gửi, công nợ, lưu, chia sẻ…" autocomplete="off"></label>
-        <label for="rootButtonFamily"><span>Họ nút</span><select id="rootButtonFamily"><option value="all">Tất cả họ nút</option></select></label>
-        <button class="ui-button ui-button--secondary" id="rootButtonReset" type="button">Đặt lại</button>
-      </div>
-      <div id="rootButtonCount" class="ui-root-catalog-count" role="status" aria-live="polite">88 nút tham chiếu · 11 họ</div>
-    </div>
-    <div class="ui-root-button-rows" id="rootButtonGroups" aria-label="Các nút mẫu theo nhóm"></div>
-    <div id="rootButtonEmpty" class="ui-root-empty" hidden>Không tìm thấy nút phù hợp. Hãy đổi nhóm hoặc xóa từ khóa.</div>
-    <div class="ui-root-detail" id="rootButtonDetail" aria-live="polite">
-      <strong>Chọn một nút để xem cấu trúc</strong>
-      <span>Thư viện chỉ hiển thị hình dạng, vai trò, trạng thái và nguồn CSS/markup — không thực hiện hành động thật.</span>
-    </div>
-  </div>
-</section>
         <section class="studio-component-card variant-wide ui-root-state-library" aria-labelledby="rootStateTitle">
  <div class="studio-component-label"><strong id="rootStateTitle">Ma trận trạng thái nút gốc</strong><span>Normal · Active · Loading · Success · Error · Disabled · Warning</span></div>
  <div class="studio-component-content">
-   <p class="ui-action-library-description">Đây là các trạng thái áp dụng chung cho nút CHAT/TAPHOA. Dùng đúng lớp `ui-button` và token hiện có, không gắn CSS mới trong từng màn.</p>
+   <p class="ui-action-library-description">Các trạng thái dùng chung cho nút gốc của 2027, không kế thừa mã hoặc CSS từ ứng dụng cũ.</p>
    <div class="ui-root-state-grid" role="group" aria-label="So sánh trạng thái nút">
      <div class="ui-root-state-example"><span>Mặc định</span><button type="button" class="ui-button ui-button--primary ui-button--catalog" data-root-demo="idle"><svg class="ui-icon" aria-hidden="true"><use href="./web/icons.svg#ui-icon-check"/></svg><span>Thực hiện</span></button></div>
      <div class="ui-root-state-example"><span>Đã chọn</span><button type="button" class="ui-button ui-button--segment ui-button--catalog" data-root-demo="toggle" aria-pressed="true"><svg class="ui-icon" aria-hidden="true"><use href="./web/icons.svg#ui-icon-check-circle"/></svg><span>Đang chọn</span></button></div>

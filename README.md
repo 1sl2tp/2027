@@ -328,3 +328,6 @@ Thư viện mới không kế thừa thẩm mỹ của CHAT/TAPHOA. Mục cuối
 
 ## V46 — Thư viện mẹ độc lập, làm mới 100%
 `UI-LIBRARY` là cha duy nhất. Mọi ứng dụng Chat/Sales/Work/Report đều là màn con mới, dựng lại từ primitive/token của chính 2027; không dùng lại bất cứ thành phần hay CSS nào trong CHAT/TAPHOA cũ. Bản đối chiếu V44 cũ được lưu như tư liệu nghiệp vụ, không còn hiển thị/nhập vào thư viện chính. Xem [RULE 12.12](RULES.md) và [V46 design charter](references/UI_V46_MASTER_LIBRARY_2026-11-23.md).
+
+
+**V46 legacy archive:** The old 88-button inventory and old CHAT live DOM crosswalk are not mounted or imported in the main UI. Archived files exist only to understand past business workflows. All new UI is 2027 owned.
