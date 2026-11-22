@@ -210,7 +210,7 @@ test("R04 grounds three vendor reference captures in the one canonical RULES fil
   assert.ok(rule.includes("## RULE 04"));
   assert.ok(rule.includes("UI-REF-01"));
   assert.ok(rule.includes("UI-REF-05"));
-  assert.ok(rule.includes("ONE")===false || rule.includes("một `web/styles.css`"));
+  assert.ok(rule.includes("một `web/styles.css`"));
   for(const name of ["ChatGPT","Facebook","Gemini"]){
     assert.ok(rule.includes(name));
     assert.ok(comparison.includes(name));
