@@ -2883,6 +2883,22 @@ body.simple-first .topbar-end{gap:0}
 .source-dialog p{font:400 13px/1.6 system-ui,sans-serif;color:#555;margin:0 0 16px}
 .source-dialog button{background:#222;color:#fff;border-radius:9px;padding:10px 19px;min-height:44px}
 .source-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.source-parts-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(250px,1fr);gap:14px;align-items:start}
+.source-parts-message,.source-parts-contract{min-width:0;border:1px solid var(--ui-border,#e0e0e0);border-radius:12px;background:#fff;padding:16px}
+.source-parts-stack{min-width:0;display:grid;gap:12px}
+.source-parts-stack>p{margin:0;font:400 14px/1.6 system-ui,sans-serif}
+.source-parts-table{width:100%;min-width:0;font-size:12px}
+.source-parts-table :is(td,th){padding:8px 10px}
+.source-parts-table :is(td,th):nth-child(2){text-align:center;font-variant-numeric:tabular-nums}
+.source-parts-table :is(td,th):nth-child(3){text-align:right;font-variant-numeric:tabular-nums}
+.source-parts-media{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;border-radius:9px;overflow:hidden}
+.source-parts-media>span{min-width:0;min-height:86px;display:grid;place-items:center;background:var(--ui-surface,#f7f7f8);font:500 12px system-ui,sans-serif;color:var(--ui-muted,#646464)}
+.source-parts-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.source-parts-status{font:400 12px/1.4 system-ui,sans-serif;color:var(--ui-muted,#646464)}
+.source-parts-contract>strong{font:650 14px system-ui,sans-serif}
+.source-parts-contract pre{max-width:100%;overflow-x:auto;padding:13px 10px;margin:10px 0;border-radius:8px;background:var(--ui-surface,#f7f7f8);font:12px/1.7 ui-monospace,monospace}
+.source-parts-contract p{font:400 12px/1.65 system-ui,sans-serif;margin:10px 0 0;color:var(--ui-muted,#646464)}
+@media(max-width:700px){.source-parts-grid{grid-template-columns:minmax(0,1fr)}}
 .source-lab :is(button,select,a,summary,textarea):focus-visible{outline:2px solid var(--ui-focus-color,#597bda);outline-offset:2px}
 @media(max-width:700px){
  .source-main{padding:24px 14px 0}
