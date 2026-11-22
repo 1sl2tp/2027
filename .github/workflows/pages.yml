@@ -29,7 +29,7 @@ jobs:
           cp web/icons.svg _site/web/
           cp -R web/dist _site/web/
           # Isolate all ES imports under a new URL: old relative module URLs remain cached otherwise.
-          cp -R web/dist _site/web/dist-v23
+          cp -R web/dist _site/web/dist-v24
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
