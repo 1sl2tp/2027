@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Có ba trang chính và một phòng thử nguồn GitHub:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V41**: thư viện dạng danh sách tối giản như các mẫu font. Bảng 1–20 cột hiển thị theo dòng đánh số và mở bảng ngay bên dưới; các bộ mẫu giao diện nâng cao không còn được hiển thị công khai.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V41**: thư viện dạng danh sách tối giản như các mẫu font, bổ sung mẫu 4.1 tin nhắn đa nội dung. Bảng gốc vẫn giữ schema 20 cột; mẫu trong tin chỉ sử dụng các cột cần thiết, không tạo bảng gốc thứ hai.
 - **[Nguồn GitHub & phòng thử Chat UI](https://1sl2tp.github.io/2027/github-sources.html)** — `github-sources.html`, **SOURCE-V02**: đối chiếu 13 nguồn, phân loại đúng primitive/composition/utility và cha sở hữu; thêm một tin mẫu gồm text, bảng, media và action bar thuộc chính tin đó. [Audit V02](./references/GITHUB_SOURCE_V02_2026-11-22.md), [audit V01](./references/GITHUB_CHAT_UI_SOURCE_LAB_2026-11-22.md).
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
@@ -11,7 +11,7 @@
 
 
 
-## Kiểm kê GitHub mở rộng — V41 nghiên cứu (giao diện vẫn V40)
+## Kiểm kê GitHub mở rộng — V41 (mẫu Message đã triển khai; các phần khác là backlog)
 
 **[Xem báo cáo phân loại những mẫu còn thiếu](./references/GITHUB_UI_UX_COMPONENT_GAPS_V41.md)**: 11 nhóm nguồn/khả năng bổ sung gồm TanStack Virtual Chat Guide, React Virtuoso, assistant-ui MessageParts/Actions/DraftRestore/ConversationSearch/ImageGallery, Radix/Floating UI, react-resizable-panels, cmdk và Motion/AutoAnimate.
 
