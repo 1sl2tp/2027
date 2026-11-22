@@ -496,7 +496,7 @@ test("V13 copy, share, local TXT download and loading demo do not use network",(
  assert.ok(app.includes("initMessageActions();"));
  for(const hook of ["navigator.clipboard","navigator.share","Blob","URL.createObjectURL",
   "URL.revokeObjectURL",'anchor.download="2027-ui-noi-dung-mau.txt"',
-  'data-action-state="loading"',"ui-icon-loader","ui-icon-check","aria-busy","aria-pressed",
+  'data-action-state="loading"','setIcon(button,"loader")','setIcon(button,"check")',"aria-busy","aria-pressed",
   "window.setTimeout","closeMenus","data-action-feedback"]){
    // DOM loading state is assigned with dataset, not hard-coded attribute strings.
    if(hook==='data-action-state="loading"')assert.ok(ts.includes('dataset.actionState="loading"'));
