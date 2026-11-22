@@ -616,7 +616,7 @@ test("V15 pattern kit has local-only interaction and safe copy/download controls
  for(const marker of ["UI_PATTERNS","UI_PATTERN_GROUPS","navigator.clipboard","kitSource","kitCopy","kitCopySetup",
   "kitExportCatalog","kitFamilyTabs","kitSearch","Blob","URL.createObjectURL","URL.revokeObjectURL",
   "data-kit-stepper","data-kit-segment","data-kit-password-toggle","data-kit-switch","data-kit-action",
-  "aria-pressed","2027-ui-pattern-catalog-v15.json"]){
+  "aria-pressed","2027-ui-pattern-catalog-v16.json"]){
    assert.ok(ts.includes(marker),marker);
  }
  assert.doesNotMatch(ts,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:|getUserMedia\s*\(/i);
