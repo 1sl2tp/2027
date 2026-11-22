@@ -486,3 +486,10 @@ updateGallery();
 
 initComposerGallery();
 render();
+// When a user opens #sample-inputs directly, filtering hides preceding sections.
+// Reposition the anchor once the visible layout has settled.
+if(initialGalleryCategory&&initialGalleryCategory!=="all"){
+ requestAnimationFrame(()=>{
+  document.getElementById("sample-"+initialGalleryCategory)?.scrollIntoView({block:"start"});
+ });
+}
