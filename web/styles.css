@@ -2282,19 +2282,32 @@ body.simple-first .topbar-end{gap:0}
 .simple-field-error{font:400 11px/1.4 system-ui,-apple-system,Arial,sans-serif;
  color:#a52a2a;padding:5px 2px 0}
 .simple-field-demo .simple-field-area{resize:none;max-height:132px;min-height:56px!important;overflow-y:auto;line-height:24px!important}
-.simple-field-demo-textarea .simple-field-shell,.simple-field-demo-composer .simple-field-shell{align-items:flex-end}
+.simple-field-demo-textarea .simple-field-shell{align-items:flex-end}
 .simple-field-demo-textarea .simple-field-shell{padding-block:5px}
 .simple-field-demo-quantity .simple-field-shell{gap:0;padding:0 3px;min-height:46px}
 .simple-field-demo-quantity .simple-field-input{text-align:center;padding:8px 0!important;
  font-variant-numeric:tabular-nums}
 .simple-field-demo-quantity .simple-field-action{width:43px;min-height:43px}
-.simple-field-demo-composer .simple-field-shell{border-radius:23px;min-height:53px;
- padding:4px 7px;gap:4px}
-.simple-field-demo-composer .simple-field-input{min-height:38px!important;
- max-height:130px;padding:8px 2px!important}
-.simple-field-demo-composer .simple-field-action{width:39px;min-height:41px;border-radius:50%}
-.simple-field-demo-composer .simple-field-send{background:#181818;color:#fff}
-.simple-field-demo-composer .simple-field-send:hover{background:#3b3b3b}
+/* RULE 12: the composer is a composition, NOT a new input/button variant.
+   Its surface comes from ds-composer; controls stay ui-button/ui-icon.
+   Only child placement and explanatory text belong to the simple gallery. */
+.simple-field-demo-composer .composer-contract{box-sizing:border-box;max-width:100%}
+.simple-field-demo-composer .composer-contract textarea{resize:none;min-height:43px;max-height:136px;overflow-y:hidden}
+.simple-field-demo-composer .composer-contract-toolbar{width:100%}
+.simple-field-demo-composer .composer-contract-toolbar [data-ui-component="COMPOSER-MIC-BUTTON"]{margin-left:auto}
+.simple-field-parent-map{display:block;margin-top:8px;color:var(--ui-text-muted);
+ font:400 11px/1.5 var(--ui-font);overflow-wrap:anywhere}
+/* A plain text tree for component structure: no parallel layout/button system. */
+.simple-component-contract{border-top:1px solid var(--ui-border);margin-top:15px;padding-top:9px;color:var(--ui-text)}
+.simple-component-contract>summary{min-height:44px;display:flex;align-items:center;cursor:pointer;
+ font:650 13px/1.45 var(--ui-font)}
+.simple-component-contract>p{margin:6px 0 12px;color:var(--ui-text-muted);font:400 12px/1.55 var(--ui-font)}
+.simple-component-tree-level{list-style:none;margin:0;padding-left:14px;border-left:1px solid var(--ui-border)}
+#componentContractTree>.simple-component-tree-level{padding-left:0;border-left:0}
+.simple-component-tree-level>li{padding:5px 0 5px 12px;font:400 11px/1.45 var(--ui-font);color:var(--ui-text-muted)}
+.simple-component-tree-level>li>strong{font-weight:650;color:var(--ui-text)}
+.simple-component-tree-level>li>small{display:block;color:var(--ui-text-muted);margin-top:1px}
+.simple-component-contract-sources a{color:var(--ui-text);text-decoration:underline;text-underline-offset:3px}
 .simple-field-demo-status{margin:3px 0 0;font:400 11px/1.45 system-ui,-apple-system,Arial,sans-serif;
  color:#646464;overflow-wrap:anywhere}
 .simple-field-demo-status:empty{display:none}

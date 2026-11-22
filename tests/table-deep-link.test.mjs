@@ -4,16 +4,16 @@ import {readFileSync} from "node:fs";
 import ts from "typescript";
 const read=p=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
 
-test("V39 version badge and GitHub Pages module graph agree",()=>{
+test("V40 version badge and GitHub Pages module graph agree",()=>{
  const html=read("index.html"),workflow=read(".github/workflows/pages.yml");
- assert.ok(html.includes('<span class="version">V39</span>'));
- assert.ok(html.includes('data-ui-version="2027-UI-V39"'));
- assert.ok(html.includes('./web/styles.css?v=2027-UI-V39'));
- assert.ok(html.includes('src="./web/dist-v39/app.js"'));
- assert.ok(workflow.includes('cp -R web/dist _site/web/dist-v39'));
+ assert.ok(html.includes('<span class="version">V40</span>'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V40"'));
+ assert.ok(html.includes('./web/styles.css?v=2027-UI-V40'));
+ assert.ok(html.includes('src="./web/dist-v40/app.js"'));
+ assert.ok(workflow.includes('cp -R web/dist _site/web/dist-v40'));
 });
 
-test("V39 moves table after 7 as section 8, keeps fonts section 1 clean",()=>{
+test("V40 moves table after 7 as section 8, keeps fonts section 1 clean",()=>{
  const html=read("index.html"),src=read("web/src/simple-gallery.ts"),css=read("web/styles.css");
  const fontStart=html.indexOf('id="simpleKit"');
  const secondStart=html.indexOf('id="simpleMultiline"');
@@ -31,7 +31,7 @@ test("V39 moves table after 7 as section 8, keeps fonts section 1 clean",()=>{
  assert.ok(css.includes("body.simple-first .studio-component-gallery"),"legacy dashboard stays hidden");
 });
 
-test("V39 makes only ONE real 20-column table, plus a metadata list",()=>{
+test("V40 makes only ONE real 20-column table, plus a metadata list",()=>{
  const source=read("web/src/column-matrix.ts"),app=read("web/src/app.ts"),css=read("web/styles.css");
  assert.ok(source.includes("export function initSimpleMasterTable():void"));
  assert.ok(source.includes('const root=document.getElementById("simpleTableItems")'));
@@ -51,7 +51,7 @@ test("V39 makes only ONE real 20-column table, plus a metadata list",()=>{
  assert.ok(!css.includes(".simple-table-row{"),"removed old multi-table CSS layer");
 });
 
-test("V39 stable 1-based column positions map to names and keys, including boundary cases",async()=>{
+test("V40 stable 1-based column positions map to names and keys, including boundary cases",async()=>{
  const src=read("web/src/column-matrix.ts");
  const js=ts.transpileModule(src,{
   compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}

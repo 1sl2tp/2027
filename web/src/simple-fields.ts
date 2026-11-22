@@ -1,6 +1,7 @@
 // UI-V26: simple, live form-field specimens. No network requests or real messages.
 // Input / Textarea / Select source: OpenAI Apps SDK UI (MIT); quantity, money and
-// chat-composer arrangements are 2027 demos based on common UI and assistant-ui.
+// chat-composer is a compound owner under RULE 12; its buttons/icons are primitives.
+import { auditComposerTree } from "./component-contracts.js";
 type FieldKind=
  "outline"|"soft"|"pill"|"search"|"clear"|"invalid"|"disabled"|
  "textarea"|"money"|"quantity"|"composer"|"select";
@@ -16,7 +17,7 @@ const FIELD_SAMPLES:readonly FieldSample[]=[
  {id:"FIELD-08",label:"Ô ghi chú nhiều dòng",kind:"textarea",source:"SDK · Textarea"},
  {id:"FIELD-09",label:"Ô nhập tiền · 12.345 đ",kind:"money",source:"2027 · định dạng số"},
  {id:"FIELD-10",label:"Số lượng − / +",kind:"quantity",source:"2027 · bộ điều khiển"},
- {id:"FIELD-11",label:"Ô gõ chat",kind:"composer",source:"assistant-ui · tham khảo"},
+ {id:"FIELD-11",label:"Vùng gõ chat · Composer (cha)",kind:"composer",source:"assistant-ui · tham khảo"},
  {id:"FIELD-12",label:"Ô chọn danh mục",kind:"select",source:"SDK · Select"}
 ];
 function textInput(type:string,placeholder:string,aria:string):HTMLInputElement{
@@ -43,9 +44,12 @@ function previewField(item:FieldSample):HTMLElement{
   case "pill":shell.classList.add("simple-field-shell-pill");
     add(textInput("text","Nhập nội dung","Ô bo tròn mẫu"));break;
   case "search":{
+    shell.dataset.uiComponent="SEARCH-FIELD";shell.dataset.uiLayer="composition";
     const prefix=document.createElement("span");prefix.className="simple-field-adornment";
     prefix.textContent="⌕";prefix.setAttribute("aria-hidden","true");
-    add(prefix,textInput("search","Tìm sản phẩm…","Tìm kiếm sản phẩm mẫu"));break;
+    const search=textInput("search","Tìm sản phẩm…","Tìm kiếm sản phẩm mẫu");
+    search.dataset.uiComponent="SEARCH-INPUT";search.dataset.uiLayer="primitive";
+    add(prefix,search);break;
   }
   case "clear":{
     const input=textInput("text","Nhập nội dung","Ô nhập có nút xóa mẫu");
@@ -85,9 +89,11 @@ function previewField(item:FieldSample):HTMLElement{
     });add(input,unit);break;
   }
   case "quantity":{
+    shell.dataset.uiComponent="QUANTITY-STEPPER";shell.dataset.uiLayer="composition";
     const minus=smallButton("Giảm số lượng","−");
     const number=textInput("text","","Số lượng mẫu");number.inputMode="numeric";
     number.classList.add("simple-field-quantity-input");number.value="12";
+    number.dataset.uiComponent="QUANTITY-VALUE";number.dataset.uiLayer="primitive";
     const plus=smallButton("Tăng số lượng","+");
     const sanitize=()=>{const digits=onlyDigits(number.value);number.value=digits?String(Math.min(999999,Number(digits))):"0";};
     number.addEventListener("input",sanitize);
@@ -96,19 +102,84 @@ function previewField(item:FieldSample):HTMLElement{
     add(minus,number,plus);break;
   }
   case "composer":{
-    shell.classList.add("simple-field-shell-composer");
-    const more=smallButton("Thêm ảnh minh họa","+");
-    const area=document.createElement("textarea");area.rows=1;area.className="simple-field-input simple-field-area";
-    area.placeholder="Nhắn tin…";area.setAttribute("aria-label","Nội dung chat mẫu");
-    const send=smallButton("Thử gửi trong bản mẫu","↑");send.classList.add("simple-field-send");
-    const status=document.createElement("div");status.className="simple-field-demo-status";
+    // COMPOSER is not a single input or a button. It is the compound parent.
+    const form=document.createElement("form");
+    form.className="ds-composer composer-contract";
+    form.dataset.uiComponent="CHAT-COMPOSER";
+    form.dataset.uiLayer="composition";
+    form.setAttribute("aria-label","Vùng soạn chat mẫu");
+    form.noValidate=true;
+
+    const area=document.createElement("textarea");
+    area.rows=1;area.placeholder="Nhắn tin…";
+    area.setAttribute("aria-label","Nội dung chat mẫu");
+    area.dataset.uiComponent="COMPOSER-INPUT";
+    area.dataset.uiLayer="primitive";
+
+    const toolbar=document.createElement("div");
+    toolbar.className="ds-composer-actions composer-contract-toolbar";
+    toolbar.dataset.uiComponent="COMPOSER-TOOLBAR";
+    toolbar.dataset.uiLayer="composition";
+    toolbar.setAttribute("role","group");
+    toolbar.setAttribute("aria-label","Hành động soạn tin");
+
+    const button=(component:string,label:string,icon:string,variant:"icon"|"send",type:"button"|"submit")=>{
+      const element=document.createElement("button");
+      element.type=type;
+      element.dataset.uiComponent=component;
+      element.dataset.uiLayer="primitive";
+      element.className=variant==="icon"?"ui-button ui-button--icon":"ui-button ui-button--send";
+      element.setAttribute("aria-label",label);
+      const container=variant==="send"?document.createElement("span"):element;
+      if(variant==="send")container.className="ui-send-disc";
+      const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+      svg.classList.add("ui-icon");
+      if(variant==="send")svg.classList.add("ui-icon--send");
+      else svg.classList.add(icon==="plus"?"ui-icon--plus":"ui-icon--mic");
+      svg.setAttribute("aria-hidden","true");
+      const use=document.createElementNS("http://www.w3.org/2000/svg","use");
+      use.setAttribute("href","./web/icons.svg#ui-icon-"+icon);
+      svg.append(use);container.append(svg);
+      if(variant==="send")element.append(container);
+      return element;
+    };
+    const attach=button("COMPOSER-ATTACH-BUTTON","Thêm ảnh minh họa","plus","icon","button");
+    const mic=button("COMPOSER-MIC-BUTTON","Thử trạng thái mic","mic","icon","button");
+    const send=button("COMPOSER-SEND-BUTTON","Gửi bản mẫu","send-up","send","submit");
+    mic.setAttribute("aria-pressed","false");
+    toolbar.append(attach,mic,send);
+    form.append(area,toolbar);
+    const status=document.createElement("div");
+    status.className="simple-field-demo-status";
     status.setAttribute("role","status");status.setAttribute("aria-live","polite");
-    more.addEventListener("click",()=>{status.textContent="Đã thêm ảnh minh họa (không tải tệp).";});
-    send.addEventListener("click",()=>{
+    const grow=()=>{
+      area.style.height="auto";
+      area.style.height=Math.max(43,Math.min(area.scrollHeight,136))+"px";
+      area.style.overflowY=area.scrollHeight>136?"auto":"hidden";
+      send.disabled=area.value.trim().length===0;
+    };
+    area.addEventListener("input",grow);
+    attach.addEventListener("click",()=>{status.textContent="Nút thêm ảnh là con của Toolbar; bản mẫu không tải tệp.";});
+    mic.addEventListener("click",()=>{
+      const next=mic.getAttribute("aria-pressed")!=="true";
+      mic.setAttribute("aria-pressed",String(next));
+      status.textContent=next?"Đang thử trạng thái mic, không truy cập microphone.":"Đã tắt trạng thái mic.";
+    });
+    form.addEventListener("submit",event=>{
+      event.preventDefault();
       const message=area.value.trim();
-      status.textContent=message?"Đã thử: "+message+" (không gửi thật).":"Nhập tin nhắn để thử.";
-      if(message)area.value="";
-    });add(more,area,send);wrap.append(status);break;
+      if(!message){status.textContent="Nhập nội dung để thử.";return;}
+      status.textContent="Đã thử: "+message.slice(0,100)+" · không gửi thật.";
+      area.value="";grow();area.focus();
+    });
+    const hint=document.createElement("small");
+    hint.className="simple-field-parent-map";
+    hint.textContent="Cha: Composer → con: Textarea + Toolbar → Button → Icon.";
+    wrap.append(form,hint,status);
+    const errors=auditComposerTree(form);
+    if(errors.length)status.textContent="Cấu trúc chưa hợp lệ: "+errors.join("; ");
+    grow();
+    break;
   }
   case "select":{
     const select=document.createElement("select");select.className="simple-field-input";

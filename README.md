@@ -11,6 +11,15 @@
 
 
 
+## RULE 12 — Phân cấp cha–con trước khi thêm/sửa UI (UI-V40)
+
+**[Mở mục 5 · Xem Composer và cấu trúc cha–con](https://1sl2tp.github.io/2027/#simpleFields)**. Mục 5.1 có cây phân loại có thể mở/thu gọn; composer `FIELD-11` đã sử dụng `ds-composer` (cha), `textarea` và `ds-composer-actions` (con), `ui-button` (nút gốc), `ui-icon` (icon con của nút). Không còn nút `+`/`↑` tự tạo và CSS nút riêng trong ví dụ này.
+
+- **Căn cứ:** [RULE 12](./RULES.md) hỏi bảy câu trước mọi thay đổi: màn hình/vùng/cha, bản chất (container/content/control/decoration), số lượng con (one/optional/many), tầng, owner CSS, state/action, và việc có primitive hiện hữu chưa.
+- **Registry:** `web/src/component-contracts.ts` với `COMPONENT_CONTRACTS`, `auditComponentRegistry()`, `auditComposerTree()`. Các ví dụ Search/Quantity và bảng cũng có metadata cha–con theo phạm vi hiện có.
+- **Nguồn GitHub kiểm chứng:** [báo cáo](./references/GITHUB_COMPONENT_HIERARCHY_AUDIT_V40.md) từ assistant-ui Composer/Mobile/Attachments, AI Elements PromptInput, OpenAI Apps SDK UI Button/Textarea, Lumi-UI Composer/Layout.
+- **Kiểm thử:** `tests/component-contracts.test.mjs`; không gửi tin thật, không API, chưa áp dụng production CHAT/TAPHOA. Đặc biệt cần kiểm UI/keyboard/aria trên thiết bị thật ở E4/E5.
+
 ## Cân trục bảng 20 cột, không bẻ tên header (UI-V39)
 
 **[Mở mục 8 · Bảng & dữ liệu](https://1sl2tp.github.io/2027/#simpleTables)**. Theo ảnh nghiệm thu V38, STT bị xuống ba dòng vì icon sắp xếp chiếm diện tích trong cột 52px, nút header cao 44px cộng padding ô làm tiêu đề thừa chiều cao. V39 sửa ngay primitive `ds-table ds-table--schema` và schema, không tạo bảng mới.

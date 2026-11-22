@@ -617,3 +617,60 @@ Bổ sung cho thư viện giao diện ChatGPT-*like* những trạng thái chữ
 - Vùng cuộn role=log aria-live=off; chỉ một dòng trạng thái role=status. Không phát live từng ký tự/đoạn cho screen reader.
 - Mô phỏng tối đa ba đoạn cố định, chỉ hoạt động sau khi người dùng nhấn, dừng timer khi reset, trang ẩn hoặc pagehide; không tạo tin nhắn thật hay truy cập backend.
 - E2/E3: npm verify, PR CI, Pages. E4/E5: cần kiểm tra iOS Safari/PWA, Android Chrome/PWA, bàn phím, text selection, menu và cuộn khi streaming bằng ảnh/video thực tế.
+
+---
+
+## RULE 12 — XÁC ĐỊNH CHA → CON, BẢN CHẤT VÀ OWNER TRƯỚC MỌI THAY ĐỔI UI
+
+**Mã:** `2027-R12` · **Phiên bản áp dụng mẫu:** `UI-V40` · **Ngày:** 22/11/2026 (VN) · **Phạm vi:** tất cả Web/PWA/APK cần tham khảo thư viện 2027; triển khai mã lần này chỉ trong repo 2027. **E4/E5:** chưa xác nhận thiết bị thật.
+
+### 12.1. Trước khi tạo/sửa một mẫu, phải trả lời đủ bảy câu
+
+1. **Nó nằm ở đâu?** Xác định màn hình, vùng (screen/region), cha trực tiếp, và tên slot trong cha. Không được dựng trước một nút riêng rồi mới tìm chỗ nhét.
+2. **Nó là gì?** `container` (vùng chứa), `content` (chữ, số, ảnh), `control` (nút/input), hay `decoration` (SVG/icon). Phân biệt bản chất với giao diện: hình tròn không biến icon thành button.
+3. **Nó có bao nhiêu con?** `one` (bắt buộc một), `optional` (0–1), `many` (0–n). Vùng có nhiều nội dung không được ngầm giả chỉ có một. Danh sách là cha; mỗi tin/ảnh/bản ghi là con.
+4. **Nó ở tầng nào?** `screen → region → composition → primitive → token`. Một component có thể vừa là **con của vùng lớn**, vừa là **cha của nút và text** ở tầng dưới; không gán cứng một cấp toàn cục.
+5. **Ai quản lý diện tích và style?** Cha sở hữu trục, gap, padding ngoài, cuộn/safe-area/keyboard; primitive sở hữu height, màu, border, radius, icon size. **Không chỉnh từ con bằng margin âm để vá lỗi cha**. Một owner cho mỗi loại token/CSS.
+6. **Trạng thái và hành động nào?** `idle/disabled/focused/loading/sending/streaming/cancelled/error` theo đúng primitive; semantic action phải tồn tại. Không hiển thị nút Stop nếu nó bị vô hiệu hóa và không có logic dừng.
+7. **Đã có contract gốc chưa?** Tra `web/src/component-contracts.ts`, `web/src/ui-patterns.ts`, `web/src/root-button-data.ts`, `web/styles.css`, `web/icons.svg` và `RULES.md`. **Tái sử dụng** nếu đủ; chỉ bổ sung primitive/slot mới khi chứng minh đang thiếu. Sau khi sửa phải thêm kiểm thử cha–con và thiết bị đích.
+
+**Thứ tự thao tác bắt buộc:** *kiểm kê → tìm cha/slot/owner → xác minh cardinality → đối chiếu primitive → xác định state/action → cập nhật cùng owner → test → CI → xem giao diện thực tế → phát hành*.
+
+### 12.2. Cây chuẩn ví dụ: Composer không phải Textarea
+
+```text
+CHAT-SCREEN                           screen / cha
+└── CHAT-THREAD                       region / cha, một vùng cuộn
+    ├── CHAT-MESSAGE-LIST             composition / một danh sách
+    │   └── CHAT-MESSAGE [0..n]       composition / mỗi tin là một con
+    │       ├── CHAT-MESSAGE-TEXT [0..1]     content
+    │       └── CHAT-MESSAGE-ACTIONS [0..1] composition
+    └── CHAT-COMPOSER                 composition / một form, cha
+        ├── COMPOSER-ATTACHMENTS [0..1]      composition / vùng chứa
+        │   └── COMPOSER-ATTACHMENT [0..n]  content/tệp và nút bỏ
+        ├── COMPOSER-INPUT [1]               textarea / nội dung
+        └── COMPOSER-TOOLBAR [1]             composition / chứa nhiều nút
+            ├── COMPOSER-ATTACH-BUTTON [0..1] ui-button → ui-icon
+            ├── COMPOSER-MIC-BUTTON [0..1]    ui-button → ui-icon
+            └── COMPOSER-SEND-BUTTON [1]      ui-button
+                └── COMPOSER-SEND-ICON [1]    SVG token từ web/icons.svg
+```
+
+Mẫu `FIELD-11` của mục 5 chỉ là **vị trí để xem** Composer, **không định nghĩa rằng Composer là một loại ô nhập**. Parent thực là `form.ds-composer[data-ui-component="CHAT-COMPOSER"]`; `textarea` là con `COMPOSER-INPUT`, `div.ds-composer-actions` là con `COMPOSER-TOOLBAR`; các nút có `ui-button`, icon có `ui-icon` lấy từ sprite. CSS của ví dụ chỉ điều chỉnh **cách bố trí con**, không được định nghĩa lại nền/radius/kích thước nút.
+
+- **Search:** `SEARCH-FIELD → SEARCH-INPUT` và icon/nút xóa tùy chọn. Search field là cha có nhiều phần, input chỉ là một con.
+- **Số lượng:** `QUANTITY-STEPPER → nút giảm + QUANTITY-VALUE + nút tăng`. Ba phần theo nhóm, không phải ba input riêng biệt.
+- **Bảng:** `DATA-TABLE → TABLE-COLUMN[0..n]`. Cột vẫn xác định bằng key/label/role, không căn theo `nth-child`.
+- **Tin nhắn:** vùng nội dung một tin có thể chứa text, ảnh, trích dẫn, bảng, trạng thái và action bar. Phân loại nội dung thành nhóm trước khi cấp CSS; không dùng style của text để làm style nút.
+
+### 12.3. Cơ chế thực thi và hồi quy
+
+- **Registry:** `web/src/component-contracts.ts` giữ `id/parent/layer/nature/cardinality/owner/description`; `auditComponentRegistry()` xác nhận không ID trùng, không mất cha, không vòng lặp, có owner. `auditComposerTree()` xác nhận DOM form/textarea/toolbar, 3 nút đúng cha, loại và icon thuộc thư viện gốc.
+- **Rendering:** `initComponentContractTree()` hiển thị cây read-only trong **mục 5.1** của danh sách tối giản, không tạo dashboard mới. Mẫu `FIELD-11` phải dùng `ds-composer`, `ui-button`, `ui-icon` và HTML `form` đúng semantics.
+- **Kiểm thử:** `tests/component-contracts.test.mjs` kiểm tra registry thật, 4 lớp đối tượng và cha-con, phân biệt vùng một nội dung/nhiều nội dung, mã HTML/CSS, không phát sinh CSS nút/icon thứ hai, không gửi tin/không gọi mạng, và trạng thái composer. Test tĩnh chưa đo được bàn phím/zoom/ARIA trên Safari.
+- **Không sao chép source/asset bên ngoài:** Repo vẫn là TypeScript DOM + CSS hiện có. Tài liệu nguồn và giấy phép ở `references/GITHUB_COMPONENT_HIERARCHY_AUDIT_V40.md`.
+- **Nguồn đối chiếu trực tiếp:** [assistant-ui Composer](https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/composer.mdx) và [Mobile Composer](https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/mobile-composer.mdx): `Root → Input + Toolbar/Actions + attachments`; [AI Elements Prompt Input](https://github.com/vercel/ai-elements/blob/main/skills/ai-elements/references/prompt-input.md): `Header/Body/Footer`; [OpenAI Apps SDK UI Button](https://github.com/openai/apps-sdk-ui/blob/main/src/components/Button/Button.mdx), [Textarea](https://github.com/openai/apps-sdk-ui/blob/main/src/components/Textarea/Textarea.mdx): primitive riêng, chiều cao/tokens; [Lumi-UI Composer](https://github.com/mrigankad/Lumi-UI/blob/main/src/components/lumi/composer.tsx): composer chứa textarea + slot đính kèm + nút gửi/dừng. **Chúng là nguồn công khai, không phải UI ChatGPT nội bộ.**
+
+### 12.4. Không nhận là đã xử lý hết toàn bộ dự án
+
+Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Quantity trong thư viện; registry cũng lập cây cho Thread/Message/Table để đối chiếu kiến trúc. **Chưa tuyên bố rằng 100% DOM hiện hữu của các màn/chat thật được kiểm định.** Phạm vi tiếp theo: lần lượt kiểm toán `data-ui-component` tại các mẫu message, attachment, table, popup và vùng cuộn, rồi áp dụng cho CHAT/sản phẩm thực sau khi rà soát repo và bằng chứng thiết bị.

@@ -114,6 +114,7 @@ function sortedRows(rows:readonly SampleRow[],state:TableState):SampleRow[]{
 }
 function buildTable(columns:readonly ColumnSpec[],rows:readonly SampleRow[],state:TableState,refresh:()=>void):HTMLTableElement{
  const table=node("table","ds-table ds-table--schema");
+ table.dataset.uiComponent="DATA-TABLE";table.dataset.uiLayer="composition";
  table.dataset.colCount=String(columns.length);
  table.dataset.wide=String(columns.length>=6);
  table.dataset.borders=state.borders;
@@ -126,6 +127,7 @@ function buildTable(columns:readonly ColumnSpec[],rows:readonly SampleRow[],stat
   const track=node("col");
   track.dataset.colIndex=String(colIndex+1);
   track.dataset.colKey=col.key;
+  track.dataset.uiComponent="TABLE-COLUMN";track.dataset.uiLayer="primitive";
   track.dataset.colRole=col.role;
   track.style.width=(100*col.minPx/minWidth).toFixed(4)+"%";
   group.append(track);
