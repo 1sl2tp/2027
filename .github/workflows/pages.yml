@@ -27,9 +27,10 @@ jobs:
           cp index.html flows.html base.html _site/
           cp web/styles.css _site/web/
           cp web/icons.svg _site/web/
+          cp web/button-thumbnail.svg _site/web/
           cp -R web/dist _site/web/
           # Isolate all ES imports under a new URL: old relative module URLs remain cached otherwise.
-          cp -R web/dist _site/web/dist-v27
+          cp -R web/dist _site/web/dist-v28
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
