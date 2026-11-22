@@ -151,7 +151,7 @@ export function initSimpleGallery():void {
  // Older deep links still open the pre-existing advanced gallery.
  const showOriginal=():void=>{
    const hash=window.location.hash;
-   const useOriginal=hash!==""&&hash!=="#simpleKit"&&hash!=="#simple-gallery"&&hash!=="#simpleMultiline"&&hash!=="#simpleUnderline"&&hash!=="#simpleFrames"&&hash!=="#simpleFields"&&hash!=="#simpleButtons";
+   const useOriginal=hash!==""&&hash!=="#simpleKit"&&hash!=="#simple-gallery"&&hash!=="#simpleMultiline"&&hash!=="#simpleUnderline"&&hash!=="#simpleFrames"&&hash!=="#simpleFields"&&hash!=="#simpleButtons"&&hash!=="#simpleButtonRules";
    document.body.classList.toggle("simple-first",!useOriginal);
  };
  window.addEventListener("hashchange",showOriginal);
