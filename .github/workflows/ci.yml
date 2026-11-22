@@ -25,3 +25,5 @@ jobs:
           node-version: '22'
       - run: npm install --no-package-lock --no-audit --no-fund
       - run: npm run verify
+      - name: Validate shared icon sprite XML
+        run: python3 -c "import xml.etree.ElementTree as ET; ET.parse('web/icons.svg')"

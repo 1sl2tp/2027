@@ -2292,7 +2292,7 @@ body.simple-first .topbar-end{gap:0}
 .simple-field-demo-status:empty{display:none}
 .simple-field-demo-select .simple-field-input{cursor:pointer;appearance:auto}
 .simple-field-pick{display:flex;align-items:center;justify-content:center;
- width:40px;height:40px;border:1px solid #dedede;border-radius:50%;
+ width:44px;height:44px;border:1px solid #dedede;border-radius:50%;
  background:#fff;color:#777;font:650 16px/1 system-ui,-apple-system,Arial,sans-serif;
  cursor:pointer;opacity:.7}
 .simple-field-pick[aria-pressed=true]{background:#202020;border-color:#202020;color:#fff;opacity:1}
@@ -2309,88 +2309,117 @@ body.simple-first .topbar-end{gap:0}
 /* UI-V27 · Button and icon. One quiet neutral family, no gradients or glow.
    Source roles: Apps SDK Button solid/soft/outline/ghost, pill, block, uniform,
    disabled/loading. Icons reuse the pre-existing web/icons.svg registry. */
+/* V29: one button geometry contract for both text actions and SVG-only controls.
+   Sizes and design choices belong to 2027, not a pixel claim about ChatGPT. */
 .simple-button-row{
- display:grid;grid-template-columns:27px minmax(0,1fr) 42px;gap:8px;
- min-width:0;align-items:center;border-bottom:1px solid #ededed;padding:12px 2px;
+ display:grid;grid-template-columns:27px minmax(0,1fr) 44px;gap:8px;
+ min-width:0;align-items:center;border-bottom:1px solid var(--ui-border,#e0e0e0);padding:12px 2px;
 }
 .simple-button-row:last-child{border-bottom:0}
 .simple-button-middle{min-width:0;display:flex;flex-direction:column;gap:7px}
-.simple-button-stage{display:flex;align-items:center;min-width:0;max-width:100%}
+.simple-button-stage{display:flex;align-items:center;min-width:0;width:100%;max-width:100%}
 .simple-button-demo{
- display:inline-flex;align-items:center;justify-content:center;gap:8px;
- box-sizing:border-box;max-width:100%;min-width:0;min-height:44px;
- padding:9px 16px;border:1px solid #1e1e1e;border-radius:10px;
- font:650 13px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
- text-align:center;background:#202020;color:#fff;cursor:pointer;
- transition:background-color .12s ease,border-color .12s ease;
+ --ds-btn-height:44px;--ds-btn-icon:20px;--ds-btn-gap:8px;--ds-btn-gutter:16px;
+ --ds-btn-size:14px;--ds-btn-leading:20px;--ds-btn-radius:10px;
+ --ds-btn-bg:#202020;--ds-btn-fg:#fff;--ds-btn-border:#202020;
+ display:inline-flex;align-items:center;justify-content:center;gap:var(--ds-btn-gap);
+ box-sizing:border-box;flex-shrink:0;max-width:100%;min-width:0;
+ min-height:44px;min-height:var(--ds-btn-height);height:var(--ds-btn-height);
+ padding:0 var(--ds-btn-gutter);border:1px solid var(--ds-btn-border);
+ border-radius:var(--ds-btn-radius);background:var(--ds-btn-bg);color:var(--ds-btn-fg);
+ font:600 var(--ds-btn-size)/var(--ds-btn-leading) system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+ text-align:center;white-space:nowrap;cursor:pointer;vertical-align:middle;
+ transition:background-color .12s ease,border-color .12s ease,color .12s ease;
 }
-.simple-button-demo:not(:disabled):hover{filter:brightness(.94)}
-.simple-button-demo:focus-visible{outline:2px solid #444;outline-offset:3px}
-.simple-button-demo:disabled{cursor:not-allowed;opacity:.55;filter:none}
-.simple-button-demo-solid{background:#202020;color:#fff;border-color:#1e1e1e}
+.simple-button-demo>span:not(.simple-button-spinner){min-width:0;overflow:hidden;text-overflow:ellipsis}
+.simple-button-demo:not(:disabled):hover{filter:brightness(.95)}
+.simple-button-demo:focus-visible{outline:2px solid var(--ui-focus-color,#597bda);outline-offset:2px}
+.simple-button-demo:disabled{cursor:not-allowed;opacity:.6;filter:none}
+.simple-button-demo-solid{--ds-btn-bg:#202020;--ds-btn-fg:#fff;--ds-btn-border:#202020}
 .simple-button-demo-soft,.simple-button-demo-disabled{
- background:#f0f0f0;color:#292929;border-color:#f0f0f0;
+ --ds-btn-bg:#f0f0f0;--ds-btn-fg:#292929;--ds-btn-border:#f0f0f0
 }
-.simple-button-demo-outline{background:#fff;color:#222;border-color:#b6b6b6}
-.simple-button-demo-ghost{background:transparent;color:#252525;border-color:transparent}
-.simple-button-demo-ghost:hover{background:#f2f2f2}
-.simple-button-demo-pill{border-radius:999px;padding-inline:20px}
-.simple-button-demo-block{width:min(100%,360px)}
+.simple-button-demo-outline{
+ --ds-btn-bg:#fff;--ds-btn-fg:#222;--ds-btn-border:#b6b6b6
+}
+.simple-button-demo-ghost{
+ --ds-btn-bg:transparent;--ds-btn-fg:#252525;--ds-btn-border:transparent
+}
+.simple-button-demo-ghost:not(:disabled):hover{background:#f2f2f2;filter:none}
+.simple-button-demo-pill{--ds-btn-radius:999px;--ds-btn-gutter:20px}
+.simple-button-demo-block{width:100%;max-width:360px;flex-shrink:1}
 .simple-button-demo-icon-start,.simple-button-demo-icon-end{
- background:#fff;color:#242424;border-color:#dadada;
+ --ds-btn-bg:#fff;--ds-btn-fg:#242424;--ds-btn-border:#dadada
 }
-.simple-button-demo-square,.simple-button-demo-circle{
- flex:0 0 44px;width:44px;height:44px;min-height:44px;padding:0;
- background:#f2f2f2;color:#222;border-color:#e0e0e0;
-}
-.simple-button-demo-square{border-radius:9px}
-.simple-button-demo-circle{border-radius:50%}
+.simple-button-demo-square,.simple-button-demo-circle,
 .simple-button-row[data-sample-id^="ICON-"] .simple-button-demo{
- width:44px;height:44px;min-height:44px;padding:0;border-radius:10px;
- background:#f7f7f7;color:#222;border-color:#e2e2e2;
+ --ds-btn-height:44px;--ds-btn-gutter:0px;--ds-btn-bg:#f7f7f7;
+ --ds-btn-fg:#222;--ds-btn-border:#e2e2e2;
+ flex:0 0 44px;width:44px;min-width:44px;max-width:44px;height:44px;
+ min-height:44px;padding:0
 }
-.simple-button-demo-danger{background:#a72a2a;border-color:#a72a2a;color:#fff}
-.simple-button-demo-loading{opacity:.7}
+.simple-button-demo-square{--ds-btn-radius:10px}
+.simple-button-demo-circle{--ds-btn-radius:999px}
+.simple-button-row[data-sample-id^="ICON-"] .simple-button-demo{--ds-btn-radius:10px}
+.simple-button-demo-danger{
+ --ds-btn-bg:#a72a2a;--ds-btn-border:#a72a2a;--ds-btn-fg:#fff
+}
+.simple-button-demo-loading:disabled{opacity:.8}
 .simple-button-demo-toggle{
- background:#fff;color:#242424;border-color:#bdbdbd;
+ --ds-btn-bg:#fff;--ds-btn-fg:#242424;--ds-btn-border:#bdbdbd
 }
 .simple-button-demo-toggle[aria-pressed="true"]{
- background:#242424;color:#fff;border-color:#242424;
+ --ds-btn-bg:#242424;--ds-btn-fg:#fff;--ds-btn-border:#242424
 }
-.simple-button-icon{display:block;flex:none;width:20px;height:20px;fill:none;
- stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
-.simple-button-demo-icon-start .simple-button-icon,
-.simple-button-demo-icon-end .simple-button-icon{width:18px;height:18px}
+.simple-button-icon{
+ display:block;flex:none;width:var(--ds-btn-icon);height:var(--ds-btn-icon);
+ fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round
+}
 .simple-button-demo-loading .simple-button-spinner{
- display:inline-block;flex:none;width:15px;height:15px;
+ display:inline-block;flex:none;width:16px;height:16px;
  border:2px solid currentColor;border-right-color:transparent;
  border-radius:50%;animation:simple-button-spin .85s linear infinite;
 }
 @keyframes simple-button-spin{to{transform:rotate(360deg)}}
 .simple-button-pick{
  display:flex;align-items:center;justify-content:center;flex:none;
- width:40px;height:40px;border-radius:50%;padding:0;
- border:1px solid #dedede;background:#fff;color:#777;
+ width:44px;height:44px;border-radius:50%;padding:0;
+ border:1px solid var(--ui-border,#dedede);background:#fff;color:#777;
  font:650 16px/1 system-ui,-apple-system,Arial,sans-serif;cursor:pointer;
 }
-.simple-button-pick[aria-pressed="true"]{
- background:#202020;color:#fff;border-color:#202020;
-}
-.simple-button-pick:focus-visible{outline:2px solid #222;outline-offset:2px}
-.simple-buttons-feedback{font:400 12px/1.5 system-ui,-apple-system,Arial,sans-serif;
- color:#626262;margin:9px 0 0;overflow-wrap:anywhere}
+.simple-button-pick[aria-pressed="true"]{background:#202020;color:#fff;border-color:#202020}
+.simple-button-pick:focus-visible{outline:2px solid var(--ui-focus-color,#597bda);outline-offset:2px}
+.simple-buttons-feedback{font:400 12px/1.5 system-ui,-apple-system,Arial,sans-serif;color:#626262;margin:9px 0 0;overflow-wrap:anywhere}
 .simple-buttons-feedback:empty{display:none}
+.simple-button-size-kit{margin:18px 0 8px;border:1px solid var(--ui-border,#e0e0e0);border-radius:12px;padding:16px 14px;min-width:0}
+.simple-button-size-kit h3{font:700 16px/1.35 system-ui,-apple-system,Arial,sans-serif;margin:0 0 5px}
+.simple-button-size-kit p{font:400 12px/1.55 system-ui,-apple-system,Arial,sans-serif;color:#666;margin:0 0 15px}
+.simple-button-size-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+.simple-button-size-example{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.simple-button-size-example>strong{font:600 12px/1.4 system-ui,-apple-system,Arial,sans-serif}
+.simple-button-size-example>small{font:400 11px/1.4 system-ui,-apple-system,Arial,sans-serif;color:#777}
+.simple-button-demo[data-size="compact"]{
+ --ds-btn-height:36px;--ds-btn-icon:18px;--ds-btn-size:13px;
+ --ds-btn-leading:18px;--ds-btn-gap:6px;--ds-btn-gutter:12px;--ds-btn-radius:8px;
+}
+.simple-button-demo[data-size="large"]{
+ --ds-btn-height:52px;--ds-btn-icon:22px;--ds-btn-size:16px;
+ --ds-btn-leading:24px;--ds-btn-gap:10px;--ds-btn-gutter:18px;--ds-btn-radius:12px;
+}
+.simple-button-demo[data-size="large"].simple-button-demo-pill{--ds-btn-radius:999px}
+.simple-button-demo[data-size="compact"].simple-button-demo-pill{--ds-btn-radius:999px}
+@media(pointer:coarse){
+ .simple-button-demo[data-size="compact"]{min-height:44px}
+}
 @media(max-width:760px){
- .simple-button-row{grid-template-columns:23px minmax(0,1fr) 40px;
-  gap:7px;padding:12px 0}
- .simple-button-stage{width:100%}
- .simple-button-demo{min-height:44px}
+ .simple-button-row{grid-template-columns:23px minmax(0,1fr) 44px;gap:7px;padding:12px 0}
+ .simple-button-size-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .simple-button-demo{max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){
  .simple-button-demo{transition:none}
  .simple-button-demo-loading .simple-button-spinner{animation:none}
 }
-
 
 /* UI-V28 · Button content anatomy tokens (2027 design decisions).
    OpenAI Apps SDK Button is the source of the token categories, not exact px.
@@ -2409,7 +2438,7 @@ body.simple-first .topbar-end{gap:0}
 .simple-button-rule-table th:first-child{text-align:left}
 .simple-button-rule-table thead{color:#555;background:#fafafa}
 .simple-button-rule-note{margin:10px 0 14px;font:400 12px/1.5 system-ui,-apple-system,Arial,sans-serif;color:#666}
-.simple-button-inner-row{display:grid;grid-template-columns:27px minmax(0,1fr) 42px;
+.simple-button-inner-row{display:grid;grid-template-columns:27px minmax(0,1fr) 44px;
  gap:8px;align-items:center;border-bottom:1px solid #eee;min-width:0;padding:13px 2px}
 .simple-button-inner-row:last-child{border-bottom:0}
 .simple-button-inner-middle{display:flex;flex-direction:column;gap:7px;min-width:0}
@@ -2479,7 +2508,7 @@ svg.simple-button-inner-icon:where(.simple-button-inner-optical){transform:trans
 .simple-button-inner-pick[aria-pressed="true"]{background:#222;color:#fff;border-color:#222}
 .simple-button-inner-pick:focus-visible{outline:2px solid #222;outline-offset:2px}
 @media(max-width:760px){
- .simple-button-inner-row{grid-template-columns:23px minmax(0,1fr) 40px;gap:7px;padding:12px 0}
+ .simple-button-inner-row{grid-template-columns:23px minmax(0,1fr) 44px;gap:7px;padding:12px 0}
  .simple-button-rule-diagram{justify-content:flex-start}
  .simple-button-inner-stage{width:100%}
  .simple-button-inner-demo{max-width:100%}

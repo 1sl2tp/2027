@@ -21,6 +21,8 @@ jobs:
           node-version: '22'
       - run: npm install --no-package-lock --no-audit --no-fund
       - run: npm run verify
+      - name: Validate shared icon sprite XML
+        run: python3 -c "import xml.etree.ElementTree as ET; ET.parse('web/icons.svg')"
       - name: Package standalone Web preview
         run: |
           mkdir -p _site/web
@@ -31,7 +33,7 @@ jobs:
           cp web/button-thumbnail.svg _site/web/
           cp -R web/dist _site/web/
           # Isolate all ES imports under a new URL: old relative module URLs remain cached otherwise.
-          cp -R web/dist _site/web/dist-v28
+          cp -R web/dist _site/web/dist-v29
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
