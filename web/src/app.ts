@@ -15,6 +15,7 @@ import { initSimpleFields } from "./simple-fields.js";
 import { initSimpleButtons } from "./simple-buttons.js";
 import { initSimpleButtonRules } from "./simple-button-rules.js";
 import { initTextMotionGallery } from "./text-motion.js";
+import { initColumnMatrix } from "./column-matrix.js";
 
 type BlockId="title"|"body"|"section"|"description"|"list"|"table"|"number"|"money"|"note"|"caption";
 type SelectId=BlockId|"all";
@@ -502,6 +503,7 @@ initSimpleFields();
 initSimpleButtons();
 initSimpleButtonRules();
 initTextMotionGallery();
+initColumnMatrix();
 initPatternKit();
 initInvoiceGallery();
 initRootButtonCatalog(); // Build the source catalog before text-search discovers gallery content.
