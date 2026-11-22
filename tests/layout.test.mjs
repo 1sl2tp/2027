@@ -282,7 +282,7 @@ test("V09 Pages bundles base.html and TS output without replacing original pages
 test("V16 categorizes 23 component sets into nine clear groups",()=>{
   const html=read("index.html");
   const css=read("web/styles.css");
-  const expected={patterns:1,typography:1,tables:2,invoices:1,quantity:2,inputs:4,actions:6,layouts:4,overlays:2};
+  const expected={patterns:1,typography:1,tables:3,invoices:1,quantity:2,inputs:4,actions:6,layouts:4,overlays:2};
   assert.match(html,/data-ui-version="2027-UI-V33"/);
   assert.ok(html.includes("Chọn loại mẫu cần xem"));
   assert.ok(html.includes('id="componentTheme"'));
@@ -296,7 +296,7 @@ test("V16 categorizes 23 component sets into nine clear groups",()=>{
     const slice=html.slice(a,z<0?html.indexOf('  </div>\n  <div class="gallery-empty"',a):z);
     assert.equal((slice.match(/class="studio-component-card/g)||[]).length,count,category);
   }
-  assert.equal((html.match(/class="studio-component-card/g)||[]).length,23);
+  assert.equal((html.match(/class="studio-component-card/g)||[]).length,24);
   assert.ok(css.includes(".gallery-filter-nav"));
   assert.ok(css.includes(".gallery-category-heading"));
   assert.ok(css.includes(".gallery-browser"));
@@ -472,7 +472,7 @@ test("V13 catalogs subtle copy, share, download, loading and feedback buttons",(
   ".ui-message-action-grid",".ui-message-layout-demo"])
    assert.ok(css.includes(marker),marker);
  assert.ok(css.includes("@media(prefers-reduced-motion:reduce)"));
- assert.equal((html.match(/class="studio-component-card/g)||[]).length,23);
+ assert.equal((html.match(/class="studio-component-card/g)||[]).length,24);
  assert.equal((html.match(/<link rel="stylesheet"/g)||[]).length,1);
 });
 
@@ -540,7 +540,7 @@ test("V14 root button gallery filters by CHAT/TAPHOA and 11 functional families"
    ".ui-root-button-item",".ui-root-detail",".ui-root-search-row"])
    assert.ok(css.includes(selector),selector);
  assert.ok(read("web/src/app.ts").includes("initRootButtonCatalog();"));
- assert.equal((html.match(/class="studio-component-card/g)||[]).length,23);
+ assert.equal((html.match(/class="studio-component-card/g)||[]).length,24);
 });
 
 test("V14 one registry owns icons used by all root button specs",()=>{
@@ -579,7 +579,7 @@ test("V15 exposes a source-of-truth reusable pattern kit inside the existing UI 
  assert.ok(html.includes('data-gallery-category="patterns"'));
  assert.ok(html.includes('data-gallery-filter="patterns"'));
  assert.ok(html.includes('href="#sample-patterns"'));
- assert.ok(html.includes("23 bộ mẫu · 9 nhóm"));
+ assert.ok(html.includes("24 bộ mẫu · 9 nhóm"));
  assert.ok(html.includes("35 mẫu HTML"));
  assert.ok(html.includes("V33</title>"));
  assert.ok(css.includes(".ui-kit-workspace"));
