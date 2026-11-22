@@ -11,7 +11,16 @@
 
 
 
-## Giao diện thư viện tối giản theo danh sách (UI-V37)
+## Mục 8 – Một bảng 20 cột chuẩn (UI-V38)
+
+**[Xem mục 8 · Bảng & dữ liệu](https://1sl2tp.github.io/2027/#simpleTables)**. Mục 1 chỉ còn kiểu chữ. Mục 8, đặt sau phần 7 về chữ streaming, hiển thị **một bảng duy nhất có đủ 20 cột** với các hàng dữ liệu mẫu, không còn 20 bảng riêng theo số cột.
+
+- Cột 01 = STT, 02 = Tên hàng, 03 = Số, 04 = Số lượng, 05 = Đơn giá, 06 = Thành tiền… đến cột 20 = Ghi chú.
+- Mỗi cột có `data-col-index` (vị trí 1-based) và `data-col-key` (khóa trường ổn định) trên `col`, `th`, `td`; tra cứu qua `getColumnByPosition(n)` trên `COLUMN_SCHEMA`.
+- Bảng rộng cuộn ngang, vẫn dùng nguyên `ds-table ds-table--schema`, căn theo tên/role, chung colgroup và padding 10px. Phần danh mục 20 cột chỉ là `<ol>` thu gọn để đối chiếu, không thêm một bảng hay hệ CSS mới.
+- Quy tắc cập nhật trong **RULE 09 §9.9**; chỉ thay thư viện 2027, không thay dữ liệu CHAT/TAPHOA.
+
+## Lịch sử V37: Giao diện thư viện tối giản theo danh sách (UI-V37)
 
 **[Xem trực tiếp 20 mẫu bảng](https://1sl2tp.github.io/2027/#simpleTables)**. Giao diện chính giữ **kiểu trình bày như danh sách mẫu cỡ chữ**: mỗi dòng có STT, tên mẫu và mô tả; bấm mở bảng thật ngay dưới dòng. Bảng 6 cột mở sẵn; 10, 15 và 20 cột vẫn xem trên cùng trang với cuộn ngang.
 

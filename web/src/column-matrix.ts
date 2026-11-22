@@ -34,6 +34,11 @@ export const COLUMN_SCHEMA:readonly ColumnSpec[]=[
  {key:"updated",label:"Cập nhật",role:"date",priority:"secondary",minPx:135},
  {key:"note",label:"Ghi chú",role:"note",priority:"secondary",minPx:210}
 ];
+/** Stable 1-based field lookup for later column-based data extraction. */
+export function getColumnByPosition(position:number):ColumnSpec|undefined{
+ if(!Number.isInteger(position)||position<1)return undefined;
+ return COLUMN_SCHEMA[position-1];
+}
 const SAMPLE_ROWS:readonly SampleRow[]=[
  {index:1,name:"Sữa hộp 180 ml",number:101,quantity:12,price:12000,total:144000,
   code:"SP-001",unit:"Hộp",date:"22/11/2026",time:"08:30",category:"Sữa",supplier:"NCC mẫu A",
@@ -117,8 +122,10 @@ function buildTable(columns:readonly ColumnSpec[],rows:readonly SampleRow[],stat
  const minWidth=columns.reduce((total,col)=>total+col.minPx,0);
  table.style.minWidth=minWidth+"px";
  const group=node("colgroup");
- for(const col of columns){
+ for(const [colIndex,col] of columns.entries()){
   const track=node("col");
+  track.dataset.colIndex=String(colIndex+1);
+  track.dataset.colKey=col.key;
   track.dataset.colRole=col.role;
   track.style.width=(100*col.minPx/minWidth).toFixed(4)+"%";
   group.append(track);
@@ -126,8 +133,10 @@ function buildTable(columns:readonly ColumnSpec[],rows:readonly SampleRow[],stat
  table.append(group);
  table.append(node("caption","ui-column-caption","Bảng mẫu "+columns.length+" cột; số là mã/số hàng, số lượng là số đơn vị"));
  const thead=node("thead"),headRow=node("tr");
- for(const col of columns){
+ for(const [colIndex,col] of columns.entries()){
   const th=node("th");th.scope="col";
+  th.dataset.colIndex=String(colIndex+1);
+  th.dataset.colKey=col.key;
   th.dataset.colRole=col.role;th.dataset.priority=col.priority;
   const active=state.sortKey===col.key;
   th.setAttribute("aria-sort",!active?"none":state.descending?"descending":"ascending");
@@ -152,8 +161,10 @@ function buildTable(columns:readonly ColumnSpec[],rows:readonly SampleRow[],stat
  const tbody=node("tbody");
  for(const row of rows){
   const tr=node("tr");
-  for(const col of columns){
+  for(const [colIndex,col] of columns.entries()){
    const cell=node("td","",displayValue(row,col));
+   cell.dataset.colIndex=String(colIndex+1);
+   cell.dataset.colKey=col.key;
    cell.dataset.colRole=col.role;cell.dataset.priority=col.priority;
    tr.append(cell);
   }
@@ -297,42 +308,37 @@ export function initColumnMatrix():void{
  render();
 }
 
-/** UI-V37: simple numbered specimens using the SAME schema and ds-table renderer.
- * No filter panels, selectors or 360px preview frames; match the typography list.
+/** UI-V38: a SINGLE 20-column table in Section 8.
+ * One schema and one real table, not 20 independently rendered tables.
+ * All cells expose 1-based column position and stable field key for future reuse.
  */
-export function initSimpleTableList():void {
+export function initSimpleMasterTable():void{
  const root=document.getElementById("simpleTableItems");
  if(!root)return;
- const fragment=document.createDocumentFragment();
- for(let count=1;count<=COLUMN_SCHEMA.length;count++){
-  const columns=COLUMN_SCHEMA.slice(0,count);
-  const details=node("details","simple-table-row");
-  details.dataset.colCount=String(count);
-  details.id="simpleTable-"+String(count).padStart(2,"0");
-  const summary=node("summary","simple-table-summary");
-  const index=node("span","simple-font-number",String(count).padStart(2,"0"));
-  const label=node("span","simple-font-content");
-  const title=node("strong","simple-table-title","Bảng "+count+" cột");
-  const description=node("span","simple-font-meta",columns.map(c=>c.label).join(" · "));
-  const marker=node("span","simple-table-chevron");
-  marker.setAttribute("aria-hidden","true");
-  label.append(title,description);
-  summary.append(index,label,marker);
-  const stage=node("div","ds-table-scroll simple-table-preview");
-  stage.tabIndex=0;
-  stage.setAttribute("role","region");
-  stage.setAttribute("aria-label","Xem bảng "+count+" cột và cuộn ngang nếu bảng rộng");
-  const state:TableState={count,mode:"scroll",width:"desktop",borders:"rows",density:"standard",
-    sortKey:null,descending:false,headerNames:{}};
-  const render=()=>{
-   const offset=stage.scrollLeft;
-   stage.replaceChildren(buildTable(columns,sortedRows(SAMPLE_ROWS,state),state,render));
-   stage.scrollLeft=offset;
-  };
-  details.append(summary,stage);
-  details.addEventListener("toggle",()=>{if(details.open&&stage.childElementCount===0)render();});
-  if(count===6){details.open=true;render();}
-  fragment.append(details);
+ const stage=node("div","ds-table-scroll simple-table-preview simple-table-master");
+ stage.tabIndex=0;
+ stage.setAttribute("role","region");
+ stage.setAttribute("aria-label","Một bảng dữ liệu đủ 20 cột; dùng cuộn ngang để đọc hết các cột");
+ const state:TableState={count:COLUMN_SCHEMA.length,mode:"scroll",width:"desktop",
+   borders:"rows",density:"standard",sortKey:null,descending:false,headerNames:{}};
+ const render=()=>{
+  const offset=stage.scrollLeft;
+  stage.replaceChildren(buildTable(COLUMN_SCHEMA,sortedRows(SAMPLE_ROWS,state),state,render));
+  stage.scrollLeft=offset;
+ };
+ const details=node("details","simple-table-field-index");
+ const summary=node("summary","simple-table-field-summary","Tra cứu thứ tự và tên 20 cột");
+ const mapping=node("ol","simple-table-field-map");
+ for(const [index,col] of COLUMN_SCHEMA.entries()){
+  const entry=node("li");
+  entry.dataset.colIndex=String(index+1);
+  entry.dataset.colKey=col.key;
+  const align=alignmentForRole(col.role);
+  const alignName=align==="left"?"trái":align==="center"?"giữa":"phải";
+  entry.textContent=String(index+1).padStart(2,"0")+" = "+col.label+" · "+alignName;
+  mapping.append(entry);
  }
- root.append(fragment);
+ details.append(summary,mapping);
+ root.replaceChildren(stage,details);
+ render();
 }
