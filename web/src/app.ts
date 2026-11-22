@@ -169,20 +169,20 @@ function render():void{
  renderBlocks();
  renderInspector();
  const css=exportCss(settings);
- const exceptions=blockIds.filter(id=>Object.keys(blocks[id]||{}).length).map(id=>{
-  const s=computed(id);
-  return '\n.studio-document [data-block="'+id+'"] {'+
-    '\n  font-family: '+FONTS[s.font].css+';'+
-    '\n  font-size: '+s.size+'px;'+
-    '\n  font-weight: '+s.weight+';'+
-    '\n  font-style: '+(s.italic?"italic":"normal")+';'+
-    '\n  text-decoration: '+(s.underline?"underline":"none")+';'+
-    '\n  line-height: '+s.leading.toFixed(2)+';'+
-    '\n  letter-spacing: '+s.tracking.toFixed(2)+'em;'+
-    '\n  background: '+(s.surface?"var(--ui-surface)":"transparent")+';'+
-    '\n}';
- }).join('\n');
- get<HTMLElement>("cssPreview").textContent=css+"\n/* Các phần được chỉnh riêng */\n"+(exceptions||"/* Chưa có ghi đè */");
+ const typeRules=blockIds.map(id=>{
+   const s=computed(id);
+   return '.studio-document [data-block="'+id+'"] {'+
+    '\\n  font-family: '+FONTS[s.font].css+';'+
+    '\\n  font-size: '+s.size+'px;'+
+    '\\n  font-weight: '+s.weight+';'+
+    '\\n  font-style: '+(s.italic?"italic":"normal")+';'+
+    '\\n  text-decoration: '+(s.underline?"underline":"none")+';'+
+    '\\n  line-height: '+s.leading.toFixed(2)+';'+
+    '\\n  letter-spacing: '+s.tracking.toFixed(2)+'em;'+
+    '\\n  background: '+(s.surface?"var(--ui-surface)":"transparent")+';'+
+    '\\n}';
+ }).join('\\n');
+ get<HTMLElement>("cssPreview").textContent=css+"\\n/* Quy tắc trình bày cho 10 loại nội dung */\\n"+typeRules;
 }
 function selectBlock(next:SelectId):void {
  selected=next;render();announce(next==="all"?"Chọn toàn văn bản.":"Đang chỉnh: "+blockTypes[next].label+".");
