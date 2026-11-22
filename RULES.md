@@ -488,3 +488,45 @@ Làm rõ cách triển khai RULE 06–08, **không sinh design system thứ hai*
 - **E0–E1:** ảnh lỗi + đối chiếu source/Rule; code và test source chuẩn bị. **E2:** phải chạy `npm run verify`; **E3:** CI PR và GitHub Pages thành công mới ghi đạt. **E4/E5:** đối chiếu thật trên desktop 390px/mobile Safari, Chrome, focus, trạng thái selection và line break; chưa tuyên bố đạt.
 - **Đầu ra kiểm tra:** 14 nút + 10 icon giữ ID ổn định; không có `ui-button--catalog` trong gallery 6; `block` được đo width=100% parent và căn giữa; pill không dùng round; shape không đổi semantic tone; check chưa chọn không được nhìn như đã chọn.
 - **Hoàn tác:** revert PR UI-V31 tại repo `2027`; không tác động các ứng dụng khác.
+
+
+---
+
+## RULE 11 — HIỆU ỨNG CHỮ KHI CHỜ VÀ STREAMING
+
+**Mã:** `2027-R11` · **Ngày:** 22/11/2026 (VN) · **Trạng thái:** Đề xuất được chấp nhận cho bản mẫu Web `UI-V32`; E2/E3 xác nhận riêng qua CI/Pages; E4/E5 chưa nghiệm thu thiết bị.
+
+### 11.1. Mục đích
+
+Bổ sung cho thư viện giao diện ChatGPT-*like* những trạng thái chữ còn thiếu: `idle → waiting → streaming → complete`, tùy chọn `cancelled`. Chữ “đang chờ” (shimmer / chấm nhịp / skeleton) **khác** chữ câu trả lời đang đến (chunk/word reveal + caret). Không đồng nhất “typing animation” với tốc độ thực mà mô hình sinh nội dung; không hứa hiệu ứng này là mã nội bộ ChatGPT.
+
+### 11.2. Nguồn công khai đã đọc trực tiếp và phạm vi tham khảo
+
+| Repo | Bằng chứng trong source | Giấy phép | Được học, không sao chép |
+| --- | --- | --- | --- |
+| [vercel/streamdown](https://github.com/vercel/streamdown) | README + `skills/streamdown/references/features.md`: Markdown chưa hoàn chỉnh, `caret="block"`/`caret="circle"` chỉ khi `isAnimating` | Apache-2.0 (file LICENSE) | Cursor gắn vào trạng thái streaming và hủy khi xong |
+| [assistant-ui/assistant-ui](https://github.com/assistant-ui/assistant-ui) | README và docs: streaming, scroll, retry, keyboard, accessibility | MIT | Trạng thái ổn định, không scroll-jump khi chữ dài |
+| [lobehub/streamdown](https://github.com/lobehub/streamdown) | README: smooth reveal theo ký tự/từ, tốc độ có nhịp | MIT | Chữ đến theo từng khối, tránh flicker |
+| [vercel/ai-elements](https://github.com/vercel/ai-elements) | README và Plan docs: loading/shimmer và UI AI | Apache-2.0 (file LICENSE) | Chữ chờ mờ động, trạng thái tiến trình |
+| [openai/apps-sdk-ui](https://github.com/openai/apps-sdk-ui) | AGENTS.md: Animate, Indicator, Markdown, typography token | MIT | Dùng token có sẵn, trạng thái loading tách giao diện |
+| [mrigankad/Lumi-UI](https://github.com/mrigankad/Lumi-UI) | README: streaming text/thinking indicator | Apache-2.0 | Đối chiếu bố cục/thứ bậc nhãn chờ |
+
+Đây là nguồn tham khảo công khai, **không phải thư viện giao diện ChatGPT nội bộ**. Bản V32 là TypeScript + HTML + CSS hiện có (không cài React hay phụ thuộc mạng).
+
+### 11.3. Hợp đồng bắt buộc
+
+1. **Phân loại:** mẫu hiệu ứng là mẫu chữ/trạng thái, không phải nút/icon mới; thí dụ `MOTION-01…06` dùng class trình bày `.ui-motion-*` thuộc **cùng** `web/styles.css`; các nút Chạy/Dừng/Thử lại tiếp tục dùng `.ui-button`.
+2. **Trạng thái:** `waiting` chỉ hiển thị placeholder, chưa có chữ; `streaming` chỉ thêm **nội dung đã có trong buffer**; `complete` hiển thị đầy đủ và bỏ caret; `cancelled` không được giả là hoàn thành.
+3. **Thử mẫu:** chỉ chuỗi cố định, xử lý ở trình duyệt, không kết nối LLM/backend/CHAT/TAPHOA, không ghi dữ liệu, không gửi thông báo. Dừng phải hủy lịch animation/timer, thử lại phải reset đầy đủ.
+4. **Unicode + khối nội dung:** chỉ dùng token/từ nguyên vẹn, không cắt giữa dấu tiếng Việt hoặc emoji; không viết `innerHTML` từ văn bản streaming; demo không giả render Markdown chưa có parser. Khi tích hợp thật phải dùng renderer Markdown có xử lý nội dung chưa hoàn tất (tham khảo Streamdown), không dùng regex để chuyển Markdown trực tiếp.
+5. **Khả năng tiếp cận:** `prefers-reduced-motion:reduce` dừng shimmer/caret, hiển thị cuối cùng hoặc trạng thái tĩnh tùy trường hợp; **không** `aria-live` cập nhật từng ký tự. Dùng đúng một dòng trạng thái `role=status`, không spam screen reader; focus/label/44px target lấy từ primitive R06.
+6. **Hiệu năng/scroll:** không gọi `scrollIntoView` liên tục mỗi từ, không `requestAnimationFrame` vòng lặp vô hạn; có giới hạn nhịp khối, chỉ chạy sau thao tác của người xem và dừng khi tab bị ẩn hoặc rời màn; không tự dựng nội dung nếu chưa có chunk.
+7. **Nguồn và trình tự:** dữ liệu kiểm kê các hiệu ứng được ghi trong một module TypeScript riêng; preview gắn cùng ID/metadata. Nếu sau này cần xuất HTML như “Bộ mẫu gốc · Lấy mã” thì chuyển thành contract `web/src/ui-patterns.ts` và tái sử dụng đúng HTML preview theo RULE 08; gallery này hiện chỉ là mẫu tương tác thử.
+8. **Kiểm thử:** có test xác nhận ít nhất sáu mẫu, hiệu ứng CSS giảm chuyển động, trạng thái hữu hạn, không network, không XSS/Markdown parser tự chế, và không trùng tên nút/icon; nghiệm thu thực tế với iPhone Safari/PWA, Android Chrome/PWA, màn 320–430px và desktop, chữ dài/đường dẫn/code/money khi E4.
+
+### 11.4. Phạm vi, bằng chứng, hoàn tác
+
+- **Web:** thêm mục `7. Chữ đang chạy & trạng thái tải` ngay sau mục 6 của thư viện chính; không thay rule có sẵn cho font/chữ, button, input, icon. Bổ sung module `web/src/text-motion.ts` và CSS hiển thị trong `web/styles.css` theo đúng `ui-motion-*`.
+- **Ảnh hưởng:** Web demo 2027; APK, CHAT, TAPHOA, songoku, backend, DB, tin nhắn thật không đổi.
+- **E0:** yêu cầu chữ streaming/loading + nguồn GitHub đã đối chiếu. **E1:** source và test có trong PR. **E2:** `npm run verify`. **E3:** PR CI + Pages deploy báo thành công. **E4/E5:** cần ảnh/quan sát thiết bị thật trước khi xác nhận.
+- **Rollback:** revert duy nhất PR UI-V32, không tạo `RULES-*.md` song song.
