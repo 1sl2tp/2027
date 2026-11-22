@@ -1,6 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <!-- Canonical UI 2027 icon registry. Use from any HTML page with
-       <svg class="ui-icon"><use href="./web/icons.svg#ui-icon-plus"/></svg>. -->
+       <svg class="ui-icon"><use href="./web/icons.svg#ui-icon-plus"/>  <!-- V13: message actions and loading / downloading are registry icons, not per-screen drawings. -->
+  <symbol id="ui-icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+  <symbol id="ui-icon-thumbs-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M7 10v10H5a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h2Zm0 0 5-7a2.5 2.5 0 0 1 2.5 2.5L14 9h5a2 2 0 0 1 2 2l-1 8a2 2 0 0 1-2 1H7"/></symbol>
+  <symbol id="ui-icon-thumbs-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M7 14V4H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2Zm0 0 5 7a2.5 2.5 0 0 0 2.5-2.5L14 15h5a2 2 0 0 0 2-2l-1-8a2 2 0 0 0-2-1H7"/></symbol>
+  <symbol id="ui-icon-volume" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M4 9h4l5-4v14l-5-4H4V9Zm12-1a6 6 0 0 1 0 8m2-11a10 10 0 0 1 0 14"/></symbol>
+  <symbol id="ui-icon-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M12 16V3m-5 5 5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></symbol>
+  <symbol id="ui-icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3h16v-3"/></symbol>
+  <symbol id="ui-icon-loader" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3a9 9 0 0 1 9 9"/></symbol>
+  <symbol id="ui-icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="ui-icon-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M20 10a8 8 0 1 0-2 7M20 4v6h-6"/></symbol>
+</svg>. -->
   <symbol id="ui-icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 4.5v15M4.5 12h15"/></symbol>
   <symbol id="ui-icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
   <symbol id="ui-icon-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="12" rx="3"/><path d="M6 10.5v2a6 6 0 0 0 12 0v-2M12 18.5v3m-4 0h8"/></symbol>
