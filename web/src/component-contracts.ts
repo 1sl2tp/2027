@@ -1,4 +1,4 @@
-// UI-V43 · RULE 12: structural contracts — classification before creating CSS.
+// UI-V44 · RULE 12: structural contracts — classification before creating CSS.
 // Public GitHub inspiration: assistant-ui ComposerPrimitive, AI Elements PromptInput
 // and OpenAI Apps SDK UI Button/Textarea. This is original 2027 metadata, not vendor code.
 export type ComponentLayer="screen"|"region"|"composition"|"primitive"|"token";
@@ -10,21 +10,57 @@ export interface ComponentContract {
 }
 export const COMPONENT_CONTRACTS:readonly ComponentContract[]=[
  {id:"CHAT-SCREEN",parent:null,layer:"screen",nature:"container",cardinality:"one",owner:"app shell",description:"Vùng ứng dụng chat"},
+ {id:"CHAT-DIRECTORY",parent:"CHAT-SCREEN",layer:"region",nature:"container",cardinality:"one",owner:"shell.js",description:"Danh bạ bên trái desktop, view chính trên mobile"},
+ {id:"CHAT-REGION-TOP",parent:"CHAT-SCREEN",layer:"region",nature:"container",cardinality:"one",owner:"shell.js",description:"Header co theo normal / reading / typing"},
+ {id:"CHAT-QUICK-ACTIONS",parent:"CHAT-SCREEN",layer:"composition",nature:"container",cardinality:"optional",owner:"shell.js",description:"Thao tác khách hàng nằm trên thread, không trong composer"},
+ {id:"CHAT-NETWORK-STATUS",parent:"CHAT-SCREEN",layer:"primitive",nature:"content",cardinality:"optional",owner:"chat-connection-status.js",description:"Hiển thị mạng/sync, không tự kết luận ACK tin"},
+ {id:"CHAT-WORK-REGION",parent:"CHAT-SCREEN",layer:"region",nature:"container",cardinality:"optional",owner:"shell.js",description:"Region 3 workspace desktop hoặc route Work mobile"},
+ {id:"CHAT-MOBILE-DRAWER",parent:"CHAT-SCREEN",layer:"composition",nature:"container",cardinality:"optional",owner:"shell.js",description:"Điều hướng overlay riêng mobile, không nhân bản dữ liệu danh bạ"},
+ {id:"CHAT-OVERLAY-ROOT",parent:"CHAT-SCREEN",layer:"region",nature:"container",cardinality:"one",owner:"shell.js",description:"Một nơi mount overlay toàn screen"},
+ {id:"DIRECTORY-TOOLS",parent:"CHAT-DIRECTORY",layer:"composition",nature:"container",cardinality:"one",owner:"contact-directory-admin.js",description:"Chứa tìm kiếm và bộ lọc danh bạ"},
+ {id:"DIRECTORY-SEARCH",parent:"DIRECTORY-TOOLS",layer:"primitive",nature:"content",cardinality:"one",owner:"ds-field",description:"Tìm khách, một input do vùng công cụ sở hữu"},
+ {id:"DIRECTORY-FILTERS",parent:"DIRECTORY-TOOLS",layer:"composition",nature:"container",cardinality:"optional",owner:"contact-directory-admin.js",description:"Nhóm lọc; không thuộc từng dòng liên hệ"},
+ {id:"DIRECTORY-LIST",parent:"CHAT-DIRECTORY",layer:"composition",nature:"container",cardinality:"one",owner:"shell.js",description:"Một scroll owner của danh bạ"},
+ {id:"DIRECTORY-CONTACT-ROW",parent:"DIRECTORY-LIST",layer:"composition",nature:"container",cardinality:"many",owner:"contact-directory-admin.js",description:"Mỗi khách là một row với avatar, tên và preview"},
+ {id:"CONTACT-AVATAR",parent:"DIRECTORY-CONTACT-ROW",layer:"primitive",nature:"content",cardinality:"optional",owner:"contact-directory-admin.js",description:"Một avatar thuộc đúng hàng khách"},
+ {id:"CONTACT-NAME",parent:"DIRECTORY-CONTACT-ROW",layer:"primitive",nature:"content",cardinality:"one",owner:"contact-directory-admin.js",description:"Tên khách có ưu tiên đọc và co giãn"},
+ {id:"CONTACT-PREVIEW",parent:"DIRECTORY-CONTACT-ROW",layer:"primitive",nature:"content",cardinality:"optional",owner:"contact-directory-admin.js",description:"Nội dung cuối và trạng thái không làm tăng row tùy tiện"},
+ {id:"DIRECTORY-ACCOUNT-FOOTER",parent:"CHAT-DIRECTORY",layer:"composition",nature:"container",cardinality:"optional",owner:"shell.js",description:"Footer account nằm dưới danh sách, không lẫn scroll list"},
+ {id:"HEADER-IDENTITY",parent:"CHAT-REGION-TOP",layer:"composition",nature:"container",cardinality:"one",owner:"shell.js",description:"Tên/avatar và tab cùng một vùng điều khiển"},
+ {id:"HEADER-AVATAR",parent:"HEADER-IDENTITY",layer:"primitive",nature:"content",cardinality:"optional",owner:"shell.js",description:"Avatar có thể ẩn lúc bàn phím hiện"},
+ {id:"HEADER-NAME",parent:"HEADER-IDENTITY",layer:"primitive",nature:"content",cardinality:"one",owner:"shell.js",description:"Tên liên hệ/nhãn tab"},
+ {id:"HEADER-CALL-CONTROL",parent:"CHAT-REGION-TOP",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Nút gọi do vùng header sở hữu"},
+ {id:"HEADER-MORE-CONTROL",parent:"CHAT-REGION-TOP",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Nút menu hội thoại, không thêm menu chồng"},
+ {id:"WORK-SUMMARY",parent:"CHAT-WORK-REGION",layer:"composition",nature:"container",cardinality:"optional",owner:"work-customer-summary.js",description:"Tổng hợp hàng thuộc Work, không thuộc bubble chat"},
+ {id:"THREAD-SEARCH-OVERLAY",parent:"CHAT-OVERLAY-ROOT",layer:"composition",nature:"container",cardinality:"optional",owner:"conversation-search.js",description:"Tìm trong cuộc hội thoại đã tải, có đúng focus owner"},
+ {id:"THREAD-SEARCH-RESULTS",parent:"THREAD-SEARCH-OVERLAY",layer:"composition",nature:"container",cardinality:"one",owner:"conversation-search.js",description:"Kết quả tìm, không truy vấn mạng trong UI"},
+ {id:"THREAD-SEARCH-HIT",parent:"THREAD-SEARCH-RESULTS",layer:"primitive",nature:"control",cardinality:"many",owner:"conversation-search.js",description:"Mỗi kết quả nhảy về ID tin trong đúng thread"},
+ {id:"CHAT-IMAGE-VIEWER",parent:"CHAT-OVERLAY-ROOT",layer:"composition",nature:"container",cardinality:"optional",owner:"app.js",description:"Một viewer cho media: zoom/swipe/close/focus"},
+ {id:"CHAT-FORWARD-OVERLAY",parent:"CHAT-OVERLAY-ROOT",layer:"composition",nature:"container",cardinality:"optional",owner:"message-forward.js",description:"Một picker chuyển tiếp ngoài vùng soạn"},
  {id:"CHAT-THREAD",parent:"CHAT-SCREEN",layer:"region",nature:"container",cardinality:"one",owner:"thread layout",description:"Vùng nội dung hội thoại, một owner cuộn"},
  {id:"CHAT-MESSAGE-LIST",parent:"CHAT-THREAD",layer:"composition",nature:"container",cardinality:"one",owner:"thread layout",description:"Danh sách nhiều tin nhắn"},
  {id:"CHAT-MESSAGE",parent:"CHAT-MESSAGE-LIST",layer:"composition",nature:"container",cardinality:"many",owner:"message template",description:"Một tin nhắn có nhiều phần tùy chọn"},
+ {id:"THREAD-DAY-MARKER",parent:"CHAT-MESSAGE-LIST",layer:"primitive",nature:"content",cardinality:"optional",owner:"app.js",description:"Nhãn ngày nổi, không thêm scroll owner"},
+ {id:"THREAD-HISTORY-LOAD",parent:"CHAT-MESSAGE-LIST",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Tải tin cũ, giữ neo vị trí theo message ID"},
  {id:"THREAD-JUMP-TO-LATEST",parent:"CHAT-MESSAGE-LIST",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Một nút tròn mũi tên về cuối, chỉ MessageList điều khiển"},
  {id:"THREAD-JUMP-ICON",parent:"THREAD-JUMP-TO-LATEST",layer:"token",nature:"decoration",cardinality:"one",owner:"web/icons.svg",description:"Arrow down, con của nút, không tự có hành động"},
  {id:"THREAD-UNSEEN-COUNT",parent:"THREAD-JUMP-TO-LATEST",layer:"primitive",nature:"content",cardinality:"optional",owner:"message list state",description:"Badge số tin chưa xem do đúng MessageList tính"},
+ {id:"MESSAGE-TIME",parent:"CHAT-MESSAGE",layer:"primitive",nature:"content",cardinality:"optional",owner:"app.js",description:"Time node của tin, không phải dòng thừa"},
+ {id:"MESSAGE-DELIVERY-STATE",parent:"CHAT-MESSAGE",layer:"primitive",nature:"content",cardinality:"optional",owner:"app.js",description:"sending/failed/ACK thuộc chính message"},
  {id:"CHAT-MESSAGE-TEXT",parent:"CHAT-MESSAGE",layer:"primitive",nature:"content",cardinality:"optional",owner:"typography tokens",description:"Chữ legacy; bản tin hỗn hợp dùng MESSAGE-CONTENT-PARTS"},
  {id:"MESSAGE-CONTENT-PARTS",parent:"CHAT-MESSAGE",layer:"composition",nature:"container",cardinality:"one",owner:"message template",description:"Vùng chứa tuần tự nhiều loại nội dung trong cùng một tin"},
+ {id:"MESSAGE-REPLY-QUOTE",parent:"MESSAGE-CONTENT-PARTS",layer:"composition",nature:"content",cardinality:"optional",owner:"app.js",description:"Trích dẫn gắn vào content của đúng tin"},
  {id:"MESSAGE-TEXT-PART",parent:"MESSAGE-CONTENT-PARTS",layer:"primitive",nature:"content",cardinality:"many",owner:"typography tokens",description:"Mỗi đoạn chữ là một part, 0–n"},
  {id:"MESSAGE-TABLE-PART",parent:"MESSAGE-CONTENT-PARTS",layer:"composition",nature:"container",cardinality:"many",owner:"message layout",description:"Slot đặt DATA-TABLE gốc, không phát minh bảng mới"},
  {id:"MESSAGE-MEDIA-PART",parent:"MESSAGE-CONTENT-PARTS",layer:"composition",nature:"container",cardinality:"many",owner:"message media layout",description:"Vùng nhóm ảnh trong một tin"},
  {id:"MESSAGE-MEDIA-TILE",parent:"MESSAGE-MEDIA-PART",layer:"primitive",nature:"content",cardinality:"many",owner:"media tile",description:"Mỗi ô ảnh là con một nhóm media"},
  {id:"CHAT-MESSAGE-ACTIONS",parent:"CHAT-MESSAGE",layer:"composition",nature:"container",cardinality:"optional",owner:"ui-action-strip",description:"Vùng nhiều hành động của đúng tin"},
+ {id:"MESSAGE-FORWARD-ACTION",parent:"CHAT-MESSAGE-ACTIONS",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Chuyển tiếp đúng message ID"},
+ {id:"MESSAGE-REPLY-ACTION",parent:"CHAT-MESSAGE-ACTIONS",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Trả lời đúng message ID"},
  {id:"MESSAGE-COPY-BUTTON",parent:"CHAT-MESSAGE-ACTIONS",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Nút sao chép tất cả parts của đúng tin"},
  {id:"CHAT-COMPOSER",parent:"CHAT-THREAD",layer:"composition",nature:"container",cardinality:"one",owner:"ds-composer",description:"Cha của textarea, đính kèm và toolbar"},
+ {id:"COMPOSER-REPLY-CONTEXT",parent:"CHAT-COMPOSER",layer:"composition",nature:"container",cardinality:"optional",owner:"app.js",description:"Reply preview là con composer"},
+ {id:"COMPOSER-ACTION-MENU",parent:"CHAT-COMPOSER",layer:"composition",nature:"container",cardinality:"optional",owner:"admin-composer-actions.js",description:"Menu mở từ + và đóng theo cùng owner"},
  {id:"COMPOSER-ATTACHMENTS",parent:"CHAT-COMPOSER",layer:"composition",nature:"container",cardinality:"optional",owner:"composer attachment slots",description:"Vùng có 0–n ảnh/tệp trước khi gửi"},
  {id:"COMPOSER-ATTACHMENT",parent:"COMPOSER-ATTACHMENTS",layer:"composition",nature:"content",cardinality:"many",owner:"attachment preview",description:"Một ảnh/tệp với nút bỏ riêng"},
  {id:"COMPOSER-INPUT",parent:"CHAT-COMPOSER",layer:"primitive",nature:"content",cardinality:"one",owner:"ds-composer textarea",description:"Một ô textarea; không bao gồm nút"},
@@ -47,7 +83,8 @@ export interface ComponentPlacement {
  id:string;host:string;child:string;cardinality:ComponentCardinality;
 }
 export const COMPONENT_PLACEMENTS:readonly ComponentPlacement[]=[
- {id:"message-table",host:"MESSAGE-TABLE-PART",child:"DATA-TABLE",cardinality:"one"}
+ {id:"message-table",host:"MESSAGE-TABLE-PART",child:"DATA-TABLE",cardinality:"one"},
+ {id:"thread-search-input",host:"THREAD-SEARCH-OVERLAY",child:"SEARCH-FIELD",cardinality:"one"}
 ];
 export function getAllowedComponentParents(id:string):string[]{
  const canonical=getComponentContract(id)?.parent;

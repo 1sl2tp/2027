@@ -719,3 +719,11 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 - Bỏ nhãn chữ “Về tin mới” khỏi hình hiển thị; giữ `aria-label` và `title`. Nút mũi tên xuất hiện khi rời cuối (kể cả chưa có tin mới), badge ẩn khi unseen=0. Click cuộn mềm khi được phép; thiết bị yêu cầu reduced motion thì cuộn ngay.
 - `icon-motion-gallery.ts` là phần xem catalog, không tạo định nghĩa icon thứ hai. Các hiệu ứng (fade/rise/press/shimmer/dots/spin/pulse) là state của nút, message hoặc indicator, không tạo component CSS chủ mới.
 - Hệ màu và `--ui-control-*` gốc quyết định kích thước. `prefers-reduced-motion:reduce` vô hiệu hóa chuyển động không thiết yếu. Chỉ demo client-side, không cài dependency hoặc truyền dữ liệu thật. [Audit V43](references/UI_V43_GITHUB_ICON_MOTION.md).
+
+
+### 12.10. V44 — Crosswalk từ code CHAT đang tồn tại vào một registry cha–con
+- **Một registry canonical:** `COMPONENT_CONTRACTS` giữ định nghĩa, `chat-live-map.ts` chỉ là bộ binding selector/file/owner cho code hiện tại, KHÔNG là định nghĩa component thứ hai. Không dựng lại bảng/icon/textarea riêng.
+- **P0 ≠ DOM con:** Platform (`keyboard-inset-core.js`, `shell-form-viewport-policy.js`, safe-area) và Shell (`shell.js`, route/mode) quyết định không gian; không nhét Platform vào composer/bubble. Desktop workspace hay mobile 1 screen do Shell quyết định.
+- **Phân biệt cha logic và DOM mount:** `THREAD-JUMP-TO-LATEST` do MessageList quản lý nhưng ở CHAT thật `#threadScrollControlWrap` gắn gần `#thread-bottom-container` bên ngoài `#messageWindow`. V44 không di chuyển DOM để ép nó thành con vật lý.
+- **Tìm kiếm dùng lại:** một `SEARCH-FIELD`, placement `THREAD-SEARCH-OVERLAY`; không tạo primitive tìm mới. `conversation-search.js` đã thực hiện searchLoaded/revealLoadedMessage trên tin đã tải; không coi Search là gap chức năng toàn CHAT.
+- **Chỉ nâng thư viện 2027:** không thay production CHAT; phân biệt thiếu mẫu/thẻ trong 2027 với thiếu feature ở CHAT. E4/E5 cần nghiệm thu mobile Safari/Chrome/PWA. [Crosswalk V44](references/UI_V44_CHAT_CODE_CROSSWALK.md).

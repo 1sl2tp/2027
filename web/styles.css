@@ -2322,6 +2322,18 @@ body.simple-first .topbar-end{gap:0}
  .message-v41-preview{padding:10px}
  .message-v41-options{gap:6px}
 }
+/* V44: this is a source-aware reader of the existing R12 registry, not a new UI kit. */
+.chat-live-map a{color:var(--ui-text);text-decoration:underline;text-underline-offset:3px}
+.chat-live-platform{display:grid;grid-template-columns:minmax(0,1fr);gap:5px;margin:10px 0;padding:10px 13px;background:var(--ui-surface);border-radius:9px}
+.chat-live-platform p{margin:0;color:var(--ui-text-muted);font:400 11px/1.55 var(--ui-font)}
+.chat-live-platform strong{color:var(--ui-text);font-weight:650}
+.chat-live-platform small{display:block}
+.chat-live-filter{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0}
+.chat-live-filter label{font:600 12px/1.3 var(--ui-font);color:var(--ui-text-muted)}
+.chat-live-filter select{min-height:var(--ui-control-hit);max-width:100%;border:1px solid var(--ui-border);border-radius:8px;padding:8px 12px;background:var(--ui-bg);color:var(--ui-text);font:500 13px var(--ui-font)}
+.chat-live-map .simple-component-tree-level>li{overflow-wrap:anywhere}
+.chat-live-map .simple-component-tree-level>li>small{max-width:100%}
+.chat-live-status{color:var(--ui-text-muted);font:400 12px/1.5 var(--ui-font)}
 .simple-component-contract{border-top:1px solid var(--ui-border);margin-top:15px;padding-top:9px;color:var(--ui-text)}
 .simple-component-contract>summary{min-height:44px;display:flex;align-items:center;cursor:pointer;
  font:650 13px/1.45 var(--ui-font)}
