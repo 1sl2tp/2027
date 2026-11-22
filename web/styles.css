@@ -1174,9 +1174,16 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid #fff
 .ui-button--icon{width:var(--ui-control-hit);height:var(--ui-control-hit);min-width:var(--ui-control-hit);
  padding:0;border-radius:50%;background:transparent;color:var(--ui-text)}
 .ui-button--icon:hover:not(:disabled),.ui-button--mode:hover:not(:disabled){background:var(--ui-surface)}
-.ui-button--square{border-radius:10px;background:var(--ui-surface);border-color:var(--ui-border)}
+/* Shape/layout modifiers follow RULE 06–08: no semantic colors here. */
+.ui-button--square{border-radius:var(--ui-button-radius)}
 .ui-button--round{border-radius:var(--ui-button-radius-pill)}
-.ui-button--round:not(.ui-button--primary){background:var(--ui-surface);border-color:var(--ui-border)}
+.ui-button--pill{border-radius:var(--ui-button-radius-pill)}
+.ui-button--uniform{
+ width:var(--ui-control-hit);height:var(--ui-control-hit);
+ min-width:var(--ui-control-hit);min-height:var(--ui-control-hit);
+ padding:0;flex:none;aspect-ratio:1
+}
+.ui-button--block{width:100%;max-width:100%;justify-content:center;text-align:center}
 .ui-button--filled{background:var(--ui-text);color:var(--ui-bg);border-color:var(--ui-text)}
 .ui-button--outline{background:var(--ui-bg)}
 .ui-button--icon[aria-pressed=true]{background:var(--ui-surface);box-shadow:inset 0 0 0 1px var(--ui-border)}
@@ -2322,7 +2329,12 @@ body.simple-first .topbar-end{gap:0}
 .simple-button-stage{display:flex;align-items:center;width:100%;min-width:0;max-width:100%}
 .simple-button-demo{max-width:100%;min-width:0}
 .simple-button-demo>span{min-width:0;overflow:hidden;text-overflow:ellipsis}
-.simple-button-stage>.ui-button--catalog{max-width:360px}
+.simple-button-stage>.ui-button--icon{flex:none}
+.simple-button-demo.ui-button--block{min-width:0}
+.simple-button-stage[data-layout="block"]{max-width:280px}
+.simple-button-stage[data-layout="block"]>.ui-button--block{width:100%}
+.simple-button-pick:not([aria-pressed="true"])>.ui-icon,
+.simple-button-inner-pick:not([aria-pressed="true"])>.ui-icon{visibility:hidden}
 .simple-button-pick[aria-pressed="true"]{background:var(--ui-text);color:var(--ui-bg);border-color:var(--ui-text)}
 .simple-buttons-feedback{
  font:400 12px/1.5 var(--ui-font);color:var(--ui-text-muted);
