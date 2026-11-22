@@ -90,8 +90,8 @@ function node<K extends keyof HTMLElementTagNameMap>(tag:K,className="",value=""
 }
 function displayValue(row:SampleRow,col:ColumnSpec):string{
  const value=row[col.key];
- if(col.role==="money")return amount.format(value as number)+" đ";
- if(col.role==="percent")return number.format(value as number)+"%";
+ if(col.role==="money"&&typeof value==="number")return amount.format(value)+" đ";
+ if(col.role==="percent"&&typeof value==="number")return number.format(value)+"%";
  if(typeof value==="number")return number.format(value);
  return String(value);
 }
