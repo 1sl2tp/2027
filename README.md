@@ -10,6 +10,16 @@
 
 
 
+
+## Mẫu chữ đang tải và Streaming (UI-V32)
+
+**[Mở mục 7 — Chữ đang chạy & trạng thái tải](https://1sl2tp.github.io/2027/#simpleMotion)**: sáu mẫu thử chạy cục bộ (waiting dots, chữ shimmer, skeleton, chữ theo từ + caret, khối nội dung + caret, và vòng đời chờ → streaming → hoàn tất/dừng). Mỗi mẫu có nút Chạy thử/Dừng, không gửi tin thật hay dùng API AI.
+
+- Nguồn phân loại và hành vi được ghi chuẩn tắc ở **RULE 11** trong [RULES.md](./RULES.md).
+- [Báo cáo đối chiếu 6 GitHub repo](./references/TEXT_STREAMING_SOURCE_AUDIT_V32.md): Streamdown của Vercel (Apache-2.0), assistant-ui (MIT), Streamdown của LobeHub (MIT), Vercel AI Elements (Apache-2.0), OpenAI Apps SDK UI (MIT), Lumi-UI (Apache-2.0).
+- Bản thử dùng TypeScript và CSS cùng thư viện 2027. Mã không cài React, không sao chép asset/hiệu ứng độc quyền ChatGPT và **chưa có renderer Markdown đang streaming thật**.
+- `prefers-reduced-motion`: hiện ngay nội dung mẫu; stop dừng timer, giữ phần đã hiển thị, con trỏ biến mất khi xong. Chờ nghiệm thu trên Safari/Chrome mobile thực tế.
+
 ## Mẫu gốc dùng chung 2027 (UI-V09)
 
 - [**Mở mẫu gốc**](https://1sl2tp.github.io/2027/base.html) · một khung giao diện chuẩn gồm header/rail/sidebar, nội dung Chat, Công việc, Bán hàng, bảng, nút, icon, input, stepper số lượng, composer, menu và popup.
