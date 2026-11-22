@@ -2140,3 +2140,93 @@ body.simple-first .topbar-end{gap:0}
 @media(hover:none){
  .simple-underline-row[aria-pressed="true"] .simple-underline-hover{text-decoration:underline}
 }
+
+
+/* UI-V25 · Framed text and message bubbles.
+   Badge, Alert, CodeBlock behaviors were inspected in openai/apps-sdk-ui (MIT).
+   ChatGPT-style outgoing bubble inspired by assistant-ui open-source example;
+   other chat variants are original 2027 component samples. */
+.simple-frame-group-label{
+ padding:14px 0 9px;margin-top:3px;
+ font:650 12px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+ color:#646464;letter-spacing:.01em;
+}
+.simple-frame-group-label:not(:first-child){border-top:1px solid #dedede}
+.simple-frame-row .simple-font-content{width:100%;min-width:0;gap:7px}
+.simple-frame-stage{
+ width:100%;max-width:100%;min-width:0;
+ display:flex;align-items:flex-start;justify-content:flex-start;padding:4px 0;
+}
+.simple-frame-stage-right{justify-content:flex-end}
+.simple-frame-preview{
+ display:inline-block;box-sizing:border-box;max-width:100%;min-width:0;
+ color:#191919;font:400 14px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+ white-space:pre-line;overflow-wrap:anywhere;text-align:left;
+}
+.simple-frame-thin{border:1px solid #d8d8d8;border-radius:2px;padding:8px 11px}
+.simple-frame-round{border:1px solid #dedede;border-radius:10px;padding:9px 12px}
+.simple-frame-dashed{border:1px dashed #a8a8a8;border-radius:7px;padding:9px 12px}
+.simple-frame-dotted{border:1px dotted #888;border-radius:7px;padding:9px 12px}
+.simple-frame-heavy{border:2px solid #333;border-radius:8px;padding:9px 12px;font-weight:650}
+.simple-frame-badge-soft,.simple-frame-badge-outline,.simple-frame-badge-solid,
+.simple-frame-badge-pill,.simple-frame-badge-success{
+ display:inline-flex;align-items:center;min-height:18px;
+ font-size:11px;line-height:1.3;font-weight:600;
+ padding:2px 8px;border-radius:6px;
+}
+.simple-frame-badge-soft{background:#eee;color:#494949}
+.simple-frame-badge-outline{box-shadow:inset 0 0 0 1px #bdbdbd;color:#333}
+.simple-frame-badge-solid{background:#202020;color:#fff}
+.simple-frame-badge-pill{background:#eee;border-radius:999px;padding:5px 13px}
+.simple-frame-badge-success{background:#e9f5ed;color:#1b6c3a}
+.simple-frame-alert-soft,.simple-frame-alert-outline,
+.simple-frame-alert-solid,.simple-frame-alert-description{
+ display:block;width:min(100%,380px);max-width:100%;
+ padding:10px 12px;border-radius:10px;
+ box-shadow:inset 0 0 0 1px #dedede;
+ font-size:13px;line-height:1.5;
+}
+.simple-frame-alert-soft{background:#f4f4f4}
+.simple-frame-alert-outline{background:#fff}
+.simple-frame-alert-solid{background:#242424;color:#fff;box-shadow:none}
+.simple-frame-alert-description{display:flex;flex-direction:column;gap:3px;background:#f7f7f7}
+.simple-frame-alert-description strong{font-weight:700}
+.simple-frame-alert-description span{white-space:pre-line;font-size:12px;color:#5d5d5d}
+.simple-frame-code-box{
+ display:block;width:min(100%,390px);
+ border:1px solid #dedede;border-radius:8px;
+ padding:12px 13px;background:#f7f7f7;
+ font:400 12px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+.simple-frame-quote-box{
+ display:block;width:min(100%,390px);
+ border:1px solid #e2e2e2;border-left:3px solid #999;
+ border-radius:7px;padding:10px 13px;background:#fafafa;
+ font-style:italic;
+}
+.simple-frame-bubble-user-dark,.simple-frame-bubble-user-soft,
+.simple-frame-bubble-incoming-outline,.simple-frame-bubble-incoming-soft,
+.simple-frame-bubble-two,.simple-frame-bubble-four,.simple-frame-bubble-time{
+ max-width:min(82%,420px);
+ border-radius:22px;padding:10px 16px;
+ font-size:14px;line-height:1.5;
+}
+.simple-frame-bubble-user-dark{background:#171717;color:#fff}
+.simple-frame-bubble-user-soft,.simple-frame-bubble-two,
+.simple-frame-bubble-time{background:#e9f3fe;color:#132d50}
+.simple-frame-bubble-incoming-outline{border:1px solid #dadada;background:#fff}
+.simple-frame-bubble-incoming-soft,.simple-frame-bubble-four{background:#f3f3f3}
+.simple-frame-bubble-assistant{
+ max-width:min(100%,420px);padding:7px 0;
+ color:#181818;font-size:15px;line-height:1.6;
+}
+.simple-frame-bubble-time{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.simple-frame-timestamp{color:#687d90;font-size:10px;line-height:1.3;font-weight:400}
+@media(max-width:760px){
+ .simple-frame-row{grid-template-columns:25px minmax(0,1fr) 20px}
+ .simple-frame-bubble-user-dark,.simple-frame-bubble-user-soft,
+ .simple-frame-bubble-incoming-outline,.simple-frame-bubble-incoming-soft,
+ .simple-frame-bubble-two,.simple-frame-bubble-four,.simple-frame-bubble-time{
+  max-width:88%;font-size:14px;
+ }
+}

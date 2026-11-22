@@ -1,4 +1,4 @@
-// V24 — Source-grounded typography with separate link underline treatments.
+// V25 — Source-grounded typography and framed text / message-bubble variants.
 // Source snapshot: Google Drive ChatGPT.html (22 Nov 2026), --text-* and --text-heading-* tokens.
 // Font family uses system sans; monospace is reserved for code.
 // Styling for composition variants is authored for this demo; it is not vendor CSS.
@@ -89,6 +89,44 @@ const UNDERLINE_SAMPLES:readonly UnderlineSample[]=[
  {id:"UNDER-11",label:"Liên kết màu nhấn, không gạch",style:"primary",preview:"Tìm hiểu thêm ↗"},
  {id:"UNDER-12",label:"Gạch chân khi rê / focus",style:"hover",preview:"Di chuột hoặc chạm để xem"}
 ];
+type FrameStyle =
+ "thin"|"round"|"dashed"|"dotted"|"heavy"|
+ "badge-soft"|"badge-outline"|"badge-solid"|"badge-pill"|"badge-success"|
+ "alert-soft"|"alert-outline"|"alert-solid"|"alert-description"|
+ "code-box"|"quote-box"|
+ "bubble-user-dark"|"bubble-user-soft"|"bubble-incoming-outline"|"bubble-incoming-soft"|
+ "bubble-assistant"|"bubble-two"|"bubble-four"|"bubble-time";
+interface FramedSample {
+ id:string;label:string;style:FrameStyle;lines:readonly string[];
+ source:"2027"|"SDK · Badge"|"SDK · Alert"|"SDK · CodeBlock"|"assistant-ui";
+ time?:string;
+}
+const FRAMED_SAMPLES:readonly FramedSample[]=[
+ {id:"FRAME-01",label:"Khung chữ vuông, viền mảnh",style:"thin",lines:["Nội dung trong khung"],source:"2027"},
+ {id:"FRAME-02",label:"Khung bo góc 10px",style:"round",lines:["Thông tin đơn hàng"],source:"2027"},
+ {id:"FRAME-03",label:"Khung viền nét đứt",style:"dashed",lines:["Ghi chú cần kiểm tra"],source:"2027"},
+ {id:"FRAME-04",label:"Khung viền nét chấm",style:"dotted",lines:["Vùng nội dung mẫu"],source:"2027"},
+ {id:"FRAME-05",label:"Khung viền đậm",style:"heavy",lines:["Tổng thanh toán: 180.000 đ"],source:"2027"},
+ {id:"FRAME-06",label:"Nhãn nền nhẹ · soft",style:"badge-soft",lines:["Đơn đang xử lý"],source:"SDK · Badge"},
+ {id:"FRAME-07",label:"Nhãn viền · outline",style:"badge-outline",lines:["Đã kiểm tra"],source:"SDK · Badge"},
+ {id:"FRAME-08",label:"Nhãn nền đậm · solid",style:"badge-solid",lines:["Đã giao"],source:"SDK · Badge"},
+ {id:"FRAME-09",label:"Nhãn dạng viên thuốc",style:"badge-pill",lines:["Thông báo mới"],source:"SDK · Badge"},
+ {id:"FRAME-10",label:"Nhãn trạng thái thành công",style:"badge-success",lines:["Đã hoàn thành"],source:"SDK · Badge"},
+ {id:"FRAME-11",label:"Thông báo nền nhẹ",style:"alert-soft",lines:["Đã lưu thông tin mẫu"],source:"SDK · Alert"},
+ {id:"FRAME-12",label:"Thông báo chỉ có viền",style:"alert-outline",lines:["Đã cập nhật dữ liệu xem trước"],source:"SDK · Alert"},
+ {id:"FRAME-13",label:"Thông báo nền đậm",style:"alert-solid",lines:["Cần xem lại nội dung"],source:"SDK · Alert"},
+ {id:"FRAME-14",label:"Thông báo tiêu đề + 2 dòng",style:"alert-description",lines:["Lưu ý khi tạo đơn","Kiểm tra số lượng và giá","trước khi xác nhận."],source:"SDK · Alert"},
+ {id:"FRAME-15",label:"Khung mã nguồn",style:"code-box",lines:["const total = 180000;","console.log(total);"],source:"SDK · CodeBlock"},
+ {id:"FRAME-16",label:"Khung trích dẫn",style:"quote-box",lines:["“Nội dung cần được đọc dễ dàng.”"],source:"2027"},
+ {id:"FRAME-17",label:"Bong bóng gửi · nền tối",style:"bubble-user-dark",lines:["Cho mình xem đơn hàng."],source:"assistant-ui"},
+ {id:"FRAME-18",label:"Bong bóng gửi · nền sáng",style:"bubble-user-soft",lines:["Đã nhận thông tin nhé."],source:"2027"},
+ {id:"FRAME-19",label:"Bong bóng nhận · có viền",style:"bubble-incoming-outline",lines:["Đơn đã được chuẩn bị."],source:"2027"},
+ {id:"FRAME-20",label:"Bong bóng nhận · nền nhẹ",style:"bubble-incoming-soft",lines:["Mình sẽ kiểm tra lại."],source:"2027"},
+ {id:"FRAME-21",label:"Trả lời không bong bóng",style:"bubble-assistant",lines:["Dưới đây là thông tin bạn cần."],source:"assistant-ui"},
+ {id:"FRAME-22",label:"Bong bóng 2 dòng",style:"bubble-two",lines:["Sữa hộp 180 ml","Số lượng: 12 hộp"],source:"2027"},
+ {id:"FRAME-23",label:"Bong bóng 4 dòng",style:"bubble-four",lines:["Đơn hàng: DH-001","Tên hàng: Bánh quy","Số lượng: 3 hộp","Tổng: 75.000 đ"],source:"2027"},
+ {id:"FRAME-24",label:"Bong bóng có thời gian",style:"bubble-time",lines:["Mình đã nhận được."],time:"08:30",source:"2027"}
+];
 function renderTextTreatment(target:HTMLElement,item:MultiTextSample):void {
  target.className="simple-multi-preview simple-multi-"+item.style;
  if(item.style==="mixed"){
@@ -113,7 +151,7 @@ export function initSimpleGallery():void {
  // Older deep links still open the pre-existing advanced gallery.
  const showOriginal=():void=>{
    const hash=window.location.hash;
-   const useOriginal=hash!==""&&hash!=="#simpleKit"&&hash!=="#simple-gallery"&&hash!=="#simpleMultiline"&&hash!=="#simpleUnderline";
+   const useOriginal=hash!==""&&hash!=="#simpleKit"&&hash!=="#simple-gallery"&&hash!=="#simpleMultiline"&&hash!=="#simpleUnderline"&&hash!=="#simpleFrames";
    document.body.classList.toggle("simple-first",!useOriginal);
  };
  window.addEventListener("hashchange",showOriginal);
@@ -217,5 +255,74 @@ export function initSimpleGallery():void {
      button.setAttribute("aria-pressed",String(button.dataset.sampleId===pickedUnderline));
    underlineChosen.textContent="Đã chọn: "+item.label;
    underlineChosen.hidden=false;
+ });
+ const framesList=document.getElementById("simpleFramesItems");
+ const framesChosen=document.getElementById("simpleFramesChosen");
+ if(!framesList||!framesChosen)return;
+ let pickedFrame:string|null=null;
+ for(const [index,item] of FRAMED_SAMPLES.entries()){
+   if(index===0||index===16){
+     const heading=document.createElement("div");
+     heading.className="simple-frame-group-label";
+     heading.setAttribute("role","heading");
+     heading.setAttribute("aria-level","3");
+     heading.textContent=index===0?"Khung chữ, nhãn và thông báo":"Bong bóng trò chuyện";
+     framesList.append(heading);
+   }
+   const row=document.createElement("button");
+   row.type="button";
+   row.className="simple-font-row simple-frame-row";
+   row.dataset.sampleId=item.id;
+   row.setAttribute("aria-pressed","false");
+   row.setAttribute("aria-label","Chọn mẫu "+item.label);
+   const number=document.createElement("span");
+   number.className="simple-font-number";
+   number.textContent=String(index+1).padStart(2,"0");
+   const content=document.createElement("span");
+   content.className="simple-font-content";
+   const stage=document.createElement("span");
+   stage.className="simple-frame-stage";
+   if(["bubble-user-dark","bubble-user-soft","bubble-two","bubble-time"].includes(item.style))
+     stage.classList.add("simple-frame-stage-right");
+   const preview=document.createElement("span");
+   preview.className="simple-frame-preview simple-frame-"+item.style;
+   if(item.style==="alert-description"){
+     const heading=document.createElement("strong");
+     heading.textContent=item.lines[0];
+     const desc=document.createElement("span");
+     desc.textContent=item.lines.slice(1).join("\n");
+     preview.append(heading,desc);
+   }else{
+     preview.textContent=item.lines.join("\n");
+   }
+   if(item.time){
+     const stamp=document.createElement("span");
+     stamp.className="simple-frame-timestamp";
+     stamp.textContent=item.time;
+     preview.append(stamp);
+   }
+   stage.append(preview);
+   const label=document.createElement("span");
+   label.className="simple-font-meta";
+   label.textContent=item.label+" · "+item.source;
+   const tick=document.createElement("span");
+   tick.className="simple-font-check";
+   tick.setAttribute("aria-hidden","true");
+   tick.textContent="✓";
+   content.append(stage,label);
+   row.append(number,content,tick);
+   framesList.append(row);
+ }
+ framesList.addEventListener("click",event=>{
+   if(!(event.target instanceof Element))return;
+   const row=event.target.closest<HTMLButtonElement>(".simple-frame-row");
+   if(!row)return;
+   const item=FRAMED_SAMPLES.find(sample=>sample.id===row.dataset.sampleId);
+   if(!item)return;
+   pickedFrame=item.id;
+   for(const button of Array.from(framesList.querySelectorAll<HTMLButtonElement>(".simple-frame-row")))
+     button.setAttribute("aria-pressed",String(button.dataset.sampleId===pickedFrame));
+   framesChosen.textContent="Đã chọn: "+item.label;
+   framesChosen.hidden=false;
  });
 }
