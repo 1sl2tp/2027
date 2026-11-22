@@ -450,6 +450,20 @@ Mục tiêu là **một thư viện nút đủ rộng để phục vụ cả CHA
 
 ---
 
+### 9.5. Mở rộng V33: bảng linh hoạt từ 1 đến 8 cột
+
+Bổ sung **vào RULE 09 đã có**, không tạo bộ CSS bảng khác. Mẫu `#tableColumnMatrixCard` trong nhóm `#sample-tables` dùng `ds-table ds-table--schema` và `ds-table-scroll` từ primitive hiện hành. Mọi cách trình bày lấy dữ liệu **cùng một** `COLUMN_SCHEMA + SAMPLE_ROWS` ở `web/src/column-matrix.ts`. Mẫu hiện có 5 cột INV-xx giữ nguyên và không đổi số liệu.
+
+1. **Nguồn cột:** định nghĩa `key`, `label`, `role` (text/quantity/money/date/status/note), `priority` (primary/secondary). Tên và nội dung có thể lấy mẫu khác, nhưng không gán căn số tiền dựa trên vị trí `nth-child`.
+2. **Số cột:** bản xem thử chọn 1–8; 1 cột có thể tương đương danh sách, 2–3 cột có thể đủ rộng trên mobile, 4–5 cột phụ thuộc chiều dài dữ liệu, 6–8 cột yêu cầu giải pháp không làm chữ quá nhỏ. **Mốc số cột là hướng dẫn, không phải định lý**; ưu tiên đo vùng chứa và loại dữ liệu.
+3. **Màn hình:** `auto` dùng container query, dưới 480px với 4+ cột chuyển sang thẻ có `dt/dd` nhãn rõ, còn bảng 1–3 cột hoặc chế độ scroll giữ `<table>` có header `scope=col`; `scroll` cho phép cuộn ngang và tập trung bàn phím; `cards` là lựa chọn thủ công, không tự cắt dữ liệu. Cùng dữ liệu, không có cột biến mất bất ngờ.
+4. **Nghĩa và căn:** tên/ghi chú trái, SL giữa, tiền phải/tabular; bảng rộng có thể ghim cột nhận diện bên trái; số tiền vẫn tính từ dữ liệu numeric gốc. Sắp xếp khi bấm nút trong `th` phải cập nhật `aria-sort` trên header và dùng icon chung `web/icons.svg`.
+5. **Nội dung có thể sao chép:** HTML được lấy từ `table.outerHTML` của bảng thật đang preview; hành vi sort trong ứng dụng đích phải được nối theo controller gốc. Không hứa việc dán HTML tự tạo tương tác.
+6. **Giới hạn:** nhiều hàng (>1000) có thể cần phân trang/virtualization; **8 cột không có nghĩa phải dùng virtualization**. Tham khảo trực tiếp [assistant-ui DataTable](https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/data-table.mdx), [TanStack Table](https://tanstack.com/table/latest/docs/guide/column-visibility) và [W3C WAI Tables](https://www.w3.org/WAI/tutorials/tables/). Không cài React/TanStack vào bản demo TypeScript.
+7. **Bằng chứng:** test đủ 8 schema keys, role alignment, `scope=col`, `aria-sort`, cùng source bảng/thẻ, `@container`, `prefers-reduced-motion` nếu có chuyển động, nguồn icon, không backend. E4/E5 trên iPhone/Android + zoom văn bản + bàn phím và cuộn ngang vẫn cần nghiệm thu ngoài CI.
+
+---
+
 ## RULE 10 — ĐẶT TÊN NÚT THEO ĐÚNG VAI TRÒ, KHÔNG ĐÁNH TRÁO KIỂU VÀ BỐ CỤC
 
 **Mã:** `2027-R10` · **Ngày:** 22/11/2026 (VN) · **Phạm vi:** mục 6 / 6.1 của UI Library Web. **Trạng thái:** E0–E1; E2, E3 và nghiệm thu thiết bị E4/E5 phải xác nhận bằng CI/deploy/bằng chứng riêng.
@@ -530,3 +544,13 @@ Bổ sung cho thư viện giao diện ChatGPT-*like* những trạng thái chữ
 - **Ảnh hưởng:** Web demo 2027; APK, CHAT, TAPHOA, songoku, backend, DB, tin nhắn thật không đổi.
 - **E0:** yêu cầu chữ streaming/loading + nguồn GitHub đã đối chiếu. **E1:** source và test có trong PR. **E2:** `npm run verify`. **E3:** PR CI + Pages deploy báo thành công. **E4/E5:** cần ảnh/quan sát thiết bị thật trước khi xác nhận.
 - **Rollback:** revert duy nhất PR UI-V32, không tạo `RULES-*.md` song song.
+
+### 11.5. Rà soát V33: hiệu ứng và thành phần khác trong sáu nguồn
+
+- **Đã có V32:** dots chờ, shimmer, skeleton, reveal theo từ, reveal theo khối, trạng thái streaming/cancelled (mô phỏng).
+- **Đã có trong repo nguồn nhưng chưa triển khai đầy đủ ở 2027:** OpenAI Apps SDK UI `ShimmerableText` có thể dừng shimmer ở ranh giới chu kỳ; `Animate` hỗ trợ fade/scale/crossfade; `AnimateLayout` hỗ trợ chiều rộng/chiều cao và accordion. Chưa nên dựng thêm `ui-button` hay duplicate CSS; đặt hiệu ứng ở thuộc tính trạng thái/chuyển động.
+- **AI Elements:** CodeBlock có syntax highlight/line numbers/copy; Tool có pending/running/success/error; Plan có tiêu đề/tiến trình mở gọn; TestResults có pass/fail/progress; Reasoning có section thu gọn. **Chỉ thể hiện trạng thái hoặc tóm tắt được phép công khai**, không hiển thị suy luận ẩn của mô hình.
+- **assistant-ui:** DataTable với `{columns,rows}`/sorting/compact cards, ScrollAnchor tránh tự kéo hội thoại khi người dùng đang đọc; NumberTicker cho số thay đổi, ComparisonCard cho nhiều lựa chọn.
+- **Streamdown (Vercel):** Markdown GFM/partial fences/tables và điều khiển copy/download bảng. Streamdown (LobeHub) còn có smooth reveal per-character/per-word. Những nguồn này là **hai repo khác nhau**.
+- **Thứ tự ưu tiên kế tiếp của CHAT:** (1) scroll anchor đúng hành vi đang đọc; (2) Markdown, code/table copy và bảng linh hoạt; (3) kết quả công cụ + source citations; (4) chuyển vùng/accordion ổn định và hiệu ứng giảm chuyển động; (5) ticker/chart/file-tree khi có mục đích. Không tự động triển khai ồ ạt mọi UI mẫu.
+- **Bằng chứng và phạm vi:** `references/GITHUB_COMPONENT_TABLE_EFFECT_AUDIT_V33.md` là tài liệu kiểm kê, không phải file rule riêng. V33 chỉ bổ sung bảng 1–8 cột; những thành phần còn lại là backlog có nguồn, **chưa được khẳng định đã thực hiện**.
