@@ -2298,6 +2298,33 @@ body.simple-first .topbar-end{gap:0}
 .simple-field-parent-map{display:block;margin-top:8px;color:var(--ui-text-muted);
  font:400 11px/1.5 var(--ui-font);overflow-wrap:anywhere}
 /* A plain text tree for component structure: no parallel layout/button system. */
+
+/* UI-V41: composition geometry only; table, button and typography keep their old owners. */
+.message-v41-demo{border-top:1px solid var(--ui-border);margin-top:18px;padding-top:15px;min-width:0}
+.message-v41-demo h3{font:650 15px/1.4 var(--ui-font);margin:0 0 7px}
+.message-v41-demo .simple-font-intro{margin-bottom:12px}
+.message-v41-options{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px}
+.message-v41-options .ui-button[aria-pressed="true"]{border-color:var(--ui-text);box-shadow:inset 0 0 0 1px var(--ui-text)}
+.message-v41-preview{max-width:720px;min-width:0;padding:10px 16px;border:1px solid var(--ui-border);border-radius:var(--ds-radius-md);background:var(--ui-bg)}
+.message-v41-message{min-width:0}
+.message-v41-parts{display:flex;flex-direction:column;gap:12px;min-width:0}
+.message-v41-text{font:400 14px/1.6 var(--ui-font);color:var(--ui-text);margin:0;overflow-wrap:anywhere}
+.message-v41-table-part{min-width:0}
+.message-v41-table-scroll{min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;border:1px solid var(--ui-border);border-radius:10px}
+.message-v41-table-scroll:focus-visible{outline:2px solid var(--ui-focus-color);outline-offset:2px}
+.message-v41-table{min-width:440px}
+.message-v41-table :is(th,td){white-space:normal}
+.message-v41-media{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;max-width:480px;min-width:0}
+.message-v41-media-tile{aspect-ratio:1.55;min-width:0;display:grid;place-items:center;background:var(--ui-surface);color:var(--ui-text-muted);border-radius:8px;font:500 12px var(--ui-font)}
+.message-v41-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.message-v41-feedback,.message-v41-note{font:400 12px/1.55 var(--ui-font);color:var(--ui-text-muted);margin:9px 0 0}
+.message-v41-note a{text-decoration:underline;text-underline-offset:2px}
+.message-v41-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:480px){
+ .message-v41-preview{padding:10px}
+ .message-v41-options{gap:6px}
+ .message-v41-options .ui-button{font-size:12px}
+}
 .simple-component-contract{border-top:1px solid var(--ui-border);margin-top:15px;padding-top:9px;color:var(--ui-text)}
 .simple-component-contract>summary{min-height:44px;display:flex;align-items:center;cursor:pointer;
  font:650 13px/1.45 var(--ui-font)}
