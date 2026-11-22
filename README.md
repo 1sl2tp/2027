@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có ba trang Web:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V14**: một văn bản chỉnh font/nền như trước, bên dưới là **21 bộ mẫu được chia vào 7 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V15**: một văn bản chỉnh font/nền như trước, bên dưới là **22 bộ mẫu được chia vào 8 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
 
@@ -18,6 +18,18 @@
 - Danh mục [**nguồn gốc Drive + mốc phục hồi**](./references/ORIGINAL_UI_SOURCES_AND_BASELINE_2026-11-22.md). Không sao chép trọn CSS/HTML nhúng từ Save Page hoặc thay đổi các tệp nguồn trong Drive.
 
 **Ranh giới:** mẫu UI chỉ chạy tại máy người xem, chưa kết nối CHAT/TAPHOA, không gửi tin nhắn hoặc làm phát sinh khoản thu/đơn hàng thật. Bản V08 đang có ở trang chính được giữ nguyên; V09 là một trang mới.
+
+## Bộ mẫu gốc có thể lấy mã trực tiếp (UI-V15)
+
+**Mở tại [Bộ mẫu gốc · Lấy mã](https://1sl2tp.github.io/2027/#sample-patterns).**
+
+Bản V15 bổ sung **22 mẫu HTML đã phân loại trong 8 nhóm** để đưa vào nhiều màn mà không phải tự viết lại từng nút/ô nhập. Cùng một định nghĩa trong `web/src/ui-patterns.ts` dùng cho **preview và nút Sao chép HTML**. Có chọn nhóm, tìm kiếm (có/không dấu), thử một số trạng thái tương tác, sao chép hướng dẫn kết nối CSS/icon, xuất JSON danh mục và mở mã của từng mẫu.
+
+**Mẫu hiện có:** chữ/trạng thái (2), nút/thanh công cụ/số lượng/tabs (4), nhập liệu (3), chat/media (4), bảng/bán hàng (3), công việc/công nợ/báo giá (3), cài đặt (1), popup/phản hồi (2). Các mẫu mới sử dụng class `.ui-*` và `.ds-*`, một `web/styles.css` và một `web/icons.svg` **không có bộ CSS riêng cho CHAT và TAPHOA**.
+
+Tham khảo kiến trúc thiết kế: [GitHub Primer](https://primer.style/product/getting-started/foundations/), [Meta StyleX](https://engineering.fb.com/2025/11/11/web/stylex-a-styling-library-for-css-at-scale/), [Brad Frost Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/) và [Radix Primitives](https://www.radix-ui.com/primitives/docs/overview/introduction). Chỉ tham khảo nguyên tắc dùng lại, không copy code vendor hoặc khẳng định tương đương CSS Meta/Facebook.
+
+**Hướng dẫn thực hiện và giới hạn:** [`references/REUSABLE_UI_KIT_GUIDE_2026-11-22.md`](./references/REUSABLE_UI_KIT_GUIDE_2026-11-22.md). **RULE 08** trong `RULES.md` kiểm soát nguồn mẫu, lớp CSS, yêu cầu kiểm thử và cách kết nối vào app thật. Hiện 2027 chưa tự động chuyển toàn bộ code CHAT/TAPHOA thành component đã chia sẻ; không thay thế handler nghiệp vụ production.
 
 ## Bộ danh mục nút gốc CHAT & TAPHOA (UI-V14)
 
@@ -190,4 +202,4 @@ Yêu cầu JDK 17, Android SDK 35, Gradle 8.11.1. V04 là cập nhật Web Libra
 
 ## Ghi chú thiết kế
 
-[**RULES.md**](./RULES.md) chứa nguyên tắc UI/UX R01–R07. V04 đang minh họa các nguyên tắc đó; không tạo một hệ rule song song. Việc xem/nghiệm thu trên thiết bị iOS/Android thật khác với việc CI compile thành công.
+[**RULES.md**](./RULES.md) chứa nguyên tắc UI/UX R01–R08. V04 đang minh họa các nguyên tắc đó; không tạo một hệ rule song song. Việc xem/nghiệm thu trên thiết bị iOS/Android thật khác với việc CI compile thành công.

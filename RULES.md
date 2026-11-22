@@ -1,7 +1,7 @@
 # 2027 — RULES.md
 
 > **Nguồn quy tắc duy nhất (Single Source of Truth)**  
-> Repo: `1sl2tp/2027` · Trạng thái: **R07 / UI-V14 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
+> Repo: `1sl2tp/2027` · Trạng thái: **R08 / UI-V15 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
 > Phạm vi: Web App/PWA (TypeScript + HTML + CSS) và Android APK native (Kotlin + Jetpack Compose).
 
 ## RULE 01 — MỘT FILE RULE DUY NHẤT
@@ -375,3 +375,38 @@ Mục tiêu là **một thư viện nút đủ rộng để phục vụ cả CHA
 - **TAPHOA/CHAT production:** không chỉnh sửa. **APK:** không đổi. **Nguồn Drive:** không đổi.
 - **Kiểm thử:** bảo đảm 44 nút CHAT + 44 ví dụ TAPHOA, 11 họ, 51 icon, 21 bộ mẫu, không duplicate ID, không JS gọi mạng; phải xác minh CI thực và xem trên thiết bị thật mới đánh dấu nghiệm thu.
 - **Hoàn tác:** revert commit V14 trên repo 2027; thư viện V13 trước đó và archive V08 không bị sửa.
+
+---
+
+## RULE 08 — MẪU GỐC PHẢI CÓ HỢP ĐỒNG TÁI SỬ DỤNG VÀ CÁCH LẤY MÃ
+
+**Mã:** 2027-R08 · **Ngày:** 22/11/2026 (VN) · **Trạng thái:** Đã xây dựng V15 ở thư viện 2027; nghiệm thu thực tế CHAT/TAPHOA và thiết bị còn riêng.
+
+### 8.1. Tư duy thiết kế đối chiếu từ nguồn công khai
+
+| Nguồn đã nghiên cứu | Nguyên tắc áp dụng vào 2027 | Không hiểu sai |
+|---|---|---|
+| [GitHub Primer Foundations](https://primer.style/product/getting-started/foundations/) | Token chữ/màu, khả năng truy cập, bộ component có cấu trúc | Không sao chép mã nguồn/bộ giao diện Primer thành sản phẩm của 2027 |
+| [Meta/Facebook StyleX](https://engineering.fb.com/2025/11/11/web/stylex-a-styling-library-for-css-at-scale/) | Giá trị thiết kế dùng lại, CSS có chủ sở hữu, tránh đè chồng selector | V15 vẫn dùng CSS/TypeScript hiện tại, **không cài StyleX** và không tuyên bố dùng CSS Facebook |
+| [Brad Frost Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/) | Token/icon/nút → mẫu ghép → luồng → màn hình | Các ví dụ thuộc một hệ, không phải nhiều thư viện độc lập |
+| [Radix Primitives](https://www.radix-ui.com/primitives/docs/overview/introduction) | Hợp đồng hành vi, vai trò và accessibility trước khi tùy biến hình dạng | V15 không phụ thuộc React/Radix; lấy nguyên tắc chứ không copy component |
+| [WCAG 2.2](https://www.w3.org/TR/WCAG22/) | Nhãn, focus, trạng thái bàn phím, vùng chạm và giảm chuyển động | Vùng chạm 44px là ưu tiên **của dự án**, không phải ngưỡng AA 24px của tiêu chí 2.5.8 |
+
+### 8.2. Quy tắc bắt buộc
+
+1. **Một nơi quản lý kiểu:** `web/styles.css` là nguồn CSS gốc cho các ví dụ Web 2027; `web/icons.svg` là một registry hình học icon. Tránh viết CSS cho từng nơi gọi như `.chat-btn` và `.taphoa-btn` nếu chúng cùng chức năng.
+2. **Mẫu phải có ID và hợp đồng:** ở `web/src/ui-patterns.ts`, mỗi mẫu phải có `id` ổn định, `group`, `title`, `description`, `html`. Cùng một định nghĩa này vừa tạo preview vừa tạo mã HTML sao chép, không viết hai phiên bản rồi để lệch nhau.
+3. **Tầng áp dụng:** `token` → `ui-icon` → `ui-button`/`ds-field`/`ds-qty` → `composition` (`ds-contact`, `ds-composer`, `ds-table`, `ds-summary`, `ds-confirm`) → màn Chat/Công việc/Bán hàng. Các composition chỉ xếp chỗ, không sở hữu lại toàn bộ màu, kích thước và icon.
+4. **Phân loại có thể tìm:** thư viện V15 có nhóm *Bộ mẫu gốc · Lấy mã* bên cạnh 7 nhóm hiện có; trong bộ có 8 nhóm chức năng và 22 mẫu HTML. Thêm mới phải vào một nhóm cụ thể, có ID không trùng và được kiểm tra trong CI. Tất cả mẫu này là **bộ dùng lại giai đoạn đầu**, không đồng nghĩa đã phủ toàn bộ 246 thành phần CHAT hoặc toàn bộ TAPHOA.
+5. **Lấy mã và kết nối:** người dùng có thể chọn mẫu, xem hình dạng, sao chép đúng HTML từ cùng dữ liệu preview, sao chép hướng dẫn nạp **một CSS và một SVG**, hoặc xuất JSON manifest. Khi chuyển vào app thật, phải chỉnh đúng đường dẫn CSS/SVG và nối hành vi bằng handler/owner gốc; không đưa logic demo sang production.
+6. **Trạng thái + thiết bị:** ít nhất có `default`, `focus`, `hover`, `pressed`, `disabled` nơi có liên quan; spinner, khả năng thu gọn, overflow, tabular numeric, safe area và bàn phím phải được kiểm tra theo ngữ cảnh. Trường nhập mobile dùng 16px để tránh focus zoom Safari; giữ chỉ dẫn giảm chuyển động.
+7. **An toàn mẫu:** `Copy HTML`, `Xuất JSON` và số lượng/tab/password/switch chỉ thao tác cục bộ; không có API/Auth/Supabase/DB/realtime, không tự gửi/chia sẻ dữ liệu khách, không giao hàng, ghi thu hay xóa tài khoản. Các nút thao tác demo không thay thế xác nhận nghiệp vụ thật.
+8. **Tránh sửa vá:** sửa lỗi kiểu chữ, icon, trạng thái hoặc kích thước ở token/primitive/contract trước; cập nhật preview và regression tại cùng nơi. Không sửa thủ công CSS rời rạc cho từng màn khi cùng hợp đồng. Nếu app có ngoại lệ thật, ghi rõ lý do và scope trước khi thêm variant.
+
+### 8.3. Tệp nguồn, tác động và hoàn tác
+
+- **Web:** `web/src/ui-patterns.ts` = hợp đồng, `web/src/pattern-kit.ts` = preview/copy/export mẫu, `web/styles.css` = các class `ui-*` và `ds-*` gốc, `web/icons.svg` = hình học icon, `index.html#sample-patterns` = nơi duyệt và lấy mã.
+- **Tham khảo:** [hướng dẫn sử dụng lại 2027](./references/REUSABLE_UI_KIT_GUIDE_2026-11-22.md) là tài liệu thực hiện, **không phải tệp rule thứ hai**.
+- **CHAT/TAPHOA/Drive/APK:** chưa sửa. Để nhập 2027 vào ứng dụng thật cần PR riêng và kiểm tra global CSS/selector xung đột; chưa thể mặc định một stylesheet từ demo áp nguyên vào production là hoàn hảo.
+- **Kiểm thử:** 22 mẫu/8 nhóm trong bộ gốc, 8 nhóm thư viện chính, mã preview = mã xuất, nhất quán CSS/SVG, không có handler hoặc URL nguồn ngoài trong snippet. Mục tiêu kiểm chứng E0–E5 và nghiệm thu thủ công trên Safari/Chrome mobile trước khi đưa app thật vào dùng.
+- **Hoàn tác:** revert commit V15 trong `1sl2tp/2027`; giữ V14 và archive V08. Các ứng dụng thật không bị đổi.

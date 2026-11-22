@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện mẫu theo nhóm · V12</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V14">
-  <script type="module" src="./web/dist/app.js?v=2027-UI-V14"></script>
+  <title>2027 · Thư viện mẫu chuẩn dùng lại · V15</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V15">
+  <script type="module" src="./web/dist/app.js?v=2027-UI-V15"></script>
 </head>
-<body data-ui-version="2027-UI-V14" class="studio-page">
+<body data-ui-version="2027-UI-V15" class="studio-page">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><span class="version">V12</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><span class="version">V15</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
@@ -24,6 +24,7 @@
       <div class="sidebar-separator"></div>
       <div class="sidebar-group-title">CHỌN LOẠI MẪU</div>
       <a class="nav-link" href="#components"><span class="nav-numeral">03</span><span>Tất cả mẫu</span></a>
+      <a class="nav-link" href="#sample-patterns"><span class="nav-numeral">03A</span><span>Bộ mẫu gốc · Lấy mã</span></a>
       <a class="nav-link" href="#sample-typography"><span class="nav-numeral">04</span><span>Chữ & nhiều dòng</span></a>
       <a class="nav-link" href="#sample-tables"><span class="nav-numeral">05</span><span>Bảng & dữ liệu</span></a>
       <a class="nav-link" href="#sample-quantity"><span class="nav-numeral">06</span><span>Số lượng − / +</span></a>
@@ -124,15 +125,16 @@
   <div class="studio-gallery-heading">
     <span class="eyebrow">THƯ VIỆN THÀNH PHẦN / DANH MỤC</span>
     <h2>Chọn loại mẫu cần xem</h2>
-    <p>Đã phân thành <strong>7 nhóm</strong> để bạn tìm nhanh. Nhấn một nhóm để chỉ xem các mẫu thuộc nhóm đó; chọn <strong>Tất cả</strong> để so sánh theo từng mục.</p>
+    <p>Đã phân thành <strong>8 nhóm</strong> để bạn tìm nhanh. Nhấn một nhóm để chỉ xem các mẫu thuộc nhóm đó; chọn <strong>Tất cả</strong> để so sánh theo từng mục.</p>
   </div>
   <div class="gallery-browser" aria-label="Tìm và lọc thư viện">
     <div class="gallery-browser-tools">
       <label class="gallery-search-box" for="gallerySearch"><span aria-hidden="true">⌕</span><input id="gallerySearch" type="search" placeholder="Tìm mẫu: bảng, input, icon…" autocomplete="off"><button type="button" id="galleryClearSearch" aria-label="Xóa từ khóa tìm mẫu">×</button></label>
-      <div class="gallery-view-count" id="galleryCount" aria-live="polite">21 bộ mẫu · 7 nhóm</div>
+      <div class="gallery-view-count" id="galleryCount" aria-live="polite">22 bộ mẫu · 8 nhóm</div>
     </div>
     <div class="gallery-filter-nav" role="group" aria-label="Lọc các loại mẫu">
-      <button type="button" class="selected" aria-pressed="true" data-gallery-filter="all">Tất cả <span>21</span></button>
+      <button type="button" class="selected" aria-pressed="true" data-gallery-filter="all">Tất cả <span>22</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="patterns">Bộ mẫu gốc <span>1</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="typography">Chữ & nhiều dòng <span>1</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="tables">Bảng & dữ liệu <span>2</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="quantity">Số lượng − / + <span>2</span></button>
@@ -143,6 +145,42 @@
     </div>
   </div>
   <div id="componentTheme" class="studio-gallery-groups">
+    <section class="gallery-category" data-gallery-category="patterns" id="sample-patterns" aria-labelledby="galleryTitle-patterns">
+      <div class="gallery-category-heading">
+        <div class="gallery-category-index">★</div>
+        <div class="gallery-category-intro"><h3 id="galleryTitle-patterns">Bộ mẫu gốc · Lấy mã dùng lại</h3><p>22 mẫu dựng bằng class gốc: chọn mẫu → xem trực tiếp → sao chép HTML hoặc xuất JSON.</p></div>
+        <span class="gallery-category-count">1 bộ · 22 mẫu HTML</span>
+      </div>
+      <div class="studio-component-grid">
+        <section class="studio-component-card variant-wide ui-kit-card" id="patternKit" aria-labelledby="kitTitle">
+          <div class="studio-component-label"><strong id="kitTitle">Thư viện mã mẫu dùng chung</strong><span>Token → icon → nút/input → mẫu ghép → màn hình</span></div>
+          <div class="studio-component-content">
+            <p class="ui-kit-intro">Các mẫu dùng <code>web/styles.css</code> và <code>web/icons.svg</code>, không tạo CSS riêng cho CHAT hoặc TAPHOA. Dựa trên nguyên tắc của GitHub Primer, Meta StyleX, Atomic Design và Radix; đây là mẫu thiết kế của <b>2027</b>, không phải mã CSS của các hãng. <strong>Phần preview không chạy nghiệp vụ thật.</strong></p>
+            <div class="ui-kit-main-actions">
+              <button type="button" class="ui-button ui-button--secondary" id="kitCopySetup"><svg class="ui-icon" aria-hidden="true"><use href="./web/icons.svg#ui-icon-copy"/></svg> Sao chép cách kết nối CSS/icon</button>
+              <button type="button" class="ui-button ui-button--secondary" id="kitExportCatalog"><svg class="ui-icon" aria-hidden="true"><use href="./web/icons.svg#ui-icon-download"/></svg> Xuất 22 mẫu JSON</button>
+            </div>
+            <div class="ui-kit-filter-bar">
+              <div id="kitFamilyTabs" class="ui-kit-family-tabs" role="group" aria-label="Lọc mẫu theo nhóm"></div>
+              <div class="ui-kit-searchbar"><label for="kitSearch">Tìm thành phần</label><input id="kitSearch" type="search" autocomplete="off" placeholder="Ví dụ: tiền, tìm kiếm, nút, đơn…" /><button type="button" class="ui-button ui-button--text" id="kitReset">Hiện tất cả</button><span id="kitCount" aria-live="polite">22 mẫu · 8 nhóm</span></div>
+            </div>
+            <div class="ui-kit-workspace">
+              <div class="ui-kit-list-panel"><div class="ui-kit-pane-heading">DANH MỤC</div><div id="kitItems" class="ui-kit-index" aria-label="Danh sách mẫu có thể sao chép"></div></div>
+              <div class="ui-kit-preview-panel">
+                <div class="ui-kit-pane-heading"><span>PREVIEW &amp; MÃ NGUỒN</span><span>Chỉ thử tại chỗ</span></div>
+                <h4 id="kitSelectedName">TEXT-01 · Vai trò chữ chuẩn</h4>
+                <p id="kitSelectedDescription">Các mẫu sử dụng một bảng CSS và registry SVG duy nhất.</p>
+                <div id="kitPreview" class="ui-kit-preview" aria-label="Xem trực tiếp mẫu đã chọn"></div>
+                <div class="ui-kit-code-heading"><strong>Mã HTML dùng lại</strong><button type="button" class="ui-button ui-button--primary" id="kitCopy"><svg class="ui-icon" aria-hidden="true"><use href="./web/icons.svg#ui-icon-copy"/></svg> Sao chép HTML</button></div>
+                <textarea id="kitSource" class="ui-kit-source" rows="6" readonly spellcheck="false" aria-label="Mã HTML của mẫu đã chọn"></textarea>
+                <p id="kitFeedback" class="studio-component-feedback" role="status" aria-live="polite">Chọn mẫu để lấy mã. Chưa kết nối với ứng dụng thật.</p>
+              </div>
+            </div>
+            <p class="ui-kit-footnote">Để dùng trong CHAT hoặc TAPHOA: đưa <code>web/styles.css</code> và <code>web/icons.svg</code> vào dự án đích một lần, dùng lại class. Đặt đường dẫn SVG phù hợp khi thay đổi thư mục. Phần tương tác nghiệp vụ phải nối với handler hiện có; không sao chép đoạn demo để gửi tin, ghi thu hoặc tạo đơn thật.</p>
+          </div>
+        </section>
+      </div>
+    </section>
     <section class="gallery-category" data-gallery-category="typography" id="sample-typography" aria-labelledby="galleryTitle-typography">
       <div class="gallery-category-heading">
         <div class="gallery-category-index">01</div>
@@ -718,7 +756,7 @@
         <div><span class="eyebrow">CÙNG MỘT BỘ CSS</span><h2>Thông số đã chọn</h2><p>Toàn bộ thành phần dùng <code>web/styles.css</code> và các token chung. Có thể sao chép để triển khai cho những khung khác.</p></div>
         <pre id="cssPreview" aria-label="CSS hiện hành"></pre>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V11</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V15</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>
