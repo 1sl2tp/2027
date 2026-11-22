@@ -49,7 +49,8 @@ function innerSlot(node:Node):HTMLSpanElement{
 function previewInner(spec:InnerSpec):HTMLButtonElement{
  const button=document.createElement("button");button.type="button";
  button.className="ui-button ui-button--outline simple-button-inner-demo simple-button-inner-"+spec.kind;
- if(["icon","letter","number","arrow"].includes(spec.kind))button.classList.add("ui-button--icon","ui-button--square");
+ if(["icon","arrow"].includes(spec.kind))button.classList.add("ui-button--icon","ui-button--square");
+ if(["letter","number"].includes(spec.kind))button.classList.add("ui-button--uniform","ui-button--square");
  button.setAttribute("aria-label","Xem thử "+spec.name.toLowerCase());
  const group=document.createElement("span");group.className="simple-button-inner-group";
  switch(spec.kind){
@@ -115,7 +116,7 @@ export function initSimpleButtonRules():void{
   const detail=document.createElement("span");detail.className="simple-font-meta";detail.textContent=spec.rule;
   content.append(title,stage,detail);
   const pick=document.createElement("button");pick.type="button";
-  pick.className="ui-button ui-button--icon ui-button--round simple-button-inner-pick";pick.dataset.sampleId=spec.id;
+  pick.className="ui-button ui-button--icon ui-button--round ui-button--outline simple-button-inner-pick";pick.dataset.sampleId=spec.id;
   pick.setAttribute("aria-label","Chọn "+spec.name);pick.setAttribute("aria-pressed","false");
   pick.append(innerIcon("check"));
   row.append(number,content,pick);list.append(row);
