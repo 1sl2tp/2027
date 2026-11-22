@@ -1175,7 +1175,8 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid #fff
  padding:0;border-radius:50%;background:transparent;color:var(--ui-text)}
 .ui-button--icon:hover:not(:disabled),.ui-button--mode:hover:not(:disabled){background:var(--ui-surface)}
 .ui-button--square{border-radius:10px;background:var(--ui-surface);border-color:var(--ui-border)}
-.ui-button--round{border-radius:var(--ui-button-radius-pill);background:var(--ui-surface);border-color:var(--ui-border)}
+.ui-button--round{border-radius:var(--ui-button-radius-pill)}
+.ui-button--round:not(.ui-button--primary){background:var(--ui-surface);border-color:var(--ui-border)}
 .ui-button--filled{background:var(--ui-text);color:var(--ui-bg);border-color:var(--ui-text)}
 .ui-button--outline{background:var(--ui-bg)}
 .ui-button--icon[aria-pressed=true]{background:var(--ui-surface);box-shadow:inset 0 0 0 1px var(--ui-border)}
