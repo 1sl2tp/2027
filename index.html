@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện mẫu nút và icon · V27</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V27">
-  <script type="module" src="./web/dist-v27/app.js"></script>
+  <title>2027 · Thư viện quy tắc nội dung nút · V28</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V28">
+  <script type="module" src="./web/dist-v28/app.js"></script>
 </head>
-<body data-ui-version="2027-UI-V27" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V28" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><span class="version">V27</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><span class="version">V28</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
@@ -81,6 +81,26 @@
         <div id="simpleButtonsItems" class="simple-font-list" role="group" aria-label="24 mẫu nút và icon"></div>
         <p id="simpleButtonsChosen" class="simple-font-chosen" role="status" aria-live="polite" hidden></p>
         <p id="simpleButtonsFeedback" class="simple-buttons-feedback" role="status" aria-live="polite"></p>
+        <div class="simple-button-rule-section" id="simpleButtonRules">
+          <h3>6.1. Quy tắc bên trong nút</h3>
+          <p class="simple-font-intro">Khung ngoài và nội dung bên trong được căn độc lập. Mỗi mẫu có kích thước và khoảng cách rõ ràng.</p>
+          <div class="simple-button-rule-diagram" aria-label="Cấu tạo nút: đệm trái, icon hoặc ảnh, khoảng cách, chữ, số hoặc icon phải, đệm phải">
+            <span>Đệm</span><strong>Icon / ảnh</strong><span>Gap</span><strong>Chữ</strong><span>Gap</span><strong>Số / icon</strong><span>Đệm</span>
+          </div>
+          <table class="simple-button-rule-table">
+            <caption>Kích thước thiết kế 2027 · đơn vị px</caption>
+            <thead><tr><th>Cỡ</th><th>Cao</th><th>Chữ</th><th>Icon</th><th>Đệm ngang</th><th>Gap</th></tr></thead>
+            <tbody>
+              <tr><th>Nhỏ</th><td>44</td><td>13</td><td>18</td><td>12</td><td>6</td></tr>
+              <tr><th>Vừa</th><td>44</td><td>14</td><td>20</td><td>16</td><td>8</td></tr>
+              <tr><th>Lớn</th><td>52</td><td>16</td><td>22</td><td>18</td><td>10</td></tr>
+            </tbody>
+          </table>
+          <p class="simple-button-rule-note">Căn giữa theo khối nội dung; ảnh giữ tỉ lệ 1:1; chữ dài rút gọn; ba vùng dùng hai ô bên cân nhau. Các số là quy tắc thiết kế 2027, không phải số đo nguyên bản ChatGPT.</p>
+          <div id="simpleButtonRuleItems" class="simple-font-list" role="group" aria-label="14 mẫu quy tắc bố trí trong nút"></div>
+          <p id="simpleButtonRulesChosen" class="simple-font-chosen" role="status" aria-live="polite" hidden></p>
+          <p id="simpleButtonRulesFeedback" class="simple-buttons-feedback" role="status" aria-live="polite"></p>
+        </div>
       </section>
       <div class="studio-heading">
         <div class="eyebrow">THƯ VIỆN THIẾT KẾ / V12</div>
@@ -852,7 +872,7 @@
         <div><span class="eyebrow">CÙNG MỘT BỘ CSS</span><h2>Thông số đã chọn</h2><p>Toàn bộ thành phần dùng <code>web/styles.css</code> và các token chung. Có thể sao chép để triển khai cho những khung khác.</p></div>
         <pre id="cssPreview" aria-label="CSS hiện hành"></pre>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V27</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V28</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>
