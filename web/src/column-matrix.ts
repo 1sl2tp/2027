@@ -253,6 +253,14 @@ export function initColumnMatrix():void{
   if(!Number.isInteger(n)||n<1||n>COLUMN_SCHEMA.length)return;
   state.count=n;state.sortKey=null;syncColumnOptions();render();
  });
+ for(const preset of Array.from(root.querySelectorAll<HTMLButtonElement>("[data-column-preset]"))){
+  preset.addEventListener("click",()=>{
+   const value=Number(preset.dataset.columnPreset);
+   if(!Number.isInteger(value)||value<1||value>COLUMN_SCHEMA.length)return;
+   state.count=value;state.sortKey=null;count.value=String(value);
+   syncColumnOptions();render();
+  });
+ }
  mode.addEventListener("change",()=>{if(matches(mode.value,["auto","scroll","cards"] as const)){
   state.mode=mode.value;render();
  }});
