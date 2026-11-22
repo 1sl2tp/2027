@@ -3,9 +3,9 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const read = (file) => readFileSync(new URL("../"+file, import.meta.url),"utf8");
 
-test("V03 starts as a reusable UI library typography page", () => {
+test("V05 completes the UI library typography foundation", () => {
   const html=read("index.html");
-  assert.match(html,/data-ui-version="2027-UI-V03"/);
+  assert.match(html,/data-ui-version="2027-UI-V05"/);
   assert.match(html,/<h1>Chữ & màu nền<\/h1>/);
   for (const section of ["colors","typography","preview"]) assert.match(html,new RegExp('id="'+section+'"'));
   for (const id of ["demoCanvas","sizeRange","leadingRange","weightOutput","copyButton","resetButton","sampleInput"])
@@ -21,6 +21,7 @@ test("palette, font, weight and viewport choices are explicit",()=>{
     assert.match(html,new RegExp('data-font="'+font+'"'));
   for(const weight of ["400","500","600","700"])
     assert.match(html,new RegExp('data-weight="'+weight+'"'));
+  for(const style of ["normal","italic"]) assert.match(html,new RegExp('data-text-style="'+style+'"'));
   for(const width of ["desktop","mobile"])
     assert.match(html,new RegExp('data-viewport="'+width+'"'));
 });
@@ -36,7 +37,7 @@ test("responsive live preview is separated from the library interface",()=>{
 
 test("interactions remain local with no live chat, transaction or endpoint",()=>{
   const ts=read("web/src/app.ts");
-  for(const marker of ["pickPalette","pickFont","cssText","sizeRange.addEventListener","leadingRange.addEventListener","copyButton","resetButton"])
+  for(const marker of ["applyDesignTokens","auditPalette","exportCss","sizeRange.addEventListener","leadingRange.addEventListener","trackingRange.addEventListener","copyButton","resetButton"])
     assert.ok(ts.includes(marker),marker);
   assert.doesNotMatch(ts,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:/i);
 });
@@ -45,8 +46,8 @@ test("Pages builds the exact versioned assets shipped in HTML",()=>{
   const html=read("index.html");
   const config=JSON.parse(read("tsconfig.json"));
   const out=config.compilerOptions.outDir.replace(/^\.\//,"").replace(/\/$/,"");
-  assert.ok(html.includes("web/styles.css?v=2027-UI-V03"));
-  assert.ok(html.includes(out+"/app.js?v=2027-UI-V03"));
+  assert.ok(html.includes("web/styles.css?v=2027-UI-V05"));
+  assert.ok(html.includes(out+"/app.js?v=2027-UI-V05"));
   const workflow=read(".github/workflows/pages.yml");
   assert.ok(workflow.includes("npm run verify"));
   assert.ok(workflow.includes("cp -R "+out+" _site/web/"));
@@ -111,4 +112,46 @@ test("V04 Pages bundles every frame with one stylesheet",()=>{
   const links=[read("index.html"),read("flows.html")];
   for(const doc of links)assert.ok(doc.includes("./web/styles.css?v="));
   assert.equal(links.reduce((n,doc)=>n+(doc.match(/<link rel="stylesheet"/g)||[]).length,0),2);
+});
+
+test("V05 one source of semantic tokens, contrast math and safe persistence",async()=>{
+  const ts=await import("typescript");
+  const source=read("web/src/design.ts");
+  const js=ts.default.transpileModule(source,{compilerOptions:{module:ts.default.ModuleKind.ES2022,target:ts.default.ScriptTarget.ES2022}}).outputText;
+  const design=await import("data:text/javascript;base64,"+Buffer.from(js).toString("base64"));
+  assert.deepEqual(Object.keys(design.PALETTES),["white","warm","mist","dark"]);
+  assert.deepEqual(Object.keys(design.FONTS),["system","arial","serif","mono"]);
+  assert.equal(design.contrastRatio("#000000","#FFFFFF").toFixed(2),"21.00");
+  assert.equal(design.contrastRatio("#FFFFFF","#FFFFFF").toFixed(2),"1.00");
+  for(const [key,palette] of Object.entries(design.PALETTES)){
+    const result=design.auditPalette(key);
+    assert.equal(result.length,4,key);
+    for(const item of result) assert.ok(item.passesAA && item.ratio>=4.5,key+" "+item.label+" "+item.ratio);
+    const css=design.exportCss({...design.DEFAULT_SETTINGS,palette:key});
+    for(const color of [palette.background,palette.surface,palette.ink,palette.muted,palette.border])
+      assert.ok(css.includes(color),key+" "+color);
+  }
+  const normalized=design.normalizeSettings({palette:"invalid",font:"invalid",size:-200,weight:888,tracking:22,leading:0,textStyle:"oblique"});
+  assert.equal(normalized.palette,"white");
+  assert.equal(normalized.font,"system");
+  assert.equal(normalized.size,13);
+  assert.equal(normalized.weight,400);
+  assert.equal(normalized.tracking,0.08);
+  assert.equal(normalized.leading,1.2);
+  assert.equal(normalized.textStyle,"normal");
+  assert.ok(design.exportCss(design.DEFAULT_SETTINGS).includes("--ui-font-style: normal;"));
+});
+
+test("V05 shared stylesheet renders all design roles and has narrow screen layouts",()=>{
+  const html=read("index.html");
+  const css=read("web/styles.css");
+  for(const id of ["roleBackground","roleSurface","roleInk","roleMuted","roleBorder","paletteLabel"])
+    assert.match(html,new RegExp('id="'+id+'"'));
+  for(const varname of ["--ui-font","--ui-bg","--ui-surface","--ui-text","--ui-text-muted","--ui-border","--ui-font-size","--ui-font-style","--ui-letter-spacing"])
+    assert.ok(css.includes(varname),varname);
+  assert.match(css,/\.color-roles-grid/);
+  assert.match(css,/\.contrast-grid/);
+  assert.match(css,/@media\(max-width:420px\)/);
+  assert.match(html,/WCAG 2\.2/);
+  assert.match(html,/href="\.\/flows\.html"/);
 });
