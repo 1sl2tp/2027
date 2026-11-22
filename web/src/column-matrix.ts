@@ -13,12 +13,12 @@ export interface ColumnSpec {
  priority:"primary"|"secondary";minPx:number;
 }
 export const COLUMN_SCHEMA:readonly ColumnSpec[]=[
- {key:"index",label:"STT",role:"index",priority:"secondary",minPx:52},
- {key:"name",label:"Tên hàng",role:"text",priority:"primary",minPx:186},
- {key:"number",label:"Số",role:"number",priority:"secondary",minPx:70},
- {key:"quantity",label:"Số lượng",role:"quantity",priority:"secondary",minPx:88},
- {key:"price",label:"Đơn giá",role:"money",priority:"secondary",minPx:128},
- {key:"total",label:"Thành tiền",role:"money",priority:"secondary",minPx:140},
+ {key:"index",label:"STT",role:"index",priority:"secondary",minPx:64},
+ {key:"name",label:"Tên hàng",role:"text",priority:"primary",minPx:198},
+ {key:"number",label:"Số",role:"number",priority:"secondary",minPx:72},
+ {key:"quantity",label:"Số lượng",role:"quantity",priority:"secondary",minPx:102},
+ {key:"price",label:"Đơn giá",role:"money",priority:"secondary",minPx:124},
+ {key:"total",label:"Thành tiền",role:"money",priority:"secondary",minPx:142},
  {key:"code",label:"Mã hàng",role:"code",priority:"secondary",minPx:106},
  {key:"unit",label:"ĐVT",role:"unit",priority:"secondary",minPx:72},
  {key:"date",label:"Ngày",role:"date",priority:"secondary",minPx:114},
@@ -142,12 +142,16 @@ function buildTable(columns:readonly ColumnSpec[],rows:readonly SampleRow[],stat
   th.setAttribute("aria-sort",!active?"none":state.descending?"descending":"ascending");
   const button=node("button","ui-button ui-button--quiet ui-column-sort",col.label);
   button.type="button";
-  const icon=document.createElementNS("http://www.w3.org/2000/svg","svg");
-  icon.classList.add("ui-icon","ui-icon--chevron","ui-column-sort-icon");
-  icon.setAttribute("aria-hidden","true");
-  const use=document.createElementNS("http://www.w3.org/2000/svg","use");
-  use.setAttribute("href","./web/icons.svg#ui-icon-chevron");
-  icon.append(use);button.append(icon);
+  // RULE 09 §9.10: inactive headers show only their label.
+  // Do not reserve icon width on small columns; an arrow appears ONLY for a sorted column.
+  if(active){
+   const icon=document.createElementNS("http://www.w3.org/2000/svg","svg");
+   icon.classList.add("ui-icon","ui-icon--chevron","ui-column-sort-icon");
+   icon.setAttribute("aria-hidden","true");
+   const use=document.createElementNS("http://www.w3.org/2000/svg","use");
+   use.setAttribute("href","./web/icons.svg#ui-icon-chevron");
+   icon.append(use);button.append(icon);
+  }
   button.setAttribute("aria-label","Sắp xếp theo "+col.label);
   button.addEventListener("click",()=>{
    if(state.sortKey!==col.key){state.sortKey=col.key;state.descending=false;}
