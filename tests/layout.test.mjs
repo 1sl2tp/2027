@@ -507,8 +507,8 @@ test("V13 copy, share, local TXT download and loading demo do not use network",(
 
 test("V14 preserves complete source button inventory for CHAT and sampled TAPHOA",()=>{
  const source=read("web/src/root-button-data.ts");
- const chat=[...source.matchAll(/"id": "CHAT-I(\\d{2})"/g)].map(x=>x[1]);
- const tap=[...source.matchAll(/"id": "TAPHOA-T(\\d{2})"/g)].map(x=>x[1]);
+ const chat=[...source.matchAll(/"id": "CHAT-I(\d{2})"/g)].map(x=>x[1]);
+ const tap=[...source.matchAll(/"id": "TAPHOA-T(\d{2})"/g)].map(x=>x[1]);
  assert.equal(chat.length,44);
  assert.equal(tap.length,44);
  assert.equal(new Set(chat).size,44);
@@ -565,5 +565,5 @@ test("V14 shared state and composite buttons cannot trigger real transactions",(
   ".ui-root-combo-grid",".ui-root-state-grid"])assert.ok(css.includes(cls),cls);
  for(const term of ["window.setTimeout","aria-busy","selectedId","dataset.rootCombo"])
    assert.ok(script.includes(term),term);
- assert.doesNotMatch(script,/\\bfetch\\s*\\(|\\bWebSocket\\s*\\(|\\bXMLHttpRequest\\b|supabase|Authorization:|getUserMedia\\s*\\(/i);
+ assert.doesNotMatch(script,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:|getUserMedia\s*\(/i);
 });
