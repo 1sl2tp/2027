@@ -704,3 +704,11 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 - **Audit:** `auditComponentPlacements` bắt chu trình/host lỗi; `auditMessageTree` bắt sai vị trí parts/tables/tiles/actions. Dữ liệu mẫu không gửi thật.
 - **Ranh giới:** V41 mới là mẫu + contract; không tuyên bố đã xử lý scroll tin dài, media thật, PWA keyboard, popup, toàn bộ CHAT production hoặc E4/E5.
 
+
+
+### 12.8. V42 — Scroll owner và danh mục nguồn cuối trang
+
+- `CHAT-MESSAGE-LIST` là owner cuộn. Neo `messageId + top` khi prepend 6 tin cũ và khi phần media/text đổi chiều cao; không tạo một thành phần ScrollAnchor độc lập.
+- Theo cuối chỉ khi đang pinned; nếu cuộn lên thì tin mới tăng unseen, không tự kéo cuối. ResizeObserver của các item giữ điểm đọc, browser native anchoring được tắt trên vùng demo để tránh bù hai lần.
+- Nguồn tham khảo công khai nằm **sau các mẫu và CSS, ngay trước footer** trong `index.html#githubSourcesV42`, kèm chủ đề và giới hạn tích hợp. Không có tin thật hay API production.
+- Kiểm thử tĩnh/CI là E2/E3; iOS/Android/PWA với ảnh thật và bàn phím cần E4/E5 riêng.

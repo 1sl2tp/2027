@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện giao diện và phân cấp · V41</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V41">
-  <script type="module" src="./web/dist-v41/app.js"></script>
+  <title>2027 · Thư viện giao diện và phân cấp · V42</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V42">
+  <script type="module" src="./web/dist-v42/app.js"></script>
 </head>
-<body data-ui-version="2027-UI-V41" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V42" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V41</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V42</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
@@ -40,13 +40,15 @@
       <div class="sidebar-separator"></div>
       <div class="sidebar-group-title">NGUỒN & THỬ MẪU</div>
       <a class="nav-link" href="#simpleMotion"><span class="nav-numeral">TM</span><span>Chữ chạy & loading</span></a>
-      <a class="nav-link" href="./github-sources.html"><span class="nav-numeral">GH</span><span>Nguồn GitHub · Lab</span><small>↗</small></a>
+      
       <div class="sidebar-separator"></div>
       <div class="sidebar-group-title">LUỒNG ĐÃ DỰNG</div>
       <a class="nav-link" href="./flows.html#chat/contacts"><span class="nav-numeral">11</span><span>Trò chuyện</span><small>↗</small></a>
       <a class="nav-link" href="./flows.html#work/summary"><span class="nav-numeral">12</span><span>Công việc</span><small>↗</small></a>
       <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">13</span><span>Bán hàng</span><small>↗</small></a>
-      <div class="sidebar-footer">UI-V41 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
+      <div class="sidebar-separator"></div>
+      <a class="nav-link" href="#githubSourcesV42"><span class="nav-numeral">GH</span><span>Nguồn GitHub · cuối trang</span></a>
+      <div class="sidebar-footer">UI-V42 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
     </aside>
     <main class="main studio-main" id="main">
       <section class="simple-kit" id="simpleKit" aria-labelledby="simpleKitTitle">
@@ -145,6 +147,8 @@
           <div class="ui-scroll-anchor-actions">
             <button type="button" class="ui-button ui-button--secondary" id="scrollAnchorAdd">Thêm tin mẫu</button>
             <button type="button" class="ui-button ui-button--outline" id="scrollAnchorStream">Mô phỏng streaming</button>
+            <button type="button" class="ui-button ui-button--outline" id="scrollAnchorPrepend">Tải 6 tin cũ</button>
+            <button type="button" class="ui-button ui-button--outline" id="scrollAnchorReflow">Đổi chiều cao tin</button>
             <button type="button" class="ui-button ui-button--quiet" id="scrollAnchorOld">Xem đoạn cũ</button>
             <button type="button" class="ui-button ui-button--quiet" id="scrollAnchorReset">Đặt lại</button>
           </div>
@@ -984,7 +988,31 @@
         <div><span class="eyebrow">CÙNG MỘT BỘ CSS</span><h2>Thông số đã chọn</h2><p>Toàn bộ thành phần dùng <code>web/styles.css</code> và các token chung. Có thể sao chép để triển khai cho những khung khác.</p></div>
         <pre id="cssPreview" aria-label="CSS hiện hành"></pre>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V41</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <section class="github-v42-sources" id="githubSourcesV42" aria-labelledby="githubSourcesV42Title">
+        <span class="eyebrow">NGUỒN THAM KHẢO · CUỐI THƯ VIỆN</span>
+        <h2 id="githubSourcesV42Title">GitHub hỗ trợ UI/UX ChatGPT</h2>
+        <p>Chỉ dùng mẫu công khai để học cấu trúc cha → con, trạng thái và hành vi. Đây không phải CSS nội bộ của ChatGPT; không tự cài dependency vào 2027.</p>
+        <div class="github-v42-groups">
+          <div class="github-v42-group"><h3>01 · Bố cục và tin nhắn</h3><ul>
+            <li><a href="https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/examples/chatgpt.mdx" target="_blank" rel="noopener noreferrer">assistant-ui · ChatGPT example</a><small>Thread → Message/Composer, shell và vùng nội dung</small></li>
+            <li><a href="https://github.com/architects-toolkit/chat-ui" target="_blank" rel="noopener noreferrer">architects-toolkit/chat-ui</a><small>TypeScript DOM/WebView, composer và message parts</small></li>
+            <li><a href="https://github.com/loquix-dev/loquix" target="_blank" rel="noopener noreferrer">loquix</a><small>Web components cho chat, input và trạng thái</small></li>
+            <li><a href="https://github.com/miskibin/chat-components" target="_blank" rel="noopener noreferrer">chat-components</a><small>React/shadcn, composable messages và data-slot; kiểm license package trước khi nhập</small></li>
+          </ul></div>
+          <div class="github-v42-group"><h3>02 · Cuộn và tương tác</h3><ul>
+            <li><a href="https://github.com/shadcn-ui/ui/blob/main/skills/shadcn/rules/chat.md" target="_blank" rel="noopener noreferrer">shadcn/ui · Chat rules</a><small>MessageScroller, neo vị trí, prepend, jump-to-latest</small></li>
+            <li><a href="https://github.com/TanStack/virtual" target="_blank" rel="noopener noreferrer">TanStack Virtual</a><small>Virtualizer thuộc MessageList, chỉ dùng khi đo độ trễ</small></li>
+            <li><a href="https://github.com/microsoft/open-kosmos" target="_blank" rel="noopener noreferrer">Microsoft open-kosmos</a><small>ChatContainer, find bar, overlay, nhiều panel</small></li>
+          </ul></div>
+          <div class="github-v42-group"><h3>03 · Ứng dụng và primitive</h3><ul>
+            <li><a href="https://github.com/LibreChat-AI/LibreChat" target="_blank" rel="noopener noreferrer">LibreChat</a><small>Danh sách hội thoại, tìm kiếm, media và trạng thái</small></li>
+            <li><a href="https://github.com/mrigankad/Lumi-UI" target="_blank" rel="noopener noreferrer">Lumi UI</a><small>Composer, streaming, nút và feedback</small></li>
+            <li><a href="https://github.com/openai/apps-sdk-ui" target="_blank" rel="noopener noreferrer">OpenAI Apps SDK UI</a><small>Button/Input/Textarea public primitives, không phải CSS ChatGPT</small></li>
+          </ul></div>
+        </div>
+        <p><a href="./github-sources.html">Phòng thử nguồn GitHub</a> · <a href="https://github.com/1sl2tp/2027/blob/main/references/UI_V42_GITHUB_SOURCES.md" target="_blank" rel="noopener noreferrer">Nhật ký nguồn V42</a></p>
+      </section>
+      <footer class="page-footer"><span>2027 UI Library · V42</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>

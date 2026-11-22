@@ -1,8 +1,9 @@
-// UI-V34 · ScrollAnchor specimen under RULE 11.
+import {captureVisibleAnchor,restoreVisibleAnchor,type MessageAnchor} from "./scroll-preserve.js";
+// UI-V42 · ScrollAnchor specimen under RULE 11 / RULE 12.
 // Follows assistant-ui public ScrollAnchor behavior in spirit, not its React source.
 // New text never steals scroll position once a reader scrolls away from the end.
 type Author="user"|"assistant";
-interface Message {author:Author;text:string}
+interface Message {author:Author;text:string;id?:string}
 const SEED:readonly Message[]=[
  {author:"user",text:"Kiểm tra lại vùng danh bạ."},
  {author:"assistant",text:"Mình sẽ kiểm tra trục ngang, vùng chữ và chiều cao hàng."},
@@ -18,10 +19,11 @@ const STREAM:readonly string[]=[
  "Hàng đầu không tự thay đổi khi người đọc đang xem phần trước.",
  "Kết thúc mô phỏng: nút về cuối vẫn nằm ở vị trí dễ tìm."
 ];
-function messageItem(message:Message):HTMLElement{
+function messageItem(message:Message,index=0):HTMLElement{
  const row=document.createElement("div");
  row.className="ui-scroll-anchor-message";
  row.dataset.author=message.author;
+ row.dataset.messageId=message.id??'seed-'+index;
  row.textContent=message.text;
  return row;
 }
@@ -33,8 +35,33 @@ export function initScrollAnchorLab():void{
  const older=document.getElementById("scrollAnchorOld") as HTMLButtonElement|null;
  const reset=document.getElementById("scrollAnchorReset") as HTMLButtonElement|null;
  const status=document.getElementById("scrollAnchorStatus");
- if(!viewport||!jump||!add||!stream||!older||!reset||!status)return;
+ const prepend=document.getElementById("scrollAnchorPrepend") as HTMLButtonElement|null;
+ const reflow=document.getElementById("scrollAnchorReflow") as HTMLButtonElement|null;
+ if(!viewport||!jump||!add||!stream||!older||!reset||!status||!prepend||!reflow)return;
  let pinned=true,unseen=0,sequence=0,streamTimer:number|null=null;
+ let historic=0,restoring=false,anchor:MessageAnchor|null=null;
+ const watched=new Set<Element>();
+ const resizeObserver=typeof ResizeObserver==="undefined"?null:new ResizeObserver(()=>{
+  if(restoring)return;
+  restoring=true;
+  if(pinned)viewport.scrollTop=viewport.scrollHeight;
+  else restoreVisibleAnchor(viewport,anchor);
+  anchor=captureVisibleAnchor(viewport);
+  window.requestAnimationFrame(()=>{restoring=false;});
+ });
+ const watchItems=()=>{
+  if(!resizeObserver)return;
+  for(const child of Array.from(viewport.children))
+   if(!watched.has(child)){watched.add(child);resizeObserver.observe(child);}
+ };
+ const preserve=(change:()=>void)=>{
+  const snapshot=captureVisibleAnchor(viewport),follow=pinned;
+  restoring=true;change();watchItems();
+  if(follow)viewport.scrollTop=viewport.scrollHeight;
+  else restoreVisibleAnchor(viewport,snapshot);
+  anchor=captureVisibleAnchor(viewport);
+  window.requestAnimationFrame(()=>{restoring=false;});
+ };
  const atBottom=()=>viewport.scrollHeight-viewport.scrollTop-viewport.clientHeight<=32;
  const updateJump=()=>{
   jump.hidden=pinned||unseen===0;
@@ -48,14 +75,18 @@ export function initScrollAnchorLab():void{
  };
  const onScroll=()=>{
   // User initiated scroll away from the tail breaks follow mode.
+  if(restoring)return;
   pinned=atBottom();
+  anchor=captureVisibleAnchor(viewport);
   if(pinned)unseen=0;
   updateJump();
  };
  viewport.addEventListener("scroll",onScroll,{passive:true});
  const append=(message:Message)=>{
   const follow=pinned;
-  viewport.append(messageItem(message));
+  viewport.append(messageItem({...message,id:message.id??"new-"+(++sequence)}));
+  watchItems();
+  anchor=captureVisibleAnchor(viewport);
   if(follow){
    viewport.scrollTop=viewport.scrollHeight;
    unseen=0;
@@ -74,21 +105,42 @@ export function initScrollAnchorLab():void{
  };
  const initialize=()=>{
   cancelStream();
+  resizeObserver?.disconnect();watched.clear();
   viewport.replaceChildren(...SEED.map(messageItem));
-  pinned=true;unseen=0;sequence=0;
+  watchItems();
+  pinned=true;unseen=0;sequence=0;historic=0;
   viewport.scrollTop=viewport.scrollHeight;
+  anchor=captureVisibleAnchor(viewport);
   updateJump();status.textContent="Sẵn sàng: cuộn lên, rồi thêm tin để thử không tự nhảy.";
  };
  jump.addEventListener("click",jumpToBottom);
  add.addEventListener("click",()=>{
-  sequence++;
-  append({author:"assistant",text:"Đoạn mẫu "+sequence+": soát lại tên, số lượng, đơn giá và thành tiền."});
+  append({author:"assistant",text:"Đoạn mẫu "+(sequence+1)+": soát lại tên, số lượng, đơn giá và thành tiền."});
  });
  older.addEventListener("click",()=>{
   cancelStream();pinned=false;
   viewport.scrollTop=0;
+  anchor=captureVisibleAnchor(viewport);
   updateJump();
   status.textContent="Đang xem đoạn đầu. Hãy bấm Thêm tin hoặc Mô phỏng streaming.";
+ });
+ prepend.addEventListener("click",()=>{
+  if(pinned){pinned=false;viewport.scrollTop=0;}
+  preserve(()=>{
+   const batch=Array.from({length:6},(_,i)=>{
+    const id="history-"+(++historic);
+    return messageItem({id,author:i%2?"assistant":"user",text:"Lịch sử "+id+": mẫu để kiểm giữ điểm đọc khi tải tin cũ."});
+   });
+   viewport.prepend(...batch);
+  });
+  status.textContent="Đã thêm 6 tin cũ; vẫn giữ tin đang đọc theo message ID.";
+ });
+ reflow.addEventListener("click",()=>{
+  if(pinned){pinned=false;viewport.scrollTop=0;}
+  const item=viewport.querySelector<HTMLElement>('[data-message-id="seed-0"]');
+  if(!item)return;
+  preserve(()=>item.classList.toggle("is-expanded"));
+  status.textContent="Đã đổi chiều cao nội dung cũ; vị trí đọc được neo theo ID.";
  });
  reset.addEventListener("click",initialize);
  stream.addEventListener("click",()=>{
@@ -108,5 +160,6 @@ export function initScrollAnchorLab():void{
  });
  document.addEventListener("visibilitychange",()=>{if(document.hidden)cancelStream();});
  window.addEventListener("pagehide",cancelStream);
+ window.addEventListener("pagehide",()=>resizeObserver?.disconnect());
  initialize();
 }

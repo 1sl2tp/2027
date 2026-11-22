@@ -2773,7 +2773,7 @@ body.simple-first .topbar-end{gap:0}
  background:var(--ui-surface)
 }
 .ui-scroll-anchor-viewport{
- height:270px;overflow-y:auto;overscroll-behavior-y:contain;
+ height:270px;overflow-y:auto;overscroll-behavior-y:contain;overflow-anchor:none;
  padding:14px 14px 24px;scrollbar-gutter:stable;
  display:flex;flex-direction:column;gap:10px;
 }
@@ -2801,6 +2801,20 @@ body.simple-first .topbar-end{gap:0}
 @media(prefers-reduced-motion:reduce){
  .ui-scroll-anchor-viewport{scroll-behavior:auto}
 }
+
+/* V42: one scroll owner; source references are the last library section. */
+.ui-scroll-anchor-message.is-expanded::after{content:"Nội dung mẫu tải chậm: phần ảnh hoặc văn bản phát sinh chiều cao.";display:block;min-height:100px;border-top:1px solid var(--ui-border);padding-top:9px;margin-top:9px;font:400 12px/1.5 var(--ui-font);color:var(--ui-text-muted)}
+.github-v42-sources{padding:30px 0 40px;border-top:1px solid var(--ui-border);scroll-margin-top:24px}
+.github-v42-sources h2{font:700 21px/1.4 var(--ui-font);margin:7px 0 9px}
+.github-v42-sources>p{font:400 13px/1.6 var(--ui-font);max-width:800px;color:var(--ui-text-muted)}
+.github-v42-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.github-v42-group{min-width:0;border:1px solid var(--ui-border);border-radius:12px;padding:16px;background:var(--ui-bg)}
+.github-v42-group h3{font:650 13px/1.5 var(--ui-font);margin:0 0 11px}
+.github-v42-group ul{margin:0;padding-left:18px;display:grid;gap:12px}
+.github-v42-group li{font:500 12px/1.5 var(--ui-font)}
+.github-v42-group a,.github-v42-sources>p a{text-decoration:underline;text-underline-offset:3px}
+.github-v42-group small{display:block;color:var(--ui-text-muted);margin-top:3px;font:400 11px/1.5 var(--ui-font)}
+@media(max-width:800px){.github-v42-groups{grid-template-columns:minmax(0,1fr)}}
 
 /* SOURCE-V01: GitHub source comparison laboratory. Shared 2027 tokens; no app-specific overrides. */
 .source-lab{background:var(--ui-bg,#fff);color:var(--ui-text,#171717);font-family:var(--ui-font,system-ui,sans-serif)}
