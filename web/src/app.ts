@@ -322,4 +322,86 @@ for(const link of Array.from(document.querySelectorAll<HTMLAnchorElement>(".stud
   link.classList.add("active");
  });
 }
+
+// V07 gallery behavior — side-by-side variants remain independent and local.
+const tableOptions=Array.from(document.querySelectorAll<HTMLButtonElement>("[data-variant-select]"));
+for(const b of tableOptions){
+ b.addEventListener("click",()=>{
+  const name=b.querySelector("span")?.textContent||"kiểu bảng";
+  for(const option of tableOptions){
+   const active=option===b;
+   option.setAttribute("aria-pressed",String(active));
+   option.closest(".variant-sample")?.classList.toggle("is-picked",active);
+   const hint=option.lastElementChild;
+   if(hint)hint.textContent=active?"Đang chọn":"Chọn";
+  }
+  get<HTMLElement>("variantTableFeedback").textContent="Đang xem: "+name+". Không làm thay đổi dữ liệu hoặc giao dịch.";
+ });
+}
+const qtyVariants=Array.from(document.querySelectorAll<HTMLElement>("[data-qty-kind]"));
+function normalizeQty(input:HTMLInputElement):number{
+ const n=Number(input.value);
+ const safe=Number.isFinite(n)?Math.round(n):0;
+ const clamped=Math.min(99,Math.max(0,safe));
+ input.value=String(clamped);
+ return clamped;
+}
+for(const variant of qtyVariants){
+ const input=variant.querySelector<HTMLInputElement>('input[type="number"]');
+ if(!input)continue;
+ const name=variant.dataset.qtyKind||"mẫu";
+ const updateButtons=(qty:number)=>{
+  for(const btn of Array.from(variant.querySelectorAll<HTMLButtonElement>("[data-step]"))){
+   btn.disabled=qty===0&&btn.dataset.step==="-1"||qty===99&&btn.dataset.step==="1";
+  }
+ };
+ updateButtons(normalizeQty(input));
+ for(const btn of Array.from(variant.querySelectorAll<HTMLButtonElement>("[data-step]"))){
+  btn.addEventListener("click",()=>{
+   const next=normalizeQty(input)+Number(btn.dataset.step||"0");
+   const q=normalizeQty(Object.assign(input,{value:String(next)}));
+   updateButtons(q);
+   get<HTMLElement>("variantQtyFeedback").textContent="Kiểu "+name+": số lượng "+q+" (mẫu cục bộ).";
+  });
+ }
+ input.addEventListener("input",()=>{
+  get<HTMLElement>("variantQtyFeedback").textContent="Kiểu "+name+": đang nhập "+input.value+".";
+ });
+ input.addEventListener("change",()=>{
+  const q=normalizeQty(input);updateButtons(q);
+  get<HTMLElement>("variantQtyFeedback").textContent="Kiểu "+name+": số lượng "+q+" (giới hạn 0–99).";
+ });
+}
+const variantInputs=Array.from(document.querySelectorAll<HTMLInputElement>(".input-variant, .input-variant-shell input"));
+for(const input of variantInputs){
+ input.addEventListener("focus",()=>{
+  get<HTMLElement>("variantInputFeedback").textContent="Đã chọn: "+(input.placeholder||"ô nhập mẫu")+".";
+ });
+ input.addEventListener("input",()=>{
+  get<HTMLElement>("variantInputFeedback").textContent="Nội dung chỉ ở máy của bạn: "+input.value.slice(0,60);
+ });
+}
+get<HTMLButtonElement>("variantClearInput").addEventListener("click",()=>{
+ const input=get<HTMLInputElement>("variantSearchInput");
+ input.value="";input.focus();
+ get<HTMLElement>("variantInputFeedback").textContent="Đã xóa nội dung ô input có icon.";
+});
+for(const b of Array.from(document.querySelectorAll<HTMLButtonElement>("[data-expand-lines]"))){
+ b.addEventListener("click",()=>{
+  const text=b.parentElement?.querySelector<HTMLElement>(".line-preview");
+  if(!text)return;
+  const expanded=text.classList.toggle("is-expanded");
+  b.setAttribute("aria-expanded",String(expanded));
+  b.textContent=expanded?"Thu gọn":"Xem đủ";
+ });
+}
+for(const b of Array.from(document.querySelectorAll<HTMLButtonElement>("[data-layout-action]"))){
+ b.addEventListener("click",()=>{
+  const message="Đã thử bố cục: "+(b.dataset.layoutAction||"mẫu")+".";
+  const area=b.closest(".studio-component-card");
+  const feedback=area?.querySelector<HTMLElement>("#iconLayoutFeedback, #compoundFeedback");
+  if(feedback)feedback.textContent=message;
+ });
+}
+
 render();
