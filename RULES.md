@@ -446,3 +446,45 @@ Mục tiêu là **một thư viện nút đủ rộng để phục vụ cả CHA
 - Các mẫu trước giữ thứ tự **STT | TÊN HÀNG | SL | ĐƠN GIÁ | THÀNH TIỀN**. Trường hợp này là **thêm một layout cho cùng bảng dữ liệu**, không thay chuẩn sản phẩm, số lượng hay số tiền.
 - CSS chung sở hữu modifier `.ds-invoice-table--price-first`, với cột thứ ba là GIÁ (căn phải, tabular), cột thứ tư là SL (căn giữa). Cùng quy tắc trên desktop, mobile có cuộn ngang khi cần và bản in A4.
 - Bộ dùng lại tăng **32 → 35 mẫu HTML**, họ `invoices` tăng **10 → 13 mẫu**; thư viện chính giữ 23 bộ/9 nhóm. Export JSON đi theo V17. Không tích hợp production CHAT/TAPHOA và không phát sinh giao dịch thật.
+
+
+---
+
+## RULE 10 — ĐẶT TÊN NÚT THEO ĐÚNG VAI TRÒ, KHÔNG ĐÁNH TRÁO KIỂU VÀ BỐ CỤC
+
+**Mã:** `2027-R10` · **Ngày:** 22/11/2026 (VN) · **Phạm vi:** mục 6 / 6.1 của UI Library Web. **Trạng thái:** E0–E1; E2, E3 và nghiệm thu thiết bị E4/E5 phải xác nhận bằng CI/deploy/bằng chứng riêng.
+
+### 10.1. Mục tiêu và nguyên nhân
+
+Làm rõ cách triển khai RULE 06–08, **không sinh design system thứ hai**. Ở UI-V30, mẫu BUTTON-06 (nút toàn chiều ngang) đã bị gắn nhầm `.ui-button--catalog` — class dành cho mục liệt kê và có `justify-content:flex-start`. Vì thế trong ảnh phản hồi, nút `Xác nhận` rộng 360px nhưng chữ dính bên trái. Cùng lỗi loại tên: pill sử dụng `round`, ký tự/số đơn dùng `icon`; 6.1 ghi gap và cỡ chữ cứng không khớp primitive. Đây là lỗi **dùng sai hợp đồng** dù đều mang tiền tố `ui-button`.
+
+### 10.2. Phân loại trước khi đặt tên
+
+- **Variant (màu và ngữ nghĩa):** `ui-button--primary`, `secondary`, `outline`, `quiet`, `danger`, `toggle`... **Không dùng tên loại danh mục hoặc hình dạng thay cho variant.**
+- **Shape (hình dạng):** `ui-button--square` (vuông bo góc), `ui-button--round` (tròn), `ui-button--pill` (viên thuốc, chữ dài). Shape **không tự chọn màu nền/chữ hoặc border**.
+- **Size/geometry:** nút mặc định theo `--ui-control-hit`, icon theo `--ui-control-glyph`; `ui-button--icon` cho nội dung chỉ icon. `ui-button--uniform` là hình vuông kích thước đều hai trục cho trường hợp **ký tự hoặc số đơn** (không gán sai là icon). Đây là modifier bổ sung tại nguồn canonical chỉ khi kiểm kê thấy chưa có.
+- **Layout:** `ui-button--block` chiếm hết chiều rộng của **khung cha**, nội dung căn giữa; `ui-button--catalog` chỉ được dùng cho **hàng nút trong trình duyệt danh mục nguồn**, có bố cục icon + nhãn căn trái. Block và catalog khác nhau.
+- **State (trạng thái):** `disabled`, `aria-busy` (loading) và `aria-pressed` (toggle/selection), không trộn lẫn với shape/variant.
+- **Component owner:** `.ui-button` và `.ui-icon` là thành phần gốc, `web/styles.css` sở hữu CSS, `web/icons.svg` sở hữu SVG. `.simple-button-*` của thư viện chỉ sở hữu danh sách, kích thước **khung minh họa** và bố cục nội dung; không sở hữu lại nền/chữ/viền/radius của nút.
+- **Tài liệu mẫu:** mã có thể sao chép chính thức tiếp tục do `web/src/ui-patterns.ts` quản lý; bộ 14+10 ở mục 6 là gallery thử hình thái và không tự thành mã nguồn gốc thứ hai. Khi cần mẫu xuất/copy mới, thêm contract có ID vào `ui-patterns.ts` và kiểm thử preview khớp mã xuất.
+
+### 10.3. Ánh xạ mẫu phải kiểm tra
+
+| Mẫu | Cách gọi chính xác | Primitive và modifier |
+| --- | --- | --- |
+| BUTTON-01–04 | chính/phụ/viền/nhẹ | `primary`/`secondary`/`outline`/`quiet` |
+| BUTTON-05 | viên thuốc | `primary + pill`, không phải `round` |
+| BUTTON-06 | toàn chiều ngang | `primary + block`, không phải `catalog` |
+| BUTTON-07–08 | icon trái/phải chữ | `outline + ui-icon`; khác vị trí con, không sinh variant mới |
+| BUTTON-09–10 | icon vuông/tròn | `secondary + icon + square/round` |
+| BUTTON-11–14 | nguy hiểm/vô hiệu/đang tải/chọn | `danger`/disabled/aria-busy/`toggle` |
+| ICON-01–10 | icon tham chiếu | `quiet + icon + square`, SVG `ui-icon-*` chung |
+| INNER-07–08 | một ký tự/một số | `uniform + square`, không phải `icon` |
+
+### 10.4. Nguồn, kiểm thử, ảnh hưởng và hoàn tác
+
+- **Nguồn:** tiếp tục ưu tiên RULE 06–08, `ui-button--catalog` đã có sẵn trong `web/src/root-button-library.ts` và CSS cho hàng trình duyệt danh mục. `ui-button--pill`, `--block`, `--uniform` chỉ bổ sung vì **thiếu đúng vai trò**, không tạo token `--ds-btn-*` song song.
+- **Web:** sửa Section 6/6.1 và primitive tại `web/styles.css`, TypeScript của gallery, index V31 và test hồi quy. **APK, CHAT/TAPHOA, DB, tin nhắn, thanh toán:** không đổi.
+- **E0–E1:** ảnh lỗi + đối chiếu source/Rule; code và test source chuẩn bị. **E2:** phải chạy `npm run verify`; **E3:** CI PR và GitHub Pages thành công mới ghi đạt. **E4/E5:** đối chiếu thật trên desktop 390px/mobile Safari, Chrome, focus, trạng thái selection và line break; chưa tuyên bố đạt.
+- **Đầu ra kiểm tra:** 14 nút + 10 icon giữ ID ổn định; không có `ui-button--catalog` trong gallery 6; `block` được đo width=100% parent và căn giữa; pill không dùng round; shape không đổi semantic tone; check chưa chọn không được nhìn như đã chọn.
+- **Hoàn tác:** revert PR UI-V31 tại repo `2027`; không tác động các ứng dụng khác.

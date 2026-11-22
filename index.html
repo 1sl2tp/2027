@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện quy tắc nội dung nút · V30</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V30">
-  <script type="module" src="./web/dist-v30/app.js"></script>
+  <title>2027 · Thư viện quy tắc nội dung nút · V31</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V31">
+  <script type="module" src="./web/dist-v31/app.js"></script>
 </head>
-<body data-ui-version="2027-UI-V30" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V31" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V30</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V31</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
@@ -80,7 +80,7 @@
       </section>
       <section class="simple-kit simple-multi-kit" id="simpleButtons" aria-labelledby="simpleButtonsTitle">
         <h2 id="simpleButtonsTitle">6. Nút và icon</h2>
-        <p class="simple-font-intro">14 mẫu nút và 10 icon tham chiếu cùng thư viện gốc. Chạm để thử, bấm ✓ để chọn.</p>
+        <p class="simple-font-intro">14 mẫu nút và 10 icon dùng chung component gốc. Kiểu nút, hình dạng và bố cục là những thuộc tính khác nhau; chọn ✓ để so sánh.</p>
         <div id="simpleButtonsItems" class="simple-font-list" role="group" aria-label="24 mẫu nút và icon"></div>
         <p id="simpleButtonsChosen" class="simple-font-chosen" role="status" aria-live="polite" hidden></p>
         <p id="simpleButtonsFeedback" class="simple-buttons-feedback" role="status" aria-live="polite"></p>
@@ -99,10 +99,11 @@
               <tr><th>Icon thêm</th><td><code>--ui-control-plus</code></td><td>22px</td></tr>
               <tr><th>Icon mic</th><td><code>--ui-control-mic</code></td><td>19px</td></tr>
               <tr><th>Nhãn chế độ</th><td><code>--ui-control-label</code></td><td>14px</td></tr>
+              <tr><th>Gap bên trong nút</th><td><code>--ui-button-gap</code></td><td>7px</td></tr>
               <tr><th>Gap composer</th><td><code>--ui-control-gap</code></td><td>2px</td></tr>
             </tbody>
           </table>
-          <p class="simple-button-rule-note">Đây là token đã có trong hệ thống, không phải kích thước đặt mới tại mục 6.1. Nút 2 dòng có thể cao hơn mức tối thiểu. <a href="#sample-actions">Xem bộ nút gốc</a> để đối chiếu cùng kiểu nút.</p>
+          <p class="simple-button-rule-note">Token chung áp dụng cho nút; riêng gap composer là 2px, khác gap bên trong nút 7px. Không dùng <code>catalog</code> thay cho <code>block</code> và không dùng <code>round</code> thay cho <code>pill</code>.  Nút 2 dòng có thể cao hơn mức tối thiểu. <a href="#sample-actions">Xem bộ nút gốc</a> để đối chiếu cùng kiểu nút.</p>
           <div id="simpleButtonRuleItems" class="simple-font-list" role="group" aria-label="14 mẫu quy tắc bố trí trong nút"></div>
           <p id="simpleButtonRulesChosen" class="simple-font-chosen" role="status" aria-live="polite" hidden></p>
           <p id="simpleButtonRulesFeedback" class="simple-buttons-feedback" role="status" aria-live="polite"></p>
@@ -619,8 +620,8 @@
                     <div class="studio-component-label"><strong>Icon vuông và tròn</strong><span>Chung hệ kích thước chạm</span></div>
                     <div class="studio-component-content">
                       <div class="studio-icon-examples">
-                        <button type="button" class="ui-button ui-button--icon ui-button--square" data-icon="Tìm kiếm" aria-label="Icon tìm kiếm vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg></button>
-                        <button type="button" class="ui-button ui-button--icon ui-button--round" data-icon="Thêm" aria-label="Icon thêm tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+                        <button type="button" class="ui-button ui-button--secondary ui-button--icon ui-button--square" data-icon="Tìm kiếm" aria-label="Icon tìm kiếm vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg></button>
+                        <button type="button" class="ui-button ui-button--secondary ui-button--icon ui-button--round" data-icon="Thêm" aria-label="Icon thêm tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
                         <button type="button" class="ui-button ui-button--icon ui-button--square ui-button--filled" data-icon="Gửi" aria-label="Icon gửi vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-5 16-3.5-6.5L4 12Z"></path><path d="m20 4-8.5 9.5"></path></svg></button>
                         <button type="button" class="ui-button ui-button--icon ui-button--round ui-button--outline" data-icon="Menu" aria-label="Icon menu tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle></svg></button>
                       </div>
@@ -848,7 +849,7 @@
                     <div class="studio-component-content">
                       <div class="studio-menu-anchor" id="menuAnchor">
                         <span>Đơn hàng mẫu <small>DH-001</small></span>
-                        <button type="button" class="ui-button ui-button--icon ui-button--square" id="menuButton" aria-label="Mở menu phụ" aria-haspopup="menu" aria-expanded="false"><svg class="ui-icon" aria-hidden="true"><use href="./web/icons.svg#ui-icon-ellipsis"/></svg></button>
+                        <button type="button" class="ui-button ui-button--quiet ui-button--icon ui-button--square" id="menuButton" aria-label="Mở menu phụ" aria-haspopup="menu" aria-expanded="false"><svg class="ui-icon" aria-hidden="true"><use href="./web/icons.svg#ui-icon-ellipsis"/></svg></button>
                         <div id="sampleMenu" class="studio-pop-menu" role="menu" hidden>
                           <button type="button" role="menuitem" data-menu-item="Xem chi tiết">Xem chi tiết</button>
                           <button type="button" role="menuitem" data-menu-item="Sao chép thông tin">Sao chép thông tin</button>
@@ -878,7 +879,7 @@
         <div><span class="eyebrow">CÙNG MỘT BỘ CSS</span><h2>Thông số đã chọn</h2><p>Toàn bộ thành phần dùng <code>web/styles.css</code> và các token chung. Có thể sao chép để triển khai cho những khung khác.</p></div>
         <pre id="cssPreview" aria-label="CSS hiện hành"></pre>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V30</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V31</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>

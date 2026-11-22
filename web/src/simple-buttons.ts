@@ -10,12 +10,12 @@ interface Specimen {
  source:string;caption:string;icon?:string;
 }
 const SPECIMENS:readonly Specimen[]=[
- {id:"BUTTON-01",label:"Nút chính · primary",kind:"button",variant:"primary",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Chọn"},
- {id:"BUTTON-02",label:"Nút phụ · secondary",kind:"button",variant:"secondary",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Hủy"},
- {id:"BUTTON-03",label:"Nút viền · outline",kind:"button",variant:"outline",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Chi tiết"},
- {id:"BUTTON-04",label:"Nút nhẹ · quiet",kind:"button",variant:"quiet",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Xem thêm"},
- {id:"BUTTON-05",label:"Nút bo tròn · round",kind:"button",variant:"primary",layout:"pill",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Tiếp tục"},
- {id:"BUTTON-06",label:"Nút rộng · catalog",kind:"button",variant:"primary",layout:"block",state:"idle",source:"UI 2027 · thư viện nút gốc",caption:"Xác nhận"},
+ {id:"BUTTON-01",label:"Nút chính · primary",kind:"button",variant:"primary",layout:"plain",state:"idle",source:"2027 · BTN-01 / ui-button--primary",caption:"Chọn"},
+ {id:"BUTTON-02",label:"Nút phụ · secondary",kind:"button",variant:"secondary",layout:"plain",state:"idle",source:"2027 · BTN-01 / ui-button--secondary",caption:"Hủy"},
+ {id:"BUTTON-03",label:"Nút viền · outline",kind:"button",variant:"outline",layout:"plain",state:"idle",source:"2027 · ui-button--outline",caption:"Chi tiết"},
+ {id:"BUTTON-04",label:"Nút nhẹ · quiet",kind:"button",variant:"quiet",layout:"plain",state:"idle",source:"2027 · BTN-01 / ui-button--quiet",caption:"Xem thêm"},
+ {id:"BUTTON-05",label:"Nút viên thuốc · pill",kind:"button",variant:"primary",layout:"pill",state:"idle",source:"2027 · ui-button--pill",caption:"Tiếp tục"},
+ {id:"BUTTON-06",label:"Nút toàn chiều ngang · block",kind:"button",variant:"primary",layout:"block",state:"idle",source:"UI 2027 · ui-button--block",caption:"Xác nhận"},
  {id:"BUTTON-07",label:"Icon trước chữ",kind:"button",variant:"outline",layout:"leading",state:"idle",source:"UI 2027 · ui-icon",caption:"Lưu",icon:"save"},
  {id:"BUTTON-08",label:"Icon sau chữ",kind:"button",variant:"outline",layout:"trailing",state:"idle",source:"UI 2027 · ui-icon",caption:"Tiếp theo",icon:"arrow-right"},
  {id:"BUTTON-09",label:"Nút icon vuông",kind:"button",variant:"secondary",layout:"square",state:"idle",source:"UI 2027 · ui-button--square",caption:"",icon:"plus"},
@@ -55,8 +55,8 @@ function sampleButton(spec:Specimen):HTMLButtonElement{
  if(spec.layout==="square"||spec.layout==="round"||spec.kind==="icon"){
    button.classList.add("ui-button--icon");
    button.classList.add(spec.layout==="round"?"ui-button--round":"ui-button--square");
- }else if(spec.layout==="pill"){button.classList.add("ui-button--round");}
- else if(spec.layout==="block"){button.classList.add("ui-button--catalog");}
+ }else if(spec.layout==="pill"){button.classList.add("ui-button--pill");}
+ else if(spec.layout==="block"){button.classList.add("ui-button--block");}
  const icon=spec.icon?spriteIcon(spec.icon):null;
  const caption=document.createElement("span");caption.textContent=spec.caption;
  if(icon&&spec.layout!=="trailing")button.append(icon);
@@ -88,11 +88,12 @@ export function initSimpleButtons():void{
   const middle=document.createElement("div");middle.className="simple-button-middle";
   const label=document.createElement("strong");label.className="simple-field-title";label.textContent=spec.label;
   const preview=document.createElement("div");preview.className="simple-button-stage";
+  preview.dataset.layout=spec.layout;
   preview.append(sampleButton(spec));
   const source=document.createElement("span");source.className="simple-font-meta";source.textContent=spec.source;
   middle.append(label,preview,source);
   const choose=document.createElement("button");choose.type="button";
-  choose.className="ui-button ui-button--icon ui-button--round simple-button-pick";
+  choose.className="ui-button ui-button--icon ui-button--round ui-button--outline simple-button-pick";
   choose.dataset.sampleId=spec.id;
   choose.setAttribute("aria-label","Chọn "+spec.label);choose.setAttribute("aria-pressed","false");
   const tick=spriteIcon("check");choose.append(tick);
