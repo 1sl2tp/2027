@@ -791,3 +791,41 @@ test("V18 mobile gallery uses native pickers, a collapsible source, and preserve
  assert.ok(patterns.includes("INV-12"),"all thirteen invoice variants remain available");
  assert.ok(css.includes('@media print'),"A4 print rules retained");
 });
+
+
+test("V19 starts with a simple theme package and one numbered component category",()=>{
+ const html=read("index.html"),css=read("web/styles.css"),src=read("web/src/simple-gallery.ts"),app=read("web/src/app.ts");
+ for(const id of [
+  "simpleKit","simpleTheme","simpleCategory","simpleItems","simpleCount","simpleChosen",
+  "simpleCopy","simpleStatus","simpleCodeDetails","simpleSource","simpleAdvancedToggle"
+ ])assert.ok(html.includes('id="'+id+'"'),id);
+ for(const option of ["chatgpt","facebook","gemini","mono"])
+  assert.ok(html.includes('<option value="'+option+'">'),"theme "+option);
+ for(const type of ["text","input","button","icon","table","layout","popup"])
+  assert.ok(html.includes('<option value="'+type+'">'),"component "+type);
+ for(const id of Array.from({length:10},(_,i)=>"TEXT-"+String(i+1).padStart(2,"0")))
+  assert.ok(src.includes('id:"'+id+'"'),"ten numbered text variants "+id);
+ for(const id of Array.from({length:10},(_,i)=>"INPUT-"+String(i+1).padStart(2,"0")))
+  assert.ok(src.includes('id:"'+id+'"'),"ten input variants "+id);
+ const buttonStyles=JSON.parse(src.match(/const buttonStyles=(\[[^;]+\]);/)[1]);
+ const iconNames=JSON.parse(src.match(/const iconNames=(\[[^;]+\]);/)[1]);
+ assert.equal(buttonStyles.length,10,"ten button shapes");
+ assert.equal(iconNames.length,10,"ten shared icon variants");
+ assert.ok(src.includes("selectedByCategory"),"category selection survives navigation");
+ assert.ok(src.includes("root.dataset.theme=theme.value"),"a theme changes all sample styling");
+ for(const token of [
+  '.simple-kit[data-theme="facebook"]','.simple-kit[data-theme="gemini"]',
+  '.simple-kit[data-theme="mono"]','--s-font:','--s-accent:',
+  'body.simple-first .studio-component-gallery',
+  '.simple-row-preview','.simple-row-select[aria-pressed="true"]'
+ ])assert.ok(css.includes(token),token);
+ assert.ok(html.includes('id="patternKit"'),"advanced library preserved");
+ assert.ok(html.includes('id="invoiceVariantList"'),"existing invoice samples preserved");
+ assert.ok(src.includes('data-simple-money'),"formatted money field");
+ assert.ok(src.includes('replace(/\\B(?=(\\d{3})+(?!\\d))/g,".")'),"live money thousands formatting");
+ assert.ok(src.includes('data-simple-demo'),"demo actions only");
+ assert.doesNotMatch(src,/\bfetch\s*\(|\bWebSocket\s*\(|supabase|Authorization:|getUserMedia\s*\(/i);
+ assert.ok(app.includes('initSimpleGallery();'),"simple samples initialized");
+ assert.equal((html.match(/<link rel="stylesheet"/g)||[]).length,1,"single shared stylesheet");
+ assert.ok(html.includes('2027-UI-V19'),"new version marker and asset cache invalidation");
+});
