@@ -22,7 +22,9 @@ test("V29 renders Section 6 variants with the CSS classes they actually use",()=
 test("V29 only uses valid single-level XML comments in the icon registry",()=>{
   const sprite=read("web/icons.svg");
   assert.match(sprite,/^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"/);
-  assert.doesNotMatch(sprite,/<!--[\s\S]*?<!--/,"nested XML comments invalidate external SVG sprites");
+  for(const [,body] of sprite.matchAll(/<!--([\s\S]*?)-->/g)){
+    assert.doesNotMatch(body,/<!--|--/,"XML comments cannot contain nested comments or double hyphens");
+  }
   const ids=[...sprite.matchAll(/<symbol id="(ui-icon-[^"]+)"/g)].map(m=>m[1]);
   assert.equal(new Set(ids).size,ids.length,"sprite symbol IDs are unique");
   for(const icon of ["plus","minus","search","close","copy","edit","trash","share","send-up","ellipsis","save","arrow-right"]){
