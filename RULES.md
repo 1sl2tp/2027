@@ -1,7 +1,7 @@
 # 2027 — RULES.md
 
 > **Nguồn quy tắc duy nhất (Single Source of Truth)**  
-> Repo: `1sl2tp/2027` · Trạng thái: **R09 / UI-V16 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
+> Repo: `1sl2tp/2027` · Trạng thái: **R09 / UI-V17 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
 > Phạm vi: Web App/PWA (TypeScript + HTML + CSS) và Android APK native (Kotlin + Jetpack Compose).
 
 ## RULE 01 — MỘT FILE RULE DUY NHẤT
@@ -439,3 +439,10 @@ Mục tiêu là **một thư viện nút đủ rộng để phục vụ cả CHA
 - **CHAT/TAPHOA thật, APK, Drive:** không sửa, không đổi mẫu hóa đơn đã lưu trên thiết bị trong TAPHOA.
 - **Kiểm thử:** xác nhận đủ 10 ID, 4 palette, cấu trúc cột, phép tính mẫu, một tệp CSS, in tách khỏi shell, không gọi mạng. Kiểm thử tự động không thay thế ảnh so sánh trên thiết bị thật.
 - **Hoàn tác:** revert commit V16 của `2027`, quay về V15; bản gốc V08 và các repo khác không thay đổi.
+
+### 9.4. Bổ sung V17: hai dạng thứ tự cột đều là mẫu gốc
+
+- Các mẫu **INV-10** (đen trắng kẻ ô), **INV-11** (tối giản kẻ ngang), **INV-12** (mobile) có thứ tự chính xác **STT | TÊN HÀNG | GIÁ | SL | THÀNH TIỀN**, đối chiếu cùng phép tính của INV-00–09. Cả header và giá trị ở các hàng phải cùng thứ tự, không được chỉ đổi nhãn.
+- Các mẫu trước giữ thứ tự **STT | TÊN HÀNG | SL | ĐƠN GIÁ | THÀNH TIỀN**. Trường hợp này là **thêm một layout cho cùng bảng dữ liệu**, không thay chuẩn sản phẩm, số lượng hay số tiền.
+- CSS chung sở hữu modifier `.ds-invoice-table--price-first`, với cột thứ ba là GIÁ (căn phải, tabular), cột thứ tư là SL (căn giữa). Cùng quy tắc trên desktop, mobile có cuộn ngang khi cần và bản in A4.
+- Bộ dùng lại tăng **32 → 35 mẫu HTML**, họ `invoices` tăng **10 → 13 mẫu**; thư viện chính giữ 23 bộ/9 nhóm. Export JSON đi theo V17. Không tích hợp production CHAT/TAPHOA và không phát sinh giao dịch thật.
