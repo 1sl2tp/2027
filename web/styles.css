@@ -732,3 +732,12 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid #fff
 @media(prefers-reduced-motion:reduce){
  .studio-document .sample-block{transition:none}
 }
+/* Responsive document width toggle: narrow preview without changing outer viewport. */
+.studio-document[data-viewport=mobile]{max-width:390px;margin-inline:auto;border-inline:1px solid var(--ui-border)}
+.studio-document[data-viewport=mobile] .studio-document-figures{grid-template-columns:1fr 1fr}
+.studio-document[data-viewport=mobile] .studio-data-table th,
+.studio-document[data-viewport=mobile] .studio-data-table td{padding:8px 6px}
+.studio-component-grid .studio-action-primary:focus-visible,
+.studio-component-grid .studio-action-secondary:focus-visible,
+.studio-component-grid .studio-action-text:focus-visible,
+.studio-component-grid .studio-icon-button:focus-visible{outline:2px solid #597bda;outline-offset:3px}
