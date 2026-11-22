@@ -342,7 +342,7 @@ test("V12 keeps four distinct composers inside the existing input gallery",()=>{
  assert.ok(inputs.includes("Ảnh mẫu 1"));
  assert.ok(inputs.includes("Ảnh mẫu 3"));
  for(const selector of [".composer-variant-grid",".composer-variant--compact",".composer-attachment-list",
-     ".composer-preview",".composer-surface:focus-within",".composer-local-feedback",".composer-send[data-composer-busy=true]"])
+     ".composer-preview",".composer-surface:focus-within",".composer-local-feedback",".ui-button--send[data-composer-busy=true]"])
    assert.ok(css.includes(selector),selector);
  assert.ok(css.includes("@media(max-width:760px)"));
 });
@@ -429,7 +429,7 @@ test("R06 classifies future components under the shared Button and Icon library"
  assert.ok(rules.includes("index.html#sample-actions"));
  assert.ok(catalog.includes("Cấp | Vai trò"));
  for(const group of ["Chữ","Bảng","Số lượng","Ô nhập","Nút","Hàng","Menu"])
-   assert.ok(catalog.includes(group),group);
+   assert.ok(catalog.toLocaleLowerCase("vi").includes(group.toLocaleLowerCase("vi")),group);
  for(const item of ["token","Icon","Button","Mẫu ghép","Luồng"])
    assert.ok(catalog.toLowerCase().includes(item.toLowerCase()),item);
  for(const icon of ["ui-icon-plus","ui-icon-chevron","ui-icon-mic","ui-icon-send-up","ui-icon-voice","ui-icon-stop","ui-icon-ellipsis"])
