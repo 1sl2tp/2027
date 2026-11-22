@@ -22,6 +22,8 @@
 
 ## 2. Gap matrix — R12 phải tìm đúng cha, cardinality và CSS owner
 
+**Quy ước lồng nhau:** `CHAT-MESSAGE → CONTENT-PARTS → TABLE-PART → DATA-TABLE → TABLE-COLUMN`: bảng nằm trong tin vẫn dùng **một primitive DATA-TABLE gốc**, không tạo bảng chat riêng. Mẫu khảo sát này **không gửi tin thật**, không gọi backend hay cập nhật dữ liệu người dùng.
+
 **Ký hiệu:** `Có` = bộ mẫu/logic nền đã được thấy trong source 2027; `Một phần` = mới mô phỏng hoặc thiếu vòng đời; `Chưa có` = chưa thấy mẫu chức năng tương ứng trong các file đã xem, không khẳng định mọi file toàn repo đều thiếu.
 
 | Ưu tiên | Thành phần chính | Cây cha → con dự kiến | Hiện trạng 2027 đã kiểm tra | Owner cần giữ | Tiêu chí nghiệm thu giai đoạn sau |
