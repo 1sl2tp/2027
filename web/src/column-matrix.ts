@@ -71,6 +71,12 @@ function buildTable(columns:readonly ColumnSpec[],rows:readonly SampleRow[],stat
   th.setAttribute("aria-sort",!active?"none":state.descending?"descending":"ascending");
   const button=textElement("button","ui-button ui-button--quiet ui-column-sort",col.label);
   button.type="button";
+  const icon=document.createElementNS("http://www.w3.org/2000/svg","svg");
+  icon.classList.add("ui-icon","ui-icon--chevron","ui-column-sort-icon");
+  icon.setAttribute("aria-hidden","true");
+  const use=document.createElementNS("http://www.w3.org/2000/svg","use");
+  use.setAttribute("href","./web/icons.svg#ui-icon-chevron");
+  icon.append(use);button.append(icon);
   button.setAttribute("aria-label","Sắp xếp theo "+col.label+(active?(state.descending?", hiện giảm dần":", hiện tăng dần"):""));
   button.addEventListener("click",()=>{
    if(state.sortKey!==col.key){state.sortKey=col.key;state.descending=false;}
