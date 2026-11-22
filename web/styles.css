@@ -2063,3 +2063,26 @@ body.simple-first .topbar-end{gap:0}
 .simple-multi-usertext{font-size:16px;font-weight:400;line-height:1.6}
 .simple-multi-kbd{width:max-content;max-width:100%;font:500 12px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
  background:#f3f3f3;border:1px solid #ddd;border-bottom-width:2px;padding:4px 7px;border-radius:5px}
+
+/* UI-V23 · These extra sizes come from openai/apps-sdk-ui/src/Typography.mdx,
+   not the proprietary ChatGPT UI snapshot. Avoid tiny sizes for primary content. */
+.simple-multi-micro{font-size:10px;line-height:14px;color:#656565}
+.simple-multi-micro2{font-size:8px;line-height:12px;color:#656565}
+.simple-multi-headingxs{font-size:16px;line-height:24px;font-weight:600}
+.simple-multi-headingxl{font-size:32px;line-height:38px;font-weight:600;letter-spacing:-.02em}
+.simple-multi-heading2xl{font-size:36px;line-height:42px;font-weight:600;letter-spacing:-.025em}
+.simple-multi-medium{font-weight:500}
+.simple-multi-tertiary{font-size:12px;color:#898989}
+.simple-multi-accent{font-size:16px;color:#2c67c5}
+.simple-multi-clamp1,.simple-multi-clamp2,.simple-multi-clamp3,.simple-multi-clamp4{
+ display:-webkit-box;-webkit-box-orient:vertical;
+ overflow:hidden;max-width:min(100%,260px);white-space:normal;overflow-wrap:anywhere;
+ font-size:14px;line-height:21px}
+.simple-multi-clamp1{-webkit-line-clamp:1;line-clamp:1}
+.simple-multi-clamp2{-webkit-line-clamp:2;line-clamp:2}
+.simple-multi-clamp3{-webkit-line-clamp:3;line-clamp:3}
+.simple-multi-clamp4{-webkit-line-clamp:4;line-clamp:4}
+.simple-multi-paragraph{max-width:min(100%,360px);font-size:16px;line-height:26px}
+.simple-multi-pre{font:400 12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;
+ white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f7f7;
+ border:1px solid #ececec;border-radius:6px;padding:9px}

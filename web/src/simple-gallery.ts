@@ -1,4 +1,4 @@
-// V22 — ChatGPT-inspired text catalogue.
+// V23 — Source-grounded ChatGPT typography + OpenAI Apps SDK UI extended scales.
 // Source snapshot: Google Drive ChatGPT.html (22 Nov 2026), --text-* and --text-heading-* tokens.
 // Font family uses system sans; monospace is reserved for code.
 // Styling for composition variants is authored for this demo; it is not vendor CSS.
@@ -22,7 +22,7 @@ type TextTreatment =
  "normal"|"heading"|"subheading"|"body"|"semibold"|"bold"|"italic"|
  "underline"|"strike"|"mixed"|"muted"|"caption"|"link"|"code"|"codeblock"|
  "quote"|"bullets"|"ordered"|"tablehead"|"tablecell"|"money"|"time"|"status"|
- "sidebar"|"composer"|"label"|"usertext"|"kbd";
+ "sidebar"|"composer"|"label"|"usertext"|"kbd"|"micro"|"micro2"|"headingxs"|"headingxl"|"heading2xl"|"medium"|"tertiary"|"accent"|"clamp1"|"clamp2"|"clamp3"|"clamp4"|"paragraph"|"pre";
 interface MultiTextSample {
  id:string;label:string;lines:readonly string[];style:TextTreatment;
 }
@@ -57,7 +57,21 @@ const MULTI_TEXT_SAMPLES:readonly MultiTextSample[]=[
  {id:"MULTI-28",label:"Chữ gợi ý nhập chat",lines:["Hỏi ChatGPT"],style:"composer"},
  {id:"MULTI-29",label:"Nhãn viết hoa",lines:["TỔNG THANH TOÁN"],style:"label"},
  {id:"MULTI-30",label:"Nội dung người gửi",lines:["Mình muốn chọn mẫu này."],style:"usertext"},
- {id:"MULTI-31",label:"Phím tắt",lines:["⌘ K"],style:"kbd"}
+ {id:"MULTI-31",label:"Phím tắt",lines:["⌘ K"],style:"kbd"},
+ {id:"MULTI-32",label:"Chữ rất nhỏ · 10px (Apps SDK)",lines:["Ghi chú kích thước siêu nhỏ"],style:"micro"},
+ {id:"MULTI-33",label:"Chữ siêu nhỏ · 8px (Apps SDK)",lines:["Mẫu kiểm tra độ nhỏ của chữ"],style:"micro2"},
+ {id:"MULTI-34",label:"Heading XS · 16px",lines:["Tiêu đề phụ trong khối"],style:"headingxs"},
+ {id:"MULTI-35",label:"Heading XL · 32px",lines:["Tiêu đề trang"],style:"headingxl"},
+ {id:"MULTI-36",label:"Heading 2XL · 36px",lines:["Tiêu đề lớn hơn"],style:"heading2xl"},
+ {id:"MULTI-37",label:"Chữ vừa · weight 500",lines:["Nhãn danh mục"],style:"medium"},
+ {id:"MULTI-38",label:"Chữ cấp ba · tertiary",lines:["Chi tiết không cần nổi bật"],style:"tertiary"},
+ {id:"MULTI-39",label:"Chữ màu nhấn",lines:["Mở thông tin tham khảo"],style:"accent"},
+ {id:"MULTI-40",label:"Giới hạn 1 dòng · …",lines:["Nội dung rất dài để kiểm tra khi màn hình hẹp hoặc một dòng không đủ để hiển thị hết tên hội thoại và nội dung thông báo"],style:"clamp1"},
+ {id:"MULTI-41",label:"Giới hạn 2 dòng · …",lines:["Đoạn văn dài để kiểm tra hiển thị hai dòng trên màn hình nhỏ, tránh tràn khỏi khung chứa khi văn bản kéo dài hơn giới hạn cho phép"],style:"clamp2"},
+ {id:"MULTI-42",label:"Giới hạn 3 dòng · …",lines:["Đoạn nội dung dài để thử hiển thị ba dòng. Phần chữ không đủ chỗ sẽ được rút gọn bằng dấu ba chấm, nhưng bản gốc vẫn giữ nguyên nội dung. Đây là dữ liệu ví dụ phục vụ kiểm tra giao diện."],style:"clamp3"},
+ {id:"MULTI-43",label:"Giới hạn 4 dòng · …",lines:["Đây là mẫu nội dung rất dài để kiểm tra việc hiển thị tối đa bốn dòng chữ trên điện thoại. Khi đoạn chữ vượt quá không gian cho phép, giao diện có thể rút gọn phần hiển thị. Người dùng có thể mở bản đầy đủ ở nơi phù hợp mà không cần làm sai lệch dữ liệu gốc. Mẫu này không thay thế nội dung thật."],style:"clamp4"},
+ {id:"MULTI-44",label:"Đoạn dài tự xuống dòng",lines:["Đây là đoạn văn dài có nhiều từ và số 123.456.789 để kiểm tra khoảng cách, khả năng xuống dòng, giới hạn chiều ngang và sự dễ đọc khi thiết bị nhỏ hơn."],style:"paragraph"},
+ {id:"MULTI-45",label:"Giữ khoảng trắng và xuống dòng",lines:["Đơn hàng    DH-001","Số lượng   12 hộp","Tổng tiền  125.000 đ"],style:"pre"}
 ];
 function renderTextTreatment(target:HTMLElement,item:MultiTextSample):void {
  target.className="simple-multi-preview simple-multi-"+item.style;
