@@ -26,7 +26,7 @@ const INNER_SPECS:readonly InnerSpec[]=[
 function innerIcon(name:string):SVGSVGElement{
  const ns="http://www.w3.org/2000/svg";
  const svg=document.createElementNS(ns,"svg");
- svg.classList.add("simple-button-inner-icon");svg.setAttribute("viewBox","0 0 24 24");
+ svg.classList.add("ui-icon");if(name==="loader")svg.classList.add("ui-icon--loading");svg.setAttribute("viewBox","0 0 24 24");
  svg.setAttribute("aria-hidden","true");
  const use=document.createElementNS(ns,"use");
  use.setAttribute("href","./web/icons.svg#ui-icon-"+name);
@@ -48,7 +48,8 @@ function innerSlot(node:Node):HTMLSpanElement{
 }
 function previewInner(spec:InnerSpec):HTMLButtonElement{
  const button=document.createElement("button");button.type="button";
- button.className="simple-button-inner-demo simple-button-inner-"+spec.kind;
+ button.className="ui-button ui-button--outline simple-button-inner-demo simple-button-inner-"+spec.kind;
+ if(["icon","letter","number","arrow"].includes(spec.kind))button.classList.add("ui-button--icon","ui-button--square");
  button.setAttribute("aria-label","Xem thử "+spec.name.toLowerCase());
  const group=document.createElement("span");group.className="simple-button-inner-group";
  switch(spec.kind){
@@ -87,10 +88,8 @@ function previewInner(spec:InnerSpec):HTMLButtonElement{
   group.append(icon);break;
  }
  case "loading":{
-  const spinner=document.createElement("span");spinner.className="simple-button-inner-spinner";
-  spinner.setAttribute("aria-hidden","true");
-  group.append(spinner,innerText("Đang tải"));
-  button.disabled=true;button.setAttribute("aria-busy","true");break;
+  group.append(innerIcon("loader"),innerText("Đang tải"));
+  button.disabled=true;button.setAttribute("aria-busy","true");button.setAttribute("aria-disabled","true");break;
  }
  }
  button.append(group);
@@ -116,9 +115,9 @@ export function initSimpleButtonRules():void{
   const detail=document.createElement("span");detail.className="simple-font-meta";detail.textContent=spec.rule;
   content.append(title,stage,detail);
   const pick=document.createElement("button");pick.type="button";
-  pick.className="simple-button-inner-pick";pick.dataset.sampleId=spec.id;
+  pick.className="ui-button ui-button--icon ui-button--round simple-button-inner-pick";pick.dataset.sampleId=spec.id;
   pick.setAttribute("aria-label","Chọn "+spec.name);pick.setAttribute("aria-pressed","false");
-  pick.textContent="✓";
+  pick.append(innerIcon("check"));
   row.append(number,content,pick);list.append(row);
  }
  list.addEventListener("click",event=>{

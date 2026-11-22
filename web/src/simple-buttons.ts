@@ -1,72 +1,72 @@
-// 2027 UI V27 · Read-only button and icon specimen gallery.
-// OpenAI Apps SDK UI Button is the public reference for solid/soft/outline/ghost,
-// pill, uniform icon buttons, disabled/loading and block layouts.
-// Icon SVGs come from the existing 2027 sprite. No backend or message sending.
-type ButtonStyle =
- "solid"|"soft"|"outline"|"ghost"|"pill"|"block"|"icon-start"|"icon-end"|
- "square"|"circle"|"danger"|"disabled"|"loading"|"toggle";
-type IconStyle = "plus"|"minus"|"search"|"close"|"copy"|"edit"|"trash"|"share"|"send-up"|"ellipsis";
-type Specimen = {
- id:string; label:string; kind:"button"|"icon";style:ButtonStyle|IconStyle;
- source:string;caption:string;
-};
+// UI-V30 · Section 6 references the canonical RULE 06–08 Button/Icon primitives.
+// Specimens classify semantic variant, geometry/composition and state separately.
+// No new parallel button tokens or external icon source.
+type ButtonVariant="primary"|"secondary"|"outline"|"quiet"|"danger"|"toggle";
+type ButtonLayout="plain"|"pill"|"block"|"leading"|"trailing"|"square"|"round";
+type ButtonState="idle"|"disabled"|"loading"|"toggle";
+interface Specimen {
+ id:string;label:string;kind:"button"|"icon";
+ variant:ButtonVariant;layout:ButtonLayout;state:ButtonState;
+ source:string;caption:string;icon?:string;
+}
 const SPECIMENS:readonly Specimen[]=[
- {id:"BUTTON-01",label:"Nút chính · solid",kind:"button",style:"solid",source:"Apps SDK · Button",caption:"Chọn"},
- {id:"BUTTON-02",label:"Nút phụ · soft",kind:"button",style:"soft",source:"Apps SDK · Button",caption:"Hủy"},
- {id:"BUTTON-03",label:"Nút có viền · outline",kind:"button",style:"outline",source:"Apps SDK · Button",caption:"Chi tiết"},
- {id:"BUTTON-04",label:"Nút không nền · ghost",kind:"button",style:"ghost",source:"Apps SDK · Button",caption:"Xem thêm"},
- {id:"BUTTON-05",label:"Nút bo viên thuốc",kind:"button",style:"pill",source:"Apps SDK · Button",caption:"Tiếp tục"},
- {id:"BUTTON-06",label:"Nút toàn chiều ngang",kind:"button",style:"block",source:"Apps SDK · Button",caption:"Xác nhận"},
- {id:"BUTTON-07",label:"Icon bên trái chữ",kind:"button",style:"icon-start",source:"Apps SDK · Button",caption:"Lưu"},
- {id:"BUTTON-08",label:"Chữ + icon bên phải",kind:"button",style:"icon-end",source:"Apps SDK · Button",caption:"Tiếp theo"},
- {id:"BUTTON-09",label:"Nút icon hình vuông",kind:"button",style:"square",source:"Apps SDK · Button",caption:""},
- {id:"BUTTON-10",label:"Nút icon hình tròn",kind:"button",style:"circle",source:"Apps SDK · Button",caption:""},
- {id:"BUTTON-11",label:"Nút thao tác nguy hiểm",kind:"button",style:"danger",source:"Apps SDK · Button",caption:"Xóa"},
- {id:"BUTTON-12",label:"Nút bị khóa",kind:"button",style:"disabled",source:"Apps SDK · Button",caption:"Không khả dụng"},
- {id:"BUTTON-13",label:"Nút đang tải",kind:"button",style:"loading",source:"Apps SDK · Button",caption:"Đang xử lý"},
- {id:"BUTTON-14",label:"Nút có trạng thái chọn",kind:"button",style:"toggle",source:"2027 · trạng thái",caption:"Chế độ xem"},
- {id:"ICON-01",label:"Thêm",kind:"icon",style:"plus",source:"2027 · icons.svg",caption:""},
- {id:"ICON-02",label:"Giảm",kind:"icon",style:"minus",source:"2027 · icons.svg",caption:""},
- {id:"ICON-03",label:"Tìm kiếm",kind:"icon",style:"search",source:"2027 · icons.svg",caption:""},
- {id:"ICON-04",label:"Đóng",kind:"icon",style:"close",source:"2027 · icons.svg",caption:""},
- {id:"ICON-05",label:"Sao chép",kind:"icon",style:"copy",source:"2027 · icons.svg",caption:""},
- {id:"ICON-06",label:"Sửa",kind:"icon",style:"edit",source:"2027 · icons.svg",caption:""},
- {id:"ICON-07",label:"Xóa",kind:"icon",style:"trash",source:"2027 · icons.svg",caption:""},
- {id:"ICON-08",label:"Chia sẻ",kind:"icon",style:"share",source:"2027 · icons.svg",caption:""},
- {id:"ICON-09",label:"Gửi",kind:"icon",style:"send-up",source:"2027 · icons.svg",caption:""},
- {id:"ICON-10",label:"Thêm tùy chọn",kind:"icon",style:"ellipsis",source:"2027 · icons.svg",caption:""}
+ {id:"BUTTON-01",label:"Nút chính · primary",kind:"button",variant:"primary",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Chọn"},
+ {id:"BUTTON-02",label:"Nút phụ · secondary",kind:"button",variant:"secondary",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Hủy"},
+ {id:"BUTTON-03",label:"Nút viền · outline",kind:"button",variant:"outline",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Chi tiết"},
+ {id:"BUTTON-04",label:"Nút nhẹ · quiet",kind:"button",variant:"quiet",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Xem thêm"},
+ {id:"BUTTON-05",label:"Nút bo tròn · round",kind:"button",variant:"primary",layout:"pill",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Tiếp tục"},
+ {id:"BUTTON-06",label:"Nút rộng · catalog",kind:"button",variant:"primary",layout:"block",state:"idle",source:"UI 2027 · thư viện nút gốc",caption:"Xác nhận"},
+ {id:"BUTTON-07",label:"Icon trước chữ",kind:"button",variant:"outline",layout:"leading",state:"idle",source:"UI 2027 · ui-icon",caption:"Lưu",icon:"save"},
+ {id:"BUTTON-08",label:"Icon sau chữ",kind:"button",variant:"outline",layout:"trailing",state:"idle",source:"UI 2027 · ui-icon",caption:"Tiếp theo",icon:"arrow-right"},
+ {id:"BUTTON-09",label:"Nút icon vuông",kind:"button",variant:"secondary",layout:"square",state:"idle",source:"UI 2027 · ui-button--square",caption:"",icon:"plus"},
+ {id:"BUTTON-10",label:"Nút icon tròn",kind:"button",variant:"secondary",layout:"round",state:"idle",source:"UI 2027 · ui-button--round",caption:"",icon:"ellipsis"},
+ {id:"BUTTON-11",label:"Nút cảnh báo · danger",kind:"button",variant:"danger",layout:"plain",state:"idle",source:"UI 2027 · ui-button--danger",caption:"Xóa"},
+ {id:"BUTTON-12",label:"Nút vô hiệu · disabled",kind:"button",variant:"secondary",layout:"plain",state:"disabled",source:"UI 2027 · trạng thái",caption:"Không khả dụng"},
+ {id:"BUTTON-13",label:"Nút đang tải · loading",kind:"button",variant:"secondary",layout:"leading",state:"loading",source:"UI 2027 · trạng thái",caption:"Đang xử lý",icon:"loader"},
+ {id:"BUTTON-14",label:"Nút chọn · toggle",kind:"button",variant:"toggle",layout:"plain",state:"toggle",source:"UI 2027 · ui-button--toggle",caption:"Chế độ xem"},
+ {id:"ICON-01",label:"Thêm",kind:"icon",variant:"quiet",layout:"square",state:"idle",source:"2027 · icons.svg",caption:"",icon:"plus"},
+ {id:"ICON-02",label:"Giảm",kind:"icon",variant:"quiet",layout:"square",state:"idle",source:"2027 · icons.svg",caption:"",icon:"minus"},
+ {id:"ICON-03",label:"Tìm kiếm",kind:"icon",variant:"quiet",layout:"square",state:"idle",source:"2027 · icons.svg",caption:"",icon:"search"},
+ {id:"ICON-04",label:"Đóng",kind:"icon",variant:"quiet",layout:"square",state:"idle",source:"2027 · icons.svg",caption:"",icon:"close"},
+ {id:"ICON-05",label:"Sao chép",kind:"icon",variant:"quiet",layout:"square",state:"idle",source:"2027 · icons.svg",caption:"",icon:"copy"},
+ {id:"ICON-06",label:"Sửa",kind:"icon",variant:"quiet",layout:"square",state:"idle",source:"2027 · icons.svg",caption:"",icon:"edit"},
+ {id:"ICON-07",label:"Xóa",kind:"icon",variant:"quiet",layout:"square",state:"idle",source:"2027 · icons.svg",caption:"",icon:"trash"},
+ {id:"ICON-08",label:"Chia sẻ",kind:"icon",variant:"quiet",layout:"square",state:"idle",source:"2027 · icons.svg",caption:"",icon:"share"},
+ {id:"ICON-09",label:"Gửi",kind:"icon",variant:"quiet",layout:"square",state:"idle",source:"2027 · icons.svg",caption:"",icon:"send-up"},
+ {id:"ICON-10",label:"Thêm tùy chọn",kind:"icon",variant:"quiet",layout:"square",state:"idle",source:"2027 · icons.svg",caption:"",icon:"ellipsis"}
 ];
 function spriteIcon(name:string):SVGSVGElement{
  const ns="http://www.w3.org/2000/svg";
- const svg=document.createElementNS(ns,"svg");svg.classList.add("simple-button-icon");
+ const svg=document.createElementNS(ns,"svg");
+ svg.classList.add("ui-icon");
+ if(name==="loader")svg.classList.add("ui-icon--loading");
+ if(name==="plus")svg.classList.add("ui-icon--plus");
  svg.setAttribute("viewBox","0 0 24 24");svg.setAttribute("aria-hidden","true");
  const use=document.createElementNS(ns,"use");
  use.setAttribute("href","./web/icons.svg#ui-icon-"+name);
  svg.append(use);return svg;
 }
-function iconFor(spec:Specimen):string{
- if(spec.kind==="icon")return spec.style;
- if(spec.style==="icon-start")return "save";
- if(spec.style==="icon-end")return "arrow-right";
- if(spec.style==="square")return "plus";
- if(spec.style==="circle")return "ellipsis";
- return "";
-}
 function sampleButton(spec:Specimen):HTMLButtonElement{
  const button=document.createElement("button");button.type="button";
- button.className="simple-button-demo simple-button-demo-"+spec.style;
- button.setAttribute("aria-label",(spec.caption||spec.label)+" · mẫu");
+ button.className="ui-button ui-button--"+spec.variant+" simple-button-demo";
  button.title=spec.label;
- const ico=iconFor(spec);
- if(ico&&spec.style!=="icon-end")button.append(spriteIcon(ico));
- if(spec.caption){const text=document.createElement("span");text.textContent=spec.caption;button.append(text);}
- if(ico&&spec.style==="icon-end")button.append(spriteIcon(ico));
- if(spec.style==="loading"){
-   const spin=document.createElement("span");spin.className="simple-button-spinner";spin.setAttribute("aria-hidden","true");
-   button.prepend(spin);button.disabled=true;button.setAttribute("aria-busy","true");
+ if(spec.kind==="icon"||spec.layout==="square"||spec.layout==="round")
+   button.setAttribute("aria-label",spec.label+" · mẫu");
+ if(spec.layout==="square"||spec.layout==="round"||spec.kind==="icon"){
+   button.classList.add("ui-button--icon");
+   button.classList.add(spec.layout==="round"?"ui-button--round":"ui-button--square");
+ }else if(spec.layout==="pill"){button.classList.add("ui-button--round");}
+ else if(spec.layout==="block"){button.classList.add("ui-button--catalog");}
+ const icon=spec.icon?spriteIcon(spec.icon):null;
+ const caption=document.createElement("span");caption.textContent=spec.caption;
+ if(icon&&spec.layout!=="trailing")button.append(icon);
+ if(spec.caption)button.append(caption);
+ if(icon&&spec.layout==="trailing")button.append(icon);
+ if(spec.state==="loading"){
+   button.disabled=true;button.setAttribute("aria-disabled","true");button.setAttribute("aria-busy","true");
  }
- if(spec.style==="disabled"){button.disabled=true;button.setAttribute("aria-disabled","true");}
- if(spec.style==="toggle")button.setAttribute("aria-pressed","false");
+ if(spec.state==="disabled"){button.disabled=true;button.setAttribute("aria-disabled","true");}
+ if(spec.state==="toggle")button.setAttribute("aria-pressed","false");
  return button;
 }
 export function initSimpleButtons():void{
@@ -92,9 +92,10 @@ export function initSimpleButtons():void{
   const source=document.createElement("span");source.className="simple-font-meta";source.textContent=spec.source;
   middle.append(label,preview,source);
   const choose=document.createElement("button");choose.type="button";
-  choose.className="simple-button-pick";choose.dataset.sampleId=spec.id;
+  choose.className="ui-button ui-button--icon ui-button--round simple-button-pick";
+  choose.dataset.sampleId=spec.id;
   choose.setAttribute("aria-label","Chọn "+spec.label);choose.setAttribute("aria-pressed","false");
-  choose.textContent="✓";
+  const tick=spriteIcon("check");choose.append(tick);
   row.append(num,middle,choose);list.append(row);
  }
  list.addEventListener("click",event=>{
@@ -104,7 +105,7 @@ export function initSimpleButtons():void{
      const row=preview.closest<HTMLElement>(".simple-button-row");
      const spec=SPECIMENS.find(s=>s.id===row?.dataset.sampleId);
      if(!spec)return;
-     if(spec.style==="toggle"){
+     if(spec.state==="toggle"){
        const next=preview.getAttribute("aria-pressed")!=="true";
        preview.setAttribute("aria-pressed",String(next));
        feedback.textContent=next?"Đã chọn thử chế độ xem.":"Đã bỏ chọn thử chế độ xem.";
@@ -122,12 +123,4 @@ export function initSimpleButtons():void{
    }
    chosen.textContent="Đã chọn: "+spec.label;chosen.hidden=false;
  });
- const geometry=document.getElementById("simpleButtonSizeKit");
- geometry?.addEventListener("click",event=>{
-   if(!(event.target instanceof Element))return;
-   const button=event.target.closest<HTMLButtonElement>("[data-geometry-preview]");
-   if(!button)return;
-   feedback.textContent="Đã thử "+button.dataset.geometryPreview+". Không thực hiện thao tác thật.";
- });
-
 }

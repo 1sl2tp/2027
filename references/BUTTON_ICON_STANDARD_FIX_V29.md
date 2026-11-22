@@ -1,5 +1,8 @@
 # 2027 UI-V29 — Sửa chuẩn mục 6 Nút và icon (22/11/2026)
 
+> **Lưu ý lịch sử (V30):** Các tài liệu V27–V29 chỉ ghi nhận quá trình thử. Quy tắc chuẩn tắc là [RULES.md](../RULES.md), đặc biệt RULE 06–08. Bản V29 đã tạo mục 6.1 kích thước và token `--ds-btn-*` song song là sai; V30 bỏ phần đó, trả mục 6.1 về cấu tạo nút, và dùng chung `.ui-button`, `.ui-icon`, `--ui-control-*`. Không lấy tên lớp `simple-button-demo-*` làm chuẩn mới.
+
+
 ## Lỗi gốc và cách khắc phục
 
 1. Hàm `sampleButton()` tạo class `simple-button-<style>`, trong khi bảng CSS chỉ định nghĩa `.simple-button-demo-<style>`. Vì thế biến thể solid, soft, outline, ghost, vuông, tròn, loading, toggle hiển thị sai và dễ bị nhầm là các nút cùng kiểu. **Sửa tại TypeScript tạo class**, không thêm CSS vá.
