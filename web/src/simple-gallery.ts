@@ -82,7 +82,12 @@ export function initSimpleGallery():void{
  const advanced=document.getElementById("simpleAdvancedToggle") as HTMLButtonElement|null;
  if(!root||!theme||!category||!list||!heading||!count||!chosen||!status||!copy||!source||!codeDetails||!advanced)return;
  let active:SampleCategory="text";
- let selected:SimpleSample=catalog.text[0];
+ // Each category keeps its last picked sample while browsing other categories.
+ const selectedByCategory:Record<SampleCategory,SimpleSample>={
+  text:textSamples[0],input:inputSamples[0],button:buttonSamples[0],
+  icon:iconSamples[0],table:tableSamples[0],layout:layoutSamples[0],popup:popupSamples[0]
+ };
+ let selected:SimpleSample=selectedByCategory.text;
  function setAdvanced(open:boolean):void{
   document.body.classList.toggle("simple-first",!open);
   advanced!.textContent=open?"Ẩn thư viện chi tiết":"Mở thư viện nâng cao";
@@ -90,7 +95,12 @@ export function initSimpleGallery():void{
  }
  const hash=window.location.hash;
  if(hash&&hash!=="#simpleKit"&&hash!=="#simple-gallery")setAdvanced(true);
- advanced.addEventListener("click",()=>setAdvanced(document.body.classList.contains("simple-first")));
+ advanced.addEventListener("click",()=>{
+  const opening=document.body.classList.contains("simple-first");
+  setAdvanced(opening);
+  if(opening)document.getElementById("document")?.scrollIntoView({block:"start",behavior:"instant"});
+  else root.scrollIntoView({block:"start",behavior:"instant"});
+ });
  for(const a of Array.from(document.querySelectorAll<HTMLAnchorElement>(".studio-sidebar a[href^='#']"))){
   if(a.getAttribute("href")!=="#simpleKit")a.addEventListener("click",()=>setAdvanced(true));
  }
@@ -112,7 +122,7 @@ export function initSimpleGallery():void{
  function render():void{
   list!.replaceChildren();
   const items=catalog[active];
-  selected=items[0];
+  selected=selectedByCategory[active];
   heading!.textContent=names[active];
   count!.textContent=items.length+" mẫu";
   for(const [i,item] of items.entries()){
@@ -143,7 +153,7 @@ export function initSimpleGallery():void{
   const choose=event.target.closest<HTMLButtonElement>(".simple-row-select");
   if(choose){
    const item=catalog[active].find(x=>x.id===choose.dataset.sampleId);
-   if(item){selected=item;refreshSelection();status.textContent="Đã chọn mẫu "+item.id+".";}
+   if(item){selected=item;selectedByCategory[active]=item;refreshSelection();status.textContent="Đã chọn mẫu "+item.id+". Các nhóm khác vẫn giữ lựa chọn trước đó.";}
    return;
   }
   const demo=event.target.closest<HTMLButtonElement>("[data-simple-demo]");
