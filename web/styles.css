@@ -2641,6 +2641,10 @@ body.simple-first .topbar-end{gap:0}
 .ds-table.ds-table--schema[data-wide="true"] thead th:first-child{
  z-index:2;background:var(--ui-surface)
 }
+/* In grid mode the actual 1px cell border is the only STT separator. */
+.ds-table.ds-table--schema[data-wide="true"][data-borders="grid"] :is(th,td):first-child{
+ box-shadow:none
+}
 /* RULE 09 §9.10: the entire header is the click target, but its label must
    remain one line. Sort icons are mounted only for actively sorted columns. */
 .ds-table.ds-table--schema .ui-column-sort{
