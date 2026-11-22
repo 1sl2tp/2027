@@ -1,4 +1,4 @@
-// UI 2027 V16 · Invoice table visual samples from the shared UI_PATTERNS contract.
+// UI 2027 V17 · Invoice table visual samples from the shared UI_PATTERNS contract.
 // Read-only preview, HTML copy, and browser-only print. No TAPHOA integration.
 import {UI_PATTERNS,type UiPattern} from "./ui-patterns.js";
 export function initInvoiceGallery():void{

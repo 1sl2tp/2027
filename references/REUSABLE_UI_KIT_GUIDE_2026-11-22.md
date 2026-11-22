@@ -4,7 +4,7 @@
 
 ## Mở trực tiếp
 
-- [**Bộ mẫu gốc — Lấy mã**](https://1sl2tp.github.io/2027/#sample-patterns): chọn một trong 32 mẫu thuộc 9 họ, thấy preview và mã HTML tương ứng, sao chép HTML hoặc xuất JSON danh mục.
+- [**Bộ mẫu gốc — Lấy mã**](https://1sl2tp.github.io/2027/#sample-patterns): chọn một trong 35 mẫu thuộc 9 họ, thấy preview và mã HTML tương ứng, sao chép HTML hoặc xuất JSON danh mục.
 - [**Nút & biểu tượng**](https://1sl2tp.github.io/2027/#sample-actions): 88 nút tham chiếu từ nguồn CHAT/TAPHOA, xem tên/selector/nguồn; nhóm nút không đồng nghĩa toàn bộ chức năng runtime.
 - [**Hàng & bố cục**](https://1sl2tp.github.io/2027/#sample-layouts): mẫu thanh thao tác lắp ghép theo Chat / Bán hàng / Công nợ / Đơn hàng.
 - [**Ô nhập & gõ chat**](https://1sl2tp.github.io/2027/#sample-inputs): bốn composer và các input mẫu.
@@ -34,12 +34,12 @@ Một mẫu có `id`, `group`, `title`, `description`, `html` trong `web/src/ui-
 | Nhập liệu | INPUT-01 / INPUT-02 / INPUT-03 | Tìm kiếm, mật khẩu, số tiền |
 | Chat/media | CHAT-01 / CHAT-02 / CHAT-03 / CHAT-04 | Danh bạ, tin, composer, ảnh chờ gửi |
 | Bán hàng | SALE-01 / SALE-02 / SALE-03 | Hàng sản phẩm, bảng đơn, hóa đơn tổng |
-| Hóa đơn & phiếu | INV-00…INV-09 | 4 palette hóa đơn, bảng kẻ, mobile, đơn tạm, đã giao, đối soát, công nợ |
+| Hóa đơn & phiếu | INV-00…INV-12 | 4 palette hóa đơn, bảng kẻ, mobile, đơn tạm, đã giao, đối soát, công nợ; 3 dạng giá trước số lượng |
 | Công việc | WORK-01 / WORK-02 / WORK-03 | Công nợ, kiểm hàng, báo giá |
 | Cài đặt | SETTING-01 | Công tắc với aria-pressed |
 | Popup/trạng thái | OVERLAY-01 / OVERLAY-02 | Xác nhận và thông báo cục bộ |
 
-**Phân biệt nguồn:** 32 mẫu trên là *mã mới của 2027* được thiết kế từ ngữ cảnh CHAT/TAPHOA; không phải 22 component đã được chuyển nguyên code từ app thật. 88 mục nút V14 là **bản đồ tham chiếu theo mã nguồn**, không phải bộ runtime được chuyển sang production. Việc dùng bản thiết kế chỉ là cơ sở để chuẩn hóa qua các PR có kiểm soát.
+**Phân biệt nguồn:** 35 mẫu trên là *mã mới của 2027* được thiết kế từ ngữ cảnh CHAT/TAPHOA; không phải 22 component đã được chuyển nguyên code từ app thật. 88 mục nút V14 là **bản đồ tham chiếu theo mã nguồn**, không phải bộ runtime được chuyển sang production. Việc dùng bản thiết kế chỉ là cơ sở để chuẩn hóa qua các PR có kiểm soát.
 
 ## Cách đưa một mẫu vào app thật
 
@@ -68,3 +68,5 @@ Một mẫu có `id`, `group`, `title`, `description`, `html` trong `web/src/ui-
 - Không dùng bản sao giao diện/screenshot của GitHub, Facebook, ChatGPT hoặc Gemini làm source CSS chính. Đây là **bộ quy ước của 2027**, có nguồn tham khảo rõ ràng.
 
 Nếu cần bổ sung mẫu mới, thêm vào `web/src/ui-patterns.ts` một `id` thuộc nhóm rõ, dùng class chung, bổ sung CSS cấp primitive khi thật sự cần, cập nhật preview + kiểm thử (RULE 08).
+
+**Bổ sung V17:** hóa đơn có thứ tự **STT · TÊN · GIÁ · SL · THÀNH TIỀN** dùng các mã `INV-10`, `INV-11`, `INV-12` tương ứng kẻ ô đen trắng / tối giản / mobile. Tên class `ds-invoice-table--price-first` nằm trong stylesheet gốc, không tạo CSS tách theo ứng dụng. Dạng cũ SL trước giá vẫn giữ để chọn theo nhu cầu.
