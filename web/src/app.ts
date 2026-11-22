@@ -404,4 +404,83 @@ for(const b of Array.from(document.querySelectorAll<HTMLButtonElement>("[data-la
  });
 }
 
+
+// UI-V10 · Browse the existing samples by purpose instead of one long gallery.
+// No component is recreated: grouped sections and all previous demo handlers stay intact.
+type GalleryCategory = "all"|"typography"|"tables"|"quantity"|"inputs"|"actions"|"layouts"|"overlays";
+const galleryCategories:GalleryCategory[]=["all","typography","tables","quantity","inputs","actions","layouts","overlays"];
+const gallerySearch=get<HTMLInputElement>("gallerySearch");
+const gallerySections=Array.from(document.querySelectorAll<HTMLElement>("[data-gallery-category]"));
+const galleryFilterButtons=Array.from(document.querySelectorAll<HTMLButtonElement>("[data-gallery-filter]"));
+let activeGalleryCategory:GalleryCategory="all";
+const normalizeGalleryText=(text:string):string=>text.toLocaleLowerCase("vi")
+ .normalize("NFD").replace(/\p{M}/gu,"").replace(/đ/g,"d").trim();
+function galleryCategoryFromHash():GalleryCategory|null{
+ const hash=window.location.hash.replace(/^#/,"");
+ if(hash==="components")return "all";
+ if(hash==="overlays")return "overlays"; // Maintain old links to the menu example.
+ const key=hash.startsWith("sample-")?hash.slice("sample-".length):"";
+ return galleryCategories.includes(key as GalleryCategory)?key as GalleryCategory:null;
+}
+function updateGallery():void{
+ const search=normalizeGalleryText(gallerySearch.value);
+ let count=0,visibleGroups=0;
+ for(const section of gallerySections){
+  const categoryMatches=activeGalleryCategory==="all"||section.dataset.galleryCategory===activeGalleryCategory;
+  let visible=0;
+  for(const card of Array.from(section.querySelectorAll<HTMLElement>(".studio-component-card"))){
+   const searchable=normalizeGalleryText(card.textContent||"");
+   const matches=categoryMatches&&(!search||searchable.includes(search));
+   card.hidden=!matches;
+   if(matches)visible++;
+  }
+  section.hidden=visible===0;
+  if(visible>0)visibleGroups++;
+  count+=visible;
+ }
+ for(const button of galleryFilterButtons){
+  const on=button.dataset.galleryFilter===activeGalleryCategory;
+  button.classList.toggle("selected",on);
+  button.setAttribute("aria-pressed",String(on));
+ }
+ get<HTMLElement>("galleryCount").textContent=count+" bộ mẫu · "+visibleGroups+" nhóm";
+ get<HTMLElement>("galleryEmpty").hidden=count>0;
+}
+function chooseGallery(category:GalleryCategory,scroll:boolean):void{
+ activeGalleryCategory=category;
+ gallerySearch.value="";
+ updateGallery();
+ if(scroll)get<HTMLElement>("components").scrollIntoView({block:"start",behavior:"smooth"});
+}
+for(const button of galleryFilterButtons){
+ button.addEventListener("click",()=>{
+  const category=button.dataset.galleryFilter as GalleryCategory;
+  if(!galleryCategories.includes(category))return;
+  chooseGallery(category,false);
+  if(window.location.hash!=="#components")
+   get<HTMLElement>("components").scrollIntoView({block:"start",behavior:"smooth"});
+ });
+}
+gallerySearch.addEventListener("input",()=>{
+ activeGalleryCategory="all";updateGallery();
+});
+get<HTMLButtonElement>("galleryClearSearch").addEventListener("click",()=>{
+ gallerySearch.value="";updateGallery();gallerySearch.focus();
+});
+get<HTMLButtonElement>("galleryShowAll").addEventListener("click",()=>chooseGallery("all",true));
+for(const link of Array.from(document.querySelectorAll<HTMLAnchorElement>(".studio-sidebar a[href^='#sample-'], .studio-sidebar a[href='#components']"))){
+ link.addEventListener("click",()=>{
+  const hash=link.getAttribute("href")||"";
+  const category=hash==="#components"?"all":hash.slice("#sample-".length) as GalleryCategory;
+  if(galleryCategories.includes(category))chooseGallery(category,false);
+ });
+}
+window.addEventListener("hashchange",()=>{
+ const category=galleryCategoryFromHash();
+ if(category)chooseGallery(category,false);
+});
+const initialGalleryCategory=galleryCategoryFromHash();
+if(initialGalleryCategory)activeGalleryCategory=initialGalleryCategory;
+updateGallery();
+
 render();
