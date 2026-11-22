@@ -88,5 +88,5 @@ test("V44 source audit distinguishes CHAT live implementation from 2027 preview"
  const module=read("web/src/chat-live-map.ts");
  assert.doesNotMatch(module,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase\.from/i);
  assert.ok(module.includes("document.createElement"));
- assert.ok(module.includes('target="_blank"')===false,"link props are set on DOM nodes, not unsafe innerHTML");
+ assert.doesNotMatch(module,/\.innerHTML\s*=|insertAdjacentHTML|document\.write\s*\(/);
 });

@@ -46,3 +46,5 @@ P0 Platform [không phải DOM con]: keyboard-inset-core + shell-form-viewport-p
 Thực tế `#composerForm` chứa `#composerShell`; `#composerShell` chứa `#editorWrap → #editor`, `#attachmentTray`, `#composerFooter` và reply context. Mẫu V40 `ds-composer` có thể đặt textarea/toolbar trực tiếp bên trong form. V44 giữ nguyên **một** `COMPOSER-INPUT`/`COMPOSER-TOOLBAR` canonical và cho phép physical mount vào `COMPOSER-SURFACE`/`COMPOSER-EDITOR-WRAP` bằng `COMPONENT_PLACEMENTS`, không tạo CSS/Input/Button riêng.
 
 `#composerActionMenu` là **popover sibling** sau `</form>` trong nguồn HTML, nhưng action/visibility thuộc Composer và nút `#composer-plus-btn`. Không nhét popover vào textarea/surface hay tạo root menu thứ hai. Tương tự `#threadScrollControl` mount gần footer nhưng có logical owner MessageList.
+
+**Viewer source:** `app.js` dùng InteractionMode.IMAGE_VIEWER với owner `image-viewer`; quyền zoom, close và focus thuộc overlay này, không thuộc từng tin nhắn.
