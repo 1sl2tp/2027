@@ -475,6 +475,17 @@ Bổ sung **vào RULE 09 đã có**, không tạo bộ CSS bảng khác. Mẫu `
 - **Kiểm thử:** colgroup và 8 trường đúng thứ tự, scope=col, aria-sort, tất cả hàng đủ ô, tiền đúng, chung padding/width. E2/E3 qua CI/Pages; E4/E5 cần ảnh Safari/Chrome 320/360/390px, focus và zoom thực tế.
 
 ---
+### 9.7. V36: Một bảng chính cho 1–20 cột, căn theo TÊN TIÊU ĐỀ
+
+- **Không chia bảng thành ba bộ mẫu:** mục Bảng & dữ liệu có duy nhất một card `#tableColumnMatrixCard`, tiếp tục dùng primitive `ds-table ds-table--schema` trong `web/styles.css`. Các kiểu kẻ ngang/dọc/trắng, nền xen kẽ và thẻ chỉ là lựa chọn hiển thị (mẫu cũ nằm trong `<details>` để tham khảo), không phải các hệ bảng khác nhau.
+- **20 thông tin mẫu:** STT, Tên hàng, Số, Số lượng, Đơn giá, Thành tiền, Mã hàng, ĐVT, Ngày, Giờ, Nhóm, Nhà cung cấp, Giá vốn, Chiết khấu, Thuế %, Còn lại, Trạng thái, Người phụ trách, Cập nhật, Ghi chú. Mặc định mở 6 cột để kiểm trục, chọn 1–20 cột bằng cùng một dropdown. Đây là dữ liệu minh họa, không phải bản ghi bán hàng thật.
+- **Nguồn chuẩn:** mỗi trường có `key`, `label`, `role`, `priority`, `minPx` trong `COLUMN_SCHEMA`; `roleFromHeader()` phân loại theo *tên tiêu đề đã chuẩn hóa dấu tiếng Việt*, không theo thứ tự `nth-child`. Mẫu cho phép thử sửa tên một tiêu đề, cập nhật alignment mà không sửa key/giá trị dữ liệu. Tiêu đề không nhận dạng sẽ dùng `text` căn trái, **không đoán vai trò tiền khi tên không rõ**.
+- **Căn theo role:** `index`, `number`, `quantity`, `code`, `unit`, `date`, `time`, `status` ở giữa; `money`, `percent` phải và `tabular-nums`; `text`, `note` trái, cho xuống dòng. Tên và ghi chú ưu tiên chiều ngang; cột con số có đủ chỗ để không cắt mất giá trị.
+- **Một định nghĩa trục:** `colgroup` sinh từ cùng schema và `minPx`; header cùng body chung `--ds-table-cell-pad-x`, hàng tối thiểu 44px, căn theo `data-col-role`. Ba kiểu viền `grid/rows/plain` và ba mật độ `compact/standard/comfortable` vẫn do chính `ds-table` điều khiển. 10–20 cột dùng cuộn ngang, không ép 20 cột vào 360px, không tự ẩn giá/SL. Chế độ thẻ là lựa chọn phụ.
+- **Nhất quán visual:** cùng một card thật trong nhóm Bảng; số bộ mẫu tổng giảm từ 24 xuống 22 khi gộp ba card thành một. Link `#tableColumnMatrixCard` tiếp tục mở đúng bảng chính; không tạo thêm stylesheet hay rule thay thế R09.
+- **Giới hạn:** bảng chỉ minh họa 4 hàng có 20 trường, thử đổi nhãn không biến đổi dữ liệu hoặc công thức; phần bảng trong CHAT/TAPHOA và hóa đơn INV-xx chưa được đổi. E4/E5 kiểm thử thực tế cuộn 20 cột Safari/Chrome, sticky, thanh cuộn, zoom, người dùng di chuyển bàn phím.
+
+---
 ## RULE 10 — ĐẶT TÊN NÚT THEO ĐÚNG VAI TRÒ, KHÔNG ĐÁNH TRÁO KIỂU VÀ BỐ CỤC
 
 **Mã:** `2027-R10` · **Ngày:** 22/11/2026 (VN) · **Phạm vi:** mục 6 / 6.1 của UI Library Web. **Trạng thái:** E0–E1; E2, E3 và nghiệm thu thiết bị E4/E5 phải xác nhận bằng CI/deploy/bằng chứng riêng.
