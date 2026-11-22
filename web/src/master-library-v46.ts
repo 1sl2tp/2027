@@ -43,13 +43,48 @@ function message(text:string,author="other"):HTMLElement{
  parts.append(mark(make("p","",text),"MESSAGE-TEXT-PART"));item.append(parts);return item;
 }
 function chat():HTMLElement{
- const view=frame("Hội thoại · mẫu 2027");
+ // PA2: one responsive workspace owns directory, conversation and OPTIONAL
+ // context. On mobile these are exclusive views; no second scroll/keyboard owner.
+ const view=frame("Trò chuyện · PA2 thích ứng");
  const screen=mark(make("div","master-v46-screen master-v46-chat"),"CHAT-SCREEN");
+ screen.dataset.mobileView="directory";
+ screen.dataset.contextOpen="false";
+ const directory=mark(make("aside","master-v46-directory"),"CHAT-DIRECTORY");
+ directory.setAttribute("aria-label","Danh bạ mẫu");
+ const dirHeading=make("h3","","Trò chuyện");
+ const tools=mark(make("div","master-v46-directory-tools"),"DIRECTORY-TOOLS");
+ const search=mark(make("input","master-v46-contact-search"),"DIRECTORY-SEARCH");
+ search.type="search";search.placeholder="Tìm khách…";search.setAttribute("aria-label","Tìm khách trong mẫu");
+ tools.append(search);
+ const contacts=mark(make("div","master-v46-contact-list"),"DIRECTORY-LIST");
+ const entries=[
+  {id:"a",name:"Khách mẫu A",preview:"Đã nhận hàng"},
+  {id:"b",name:"Khách mẫu B",preview:"Xin báo giá"},
+  {id:"c",name:"Nhóm KH mẫu",preview:"Thông tin tổng hợp"}
+ ] as const;
+ type ContactKey=typeof entries[number]["id"];
+ let active:ContactKey="a";
+ const samples:Record<ContactKey,{body:string;author:string}[]>={
+  a:[{body:"Có thể cho xem nội dung đơn hôm nay?",author:"other"},{body:"Mình đã gửi thông tin mẫu.",author:"self"}],
+  b:[{body:"Cho mình xin bảng giá tham khảo.",author:"other"}],
+  c:[{body:"Đây là hội thoại nhóm mẫu.",author:"other"}]
+ };
+ const drafts:Record<ContactKey,string>={a:"",b:"",c:""};
+ const rows=new Map<ContactKey,HTMLButtonElement>();
+ const conversation=make("section","master-v46-conversation");
+ conversation.setAttribute("aria-label","Hội thoại mẫu");
+ const head=mark(make("header","master-v46-conversation-head"),"CHAT-REGION-TOP");
+ const back=control("Quay về danh bạ","arrow-left");
+ back.classList.add("master-v46-mobile-back");
+ const identity=make("strong","master-v46-contact-identity",entries[0].name);
+ const contextButton=control("Xem công việc liên quan mẫu","panel-right");
+ contextButton.setAttribute("aria-expanded","false");
+ head.append(back,identity,contextButton);
  const thread=mark(make("div","master-v46-thread"),"CHAT-THREAD");
  const list=mark(make("div","master-v46-messages"),"CHAT-MESSAGE-LIST");
- list.append(message("Một tin nhắn có thể chứa chữ, bảng, ảnh hoặc nhiều phần nội dung."),message("Một chủ sở hữu cho cuộn, trạng thái và hành động.", "self"));
  const composer=mark(make("form","ds-composer master-v46-composer"),"CHAT-COMPOSER");
- const input=mark(make("textarea"),"COMPOSER-INPUT");input.placeholder="Nhập nội dung mẫu…";input.rows=1;
+ const input=mark(make("textarea"),"COMPOSER-INPUT");
+ input.placeholder="Nhập nội dung mẫu…";input.rows=1;
  input.setAttribute("aria-label","Nội dung soạn mẫu");
  const toolbar=mark(make("div","ds-composer-actions master-v46-toolbar"),"COMPOSER-TOOLBAR");
  const attach=control("Mở khay đính kèm mẫu","plus");
@@ -59,14 +94,71 @@ function chat():HTMLElement{
   hint.hidden=!hint.hidden;
   hint.textContent="Khay mẫu: ảnh · tệp (không mở thiết bị hoặc upload).";
  });
+ const renderMessages=()=>{
+  list.replaceChildren(...samples[active].map(entry=>message(entry.body,entry.author)));
+ };
+ const select=(id:ContactKey)=>{
+  drafts[active]=input.value;
+  active=id;
+  for(const [key,row] of rows){const selected=key===id;row.setAttribute("aria-current",selected?"true":"false");}
+  identity.textContent=entries.find(entry=>entry.id===id)!.name;
+  input.value=drafts[id];
+  renderMessages();
+  screen.dataset.mobileView="thread";
+  screen.dataset.contextOpen="false";contextPanel.hidden=true;contextButton.setAttribute("aria-expanded","false");
+ };
+ for(const entry of entries){
+  const row=mark(make("button","master-v46-contact-row"),"DIRECTORY-CONTACT-ROW");
+  row.type="button";row.dataset.contact=entry.id;
+  row.setAttribute("aria-current",String(entry.id===active));
+  const avatar=mark(make("span","master-v46-contact-avatar",entry.name.slice(-1)),"CONTACT-AVATAR");
+  const body=make("span","master-v46-contact-copy");
+  body.append(mark(make("strong","",entry.name),"CONTACT-NAME"),make("small","",entry.preview));
+  row.append(avatar,body);
+  row.addEventListener("click",()=>select(entry.id));
+  contacts.append(row);rows.set(entry.id,row);
+ }
+ search.addEventListener("input",()=>{
+  const query=search.value.trim().toLocaleLowerCase("vi");
+  for(const entry of entries){rows.get(entry.id)!.hidden=!entry.name.toLocaleLowerCase("vi").includes(query);}
+ });
+ directory.append(dirHeading,tools,contacts);
  const onSend=()=>{
   const text=input.value.trim();if(!text)return;
-  list.append(message(text,"self"));input.value="";
+  samples[active].push({body:text.slice(0,500),author:"self"});
+  input.value="";drafts[active]="";renderMessages();
+  list.scrollTop=list.scrollHeight;
  };
+ input.addEventListener("input",()=>{drafts[active]=input.value;});
  send.addEventListener("click",onSend);
  toolbar.append(attach,send);composer.append(input,toolbar,hint);
  composer.addEventListener("submit",event=>{event.preventDefault();onSend();});
- thread.append(list,composer);screen.append(thread);placeScreen(view,screen);return view;
+ thread.append(list,composer);conversation.append(head,thread);
+ const contextPanel=mark(make("aside","master-v46-context"),"CHAT-WORK-REGION");
+ contextPanel.hidden=true;contextPanel.setAttribute("aria-label","Ngữ cảnh công việc mẫu");
+ const contextHead=make("div","master-v46-context-head");
+ const contextTitle=make("strong","","Công việc liên quan");
+ const contextClose=control("Đóng vùng ngữ cảnh","x");
+ contextHead.append(contextTitle,contextClose);
+ contextPanel.append(contextHead,make("p","","Chỉ là vị trí nội dung theo khách đang xem. Không truy cập đơn hàng hoặc dữ liệu thật."));
+ const closeContext=()=>{
+  contextPanel.hidden=true;screen.dataset.contextOpen="false";screen.dataset.mobileView="thread";
+  contextButton.setAttribute("aria-expanded","false");
+ };
+ contextButton.addEventListener("click",()=>{
+  const opening=contextPanel.hidden;
+  contextPanel.hidden=!opening;screen.dataset.contextOpen=String(opening);
+  if(opening)screen.dataset.mobileView="context";
+  else screen.dataset.mobileView="thread";
+  contextButton.setAttribute("aria-expanded",String(opening));
+ });
+ contextClose.addEventListener("click",closeContext);
+ back.addEventListener("click",()=>{
+  closeContext();screen.dataset.mobileView="directory";
+ });
+ renderMessages();
+ screen.append(directory,conversation,contextPanel);
+ placeScreen(view,screen);return view;
 }
 function table(keys:readonly string[],rows:readonly (readonly string[])[]):HTMLElement{
  const outer=make("div","master-v46-scroll-table");
