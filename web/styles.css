@@ -2532,6 +2532,9 @@ body.simple-first .topbar-end{gap:0}
 }
 .ui-column-matrix-toolbar .ui-button{min-height:var(--ui-control-hit)}
 /* UI-V36 · one main table with up to twenty fields, no extra table design system. */
+.ui-column-presets{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:8px 0 4px}
+.ui-column-presets .ui-button{min-height:var(--ui-control-hit);flex:0 0 auto}
+
 .ui-column-role-list{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 11px;min-width:0}
 .ui-column-role-chip{
  display:inline-flex;align-items:center;max-width:100%;min-height:24px;
