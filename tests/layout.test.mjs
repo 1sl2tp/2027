@@ -966,7 +966,7 @@ test("V26 adds 12 usable form input specimens on the simple screen",()=>{
  for(const kind of ["outline","soft","pill","search","clear","invalid","disabled",
   "textarea","money","quantity","composer","select"]){
   assert.ok(specs.some(x=>x[3]===kind),"sample "+kind);
-  assert.ok(css.includes(".simple-field-demo-"+kind),"CSS "+kind);
+  assert.ok(src.includes('"'+kind+'"'),"render "+kind);
  }
  assert.ok(src.includes('source:"SDK · Input"'),"OpenAI Input provenance");
  assert.ok(src.includes('source:"SDK · Textarea"'),"OpenAI Textarea provenance");
@@ -978,9 +978,14 @@ test("V26 adds 12 usable form input specimens on the simple screen",()=>{
  assert.ok(src.includes("Math.max(0,Number(number.value)-1)"),"no negative quantity");
  assert.ok(src.includes("Math.min(999999,Number(number.value)+1)"),"bounded stepper");
  assert.ok(src.includes('area.addEventListener("input"'),"multiline resizing");
- assert.ok(src.includes("Không gửi thật"),"fake composer must never send a message");
+ assert.ok(src.includes("không gửi thật"),"fake composer must never send a message");
  assert.ok(src.includes('row.setAttribute("role","group")'),"no nested interactive elements inside a button");
  assert.ok(src.includes('pick.setAttribute("aria-pressed","false")'),"accessibility");
+ for(const cssKind of [".simple-field-shell-soft",".simple-field-shell-pill",
+  ".simple-field-shell-invalid",".simple-field-shell-disabled",
+  ".simple-field-demo-quantity",".simple-field-demo-composer",".simple-field-money-input"]){
+  assert.ok(css.includes(cssKind),"CSS "+cssKind);
+ }
  assert.ok(css.includes(".simple-field-shell:focus-within"),"focus border");
  assert.ok(css.includes("font:400 16px/24px"),"avoid Safari focus zoom");
  assert.ok(src.includes('list.addEventListener("click"'),"selection listener");
