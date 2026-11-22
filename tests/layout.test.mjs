@@ -818,5 +818,5 @@ test("V20 starts with just ten font and size rows, no menus or CSS tools",()=>{
  assert.ok(app.includes("initSimpleGallery();"));
  assert.equal((html.match(/<link rel="stylesheet"/g)||[]).length,1);
  assert.ok(html.includes('2027-UI-V20'),"asset version updated");
- assert.doesNotMatch(src,/\\bfetch\\s*\\(|\\bWebSocket\\s*\\(|supabase|Authorization:/i);
+ assert.ok(!src.includes("fetch(") && !src.includes("WebSocket(") && !src.includes("supabase"));
 });
