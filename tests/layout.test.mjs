@@ -580,7 +580,7 @@ test("V15 exposes a source-of-truth reusable pattern kit inside the existing UI 
  assert.ok(html.includes('href="#sample-patterns"'));
  assert.ok(html.includes("23 bộ mẫu · 9 nhóm"));
  assert.ok(html.includes("35 mẫu HTML"));
- assert.ok(html.includes("V20</title>"));
+ assert.ok(html.includes("V21</title>"));
  assert.ok(css.includes(".ui-kit-workspace"));
  assert.ok(css.includes(".ui-kit-preview"));
  assert.ok(css.includes(".ui-kit-source"));
