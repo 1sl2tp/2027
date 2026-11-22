@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có ba trang Web:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V13**: một văn bản chỉnh font/nền như trước, bên dưới là **18 bộ mẫu được chia vào 7 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V14**: một văn bản chỉnh font/nền như trước, bên dưới là **21 bộ mẫu được chia vào 7 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
 
@@ -18,6 +18,18 @@
 - Danh mục [**nguồn gốc Drive + mốc phục hồi**](./references/ORIGINAL_UI_SOURCES_AND_BASELINE_2026-11-22.md). Không sao chép trọn CSS/HTML nhúng từ Save Page hoặc thay đổi các tệp nguồn trong Drive.
 
 **Ranh giới:** mẫu UI chỉ chạy tại máy người xem, chưa kết nối CHAT/TAPHOA, không gửi tin nhắn hoặc làm phát sinh khoản thu/đơn hàng thật. Bản V08 đang có ở trang chính được giữ nguyên; V09 là một trang mới.
+
+## Bộ danh mục nút gốc CHAT & TAPHOA (UI-V14)
+
+**Xem trên trang:** [Nút & biểu tượng](https://1sl2tp.github.io/2027/#sample-actions) → chọn bộ **Danh mục nút gốc CHAT & TAPHOA**; [Hàng & bố cục](https://1sl2tp.github.io/2027/#sample-layouts) có bốn thanh nút lắp ghép.
+
+- Đã đọc **44 mục nút CHAT có ID `I01–I44`** từ [thư viện CHAT gốc](https://github.com/1sl2tp/chat/blob/main/ui-library/index.html) và **44 ví dụ nút TAPHOA được chọn lọc** từ các file giao diện thật. Tổng **88 mục tham chiếu**, chia **11 họ** để tìm kiếm; *không tuyên bố đã liệt kê toàn bộ mọi nút trong TAPHOA*.
+- Có bộ lọc **CHAT / TAPHOA / Cả hai**, ô tìm kiếm có/không dấu, lựa chọn từng họ, bảng nút thu gọn/mở rộng; bấm nút sẽ xem tên, primitive, selector và tệp nguồn GitHub.
+- Thêm **ma trận trạng thái** (mặc định, đã chọn, loading, hoàn tất, lỗi, disabled, nguy hiểm, chờ xác nhận); **thanh nút** ghép từ primitive cho CHAT, Bán hàng, Công nợ và Đơn hàng.
+- **Một CSS và một icon registry:** `web/styles.css` sở hữu toàn bộ màu/cỡ chữ/viền của nút, `web/icons.svg` có 51 symbol; `web/src/root-button-data.ts` là bản đồ source, `web/src/root-button-library.ts` chỉ điều khiển lọc và phản hồi mẫu.
+- [**Bảng kiểm kê nguồn + phạm vi**](./references/CHAT_TAPHOA_BUTTON_SOURCE_CATALOG_2026-11-22.md); quy tắc bổ sung nằm trong **RULE 07** ở `RULES.md` (không tạo tệp rules thứ hai).
+
+**An toàn:** các nút CHAT/TAPHOA trong trang thử không liên kết đến API, không gửi tin thật, không thu tiền, không tạo/giao đơn, không gọi điện, không sửa tài khoản. Nút nguy hiểm chỉ minh họa ngoại hình và trạng thái. Việc xem giao diện thật trên mobile/Safari là bước nghiệm thu riêng.
 
 ## Thanh nút sao chép, chia sẻ, tải xuống và Loading (UI-V13)
 
@@ -178,4 +190,4 @@ Yêu cầu JDK 17, Android SDK 35, Gradle 8.11.1. V04 là cập nhật Web Libra
 
 ## Ghi chú thiết kế
 
-[**RULES.md**](./RULES.md) chứa nguyên tắc UI/UX R01–R06. V04 đang minh họa các nguyên tắc đó; không tạo một hệ rule song song. Việc xem/nghiệm thu trên thiết bị iOS/Android thật khác với việc CI compile thành công.
+[**RULES.md**](./RULES.md) chứa nguyên tắc UI/UX R01–R07. V04 đang minh họa các nguyên tắc đó; không tạo một hệ rule song song. Việc xem/nghiệm thu trên thiết bị iOS/Android thật khác với việc CI compile thành công.
