@@ -1,0 +1,40 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+const read=file=>readFileSync(new URL("../"+file,import.meta.url),"utf8");
+test("V34 mounts a ScrollAnchor under the existing text-motion section",()=>{
+ const html=read("index.html"),app=read("web/src/app.ts"),css=read("web/styles.css"),rules=read("RULES.md");
+ assert.ok(html.includes('id="simpleMotion"'));
+ assert.ok(html.includes('id="scrollAnchorLab"'));
+ for(const id of ["scrollAnchorViewport","scrollAnchorJump","scrollAnchorAdd","scrollAnchorStream","scrollAnchorOld","scrollAnchorReset","scrollAnchorStatus"])
+  assert.ok(html.includes('id="'+id+'"'),id);
+ assert.ok(html.includes('role="log" aria-label="Hội thoại mẫu có thể cuộn" aria-live="off"'));
+ assert.ok(app.includes('import { initScrollAnchorLab } from "./scroll-anchor.js";'));
+ assert.ok(app.includes("initScrollAnchorLab();"));
+ assert.ok(css.includes(".ui-scroll-anchor-viewport"));
+ assert.ok(css.includes(".ui-scroll-anchor-jump[hidden]{display:none}"));
+ assert.ok(rules.includes("### 11.6. V34: ScrollAnchor"));
+ assert.ok(html.includes("assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/scroll-anchor.mdx"));
+});
+test("V34 does not steal scroll while reading older messages; jump-back is explicit",()=>{
+ const src=read("web/src/scroll-anchor.ts");
+ assert.ok(src.includes("viewport.scrollHeight-viewport.scrollTop-viewport.clientHeight<=32"));
+ assert.ok(src.includes("pinned=atBottom()"));
+ assert.ok(src.includes("const follow=pinned"));
+ assert.ok(src.includes("if(follow){"));
+ assert.ok(src.includes("viewport.scrollTop=viewport.scrollHeight"));
+ assert.ok(src.includes("unseen++"));
+ assert.ok(src.includes("jump.hidden=pinned||unseen===0"));
+ assert.ok(src.includes("jump.addEventListener(\"click\",jumpToBottom)"));
+ assert.ok(src.includes("viewport.scrollTop=0"));
+ assert.ok(src.includes('status.textContent="Đang xem đoạn đầu.'));
+ assert.ok(src.includes("viewport.addEventListener(\"scroll\",onScroll,{passive:true})"));
+ assert.ok(src.includes("viewport.replaceChildren(...SEED.map(messageItem))"));
+ assert.ok(src.includes("window.clearInterval(streamTimer)"));
+ assert.ok(src.includes('document.addEventListener("visibilitychange"'));
+ assert.ok(src.includes('window.addEventListener("pagehide",cancelStream)'));
+ assert.ok(src.includes("next>=STREAM.length"),"stream has finite chunks");
+ assert.ok(src.includes('"ui-scroll-anchor-message"'));
+ assert.doesNotMatch(src,/\.innerHTML\s*=|insertAdjacentHTML|document\.write\s*\(/);
+ assert.doesNotMatch(src,/\bfetch\s*\(|\bWebSocket\s*\(|\bEventSource\s*\(|\bXMLHttpRequest\b|\bsupabase\b/i);
+});
