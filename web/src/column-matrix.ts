@@ -314,7 +314,7 @@ export function initSimpleTableList():void {
   const label=node("span","simple-font-content");
   const title=node("strong","simple-table-title","Bảng "+count+" cột");
   const description=node("span","simple-font-meta",columns.map(c=>c.label).join(" · "));
-  const marker=node("span","simple-table-chevron","⌄");
+  const marker=node("span","simple-table-chevron");
   marker.setAttribute("aria-hidden","true");
   label.append(title,description);
   summary.append(index,label,marker);
