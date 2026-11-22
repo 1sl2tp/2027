@@ -119,7 +119,7 @@ test("V40 keeps hierarchy display in existing simple section 5 with traceable so
  assert.ok(rules.includes("## RULE 12 — XÁC ĐỊNH CHA"));
  for(const source of ["assistant-ui/assistant-ui","vercel/ai-elements","openai/apps-sdk-ui","mrigankad/Lumi-UI"])
   assert.ok(read("references/GITHUB_COMPONENT_HIERARCHY_AUDIT_V40.md").includes(source));
- assert.ok(html.includes('data-ui-version="2027-UI-V43"'));
- assert.ok(html.includes('src="./web/dist-v43/app.js"'));
- assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v43"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V44"'));
+ assert.ok(html.includes('src="./web/dist-v44/app.js"'));
+ assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v44"));
 });

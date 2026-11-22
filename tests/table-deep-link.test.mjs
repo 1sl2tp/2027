@@ -6,11 +6,11 @@ const read=p=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
 
 test("V40 version badge and GitHub Pages module graph agree",()=>{
  const html=read("index.html"),workflow=read(".github/workflows/pages.yml");
- assert.ok(html.includes('<span class="version">V43</span>'));
- assert.ok(html.includes('data-ui-version="2027-UI-V43"'));
- assert.ok(html.includes('./web/styles.css?v=2027-UI-V43'));
- assert.ok(html.includes('src="./web/dist-v43/app.js"'));
- assert.ok(workflow.includes('cp -R web/dist _site/web/dist-v43'));
+ assert.ok(html.includes('<span class="version">V44</span>'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V44"'));
+ assert.ok(html.includes('./web/styles.css?v=2027-UI-V44'));
+ assert.ok(html.includes('src="./web/dist-v44/app.js"'));
+ assert.ok(workflow.includes('cp -R web/dist _site/web/dist-v44'));
 });
 
 test("V40 moves table after 7 as section 8, keeps fonts section 1 clean",()=>{

@@ -36,7 +36,8 @@ test("V41: shared DATA-TABLE may have two hosts but remains ONE definition",asyn
  assert.equal(getComponentContract("DATA-TABLE").parent,"CHAT-SCREEN");
  assert.deepEqual(getAllowedComponentParents("DATA-TABLE"),["CHAT-SCREEN","MESSAGE-TABLE-PART"]);
  assert.deepEqual(auditComponentPlacements(),[]);
- assert.equal(COMPONENT_PLACEMENTS.length,1);
+ assert.equal(COMPONENT_PLACEMENTS.length,2);
+ assert.ok(COMPONENT_PLACEMENTS.some(p=>p.id==="thread-search-input"&&p.child==="SEARCH-FIELD"));
  const base=COMPONENT_PLACEMENTS[0];
  assert.equal(base.cardinality,"one");
  assert.ok(auditComponentPlacements(COMPONENT_CONTRACTS,[base,base]).some(x=>x.includes("Trùng placement")));
@@ -61,8 +62,8 @@ test("V41: main message sample uses COLUMN_SCHEMA, ds-table, and the existing ui
  assert.ok(html.includes('id="messageV41Preview"'));
  assert.ok(html.includes('id="simpleFrames"'));
  assert.equal((html.match(/data-message-v41-variant=/g)||[]).length,3);
- assert.ok(html.includes('data-ui-version="2027-UI-V43"'));
- assert.ok(html.includes('src="./web/dist-v43/app.js"'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V44"'));
+ assert.ok(html.includes('src="./web/dist-v44/app.js"'));
 });
 
 test("V41: source has one owner for message composition, no duplicate Button or Table CSS",()=>{
@@ -75,6 +76,6 @@ test("V41: source has one owner for message composition, no duplicate Button or 
  assert.doesNotMatch(added,/\.ui-button\s*\{|\.ds-table\s*\{/);
  assert.ok(app.includes('import { initMessagePartsGallery } from "./message-parts.js";'));
  assert.ok(app.includes("initMessagePartsGallery();"));
- assert.ok(pages.includes("cp -R web/dist _site/web/dist-v43"));
+ assert.ok(pages.includes("cp -R web/dist _site/web/dist-v44"));
  assert.ok(rules.includes("## RULE 12 — XÁC ĐỊNH CHA"));
 });
