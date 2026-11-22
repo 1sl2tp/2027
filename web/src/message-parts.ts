@@ -36,6 +36,7 @@ function tablePart():HTMLElement{
  const columns=tableColumns.map(key=>COLUMN_SCHEMA.find(col=>col.key===key))
   .filter((column):column is ColumnSpec=>Boolean(column));
  if(columns.length!==3)throw new Error("Bảng V41 không tìm thấy cột trong COLUMN_SCHEMA");
+ table.style.minWidth=columns.reduce((sum,col)=>sum+col.minPx,0)+"px";
  const thead=element("thead"),head=element("tr");
  for(const col of columns){
   const th=element("th","",col.label);
