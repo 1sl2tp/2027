@@ -11,6 +11,12 @@
 
 
 
+## Kiểm kê GitHub mở rộng — V41 nghiên cứu (giao diện vẫn V40)
+
+**[Xem báo cáo phân loại những mẫu còn thiếu](./references/GITHUB_UI_UX_COMPONENT_GAPS_V41.md)**: 11 nhóm nguồn/khả năng bổ sung gồm TanStack Virtual Chat Guide, React Virtuoso, assistant-ui MessageParts/Actions/DraftRestore/ConversationSearch/ImageGallery, Radix/Floating UI, react-resizable-panels, cmdk và Motion/AutoAnimate.
+
+Báo cáo **không biến mỗi nguồn thành một nút hoặc mẫu độc lập**: từng khả năng được đưa vào cha phù hợp (Thread, Message, Composer, Overlay, Workspace) và phân loại `Có`/`Một phần`/`Chưa thấy` để tránh trùng. Ưu tiên đầu tiên là Message parts + action bar thuộc đúng tin và viewport prepend/append không nhảy. Ghi rõ `@virtuoso.dev/message-list` là gói **thương mại**, không được xem là MIT như core. Đã thêm quy trình chọn nguồn vào **RULE 12 §12.5**; chỉ cập nhật tài liệu, không cài dependency, không đổi giao diện và **không tăng UI-V40 thành UI-V41**.
+
 ## RULE 12 — Phân cấp cha–con trước khi thêm/sửa UI (UI-V40)
 
 **[Mở mục 5 · Xem Composer và cấu trúc cha–con](https://1sl2tp.github.io/2027/#simpleFields)**. Mục 5.1 có cây phân loại có thể mở/thu gọn; composer `FIELD-11` đã sử dụng `ds-composer` (cha), `textarea` và `ds-composer-actions` (con), `ui-button` (nút gốc), `ui-icon` (icon con của nút). Không còn nút `+`/`↑` tự tạo và CSS nút riêng trong ví dụ này.

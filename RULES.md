@@ -674,3 +674,14 @@ Mẫu `FIELD-11` của mục 5 chỉ là **vị trí để xem** Composer, **kh�
 ### 12.4. Không nhận là đã xử lý hết toàn bộ dự án
 
 Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Quantity trong thư viện; registry cũng lập cây cho Thread/Message/Table để đối chiếu kiến trúc. **Chưa tuyên bố rằng 100% DOM hiện hữu của các màn/chat thật được kiểm định.** Phạm vi tiếp theo: lần lượt kiểm toán `data-ui-component` tại các mẫu message, attachment, table, popup và vùng cuộn, rồi áp dụng cho CHAT/sản phẩm thực sau khi rà soát repo và bằng chứng thiết bị.
+
+### 12.5. Kiểm kê nguồn V41 — thư viện hỗ trợ không đồng nghĩa với component độc lập
+
+**Chi tiết và các nguồn GitHub đã kiểm tra:** [GITHUB_UI_UX_COMPONENT_GAPS_V41.md](references/GITHUB_UI_UX_COMPONENT_GAPS_V41.md). Đây là **danh sách ứng viên**, chưa phải các feature đã cài. Giao diện public vẫn V40.
+
+1. **Có thể là utility, không phải node:** TanStack Virtual là logic `MessageList` quản lý cuộn; Floating UI là định vị `OverlayContent`; Motion/AutoAnimate là hiệu ứng chuyển trạng thái của cha. **Không lập hàng nút hoặc block độc lập cho utility.**
+2. **Có thể là composition trong cha:** MessageParts (text/media/table/file), MessageActionBar (thuộc mỗi Message), ComposerDraft/Queue (thuộc một Thread/Composer), ThreadSearch (thuộc đúng thread), CommandPopover (thuộc Composer), PanelGroup (thuộc Workspace).
+3. **Bắt buộc kiểm giấy phép theo package cụ thể:** `react-virtuoso` core có nguồn MIT nhưng `@virtuoso.dev/message-list` **thương mại**, đòi giấy phép production. Không cài nó theo suy diễn “repo MIT”. Vaul hiện mô tả **unmaintained**, không chọn làm dependency mặc định.
+4. **Khi tiếp tục triển khai:** ưu tiên (A) `CHAT-MESSAGE → CONTENT-PARTS [0..n] + MESSAGE-ACTIONS`, (B) `MESSAGE-LIST` neo theo message ID khi prepend/append và item height đổi, (C) overlay focus/keyboard/portal, (D) workspace 3 panel; sau đó mới draft/command/lightbox/motion. Mỗi phần mở rộng đúng `COMPONENT_CONTRACTS` và có E0–E5.
+5. **Không nhân bản bản mẫu đã có:** R11 đã có skeleton/caret/streaming và ScrollAnchor, R09 có bảng 20 cột, R12 đã có Composer cha. Chỉ thêm hành vi/slot còn thiếu, không thêm CSS owner hoặc rule khác chỉ vì nguồn bên ngoài có mẫu.
+
