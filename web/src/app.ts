@@ -414,7 +414,7 @@ const gallerySections=Array.from(document.querySelectorAll<HTMLElement>("[data-g
 const galleryFilterButtons=Array.from(document.querySelectorAll<HTMLButtonElement>("[data-gallery-filter]"));
 let activeGalleryCategory:GalleryCategory="all";
 const normalizeGalleryText=(text:string):string=>text.toLocaleLowerCase("vi")
- .normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/đ/g,"d").trim();
+ .normalize("NFD").replace(/\p{M}/gu,"").replace(/đ/g,"d").trim();
 function galleryCategoryFromHash():GalleryCategory|null{
  const hash=window.location.hash.replace(/^#/,"");
  if(hash==="components")return "all";
