@@ -13,6 +13,7 @@ import { initInvoiceGallery } from "./invoice-gallery.js";
 import { initSimpleGallery } from "./simple-gallery.js";
 import { initSimpleFields } from "./simple-fields.js";
 import { initSimpleButtons } from "./simple-buttons.js";
+import { initSimpleButtonRules } from "./simple-button-rules.js";
 
 type BlockId="title"|"body"|"section"|"description"|"list"|"table"|"number"|"money"|"note"|"caption";
 type SelectId=BlockId|"all";
@@ -498,6 +499,7 @@ if(initialGalleryCategory)activeGalleryCategory=initialGalleryCategory;
 initSimpleGallery();
 initSimpleFields();
 initSimpleButtons();
+initSimpleButtonRules();
 initPatternKit();
 initInvoiceGallery();
 initRootButtonCatalog(); // Build the source catalog before text-search discovers gallery content.
