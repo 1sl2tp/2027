@@ -5,14 +5,14 @@ const read = (file) => readFileSync(new URL("../"+file, import.meta.url),"utf8")
 
 test("V08 retains one interactive ChatGPT-like document and shared CSS",()=>{
   const html=read("index.html");
-  assert.match(html,/data-ui-version="2027-UI-V14"/);
+  assert.match(html,/data-ui-version="2027-UI-V15"/);
   assert.match(html,/<h1>Chỉnh ngay trên một văn bản mẫu<\/h1>/);
   for(const id of ["document","controls","components","overlays","demoCanvas","fontSelect","sizeRange","sizeOutput","weightOutput","leadingRange","trackingRange","cssPreview","resetButton","copyButton"])
     assert.ok(html.includes('id="'+id+'"'),id);
   for(const block of ["title","body","section","description","list","table","number","money","note","caption"])
     assert.ok(html.includes('data-block="'+block+'"'),block);
-  assert.ok(html.includes("./web/styles.css?v=2027-UI-V14"));
-  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V14"));
+  assert.ok(html.includes("./web/styles.css?v=2027-UI-V15"));
+  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V15"));
   assert.doesNotMatch(html,/<script[^>]+src="https?:\/\//);
 });
 
@@ -51,8 +51,8 @@ test("Pages still builds the exact versioned assets shipped in HTML",()=>{
   const html=read("index.html");
   const config=JSON.parse(read("tsconfig.json"));
   const out=config.compilerOptions.outDir.replace(/^\.\//,"").replace(/\/$/,"");
-  assert.ok(html.includes("web/styles.css?v=2027-UI-V14"));
-  assert.ok(html.includes(out+"/app.js?v=2027-UI-V14"));
+  assert.ok(html.includes("web/styles.css?v=2027-UI-V15"));
+  assert.ok(html.includes(out+"/app.js?v=2027-UI-V15"));
   const workflow=read(".github/workflows/pages.yml");
   assert.ok(workflow.includes("npm run verify"));
   assert.ok(workflow.includes("cp -R "+out+" _site/web/"));
@@ -151,7 +151,7 @@ test("V08 keeps the library font/color and three-flow screens on one CSS file",(
   const index=read("index.html"),flows=read("flows.html"),css=read("web/styles.css");
   assert.ok(index.includes('href="./flows.html"'));
   assert.ok(flows.includes('./web/styles.css?v=2027-UI-V04'));
-  assert.ok(index.includes('./web/styles.css?v=2027-UI-V14'));
+  assert.ok(index.includes('./web/styles.css?v=2027-UI-V15'));
   assert.equal((index.match(/<link rel="stylesheet"/g)||[]).length,1);
   assert.equal((flows.match(/<link rel="stylesheet"/g)||[]).length,1);
   assert.ok(css.includes(".flow-app-shell"));
@@ -192,7 +192,7 @@ test("V07 five independent quantity variants, six inputs, line clamps and compos
 test("V08 gives grouped quantity and text inputs a single outer focus ring",()=>{
   const css=read("web/styles.css");
   const html=read("index.html");
-  assert.match(html,/data-ui-version="2027-UI-V14"/);
+  assert.match(html,/data-ui-version="2027-UI-V15"/);
   for(const grouped of [".studio-qty",".qty-joined",".qty-pill",".qty-inline",".input-variant-shell",".studio-search-field"])
     assert.ok(css.includes(grouped),grouped);
   assert.ok(css.includes(":focus-within"));
@@ -266,7 +266,7 @@ test("V09 base template ships four source-inspired modes on one CSS",()=>{
 
 test("V09 Pages bundles base.html and TS output without replacing original pages",()=>{
   const index=read("index.html"),flows=read("flows.html"),base=read("base.html");
-  assert.ok(index.includes('data-ui-version="2027-UI-V14"'));
+  assert.ok(index.includes('data-ui-version="2027-UI-V15"'));
   assert.ok(flows.includes('data-ui-version="2027-UI-V04"'));
   assert.ok(index.includes('href="./base.html"'));
   assert.ok(base.includes("Mẫu gốc 2027"));
@@ -278,11 +278,11 @@ test("V09 Pages bundles base.html and TS output without replacing original pages
   assert.ok(yaml.includes("npm run verify"));
 });
 
-test("V14 categorizes 21 component sets into seven clear groups",()=>{
+test("V15 categorizes 22 component sets into eight clear groups",()=>{
   const html=read("index.html");
   const css=read("web/styles.css");
-  const expected={typography:1,tables:2,quantity:2,inputs:4,actions:6,layouts:4,overlays:2};
-  assert.match(html,/data-ui-version="2027-UI-V14"/);
+  const expected={patterns:1,typography:1,tables:2,quantity:2,inputs:4,actions:6,layouts:4,overlays:2};
+  assert.match(html,/data-ui-version="2027-UI-V15"/);
   assert.ok(html.includes("Chọn loại mẫu cần xem"));
   assert.ok(html.includes('id="componentTheme"'));
   for(const [category,count] of Object.entries(expected)){
@@ -295,7 +295,7 @@ test("V14 categorizes 21 component sets into seven clear groups",()=>{
     const slice=html.slice(a,z<0?html.indexOf('  </div>\n  <div class="gallery-empty"',a):z);
     assert.equal((slice.match(/class="studio-component-card/g)||[]).length,count,category);
   }
-  assert.equal((html.match(/class="studio-component-card/g)||[]).length,21);
+  assert.equal((html.match(/class="studio-component-card/g)||[]).length,22);
   assert.ok(css.includes(".gallery-filter-nav"));
   assert.ok(css.includes(".gallery-category-heading"));
   assert.ok(css.includes(".gallery-browser"));
@@ -322,7 +322,7 @@ test("V12 searches and filters the same DOM without altering component event bin
 
 test("V12 keeps four distinct composers inside the existing input gallery",()=>{
  const html=read("index.html"),css=read("web/styles.css");
- assert.match(html,/data-ui-version="2027-UI-V14"/);
+ assert.match(html,/data-ui-version="2027-UI-V15"/);
  const inputs=html.slice(html.indexOf('id="sample-inputs"'),html.indexOf('id="sample-actions"'));
  assert.ok(inputs.includes('id="composerGalleryTitle"'));
  assert.ok(inputs.includes("Bốn trạng thái ô gõ chat"));
@@ -459,7 +459,7 @@ test("V12 library all uses the single external SVG registry and no old button cl
 test("V13 catalogs subtle copy, share, download, loading and feedback buttons",()=>{
  const html=read("index.html"),css=read("web/styles.css"),svg=read("web/icons.svg");
  const actions=html.slice(html.indexOf('id="sample-actions"'),html.indexOf('id="sample-layouts"'));
- assert.ok(html.includes('data-ui-version="2027-UI-V14"'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V15"'));
  assert.ok(actions.includes('data-ui-library="message-actions"'));
  assert.ok(actions.includes('id="messageActionsTitle"'));
  for(const action of ["copy","like","dislike","speak","share","more","download","load"])
@@ -471,7 +471,7 @@ test("V13 catalogs subtle copy, share, download, loading and feedback buttons",(
   ".ui-message-action-grid",".ui-message-layout-demo"])
    assert.ok(css.includes(marker),marker);
  assert.ok(css.includes("@media(prefers-reduced-motion:reduce)"));
- assert.equal((html.match(/class="studio-component-card/g)||[]).length,21);
+ assert.equal((html.match(/class="studio-component-card/g)||[]).length,22);
  assert.equal((html.match(/<link rel="stylesheet"/g)||[]).length,1);
 });
 
@@ -539,7 +539,7 @@ test("V14 root button gallery filters by CHAT/TAPHOA and 11 functional families"
    ".ui-root-button-item",".ui-root-detail",".ui-root-search-row"])
    assert.ok(css.includes(selector),selector);
  assert.ok(read("web/src/app.ts").includes("initRootButtonCatalog();"));
- assert.equal((html.match(/class="studio-component-card/g)||[]).length,21);
+ assert.equal((html.match(/class="studio-component-card/g)||[]).length,22);
 });
 
 test("V14 one registry owns icons used by all root button specs",()=>{
@@ -566,4 +566,74 @@ test("V14 shared state and composite buttons cannot trigger real transactions",(
  for(const term of ["window.setTimeout","aria-busy","selectedId","dataset.rootCombo"])
    assert.ok(script.includes(term),term);
  assert.doesNotMatch(script,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:|getUserMedia\s*\(/i);
+});
+
+test("V15 exposes a source-of-truth reusable pattern kit inside the existing UI gallery",()=>{
+ const html=read("index.html");
+ const css=read("web/styles.css");
+ for(const id of ["sample-patterns","patternKit","kitTitle","kitFamilyTabs","kitSearch","kitCount","kitItems",
+    "kitPreview","kitSource","kitCopy","kitCopySetup","kitExportCatalog","kitReset","kitFeedback"]){
+   assert.ok(html.includes('id="'+id+'"'),id);
+ }
+ assert.ok(html.includes('data-gallery-category="patterns"'));
+ assert.ok(html.includes('data-gallery-filter="patterns"'));
+ assert.ok(html.includes('href="#sample-patterns"'));
+ assert.ok(html.includes("22 bộ mẫu · 8 nhóm"));
+ assert.ok(html.includes("22 mẫu HTML"));
+ assert.ok(html.includes("V15</title>"));
+ assert.ok(css.includes(".ui-kit-workspace"));
+ assert.ok(css.includes(".ui-kit-preview"));
+ assert.ok(css.includes(".ui-kit-source"));
+ assert.equal((html.match(/<link rel="stylesheet"/g)||[]).length,1);
+});
+
+test("V15 offers 22 unique portable HTML patterns with eight functional groups",()=>{
+ const src=read("web/src/ui-patterns.ts"),iconRegistry=read("web/icons.svg");
+ const groups=JSON.parse(src.match(/export const UI_PATTERN_GROUPS:UiPatternGroup\[\]=(\[[\s\S]*?\]);/)[1]);
+ const examples=JSON.parse(src.match(/export const UI_PATTERNS:UiPattern\[\]=(\[[\s\S]*?\]);/)[1]);
+ assert.equal(groups.length,8);
+ assert.equal(examples.length,22);
+ assert.equal(new Set(examples.map(x=>x.id)).size,22);
+ const groupIds=groups.map(x=>x.id);
+ assert.equal(new Set(groupIds).size,8);
+ assert.ok(examples.every(x=>groupIds.includes(x.group)&&x.title&&x.description&&x.html));
+ for(const entry of examples){
+   assert.ok(!/on(click|submit|load|error)\s*=/i.test(entry.html),entry.id);
+   assert.ok(!/<script\b/i.test(entry.html),entry.id);
+   assert.ok(!/https?:\/\//i.test(entry.html),entry.id);
+   const icons=[...entry.html.matchAll(/\.\/web\/icons\.svg#ui-icon-([\w-]+)/g)].map(m=>m[1]);
+   for(const icon of icons)assert.ok(iconRegistry.includes('id="ui-icon-'+icon+'"'),entry.id+": "+icon);
+ }
+ for(const required of ["TEXT-01","BTN-03","INPUT-02","CHAT-03","SALE-02","WORK-01","SETTING-01","OVERLAY-02"])
+   assert.ok(examples.some(x=>x.id===required),required);
+ assert.ok(examples.every(x=>!/(?:Auth|supabase|Authorization:|fetch\()/i.test(x.html)));
+});
+
+test("V15 pattern kit has local-only interaction and safe copy/download controls",()=>{
+ const ts=read("web/src/pattern-kit.ts"),app=read("web/src/app.ts");
+ assert.ok(app.includes('from "./pattern-kit.js"'));
+ assert.ok(app.includes("initPatternKit();"));
+ for(const marker of ["UI_PATTERNS","UI_PATTERN_GROUPS","navigator.clipboard","kitSource","kitCopy","kitCopySetup",
+  "kitExportCatalog","kitFamilyTabs","kitSearch","Blob","URL.createObjectURL","URL.revokeObjectURL",
+  "data-kit-stepper","data-kit-segment","data-kit-password-toggle","data-kit-switch","data-kit-action",
+  "aria-pressed","2027-ui-pattern-catalog-v15.json"]){
+   assert.ok(ts.includes(marker),marker);
+ }
+ assert.doesNotMatch(ts,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:|getUserMedia\s*\(/i);
+ assert.ok(ts.includes("sourceInput.select()"));
+});
+
+test("V15 unified CSS primitives keep inputs, controls and workflow previews under one token owner",()=>{
+ const css=read("web/styles.css");
+ for(const token of ["--ds-control-min:44px","--ds-body-size:14px","--ds-focus:",
+  ".ds-field-shell:focus-within",".ds-qty:focus-within",".ds-qty input:focus-visible",
+  ".ds-composer:focus-within",".ds-contact",".ds-table",".ds-summary",".ds-switch",
+  ".ds-confirm",".ds-toast",".ds-product-row",".ui-kit-index"]){
+  assert.ok(css.includes(token),token);
+ }
+ assert.ok(css.includes("@media(max-width:760px)"));
+ assert.ok(css.includes("@media(prefers-reduced-motion:reduce)"));
+ const rules=read("RULES.md");
+ assert.ok(rules.includes("## RULE 08"));
+ assert.ok(rules.includes("web/src/ui-patterns.ts"));
 });
