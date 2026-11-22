@@ -22,3 +22,5 @@ Four interactive tabs with original sample data: Chat, Sales, Work, Reports. All
 
 ## Public design research (reference only)
 [assistant-ui](https://github.com/assistant-ui/assistant-ui), [React Aria](https://github.com/adobe/react-spectrum), [Radix](https://github.com/radix-ui/primitives), [shadcn/ui](https://github.com/shadcn-ui/ui), [OpenAI Apps SDK UI](https://github.com/openai/apps-sdk-ui), [Lucide](https://github.com/lucide-icons/lucide).
+
+**Build exclusion:** `root-button-data.ts`, `root-button-library.ts`, `chat-live-map.ts` are explicitly excluded by `tsconfig.json` from the Web bundle; no legacy UI code or CSS is referenced by the new V46 master specimen. Legacy CSS selectors may remain in historical stylesheet until separate stylesheet cleanup, but they are not used by V46 specimen DOM.

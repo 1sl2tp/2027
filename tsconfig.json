@@ -2,12 +2,22 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ES2022",
-    "lib": ["DOM", "ES2022"],
+    "lib": [
+      "DOM",
+      "ES2022"
+    ],
     "rootDir": "./web/src",
     "outDir": "./web/dist",
     "strict": true,
     "noEmitOnError": true,
     "skipLibCheck": true
   },
-  "include": ["web/src/**/*.ts"]
+  "include": [
+    "web/src/**/*.ts"
+  ],
+  "exclude": [
+    "web/src/root-button-data.ts",
+    "web/src/root-button-library.ts",
+    "web/src/chat-live-map.ts"
+  ]
 }

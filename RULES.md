@@ -753,3 +753,6 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 
 
 **V46 runtime isolation:** `root-button-library.ts`, `root-button-data.ts` and `chat-live-map.ts` are archived historical references, never imported/mounted by 2027. Newly rendered buttons come exclusively from `ui-button` (2027), placed by the ComposerToolbar/QuantityStepper owner contracts.
+
+
+**V46 build isolation:** `tsconfig.json.exclude` loại bỏ ba module crosswalk cũ khỏi `web/dist` và GitHub Pages. Chúng nằm trong Git repository chỉ để lưu lịch sử, không được đóng gói vào bản sản phẩm UI 2027.

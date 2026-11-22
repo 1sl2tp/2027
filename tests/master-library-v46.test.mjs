@@ -47,6 +47,11 @@ test("V46 master renders 4 original screen templates using one set of 2027 primi
  assert.doesNotMatch(src,/\.innerHTML\s*=|insertAdjacentHTML|document\.write\s*\(/);
  assert.doesNotMatch(src,/\bfetch\s*\(|WebSocket|XMLHttpRequest|supabase|sendMessage|api\.github\.com/i);
  assert.ok(app.includes("initMasterLibraryV46();"));
+ assert.ok(src.includes('svg.setAttribute("data-ui-component","UI-ICON")'));
+ const config=JSON.parse(read("tsconfig.json"));
+ for(const filename of ["web/src/root-button-data.ts","web/src/root-button-library.ts","web/src/chat-live-map.ts"])
+  assert.ok(config.exclude.includes(filename),filename);
+
 });
 test("V46 only renders new parent system; old app inventories are historical evidence",()=>{
  const html=read("index.html"),app=read("web/src/app.ts"),rules=read("RULES.md");

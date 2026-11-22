@@ -21,7 +21,8 @@ function mark<T extends HTMLElement>(node:T,id:string):T{node.dataset.uiComponen
 function control(title:string,icon:string,variant="secondary"):HTMLButtonElement{
  const node=mark(make("button","ui-button ui-button--"+variant),"UI-BUTTON");
  node.type="button";node.title=title;node.setAttribute("aria-label",title);
- const glyph=make("span");glyph.append(iconNode(icon));node.append(glyph);return node;
+ const glyph=make("span");const svg=iconNode(icon);
+ svg.setAttribute("data-ui-component","UI-ICON");glyph.append(svg);node.append(glyph);return node;
 }
 function frame(title:string):HTMLElement{
  const shell=mark(make("section","master-v46-frame"),"UI-SHELL");
