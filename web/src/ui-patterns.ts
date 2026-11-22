@@ -1,4 +1,4 @@
-// V15 · Copyable sample components. Static, locally authored templates.
+// V16 · Copyable sample components. Static, locally authored templates.
 // Inspired by public design-system methodology; not copied from vendor sources.
 // All patterns consume the ONE web/styles.css and ONE web/icons.svg registry.
 // A copied snippet is presentation only: real applications must bind real handlers.
@@ -29,6 +29,11 @@ export const UI_PATTERN_GROUPS:UiPatternGroup[]=[
     "id": "commerce",
     "label": "Bán hàng & bảng",
     "hint": "Sản phẩm, bảng đơn và tổng hợp"
+  },
+  {
+    "id": "invoices",
+    "label": "Hóa đơn & phiếu",
+    "hint": "Bảng in, đơn tạm, đã giao, kiểm hàng, công nợ"
   },
   {
     "id": "workflow",
@@ -200,5 +205,75 @@ export const UI_PATTERNS:UiPattern[]=[
     "title": "Thông báo trạng thái",
     "description": "Hiển thị kết quả và nút đóng nhẹ, không phải thông báo push.",
     "html": "<div class=\"ds-toast\" role=\"status\"><span><svg class=\"ui-icon\" aria-hidden=\"true\"><use href=\"./web/icons.svg#ui-icon-check-circle\"></use></svg></span><div><strong>Đã lưu mẫu</strong><small>Chỉ là trạng thái minh họa trên trang này.</small></div><button type=\"button\" class=\"ui-button ui-button--icon\" data-kit-action=\"close-toast\" aria-label=\"Đóng thông báo\"><svg class=\"ui-icon\" aria-hidden=\"true\"><use href=\"./web/icons.svg#ui-icon-close\"></use></svg></button></div>"
+  },
+  {
+    "id": "INV-00",
+    "group": "invoices",
+    "title": "Đen trắng chuẩn in (00)",
+    "description": "Bảng gốc chuẩn bản in, kẻ ô rõ, ít mực; ưu tiên số và phép tính.",
+    "html": "<article class=\"ds-invoice ds-invoice--print\" data-invoice-variant=\"print\"><header class=\"ds-invoice-header\"><div class=\"ds-invoice-brand\"><strong>TẠP HÓA · MẪU</strong><small>Hóa đơn minh họa · Không phải chứng từ thật</small></div><div class=\"ds-invoice-meta\"><strong>DH-MAU-007</strong><span>HÓA ĐƠN</span></div></header><div class=\"ds-invoice-customer\"><span><b>Khách hàng:</b> Khách mẫu A</span><span><b>Ngày:</b> 22/11/2026 · 08:30</span></div><p class=\"ds-invoice-caption\">Mẫu 00 trong bộ palette TAPHOA: đen trắng chuẩn in.</p><div class=\"ds-invoice-scroll\"><table class=\"ds-invoice-table\"><thead><tr><th scope=\"col\">STT</th><th scope=\"col\">TÊN HÀNG</th><th scope=\"col\">SL</th><th scope=\"col\">ĐƠN GIÁ</th><th scope=\"col\">THÀNH TIỀN</th></tr></thead><tbody><tr><td>1</td><td>Gạo loại 1 kg</td><td>2</td><td>32.000</td><td>64.000</td></tr><tr><td>2</td><td>Sữa hộp 180 ml</td><td>3</td><td>25.000</td><td>75.000</td></tr><tr><td>3</td><td>Bánh quy bơ</td><td>1</td><td>48.000</td><td>48.000</td></tr></tbody></table></div><div class=\"ds-invoice-totals\"><div><span>Cộng tiền hàng</span><b>187.000 đ</b></div><div><span>Giảm giá mẫu</span><b>−7.000 đ</b></div><div class=\"ds-invoice-grand\"><strong>TỔNG THANH TOÁN</strong><strong>180.000 đ</strong></div></div><footer class=\"ds-invoice-note\">Ghi chú: Giao hàng đủ số lượng, kiểm tra trước khi nhận. · Dữ liệu thử.</footer></article>"
+  },
+  {
+    "id": "INV-01",
+    "group": "invoices",
+    "title": "Tối giản, kẻ ngang (01)",
+    "description": "Nền trắng/xám rất nhẹ; các dòng không dùng viền dọc.",
+    "html": "<article class=\"ds-invoice ds-invoice--minimal\" data-invoice-variant=\"minimal\"><header class=\"ds-invoice-header\"><div class=\"ds-invoice-brand\"><strong>TẠP HÓA · MẪU</strong><small>Hóa đơn minh họa · Không phải chứng từ thật</small></div><div class=\"ds-invoice-meta\"><strong>DH-MAU-007</strong><span>HÓA ĐƠN</span></div></header><div class=\"ds-invoice-customer\"><span><b>Khách hàng:</b> Khách mẫu A</span><span><b>Ngày:</b> 22/11/2026 · 08:30</span></div><p class=\"ds-invoice-caption\">Mẫu 01 tham chiếu palette Tối giản của TAPHOA.</p><div class=\"ds-invoice-scroll\"><table class=\"ds-invoice-table\"><thead><tr><th scope=\"col\">STT</th><th scope=\"col\">TÊN HÀNG</th><th scope=\"col\">SL</th><th scope=\"col\">ĐƠN GIÁ</th><th scope=\"col\">THÀNH TIỀN</th></tr></thead><tbody><tr><td>1</td><td>Gạo loại 1 kg</td><td>2</td><td>32.000</td><td>64.000</td></tr><tr><td>2</td><td>Sữa hộp 180 ml</td><td>3</td><td>25.000</td><td>75.000</td></tr><tr><td>3</td><td>Bánh quy bơ</td><td>1</td><td>48.000</td><td>48.000</td></tr></tbody></table></div><div class=\"ds-invoice-totals\"><div><span>Cộng tiền hàng</span><b>187.000 đ</b></div><div><span>Giảm giá mẫu</span><b>−7.000 đ</b></div><div class=\"ds-invoice-grand\"><strong>TỔNG THANH TOÁN</strong><strong>180.000 đ</strong></div></div><footer class=\"ds-invoice-note\">Ghi chú: Giao hàng đủ số lượng, kiểm tra trước khi nhận. · Dữ liệu thử.</footer></article>"
+  },
+  {
+    "id": "INV-02",
+    "group": "invoices",
+    "title": "Business Navy (02)",
+    "description": "Header navy trầm; cấu trúc bảng và cột tiền không thay đổi.",
+    "html": "<article class=\"ds-invoice ds-invoice--navy\" data-invoice-variant=\"navy\"><header class=\"ds-invoice-header\"><div class=\"ds-invoice-brand\"><strong>TẠP HÓA · MẪU</strong><small>Hóa đơn minh họa · Không phải chứng từ thật</small></div><div class=\"ds-invoice-meta\"><strong>DH-MAU-007</strong><span>HÓA ĐƠN</span></div></header><div class=\"ds-invoice-customer\"><span><b>Khách hàng:</b> Khách mẫu A</span><span><b>Ngày:</b> 22/11/2026 · 08:30</span></div><p class=\"ds-invoice-caption\">Mẫu 02 tham chiếu palette Business Navy của TAPHOA.</p><div class=\"ds-invoice-scroll\"><table class=\"ds-invoice-table\"><thead><tr><th scope=\"col\">STT</th><th scope=\"col\">TÊN HÀNG</th><th scope=\"col\">SL</th><th scope=\"col\">ĐƠN GIÁ</th><th scope=\"col\">THÀNH TIỀN</th></tr></thead><tbody><tr><td>1</td><td>Gạo loại 1 kg</td><td>2</td><td>32.000</td><td>64.000</td></tr><tr><td>2</td><td>Sữa hộp 180 ml</td><td>3</td><td>25.000</td><td>75.000</td></tr><tr><td>3</td><td>Bánh quy bơ</td><td>1</td><td>48.000</td><td>48.000</td></tr></tbody></table></div><div class=\"ds-invoice-totals\"><div><span>Cộng tiền hàng</span><b>187.000 đ</b></div><div><span>Giảm giá mẫu</span><b>−7.000 đ</b></div><div class=\"ds-invoice-grand\"><strong>TỔNG THANH TOÁN</strong><strong>180.000 đ</strong></div></div><footer class=\"ds-invoice-note\">Ghi chú: Giao hàng đủ số lượng, kiểm tra trước khi nhận. · Dữ liệu thử.</footer></article>"
+  },
+  {
+    "id": "INV-03",
+    "group": "invoices",
+    "title": "Retail Green (03)",
+    "description": "Header xanh dịu; cấu trúc hóa đơn giữ nguyên.",
+    "html": "<article class=\"ds-invoice ds-invoice--sage\" data-invoice-variant=\"sage\"><header class=\"ds-invoice-header\"><div class=\"ds-invoice-brand\"><strong>TẠP HÓA · MẪU</strong><small>Hóa đơn minh họa · Không phải chứng từ thật</small></div><div class=\"ds-invoice-meta\"><strong>DH-MAU-007</strong><span>HÓA ĐƠN</span></div></header><div class=\"ds-invoice-customer\"><span><b>Khách hàng:</b> Khách mẫu A</span><span><b>Ngày:</b> 22/11/2026 · 08:30</span></div><p class=\"ds-invoice-caption\">Mẫu 03 tham chiếu palette Retail Green của TAPHOA.</p><div class=\"ds-invoice-scroll\"><table class=\"ds-invoice-table\"><thead><tr><th scope=\"col\">STT</th><th scope=\"col\">TÊN HÀNG</th><th scope=\"col\">SL</th><th scope=\"col\">ĐƠN GIÁ</th><th scope=\"col\">THÀNH TIỀN</th></tr></thead><tbody><tr><td>1</td><td>Gạo loại 1 kg</td><td>2</td><td>32.000</td><td>64.000</td></tr><tr><td>2</td><td>Sữa hộp 180 ml</td><td>3</td><td>25.000</td><td>75.000</td></tr><tr><td>3</td><td>Bánh quy bơ</td><td>1</td><td>48.000</td><td>48.000</td></tr></tbody></table></div><div class=\"ds-invoice-totals\"><div><span>Cộng tiền hàng</span><b>187.000 đ</b></div><div><span>Giảm giá mẫu</span><b>−7.000 đ</b></div><div class=\"ds-invoice-grand\"><strong>TỔNG THANH TOÁN</strong><strong>180.000 đ</strong></div></div><footer class=\"ds-invoice-note\">Ghi chú: Giao hàng đủ số lượng, kiểm tra trước khi nhận. · Dữ liệu thử.</footer></article>"
+  },
+  {
+    "id": "INV-04",
+    "group": "invoices",
+    "title": "Bảng hóa đơn kẻ dọc đầy đủ",
+    "description": "Bảng 5 cột có đường kẻ ngang/dọc, hợp đối chiếu số liệu.",
+    "html": "<article class=\"ds-invoice ds-invoice--full-grid\" data-invoice-variant=\"full-grid\"><header class=\"ds-invoice-header\"><div class=\"ds-invoice-brand\"><strong>TẠP HÓA · MẪU</strong><small>Hóa đơn minh họa · Không phải chứng từ thật</small></div><div class=\"ds-invoice-meta\"><strong>DH-MAU-007</strong><span>CHI TIẾT HÓA ĐƠN</span></div></header><div class=\"ds-invoice-customer\"><span><b>Khách hàng:</b> Khách mẫu A</span><span><b>Ngày:</b> 22/11/2026 · 08:30</span></div><p class=\"ds-invoice-caption\">Kẻ toàn bộ ô để kiểm tra STT, tên, SL, giá và thành tiền.</p><div class=\"ds-invoice-scroll\"><table class=\"ds-invoice-table\"><thead><tr><th scope=\"col\">STT</th><th scope=\"col\">TÊN HÀNG</th><th scope=\"col\">SL</th><th scope=\"col\">ĐƠN GIÁ</th><th scope=\"col\">THÀNH TIỀN</th></tr></thead><tbody><tr><td>1</td><td>Gạo loại 1 kg</td><td>2</td><td>32.000</td><td>64.000</td></tr><tr><td>2</td><td>Sữa hộp 180 ml</td><td>3</td><td>25.000</td><td>75.000</td></tr><tr><td>3</td><td>Bánh quy bơ</td><td>1</td><td>48.000</td><td>48.000</td></tr></tbody></table></div><div class=\"ds-invoice-totals\"><div><span>Cộng tiền hàng</span><b>187.000 đ</b></div><div><span>Giảm giá mẫu</span><b>−7.000 đ</b></div><div class=\"ds-invoice-grand\"><strong>TỔNG THANH TOÁN</strong><strong>180.000 đ</strong></div></div><footer class=\"ds-invoice-note\">Ghi chú: Giao hàng đủ số lượng, kiểm tra trước khi nhận. · Dữ liệu thử.</footer></article>"
+  },
+  {
+    "id": "INV-05",
+    "group": "invoices",
+    "title": "Hóa đơn gọn trên điện thoại",
+    "description": "Dạng bảng ưu tiên tên hàng và dòng tổng; cuộn riêng nếu màn nhỏ.",
+    "html": "<article class=\"ds-invoice ds-invoice--compact\" data-invoice-variant=\"compact\"><header class=\"ds-invoice-header\"><div class=\"ds-invoice-brand\"><strong>TẠP HÓA · MẪU</strong><small>Hóa đơn minh họa · Không phải chứng từ thật</small></div><div class=\"ds-invoice-meta\"><strong>DH-MAU-007</strong><span>HÓA ĐƠN GỌN</span></div></header><div class=\"ds-invoice-customer\"><span><b>Khách hàng:</b> Khách mẫu A</span><span><b>Ngày:</b> 22/11/2026 · 08:30</span></div><p class=\"ds-invoice-caption\">Bảng giữ nguyên ngữ nghĩa 5 cột, không đẩy các số lệch cột.</p><div class=\"ds-invoice-scroll\"><table class=\"ds-invoice-table ds-invoice-table--compact\"><thead><tr><th scope=\"col\">STT</th><th scope=\"col\">TÊN HÀNG</th><th scope=\"col\">SL</th><th scope=\"col\">ĐƠN GIÁ</th><th scope=\"col\">THÀNH TIỀN</th></tr></thead><tbody><tr><td>1</td><td>Gạo loại 1 kg</td><td>2</td><td>32.000</td><td>64.000</td></tr><tr><td>2</td><td>Sữa hộp 180 ml</td><td>3</td><td>25.000</td><td>75.000</td></tr><tr><td>3</td><td>Bánh quy bơ</td><td>1</td><td>48.000</td><td>48.000</td></tr></tbody></table></div><div class=\"ds-invoice-totals\"><div><span>Cộng tiền hàng</span><b>187.000 đ</b></div><div><span>Giảm giá mẫu</span><b>−7.000 đ</b></div><div class=\"ds-invoice-grand\"><strong>TỔNG THANH TOÁN</strong><strong>180.000 đ</strong></div></div><footer class=\"ds-invoice-note\">Ghi chú: Giao hàng đủ số lượng, kiểm tra trước khi nhận. · Dữ liệu thử.</footer></article>"
+  },
+  {
+    "id": "INV-06",
+    "group": "invoices",
+    "title": "Đơn tạm chưa gửi",
+    "description": "Trạng thái rõ và không giả đã giao hay đã thu.",
+    "html": "<article class=\"ds-invoice ds-invoice--draft\" data-invoice-variant=\"draft\"><header class=\"ds-invoice-header\"><div class=\"ds-invoice-brand\"><strong>TẠP HÓA · MẪU</strong><small>Hóa đơn minh họa · Không phải chứng từ thật</small></div><div class=\"ds-invoice-meta\"><strong>DH-MAU-007</strong><span>ĐƠN TẠM</span></div></header><div class=\"ds-invoice-customer\"><span><b>Khách hàng:</b> Khách mẫu A</span><span><b>Ngày:</b> 22/11/2026 · 08:30</span></div><p class=\"ds-invoice-caption\">Chưa giao · Chưa gửi cho khách. Chỉ là dữ liệu mẫu.</p><div class=\"ds-invoice-scroll\"><table class=\"ds-invoice-table\"><thead><tr><th scope=\"col\">STT</th><th scope=\"col\">TÊN HÀNG</th><th scope=\"col\">SL</th><th scope=\"col\">ĐƠN GIÁ</th><th scope=\"col\">THÀNH TIỀN</th></tr></thead><tbody><tr><td>1</td><td>Gạo loại 1 kg</td><td>2</td><td>32.000</td><td>64.000</td></tr><tr><td>2</td><td>Sữa hộp 180 ml</td><td>3</td><td>25.000</td><td>75.000</td></tr><tr><td>3</td><td>Bánh quy bơ</td><td>1</td><td>48.000</td><td>48.000</td></tr></tbody></table></div><div class=\"ds-invoice-totals\"><div><span>Cộng tiền hàng</span><b>187.000 đ</b></div><div><span>Giảm giá mẫu</span><b>−7.000 đ</b></div><div class=\"ds-invoice-grand\"><strong>TỔNG THANH TOÁN</strong><strong>180.000 đ</strong></div></div><footer class=\"ds-invoice-note\">Ghi chú: Giao hàng đủ số lượng, kiểm tra trước khi nhận. · Dữ liệu thử.</footer></article>"
+  },
+  {
+    "id": "INV-07",
+    "group": "invoices",
+    "title": "Đơn đã giao",
+    "description": "Có tên khách, thời gian, các cột và số tiền hoàn chỉnh.",
+    "html": "<article class=\"ds-invoice ds-invoice--delivered\" data-invoice-variant=\"delivered\"><header class=\"ds-invoice-header\"><div class=\"ds-invoice-brand\"><strong>TẠP HÓA · MẪU</strong><small>Hóa đơn minh họa · Không phải chứng từ thật</small></div><div class=\"ds-invoice-meta\"><strong>DH-MAU-007</strong><span>ĐÃ GIAO</span></div></header><div class=\"ds-invoice-customer\"><span><b>Khách hàng:</b> Khách mẫu A</span><span><b>Ngày:</b> 22/11/2026 · 08:30</span></div><p class=\"ds-invoice-caption\">Đơn hàng mẫu đã giao; trạng thái giao không đồng nghĩa đã thu tiền.</p><div class=\"ds-invoice-scroll\"><table class=\"ds-invoice-table\"><thead><tr><th scope=\"col\">STT</th><th scope=\"col\">TÊN HÀNG</th><th scope=\"col\">SL</th><th scope=\"col\">ĐƠN GIÁ</th><th scope=\"col\">THÀNH TIỀN</th></tr></thead><tbody><tr><td>1</td><td>Gạo loại 1 kg</td><td>2</td><td>32.000</td><td>64.000</td></tr><tr><td>2</td><td>Sữa hộp 180 ml</td><td>3</td><td>25.000</td><td>75.000</td></tr><tr><td>3</td><td>Bánh quy bơ</td><td>1</td><td>48.000</td><td>48.000</td></tr></tbody></table></div><div class=\"ds-invoice-totals\"><div><span>Cộng tiền hàng</span><b>187.000 đ</b></div><div><span>Giảm giá mẫu</span><b>−7.000 đ</b></div><div class=\"ds-invoice-grand\"><strong>TỔNG THANH TOÁN</strong><strong>180.000 đ</strong></div></div><footer class=\"ds-invoice-note\">Ghi chú: Giao hàng đủ số lượng, kiểm tra trước khi nhận. · Dữ liệu thử.</footer></article>"
+  },
+  {
+    "id": "INV-08",
+    "group": "invoices",
+    "title": "Phiếu kiểm / đối soát hàng",
+    "description": "Bảng số lượng đặt, số lượng thực nhận và ghi chú; không ghi nhận giao thật.",
+    "html": "<article class=\"ds-invoice ds-invoice--checklist\" data-invoice-variant=\"checklist\"><header class=\"ds-invoice-header\"><div class=\"ds-invoice-brand\"><strong>TẠP HÓA · MẪU</strong><small>Hóa đơn minh họa · Không phải chứng từ thật</small></div><div class=\"ds-invoice-meta\"><strong>DH-MAU-007</strong><span>PHIẾU KIỂM HÀNG</span></div></header><div class=\"ds-invoice-customer\"><span><b>Khách hàng:</b> Khách mẫu A</span><span><b>Ngày:</b> 22/11/2026 · 08:30</span></div><p class=\"ds-invoice-caption\">Dùng cùng trục tên và số lượng; các ô đánh dấu chưa kết nối nghiệp vụ.</p><div class=\"ds-invoice-scroll\"><table class=\"ds-invoice-table ds-invoice-table--check\"><thead><tr><th scope=\"col\">STT</th><th scope=\"col\">TÊN HÀNG</th><th scope=\"col\">SL ĐẶT</th><th scope=\"col\">SL THỰC</th><th scope=\"col\">GHI CHÚ</th></tr></thead><tbody><tr><td>1</td><td>Gạo loại 1 kg</td><td>2</td><td>2</td><td>Đủ</td></tr><tr><td>2</td><td>Sữa hộp 180 ml</td><td>3</td><td>2</td><td>Thiếu 1</td></tr><tr><td>3</td><td>Bánh quy bơ</td><td>1</td><td>1</td><td>Đủ</td></tr></tbody></table></div><div class=\"ds-invoice-check-summary\"><strong>Đã đối chiếu:</strong> 5 / 6 sản phẩm theo số lượng · <strong>Thiếu:</strong> 1</div><footer class=\"ds-invoice-note\">Phiếu mẫu để soát hàng trước duyệt, không thay đổi đơn thật.</footer></article>"
+  },
+  {
+    "id": "INV-09",
+    "group": "invoices",
+    "title": "Hóa đơn kèm công nợ & khoản thu",
+    "description": "Tách rõ tổng tiền, số đã thu và số còn phải thanh toán.",
+    "html": "<article class=\"ds-invoice ds-invoice--debt\" data-invoice-variant=\"debt\"><header class=\"ds-invoice-header\"><div class=\"ds-invoice-brand\"><strong>TẠP HÓA · MẪU</strong><small>Hóa đơn minh họa · Không phải chứng từ thật</small></div><div class=\"ds-invoice-meta\"><strong>DH-MAU-007</strong><span>HÓA ĐƠN / CÔNG NỢ</span></div></header><div class=\"ds-invoice-customer\"><span><b>Khách hàng:</b> Khách mẫu A</span><span><b>Ngày:</b> 22/11/2026 · 08:30</span></div><p class=\"ds-invoice-caption\">Ghi nhận thu mẫu 100.000 đ, không kết nối ngân hàng.</p><div class=\"ds-invoice-scroll\"><table class=\"ds-invoice-table\"><thead><tr><th scope=\"col\">STT</th><th scope=\"col\">TÊN HÀNG</th><th scope=\"col\">SL</th><th scope=\"col\">ĐƠN GIÁ</th><th scope=\"col\">THÀNH TIỀN</th></tr></thead><tbody><tr><td>1</td><td>Gạo loại 1 kg</td><td>2</td><td>32.000</td><td>64.000</td></tr><tr><td>2</td><td>Sữa hộp 180 ml</td><td>3</td><td>25.000</td><td>75.000</td></tr><tr><td>3</td><td>Bánh quy bơ</td><td>1</td><td>48.000</td><td>48.000</td></tr></tbody></table></div><div class=\"ds-invoice-totals\"><div><span>Cộng tiền hàng</span><b>187.000 đ</b></div><div><span>Giảm giá mẫu</span><b>−7.000 đ</b></div><div class=\"ds-invoice-grand\"><strong>TỔNG THANH TOÁN</strong><strong>180.000 đ</strong></div><div><span>Đã thu mẫu</span><b>100.000 đ</b></div><div class=\"ds-invoice-debt\"><strong>Còn phải thanh toán</strong><strong>80.000 đ</strong></div></div><footer class=\"ds-invoice-note\">Ghi chú: Giao hàng đủ số lượng, kiểm tra trước khi nhận. · Dữ liệu thử.</footer></article>"
   }
 ];
