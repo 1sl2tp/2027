@@ -1846,3 +1846,24 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid #fff
  body.ui-invoice-print-mode #invoicePrintHost .ds-invoice-table :is(th,td){color:#111!important;background:#fff!important}
  body.ui-invoice-print-mode #invoicePrintHost .ds-invoice-debt{color:#111!important}
 }
+
+/* UI-V17 · One shared 5-column invoice contract, alternate visual column order.
+   Baseline: STT | TÊN | SL | GIÁ | THÀNH TIỀN.
+   Variant --price-first: STT | TÊN | GIÁ | SL | THÀNH TIỀN.
+   DOM order and semantic roles change together, including on print/mobile;
+   no separate table component, price arithmetic, or breakpoint hacks. */
+:root{
+ --ds-invoice-price-first-price-width:21%;
+ --ds-invoice-price-first-qty-width:10%;
+}
+.ds-invoice-table--price-first :is(th,td):nth-child(3){
+ width:var(--ds-invoice-price-first-price-width);
+ text-align:right;
+ font-variant-numeric:tabular-nums;
+}
+.ds-invoice-table--price-first :is(th,td):nth-child(4){
+ width:var(--ds-invoice-price-first-qty-width);
+ text-align:center;
+ font-variant-numeric:tabular-nums;
+}
+/* Preserve the same axis for the compact sample and A4 print. */
