@@ -71,6 +71,6 @@ test("V38 stable 1-based column positions map to names and keys, including bound
  assert.equal(new Set(COLUMN_SCHEMA.map(c=>c.key)).size,20);
  assert.equal((src.match(/dataset\.colIndex=String\(colIndex\+1\)/g)||[]).length,3,
   "track, th and td each expose 1-based column position");
- assert.equal((src.match(/dataset\.colKey=col\.key/g)||[]).length,3,
-  "track, th and td each expose stable data field keys");
+ assert.equal((src.match(/dataset\.colKey=col\.key/g)||[]).length,4,
+  "track, th, td and metadata list each expose stable data field keys");
 });
