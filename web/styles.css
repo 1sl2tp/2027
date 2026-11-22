@@ -2292,7 +2292,7 @@ body.simple-first .topbar-end{gap:0}
 .simple-field-demo-status:empty{display:none}
 .simple-field-demo-select .simple-field-input{cursor:pointer;appearance:auto}
 .simple-field-pick{display:flex;align-items:center;justify-content:center;
- width:40px;height:40px;border:1px solid #dedede;border-radius:50%;
+ width:44px;height:44px;border:1px solid #dedede;border-radius:50%;
  background:#fff;color:#777;font:650 16px/1 system-ui,-apple-system,Arial,sans-serif;
  cursor:pointer;opacity:.7}
 .simple-field-pick[aria-pressed=true]{background:#202020;border-color:#202020;color:#fff;opacity:1}
@@ -2438,7 +2438,7 @@ body.simple-first .topbar-end{gap:0}
 .simple-button-rule-table th:first-child{text-align:left}
 .simple-button-rule-table thead{color:#555;background:#fafafa}
 .simple-button-rule-note{margin:10px 0 14px;font:400 12px/1.5 system-ui,-apple-system,Arial,sans-serif;color:#666}
-.simple-button-inner-row{display:grid;grid-template-columns:27px minmax(0,1fr) 42px;
+.simple-button-inner-row{display:grid;grid-template-columns:27px minmax(0,1fr) 44px;
  gap:8px;align-items:center;border-bottom:1px solid #eee;min-width:0;padding:13px 2px}
 .simple-button-inner-row:last-child{border-bottom:0}
 .simple-button-inner-middle{display:flex;flex-direction:column;gap:7px;min-width:0}
@@ -2508,7 +2508,7 @@ svg.simple-button-inner-icon:where(.simple-button-inner-optical){transform:trans
 .simple-button-inner-pick[aria-pressed="true"]{background:#222;color:#fff;border-color:#222}
 .simple-button-inner-pick:focus-visible{outline:2px solid #222;outline-offset:2px}
 @media(max-width:760px){
- .simple-button-inner-row{grid-template-columns:23px minmax(0,1fr) 40px;gap:7px;padding:12px 0}
+ .simple-button-inner-row{grid-template-columns:23px minmax(0,1fr) 44px;gap:7px;padding:12px 0}
  .simple-button-rule-diagram{justify-content:flex-start}
  .simple-button-inner-stage{width:100%}
  .simple-button-inner-demo{max-width:100%}
