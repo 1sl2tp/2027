@@ -90,6 +90,23 @@ test("V40 inherits existing ds-composer/ui-button/ui-icon; removes separate fake
  assert.ok(table.includes('track.dataset.uiComponent="TABLE-COLUMN"'));
 });
 
+test("V40 advanced composer Stop is an enabled cancellation action, not a disabled Send",()=>{
+ const source=read("web/src/composer-gallery.ts");
+ assert.ok(source.includes('send.type=sending?"button":"submit"'));
+ assert.ok(source.includes('send.disabled=false'));
+ assert.ok(source.includes('sending?"Dừng mô phỏng gửi"'));
+ assert.ok(source.includes('send.addEventListener("click",()=>{'));
+ assert.ok(source.includes("window.clearTimeout(pendingTimer)"));
+ assert.ok(source.includes("pendingTimers.delete(pendingTimer)"));
+ assert.ok(source.includes('send.dataset.composerBusy="false"'));
+ assert.ok(source.includes('pendingTimers.add(pendingTimer)'));
+ assert.ok(source.includes("for(const timer of pendingTimers)window.clearTimeout(timer)"));
+ assert.ok(source.includes("pendingTimer=window.setTimeout"));
+ assert.ok(source.includes("sendIcon.setAttribute(\"href\",sending?"));
+ assert.doesNotMatch(source,/send\.disabled=true;/,"stop icon cannot be attached to disabled button");
+ assert.doesNotMatch(source,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|getUserMedia\s*\(/i);
+});
+
 test("V40 keeps hierarchy display in existing simple section 5 with traceable sources and one rule",()=>{
  const html=read("index.html"),app=read("web/src/app.ts"),rules=read("RULES.md"),workflow=read(".github/workflows/pages.yml");
  const start=html.indexOf('id="simpleFields"'),end=html.indexOf('id="simpleButtons"',start);
