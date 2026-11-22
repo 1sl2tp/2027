@@ -3,6 +3,8 @@
 import {UI_PATTERNS,type UiPattern} from "./ui-patterns.js";
 export function initInvoiceGallery():void{
  const options=document.getElementById("invoiceVariantList") as HTMLElement;
+ const mobileSelect=document.getElementById("invoiceMobileSelect") as HTMLSelectElement;
+ const sourceDetails=document.getElementById("invoiceSourceDetails") as HTMLDetailsElement;
  const preview=document.getElementById("invoicePreview") as HTMLElement;
  const source=document.getElementById("invoiceSource") as HTMLTextAreaElement;
  const selectedTitle=document.getElementById("invoiceSelectedTitle") as HTMLElement;
@@ -10,7 +12,11 @@ export function initInvoiceGallery():void{
  const copy=document.getElementById("invoiceCopy") as HTMLButtonElement;
  const print=document.getElementById("invoicePrint") as HTMLButtonElement;
  const host=document.getElementById("invoicePrintHost") as HTMLElement;
- if(!options||!preview||!source||!selectedTitle||!info||!copy||!print||!host)return;
+ if(!options||!mobileSelect||!sourceDetails||!preview||!source||!selectedTitle||!info||!copy||!print||!host)return;
+ // Keep the detailed code available, but prioritize the receipt preview on narrow screens.
+ const narrowScreen=window.matchMedia("(max-width:760px)");
+ sourceDetails.open=!narrowScreen.matches;
+ narrowScreen.addEventListener("change",event=>{sourceDetails.open=!event.matches;});
  const variants=UI_PATTERNS.filter(item=>item.group==="invoices");
  if(!variants.length)return;
  let selected:UiPattern=variants[0];
@@ -19,6 +25,7 @@ export function initInvoiceGallery():void{
    // Static developer-owned invoice samples, shared with the copyable pattern kit.
    preview.innerHTML=item.html;
    source.value=item.html;
+   mobileSelect.value=item.id;
    selectedTitle.textContent=item.id+" · "+item.title;
    for(const button of Array.from(options.querySelectorAll<HTMLButtonElement>("[data-invoice-id]"))){
      const active=button.dataset.invoiceId===item.id;
@@ -34,7 +41,15 @@ export function initInvoiceGallery():void{
    const short=document.createElement("strong");short.textContent=item.id+" · "+item.title;
    const sub=document.createElement("span");sub.textContent=item.description;
    button.append(short,sub);options.append(button);
+   const choice=document.createElement("option");
+   choice.value=item.id;
+   choice.textContent=item.id+" · "+item.title;
+   mobileSelect.append(choice);
  }
+ mobileSelect.addEventListener("change",()=>{
+   const item=variants.find(x=>x.id===mobileSelect.value);
+   if(item)selectPattern(item);
+ });
  options.addEventListener("click",event=>{
    if(!(event.target instanceof Element))return;
    const button=event.target.closest<HTMLButtonElement>("[data-invoice-id]");
@@ -47,6 +62,7 @@ export function initInvoiceGallery():void{
      await navigator.clipboard.writeText(selected.html);
      info.textContent="Đã sao chép HTML mẫu "+selected.id+". Kiểu chữ và bảng lấy từ một CSS chung.";
    }catch{
+     sourceDetails.open=true;
      source.focus();source.select();
      info.textContent="Clipboard không khả dụng. Đã bôi chọn mã HTML để bạn sao chép thủ công.";
    }
