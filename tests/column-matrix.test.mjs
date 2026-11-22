@@ -32,7 +32,7 @@ test("V36 has exactly one main table card with 1–20 columns and existing galle
  assert.ok(app.includes('import { initColumnMatrix, initSimpleMasterTable } from "./column-matrix.js";'));
  assert.ok(app.includes("initColumnMatrix();"));
  assert.ok(rules.includes("### 9.7. V36: Một bảng chính cho 1–20 cột"));
- assert.ok(!rules.includes("## RULE 12"),"extend R09 instead of making a parallel ruleset");
+ assert.ok(rules.includes("## RULE 12 — XÁC ĐỊNH CHA"),"component hierarchy has its own distinct rule in the same RULES.md");
 });
 
 test("V36 schema has 20 meaningful headers and role metadata; header names really determine alignment",async()=>{
@@ -116,8 +116,8 @@ test("V36 preserves source audit and ships a cache-safe page",()=>{
  const html=read("index.html"),workflow=read(".github/workflows/pages.yml");
  for(const repo of ["assistant-ui/assistant-ui","vercel/streamdown","lobehub/streamdown","vercel/ai-elements","openai/apps-sdk-ui","mrigankad/Lumi-UI"])
   assert.ok(audit.includes(repo));
- assert.ok(html.includes('data-ui-version="2027-UI-V39"'));
- assert.ok(html.includes('src="./web/dist-v39/app.js"'));
- assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v39"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V40"'));
+ assert.ok(html.includes('src="./web/dist-v40/app.js"'));
+ assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v40"));
  assert.ok(workflow.includes("ET.parse('web/icons.svg')"));
 });
