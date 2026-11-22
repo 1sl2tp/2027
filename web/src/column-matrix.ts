@@ -223,7 +223,9 @@ export function initColumnMatrix():void{
   projection.append(scroll,cards);preview.append(projection);
   roles.replaceChildren();
   for(const col of columns){
-   const chip=node("span","ui-column-role-chip",col.label+" · "+alignmentForRole(col.role)+" · "+col.minPx+"px");
+   const align=alignmentForRole(col.role);
+   const meaning=align==="left"?"trái":align==="center"?"giữa":"phải";
+   const chip=node("span","ui-column-role-chip",col.label+" · "+meaning+" · "+col.minPx+"px");
    chip.dataset.align=alignmentForRole(col.role);
    roles.append(chip);
   }
@@ -274,7 +276,7 @@ export function initColumnMatrix():void{
   else delete state.headerNames[key];
   render();
   notice.textContent="Đã thử tên tiêu đề “"+(state.headerNames[key]||selected.label)+
-   "”: căn "+alignmentForRole(roleFromHeader(state.headerNames[key]||selected.label))+
+   "”: căn "+({left:"trái",center:"giữa",right:"phải"}[alignmentForRole(roleFromHeader(state.headerNames[key]||selected.label))])+
    ". Chỉ thay cách trình bày; giá trị dữ liệu không đổi.";
  });
  copy.addEventListener("click",async()=>{
