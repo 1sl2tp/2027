@@ -1,0 +1,27 @@
+name: Verify 2027 UI pull request
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "github-sources.html"
+      - "base.html"
+      - "flows.html"
+      - "web/**"
+      - "tests/**"
+      - "package.json"
+      - "tsconfig.json"
+      - ".github/workflows/ci.yml"
+      - ".github/workflows/pages.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-package-lock --no-audit --no-fund
+      - run: npm run verify
