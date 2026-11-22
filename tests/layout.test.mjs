@@ -5,14 +5,14 @@ const read = (file) => readFileSync(new URL("../"+file, import.meta.url),"utf8")
 
 test("V08 retains one interactive ChatGPT-like document and shared CSS",()=>{
   const html=read("index.html");
-  assert.match(html,/data-ui-version="2027-UI-V16"/);
+  assert.match(html,/data-ui-version="2027-UI-V17"/);
   assert.match(html,/<h1>Chỉnh ngay trên một văn bản mẫu<\/h1>/);
   for(const id of ["document","controls","components","overlays","demoCanvas","fontSelect","sizeRange","sizeOutput","weightOutput","leadingRange","trackingRange","cssPreview","resetButton","copyButton"])
     assert.ok(html.includes('id="'+id+'"'),id);
   for(const block of ["title","body","section","description","list","table","number","money","note","caption"])
     assert.ok(html.includes('data-block="'+block+'"'),block);
-  assert.ok(html.includes("./web/styles.css?v=2027-UI-V16"));
-  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V16"));
+  assert.ok(html.includes("./web/styles.css?v=2027-UI-V17"));
+  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V17"));
   assert.doesNotMatch(html,/<script[^>]+src="https?:\/\//);
 });
 
@@ -51,8 +51,8 @@ test("Pages still builds the exact versioned assets shipped in HTML",()=>{
   const html=read("index.html");
   const config=JSON.parse(read("tsconfig.json"));
   const out=config.compilerOptions.outDir.replace(/^\.\//,"").replace(/\/$/,"");
-  assert.ok(html.includes("web/styles.css?v=2027-UI-V16"));
-  assert.ok(html.includes(out+"/app.js?v=2027-UI-V16"));
+  assert.ok(html.includes("web/styles.css?v=2027-UI-V17"));
+  assert.ok(html.includes(out+"/app.js?v=2027-UI-V17"));
   const workflow=read(".github/workflows/pages.yml");
   assert.ok(workflow.includes("npm run verify"));
   assert.ok(workflow.includes("cp -R "+out+" _site/web/"));
@@ -151,7 +151,7 @@ test("V08 keeps the library font/color and three-flow screens on one CSS file",(
   const index=read("index.html"),flows=read("flows.html"),css=read("web/styles.css");
   assert.ok(index.includes('href="./flows.html"'));
   assert.ok(flows.includes('./web/styles.css?v=2027-UI-V04'));
-  assert.ok(index.includes('./web/styles.css?v=2027-UI-V16'));
+  assert.ok(index.includes('./web/styles.css?v=2027-UI-V17'));
   assert.equal((index.match(/<link rel="stylesheet"/g)||[]).length,1);
   assert.equal((flows.match(/<link rel="stylesheet"/g)||[]).length,1);
   assert.ok(css.includes(".flow-app-shell"));
@@ -192,7 +192,7 @@ test("V07 five independent quantity variants, six inputs, line clamps and compos
 test("V08 gives grouped quantity and text inputs a single outer focus ring",()=>{
   const css=read("web/styles.css");
   const html=read("index.html");
-  assert.match(html,/data-ui-version="2027-UI-V16"/);
+  assert.match(html,/data-ui-version="2027-UI-V17"/);
   for(const grouped of [".studio-qty",".qty-joined",".qty-pill",".qty-inline",".input-variant-shell",".studio-search-field"])
     assert.ok(css.includes(grouped),grouped);
   assert.ok(css.includes(":focus-within"));
@@ -266,7 +266,7 @@ test("V09 base template ships four source-inspired modes on one CSS",()=>{
 
 test("V09 Pages bundles base.html and TS output without replacing original pages",()=>{
   const index=read("index.html"),flows=read("flows.html"),base=read("base.html");
-  assert.ok(index.includes('data-ui-version="2027-UI-V16"'));
+  assert.ok(index.includes('data-ui-version="2027-UI-V17"'));
   assert.ok(flows.includes('data-ui-version="2027-UI-V04"'));
   assert.ok(index.includes('href="./base.html"'));
   assert.ok(base.includes("Mẫu gốc 2027"));
@@ -282,7 +282,7 @@ test("V16 categorizes 23 component sets into nine clear groups",()=>{
   const html=read("index.html");
   const css=read("web/styles.css");
   const expected={patterns:1,typography:1,tables:2,invoices:1,quantity:2,inputs:4,actions:6,layouts:4,overlays:2};
-  assert.match(html,/data-ui-version="2027-UI-V16"/);
+  assert.match(html,/data-ui-version="2027-UI-V17"/);
   assert.ok(html.includes("Chọn loại mẫu cần xem"));
   assert.ok(html.includes('id="componentTheme"'));
   for(const [category,count] of Object.entries(expected)){
@@ -322,7 +322,7 @@ test("V12 searches and filters the same DOM without altering component event bin
 
 test("V12 keeps four distinct composers inside the existing input gallery",()=>{
  const html=read("index.html"),css=read("web/styles.css");
- assert.match(html,/data-ui-version="2027-UI-V16"/);
+ assert.match(html,/data-ui-version="2027-UI-V17"/);
  const inputs=html.slice(html.indexOf('id="sample-inputs"'),html.indexOf('id="sample-actions"'));
  assert.ok(inputs.includes('id="composerGalleryTitle"'));
  assert.ok(inputs.includes("Bốn trạng thái ô gõ chat"));
@@ -459,7 +459,7 @@ test("V12 library all uses the single external SVG registry and no old button cl
 test("V13 catalogs subtle copy, share, download, loading and feedback buttons",()=>{
  const html=read("index.html"),css=read("web/styles.css"),svg=read("web/icons.svg");
  const actions=html.slice(html.indexOf('id="sample-actions"'),html.indexOf('id="sample-layouts"'));
- assert.ok(html.includes('data-ui-version="2027-UI-V16"'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V17"'));
  assert.ok(actions.includes('data-ui-library="message-actions"'));
  assert.ok(actions.includes('id="messageActionsTitle"'));
  for(const action of ["copy","like","dislike","speak","share","more","download","load"])
@@ -579,7 +579,7 @@ test("V15 exposes a source-of-truth reusable pattern kit inside the existing UI 
  assert.ok(html.includes('data-gallery-filter="patterns"'));
  assert.ok(html.includes('href="#sample-patterns"'));
  assert.ok(html.includes("23 bộ mẫu · 9 nhóm"));
- assert.ok(html.includes("32 mẫu HTML"));
+ assert.ok(html.includes("35 mẫu HTML"));
  assert.ok(html.includes("V16</title>"));
  assert.ok(css.includes(".ui-kit-workspace"));
  assert.ok(css.includes(".ui-kit-preview"));
@@ -592,8 +592,8 @@ test("V16 offers 32 unique portable HTML patterns with nine functional groups",(
  const groups=JSON.parse(src.match(/export const UI_PATTERN_GROUPS:UiPatternGroup\[\]=(\[[\s\S]*?\]);/)[1]);
  const examples=JSON.parse(src.match(/export const UI_PATTERNS:UiPattern\[\]=(\[[\s\S]*?\]);/)[1]);
  assert.equal(groups.length,9);
- assert.equal(examples.length,32);
- assert.equal(new Set(examples.map(x=>x.id)).size,32);
+ assert.equal(examples.length,35);
+ assert.equal(new Set(examples.map(x=>x.id)).size,35);
  const groupIds=groups.map(x=>x.id);
  assert.equal(new Set(groupIds).size,9);
  assert.ok(examples.every(x=>groupIds.includes(x.group)&&x.title&&x.description&&x.html));
@@ -616,7 +616,7 @@ test("V15 pattern kit has local-only interaction and safe copy/download controls
  for(const marker of ["UI_PATTERNS","UI_PATTERN_GROUPS","navigator.clipboard","kitSource","kitCopy","kitCopySetup",
   "kitExportCatalog","kitFamilyTabs","kitSearch","Blob","URL.createObjectURL","URL.revokeObjectURL",
   "data-kit-stepper","data-kit-segment","data-kit-password-toggle","data-kit-switch","data-kit-action",
-  "aria-pressed","2027-ui-pattern-catalog-v16.json"]){
+  "aria-pressed","2027-ui-pattern-catalog-v17.json"]){
    assert.ok(ts.includes(marker),marker);
  }
  assert.doesNotMatch(ts,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:|getUserMedia\s*\(/i);
@@ -638,7 +638,7 @@ test("V15 unified CSS primitives keep inputs, controls and workflow previews und
  assert.ok(rules.includes("web/src/ui-patterns.ts"));
 });
 
-test("V16 adds ten invoice and receipt templates in both the gallery and copyable kit",()=>{
+test("V17 adds thirteen invoice and receipt templates in both the gallery and copyable kit",()=>{
  const html=read("index.html"),ts=read("web/src/invoice-gallery.ts"),app=read("web/src/app.ts");
  assert.ok(html.includes('data-gallery-category="invoices"'));
  assert.ok(html.includes('data-gallery-filter="invoices"'));
@@ -656,15 +656,15 @@ test("V16 adds ten invoice and receipt templates in both the gallery and copyabl
  assert.ok(app.includes('from "./invoice-gallery.js"'));
  assert.ok(app.includes("initInvoiceGallery();"));
  assert.ok(app.includes('"invoices"|"quantity"'));
- assert.ok(html.includes("1 bộ · 10 mẫu hóa đơn"));
+ assert.ok(html.includes("1 bộ · 13 mẫu hóa đơn"));
 });
 
 test("V16 invoice layouts retain consistent arithmetic, header, numeric columns and safe text",()=>{
  const src=read("web/src/ui-patterns.ts");
  const entries=JSON.parse(src.match(/export const UI_PATTERNS:UiPattern\[\]=(\[[\s\S]*?\]);/)[1]);
  const invoices=entries.filter(item=>item.group==="invoices");
- assert.equal(invoices.length,10);
- assert.deepEqual(invoices.map(x=>x.id),Array.from({length:10},(_,n)=>"INV-"+String(n).padStart(2,"0")));
+ assert.equal(invoices.length,13);
+ assert.deepEqual(invoices.map(x=>x.id),Array.from({length:13},(_,n)=>"INV-"+String(n).padStart(2,"0")));
  for(const entry of invoices){
   assert.ok(entry.html.includes('class="ds-invoice '),entry.id);
   assert.ok(entry.html.includes('data-invoice-variant='),entry.id);
@@ -712,4 +712,48 @@ test("V16 print and table previews remain local without transactions or external
  assert.ok(patterns.includes("INV-00"));
  assert.ok(patterns.includes("INV-09"));
  assert.ok(read("RULES.md").includes("## RULE 09"));
+});
+
+test("V17 variants physically reorder price before quantity in header and all rows",()=>{
+ const src=read("web/src/ui-patterns.ts");
+ const items=JSON.parse(src.match(/export const UI_PATTERNS:UiPattern\[\]=(\[[\s\S]*?\]);/)[1]);
+ const variants=items.filter(x=>["INV-10","INV-11","INV-12"].includes(x.id));
+ assert.equal(variants.length,3);
+ const wantedHeader=["STT","TÊN HÀNG","GIÁ","SL","THÀNH TIỀN"];
+ const expected=[
+  ["1","Gạo loại 1 kg","32.000","2","64.000"],
+  ["2","Sữa hộp 180 ml","25.000","3","75.000"],
+  ["3","Bánh quy bơ","48.000","1","48.000"]
+ ];
+ for(const pattern of variants){
+   const cols=[...pattern.html.matchAll(/<th scope="col">([^<]+)<\/th>/g)].map(x=>x[1]);
+   assert.deepEqual(cols,wantedHeader,pattern.id+" header order");
+   assert.ok(pattern.html.includes('ds-invoice-table--price-first'),pattern.id+" modifier");
+   const dataRows=[...pattern.html.matchAll(/<tr><td>([^<]*)<\/td><td>([^<]*)<\/td><td>([^<]*)<\/td><td>([^<]*)<\/td><td>([^<]*)<\/td><\/tr>/g)]
+    .map(x=>x.slice(1));
+   assert.deepEqual(dataRows,expected,pattern.id+" rows: prices must not remain in qty column");
+   for(const figure of ["187.000 đ","7.000 đ","180.000 đ"])
+     assert.ok(pattern.html.includes(figure),pattern.id+" "+figure);
+ }
+ const original=items.find(x=>x.id==="INV-00");
+ const baseHeader=[...original.html.matchAll(/<th scope="col">([^<]+)<\/th>/g)].map(x=>x[1]);
+ assert.deepEqual(baseHeader,["STT","TÊN HÀNG","SL","ĐƠN GIÁ","THÀNH TIỀN"],
+   "Original 10 variants retain the prior STT TÊN SL GIÁ THÀNH TIỀN layout");
+});
+
+test("V17 price-before-quantity prints and scales via shared semantic column modifier",()=>{
+ const css=read("web/styles.css"),html=read("index.html");
+ for(const marker of [
+   "--ds-invoice-price-first-price-width:21%",
+   "--ds-invoice-price-first-qty-width:10%",
+   ".ds-invoice-table--price-first :is(th,td):nth-child(3)",
+   ".ds-invoice-table--price-first :is(th,td):nth-child(4)",
+   "text-align:right",
+   "text-align:center",
+   "@media print"
+ ])assert.ok(css.includes(marker),marker);
+ assert.equal((html.match(/<link rel="stylesheet"/g)||[]).length,1);
+ assert.ok(html.includes("13 mẫu hóa đơn"));
+ assert.ok(html.includes("GIÁ → SL"));
+ assert.ok(read("web/src/pattern-kit.ts").includes("2027-ui-pattern-catalog-v17.json"));
 });
