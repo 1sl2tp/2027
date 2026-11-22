@@ -16,6 +16,7 @@
   <symbol id="ui-icon-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="12" rx="3"/><path d="M6 10.5v2a6 6 0 0 0 12 0v-2M12 18.5v3m-4 0h8"/></symbol>
   <symbol id="ui-icon-send-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V4M5 11l7-7 7 7"/></symbol>
   <symbol id="ui-icon-voice" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></symbol>
+  <symbol id="ui-icon-ellipsis" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.7" stroke="none"/><circle cx="12" cy="12" r="1.7" stroke="none"/><circle cx="19" cy="12" r="1.7" stroke="none"/></symbol>
   <symbol id="ui-icon-stop" viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="7" width="10" height="10" rx="2"/></symbol>
 </svg>
 <div class="app" id="app">
@@ -547,7 +548,7 @@
                     <div class="studio-component-content">
                       <div class="studio-menu-anchor" id="menuAnchor">
                         <span>Đơn hàng mẫu <small>DH-001</small></span>
-                        <button type="button" class="studio-icon-button square" id="menuButton" aria-label="Mở menu phụ" aria-haspopup="menu" aria-expanded="false">⋯</button>
+                        <button type="button" class="ui-button ui-button--icon ui-button--square" id="menuButton" aria-label="Mở menu phụ" aria-haspopup="menu" aria-expanded="false"><svg class="ui-icon" aria-hidden="true"><use href="#ui-icon-ellipsis"/></svg></button>
                         <div id="sampleMenu" class="studio-pop-menu" role="menu" hidden>
                           <button type="button" role="menuitem" data-menu-item="Xem chi tiết">Xem chi tiết</button>
                           <button type="button" role="menuitem" data-menu-item="Sao chép thông tin">Sao chép thông tin</button>
@@ -561,7 +562,7 @@
                     <div class="studio-component-label"><strong>Popup</strong><span>Hộp thoại có nền mờ, focus, đóng</span></div>
                     <div class="studio-component-content"><div class="studio-popup-example">
                       <p>Thử một hộp thoại xác nhận như khi hoàn tất một thao tác.</p>
-                      <button type="button" class="studio-action-primary" id="openPopupButton">Mở popup mẫu</button>
+                      <button type="button" class="ui-button ui-button--primary" id="openPopupButton">Mở popup mẫu</button>
                     </div></div>
                   </div>
       </div>
@@ -584,7 +585,7 @@
 <dialog class="studio-dialog" id="demoDialog" aria-labelledby="dialogTitle">
   <div class="studio-dialog-head"><h2 id="dialogTitle">Xác nhận thao tác mẫu</h2><button type="button" id="dialogCloseButton" aria-label="Đóng popup">×</button></div>
   <p>Đây là popup để kiểm tra vị trí, cỡ chữ, nút và hành vi trên mobile. Không lưu hoặc gửi gì ra ngoài.</p>
-  <div class="studio-dialog-actions"><button type="button" class="studio-action-secondary" id="dialogCancelButton">Hủy</button><button type="button" class="studio-action-primary" id="dialogConfirmButton">Xác nhận mẫu</button></div>
+  <div class="studio-dialog-actions"><button type="button" class="ui-button ui-button--secondary" id="dialogCancelButton">Hủy</button><button type="button" class="ui-button ui-button--primary" id="dialogConfirmButton">Xác nhận mẫu</button></div>
 </dialog>
 </body>
 </html>
