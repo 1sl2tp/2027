@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có ba trang Web:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V10**: một văn bản chỉnh font/nền như trước, bên dưới là **14 bộ mẫu được chia vào 7 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V11**: một văn bản chỉnh font/nền như trước, bên dưới là **15 bộ mẫu được chia vào 7 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
 
@@ -18,6 +18,17 @@
 - Danh mục [**nguồn gốc Drive + mốc phục hồi**](./references/ORIGINAL_UI_SOURCES_AND_BASELINE_2026-11-22.md). Không sao chép trọn CSS/HTML nhúng từ Save Page hoặc thay đổi các tệp nguồn trong Drive.
 
 **Ranh giới:** mẫu UI chỉ chạy tại máy người xem, chưa kết nối CHAT/TAPHOA, không gửi tin nhắn hoặc làm phát sinh khoản thu/đơn hàng thật. Bản V08 đang có ở trang chính được giữ nguyên; V09 là một trang mới.
+
+## Bốn mẫu ô gõ chat có media (UI-V11)
+
+Trang xem trực tiếp: **[Ô nhập & gõ chat](https://1sl2tp.github.io/2027/#sample-inputs)**. Thêm một bộ mẫu mới vào danh mục Input (không chuyển sang trang khác), gồm bốn trạng thái:
+
+1. **01 — Gọn:** composer nhỏ một hàng, textarea tự nở, các nút + / chế độ / mic / gửi luôn nằm trong cùng khung.
+2. **02 — Có một ảnh:** một thumbnail nằm trên vùng gõ, có nút × để xóa. Nút + cho chọn ảnh trong thiết bị, chỉ xem cục bộ.
+3. **03 — Nhiều ảnh:** tối đa bốn thumbnail, nằm cùng hàng cuộn ngang, không chồng nổi lên vùng nhập.
+4. **04 — Trạng thái gửi/ghi âm:** có nội dung mẫu và trạng thái gửi giả lập, nút mic chỉ thay đổi biểu tượng/trạng thái, không truy cập micro.
+
+**Dùng thật ở trang demo:** tăng chiều cao theo nội dung, chọn ảnh từ thiết bị (mỗi ảnh tối đa 10 MB), xóa ảnh, đổi nhãn chế độ, thử mic, gửi giả lập và thông báo kết quả. Ảnh dùng temporary `URL.createObjectURL` và được thu hồi khi xóa hoặc rời trang; không upload, không lưu, không gọi API. Định dạng ghép vào **một tệp CSS chung** `web/styles.css`, TypeScript chuyên trách `web/src/composer-gallery.ts` được khởi tạo từ `web/src/app.ts`. Trang `base.html` và `flows.html` vẫn giữ nguyên.
 
 ## Danh mục xem mẫu nhanh (UI-V10)
 
