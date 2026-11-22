@@ -28,7 +28,7 @@ export function initComposerGallery():void {
     const refresh=():void=>{
       previews.hidden=countImages()===0;
       const hasContent=Boolean(text.value.trim()||countImages());
-      sendIcon.setAttribute("href",sending?"#ui-icon-stop":hasContent?"#ui-icon-send-up":"#ui-icon-voice");
+      sendIcon.setAttribute("href",sending?"./web/icons.svg#ui-icon-stop":hasContent?"./web/icons.svg#ui-icon-send-up":"./web/icons.svg#ui-icon-voice");
       send.setAttribute("aria-label",text.value.trim()||countImages()?"Mô phỏng gửi nội dung":"Thử chế độ giọng nói");
       send.title=text.value.trim()||countImages()?"Mô phỏng gửi nội dung":"Giọng nói mẫu (không thu âm)";
       const lineHeight=24;
@@ -109,7 +109,7 @@ export function initComposerGallery():void {
       sending=true;
       send.dataset.composerBusy="true";
       send.disabled=true;
-      sendIcon.setAttribute("href","#ui-icon-stop");
+      sendIcon.setAttribute("href","./web/icons.svg#ui-icon-stop");
       report("Đang mô phỏng gửi "+(attached?attached+" ảnh":"nội dung")+". Không kết nối mạng.");
       window.setTimeout(()=>{
         const entry=create("p");
