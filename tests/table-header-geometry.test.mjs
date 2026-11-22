@@ -67,8 +67,8 @@ test("V39 has one canonical table rule with the screenshot-derived regression co
  assert.ok(rules.includes("### 9.10. V39: bảng 20 cột phải cân trục tiêu đề/dữ liệu, không bẻ tên cột"));
  assert.ok(rules.includes("STT"));
  assert.ok(rules.includes("64 / 198 / 72 / 102 / 124 / 142"));
- assert.ok(html.includes('data-ui-version="2027-UI-V41"'));
- assert.ok(html.includes('<span class="version">V41</span>'));
- assert.ok(html.includes('src="./web/dist-v41/app.js"'));
- assert.ok(pages.includes("cp -R web/dist _site/web/dist-v41"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V42"'));
+ assert.ok(html.includes('<span class="version">V42</span>'));
+ assert.ok(html.includes('src="./web/dist-v42/app.js"'));
+ assert.ok(pages.includes("cp -R web/dist _site/web/dist-v42"));
 });

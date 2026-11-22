@@ -39,8 +39,8 @@ test("V41 extends RULE 12 and README: main page is published as V41",()=>{
  assert.ok(rules.includes("## RULE 12"));
  assert.ok(!rules.includes("## RULE 13"));
  assert.ok(readme.includes("GITHUB_UI_UX_COMPONENT_GAPS_V41.md"));
- assert.ok(readme.includes("UI-V41"));
- assert.ok(html.includes('data-ui-version="2027-UI-V41"'));
- assert.ok(html.includes('<span class="version">V41</span>'));
- assert.ok(html.includes('src="./web/dist-v41/app.js"'));
+ assert.ok(readme.includes("UI-V42"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V42"'));
+ assert.ok(html.includes('<span class="version">V42</span>'));
+ assert.ok(html.includes('src="./web/dist-v42/app.js"'));
 });
