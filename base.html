@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="2027 UI Library — mẫu gốc dùng một CSS, tham khảo ChatGPT, Facebook và Gemini.">
+  <title>2027 · Mẫu gốc dùng chung · V09</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-BASE-V09">
+  <script type="module" src="./web/dist/base.js?v=2027-BASE-V09"></script>
+</head>
+<body class="base-library" data-ui-version="2027-BASE-V09">
+  <header class="topbar base-topbar">
+    <a href="./" class="brand" aria-label="Về thư viện mẫu V08">
+      <span class="brand-mark">27</span><span class="brand-name">2027</span>
+      <span class="brand-separator">/</span><span class="brand-label">UI Library</span>
+    </a>
+    <div class="topbar-end">
+      <a href="./" class="flow-return">Thư viện thành phần</a>
+      <span class="version">V09 · GỐC</span>
+    </div>
+  </header>
+  <main class="base-page">
+    <div class="base-heading">
+      <div><span class="eyebrow">MẪU NỀN TẢNG · THIẾT KẾ RIÊNG 2027</span>
+        <h1>Một mẫu gốc. Ba nguồn tham khảo.</h1>
+        <p>Mẫu gốc 2027 kết hợp cách đọc nội dung của ChatGPT, tổ chức danh sách của Facebook và bề mặt nhập liệu của Gemini. Thử các hướng thiết kế trên <strong>cùng nội dung, cùng cấu trúc và cùng một CSS</strong>.</p>
+      </div>
+      <span class="base-notice">Bản mẫu · Không kết nối dữ liệu thật</span>
+    </div>
+    <section class="base-controls" aria-label="Điều khiển bản mẫu">
+      <div class="base-controls-main">
+        <div class="base-control-label">Hướng thiết kế</div>
+        <div class="base-presets" role="group" aria-label="Chọn hướng thiết kế">
+          <button type="button" data-preset="original" class="selected" aria-pressed="true"><span class="base-dot base-dot-original"></span>Gốc 2027</button>
+          <button type="button" data-preset="chatgpt" aria-pressed="false"><span class="base-dot base-dot-chatgpt"></span>ChatGPT</button>
+          <button type="button" data-preset="facebook" aria-pressed="false"><span class="base-dot base-dot-facebook"></span>Facebook</button>
+          <button type="button" data-preset="gemini" aria-pressed="false"><span class="base-dot base-dot-gemini"></span>Gemini</button>
+        </div>
+      </div>
+      <div class="base-controls-sub">
+        <div class="base-device" role="group" aria-label="Chiều rộng xem trước">
+          <button type="button" data-device="desktop" class="selected" aria-pressed="true">Rộng</button>
+          <button type="button" data-device="phone" aria-pressed="false">Mobile</button>
+        </div>
+        <button type="button" class="base-tool-button" id="baseReset">Đặt lại</button>
+        <button type="button" class="base-tool-button base-copy" id="baseCopy">Sao chép token</button>
+      </div>
+    </section>
+    <p class="base-preset-note" id="basePresetDescription">Mẫu gốc: văn bản rõ ràng, danh sách gọn và ô nhập bo mềm.</p>
+    <section class="base-stage" aria-label="Khung giao diện có thể thử trực tiếp">
+      <div class="base-app" id="basePreview" data-preset="original" data-device="desktop" data-view="chat">
+        <div class="base-app-top">
+          <span class="base-brand-icon">27</span>
+          <span class="base-app-title">Hệ thống 2027</span>
+          <span class="base-app-context" id="baseCurrentModule">Trò chuyện</span>
+          <button type="button" class="base-header-action" id="baseMoreButton" aria-haspopup="menu" aria-expanded="false" aria-label="Mở menu thao tác">⋯</button>
+          <div class="base-menu" role="menu" id="baseMenu" hidden>
+            <button type="button" role="menuitem" data-menu-command="Chỉnh sửa giao diện">Chỉnh sửa giao diện</button>
+            <button type="button" role="menuitem" data-menu-command="Xem thông số CSS">Xem thông số CSS</button>
+            <button type="button" role="menuitem" data-menu-command="Đóng menu">Đóng menu</button>
+          </div>
+        </div>
+        <div class="base-app-middle">
+          <nav class="base-rail" aria-label="Các mô-đun">
+            <button type="button" data-view="chat" class="selected" aria-current="page" title="Trò chuyện" aria-label="Trò chuyện"><span aria-hidden="true">◉</span></button>
+            <button type="button" data-view="work" title="Công việc" aria-label="Công việc"><span aria-hidden="true">☷</span></button>
+            <button type="button" data-view="sales" title="Bán hàng" aria-label="Bán hàng"><span aria-hidden="true">▣</span></button>
+            <span class="base-rail-spacer"></span>
+            <span class="base-rail-profile">M</span>
+          </nav>
+          <aside class="base-side" aria-label="Danh sách khách mẫu">
+            <div class="base-side-heading"><strong>Danh bạ</strong><span>3 khách mẫu</span></div>
+            <label class="base-search"><span aria-hidden="true">⌕</span><input type="search" id="baseSearch" placeholder="Tìm khách…" aria-label="Tìm khách mẫu"></label>
+            <div class="base-contact-list">
+              <button class="base-contact selected" type="button" data-customer="a" data-name="Khách mẫu A" aria-pressed="true"><span class="base-avatar">A</span><span class="base-contact-name"><strong>Khách mẫu A</strong><small>Đã nhận đơn mẫu</small></span><time>08:30</time></button>
+              <button class="base-contact" type="button" data-customer="b" data-name="Khách mẫu B" aria-pressed="false"><span class="base-avatar">B</span><span class="base-contact-name"><strong>Khách mẫu B</strong><small>Xin báo giá mới</small></span><time>08:15</time></button>
+              <button class="base-contact" type="button" data-customer="c" data-name="Khách mẫu C" aria-pressed="false"><span class="base-avatar">C</span><span class="base-contact-name"><strong>Khách hàng đang xem thử</strong><small>Nội dung 1–2 dòng</small></span><time>07:55</time></button>
+            </div>
+            <div class="base-side-foot">Danh sách chỉ để xem cách căn icon, chữ và vùng phụ.</div>
+          </aside>
+          <section class="base-main" aria-label="Nội dung mô phỏng">
+            <div class="base-thread-head"><span class="base-thread-avatar">A</span><div class="base-thread-title"><strong id="baseCustomerName">Khách mẫu A</strong><small id="baseViewHint">Hội thoại thử · Font hệ thống</small></div><button class="base-thread-more" type="button" id="baseOpenPopup">Xem popup</button></div>
+            <div class="base-thread" id="baseThread">
+              <section class="base-view-panel" data-panel="chat">
+                <div class="base-user-line"><span class="base-user-bubble">Cho mình xem báo cáo đơn hàng hôm nay.</span></div>
+                <div class="base-article">
+                  <h2>Báo cáo đơn hàng</h2>
+                  <p>Dưới đây là nội dung mẫu với <strong>chữ đậm</strong>, đoạn văn, số tiền, danh sách và bảng. Vùng này ưu tiên <strong>dễ đọc hơn trang trí</strong>.</p>
+                  <p class="base-inline-note">Đơn đã giao được tính vào công nợ. Đơn tạm chỉ là minh họa.</p>
+                  <div class="base-article-info"><span><small>SL</small><strong id="baseQtyStat">2</strong></span><span><small>Tổng tiền mẫu</small><strong id="baseAmountStat">24.000 đ</strong></span></div>
+                  <table class="base-data-table"><thead><tr><th scope="col">Sản phẩm</th><th scope="col">SL</th><th scope="col">Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp 180ml</td><td id="baseRowQuantity">2</td><td id="baseRowPrice">24.000 đ</td></tr><tr><td>Bánh quy bơ</td><td>3</td><td>78.000 đ</td></tr></tbody></table>
+                  <div class="base-local-card"><strong>Thông báo mẫu</strong><span>Khung nền, đường viền, chữ phụ và nút cùng chia sẻ bộ token.</span><button type="button" class="base-primary" id="basePrimaryDemo">Thử thao tác</button></div>
+                </div>
+              </section>
+              <section class="base-view-panel" data-panel="work" hidden>
+                <div class="base-article"><h2>Công việc</h2><p>Ví dụ một thẻ công việc có tên khách, thông tin phụ, trạng thái và số tiền.</p>
+                  <div class="base-task-row"><span class="base-task-icon">✓</span><div><strong>Tổng hợp đơn</strong><small>3 dòng sản phẩm · Cần đối chiếu</small></div><span class="base-tag">Đang xử lý</span></div>
+                  <div class="base-task-row"><span class="base-task-icon">₫</span><div><strong>Công nợ mẫu</strong><small>Thông tin minh họa</small></div><b>282.000 đ</b></div>
+                  <div class="base-inline-actions"><button type="button" class="base-primary" id="baseWorkAction">Mở công việc mẫu</button><button type="button" class="base-secondary" id="baseWorkSecondary">Nút phụ</button></div>
+                </div>
+              </section>
+              <section class="base-view-panel" data-panel="sales" hidden>
+                <div class="base-article"><h2>Bán hàng</h2><p>Ví dụ một dòng sản phẩm có icon, tên, đơn giá, số lượng và hai nút điều chỉnh.</p>
+                  <div class="base-product-row"><span class="base-product-icon">▣</span><div><strong>Sữa hộp 180ml</strong><small>12.000 đ / hộp</small></div><div class="base-stepper" aria-label="Điều chỉnh số lượng"><button id="baseQtyMinus" type="button" aria-label="Giảm số lượng">−</button><input id="baseQty" type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng"><button id="baseQtyPlus" type="button" aria-label="Tăng số lượng">+</button></div></div>
+                  <div class="base-order-summary"><span>Thành tiền mẫu</span><strong id="baseSalesTotal">24.000 đ</strong></div>
+                  <div class="base-inline-actions"><button type="button" class="base-primary" id="baseSalesButton">Lưu đơn mẫu</button><button type="button" class="base-secondary" id="baseSalesSecondary">Đơn tạm</button></div>
+                </div>
+              </section>
+            </div>
+            <form id="baseComposeForm" class="base-composer">
+              <label class="base-composer-add" for="baseMessage" aria-hidden="true">+</label>
+              <label class="base-visually-hidden" for="baseMessage">Tin nhắn để thử</label>
+              <textarea id="baseMessage" rows="1" maxlength="500" placeholder="Nhập nội dung mẫu…"></textarea>
+              <button type="submit" class="base-composer-send">Gửi mẫu</button>
+            </form>
+          </section>
+        </div>
+        <nav class="base-phone-nav" aria-label="Chuyển chức năng trên mobile">
+          <button type="button" data-view="chat" class="selected" aria-current="page">Chat</button>
+          <button type="button" data-view="work">Công việc</button>
+          <button type="button" data-view="sales">Bán hàng</button>
+        </nav>
+        <footer class="base-app-foot"><span>UI 2027 · Một CSS chung</span><span>Không gửi / thu tiền thật</span></footer>
+      </div>
+    </section>
+    <div class="base-live-row">
+      <span class="base-live-dot"></span><span id="baseFeedback" role="status" aria-live="polite">Mẫu gốc 2027 đang được hiển thị. Các nút chỉ hoạt động trong trang demo.</span>
+    </div>
+    <div class="base-sections">
+      <section class="base-spec-card">
+        <div class="base-section-heading"><span>01 / CẤU TRÚC CHUNG</span><h2>Thành phần nền tảng</h2></div>
+        <div class="base-pill-grid">
+          <span>App shell</span><span>Rail</span><span>Danh bạ</span><span>Header</span>
+          <span>Văn bản</span><span>Bảng</span><span>Thẻ</span><span>Nút</span>
+          <span>Input</span><span>Focus</span><span>Composer</span><span>Popup</span>
+        </div>
+        <p>Phần mẫu dùng một nguồn màu, font, khoảng cách và viền. Đổi nguồn tham khảo chỉ đổi các token trình bày, không thay cấu trúc HTML hay dữ liệu.</p>
+      </section>
+      <section class="base-spec-card">
+        <div class="base-section-heading"><span>02 / THÔNG SỐ HIỆN TẠI</span><h2>Token CSS của mẫu</h2></div>
+        <pre id="baseTokenOutput" class="base-tokens" aria-label="Token của mẫu gốc"></pre>
+      </section>
+    </div>
+    <div class="base-source-note">
+      <strong>Nguồn tham khảo được giữ nguyên trong Drive.</strong>
+      Bản mẫu gốc 2027 là thiết kế mới; không phải mã nguồn hay bản sao chính thức của ChatGPT, Facebook hoặc Gemini.
+      <a href="https://github.com/1sl2tp/2027/blob/main/references/CHATGPT_FACEBOOK_GEMINI_UI_COMPARISON_2026-11-22.md" target="_blank" rel="noopener noreferrer">Xem đối chiếu nguồn</a>.
+    </div>
+  </main>
+  <dialog class="base-dialog" id="baseDialog" aria-labelledby="baseDialogTitle">
+    <div class="base-dialog-header"><h2 id="baseDialogTitle">Popup mẫu 2027</h2><button id="baseDialogClose" type="button" aria-label="Đóng popup">×</button></div>
+    <p>Đây là một hộp thoại để kiểm tra nền, góc bo, viền, khoảng cách và hai cấp nút. Không thực hiện hành động trên máy chủ.</p>
+    <div class="base-dialog-buttons"><button type="button" class="base-secondary" id="baseDialogCancel">Hủy</button><button type="button" class="base-primary" id="baseDialogConfirm">Xác nhận mẫu</button></div>
+  </dialog>
+</body>
+</html>
