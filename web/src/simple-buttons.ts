@@ -10,11 +10,11 @@ interface Specimen {
  source:string;caption:string;icon?:string;
 }
 const SPECIMENS:readonly Specimen[]=[
- {id:"BUTTON-01",label:"Nút chính · primary",kind:"button",variant:"primary",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Chọn"},
- {id:"BUTTON-02",label:"Nút phụ · secondary",kind:"button",variant:"secondary",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Hủy"},
- {id:"BUTTON-03",label:"Nút viền · outline",kind:"button",variant:"outline",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Chi tiết"},
- {id:"BUTTON-04",label:"Nút nhẹ · quiet",kind:"button",variant:"quiet",layout:"plain",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Xem thêm"},
- {id:"BUTTON-05",label:"Nút viên thuốc · pill",kind:"button",variant:"primary",layout:"pill",state:"idle",source:"Apps SDK · tham khảo Button",caption:"Tiếp tục"},
+ {id:"BUTTON-01",label:"Nút chính · primary",kind:"button",variant:"primary",layout:"plain",state:"idle",source:"2027 · BTN-01 / ui-button--primary",caption:"Chọn"},
+ {id:"BUTTON-02",label:"Nút phụ · secondary",kind:"button",variant:"secondary",layout:"plain",state:"idle",source:"2027 · BTN-01 / ui-button--secondary",caption:"Hủy"},
+ {id:"BUTTON-03",label:"Nút viền · outline",kind:"button",variant:"outline",layout:"plain",state:"idle",source:"2027 · ui-button--outline",caption:"Chi tiết"},
+ {id:"BUTTON-04",label:"Nút nhẹ · quiet",kind:"button",variant:"quiet",layout:"plain",state:"idle",source:"2027 · BTN-01 / ui-button--quiet",caption:"Xem thêm"},
+ {id:"BUTTON-05",label:"Nút viên thuốc · pill",kind:"button",variant:"primary",layout:"pill",state:"idle",source:"2027 · ui-button--pill",caption:"Tiếp tục"},
  {id:"BUTTON-06",label:"Nút toàn chiều ngang · block",kind:"button",variant:"primary",layout:"block",state:"idle",source:"UI 2027 · ui-button--block",caption:"Xác nhận"},
  {id:"BUTTON-07",label:"Icon trước chữ",kind:"button",variant:"outline",layout:"leading",state:"idle",source:"UI 2027 · ui-icon",caption:"Lưu",icon:"save"},
  {id:"BUTTON-08",label:"Icon sau chữ",kind:"button",variant:"outline",layout:"trailing",state:"idle",source:"UI 2027 · ui-icon",caption:"Tiếp theo",icon:"arrow-right"},
