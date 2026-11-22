@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có ba trang Web:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V16**: một văn bản chỉnh font/nền như trước, bên dưới là **23 bộ mẫu được chia vào 9 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V17**: một văn bản chỉnh font/nền như trước, bên dưới là **23 bộ mẫu được chia vào 9 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
 
@@ -21,7 +21,7 @@
 
 ## Thư viện bảng hóa đơn và phiếu (UI-V16)
 
-**Xem ngay:** [Bảng hóa đơn & phiếu](https://1sl2tp.github.io/2027/#sample-invoices). Nhóm này có **10 mẫu hóa đơn/phiếu**, chọn một mẫu để xem trực tiếp, sao chép HTML hoặc in thử bản đen trắng.
+**Xem ngay:** [Bảng hóa đơn & phiếu](https://1sl2tp.github.io/2027/#sample-invoices). Nhóm này có **13 mẫu hóa đơn/phiếu**, chọn một mẫu để xem trực tiếp, sao chép HTML hoặc in thử bản đen trắng.
 
 - **INV-00** — bản gốc đen trắng chuẩn in.
 - **INV-01** — tối giản chỉ kẻ ngang.
@@ -33,18 +33,23 @@
 - **INV-07** — đơn đã giao.
 - **INV-08** — phiếu kiểm / đối soát số lượng và ghi chú.
 - **INV-09** — hóa đơn kèm công nợ, số đã thu và còn phải thanh toán.
+- **INV-10** — STT · TÊN · GIÁ · SL · THÀNH TIỀN, bảng đen trắng kẻ ô.
+- **INV-11** — STT · TÊN · GIÁ · SL · THÀNH TIỀN, bảng tối giản kẻ ngang.
+- **INV-12** — STT · TÊN · GIÁ · SL · THÀNH TIỀN, bảng gọn trên điện thoại.
 
 Bốn màu đầu tiên tham khảo **bộ palette thực tế** ở [TAPHOA `src/fixed-ui-invoice-templates.js`](https://github.com/1sl2tp/taphoaxyz/blob/main/src/fixed-ui-invoice-templates.js): đen trắng, Tối giản, Business Navy và Retail Green. Hình học và cấu trúc HTML do `2027` dựng từ yêu cầu, **không phải bản sao pixel của ảnh hóa đơn đang xuất trong TAPHOA**. Trục bảng dựa trên [semantic columns](https://github.com/1sl2tp/taphoaxyz/blob/main/src/fixed-ui-semantic-columns.css): STT giữa, tên trái, SL giữa, đơn giá và thành tiền phải, chữ số dạng tabular.
 
-Đồng thời [Bộ mẫu gốc · Lấy mã](https://1sl2tp.github.io/2027/#sample-patterns) đã có **32 mẫu/9 nhóm**, trong đó có đủ **INV-00…INV-09**. Hai màn hình dùng cùng `web/src/ui-patterns.ts`; CSS hóa đơn chỉ ở `web/styles.css`. Xuất JSON của bộ mẫu chuyển sang V16, gồm các mẫu hóa đơn mới. Phần in chỉ in bản mẫu, không tạo đơn thật, không gửi ảnh đơn và không ghi thu. **RULE 09** kiểm soát bảng và print.
+**Hai thứ tự cột đều được giữ làm mẫu riêng:** STT–TÊN–SL–GIÁ–THÀNH TIỀN (V16) và STT–TÊN–GIÁ–SL–THÀNH TIỀN (V17). Cả phần header, giá và số lượng ở từng dòng được hoán đổi thật, không chỉ thay chữ. Định nghĩa `.ds-invoice-table--price-first` trong CSS chung dùng cho kẻ ô, tối giản và mobile; số tiền, phép tính và mẫu gốc V16 không đổi.
+
+Đồng thời [Bộ mẫu gốc · Lấy mã](https://1sl2tp.github.io/2027/#sample-patterns) đã có **35 mẫu/9 nhóm**, trong đó có đủ **INV-00…INV-09**. Hai màn hình dùng cùng `web/src/ui-patterns.ts`; CSS hóa đơn chỉ ở `web/styles.css`. Xuất JSON của bộ mẫu chuyển sang V17, gồm các mẫu hóa đơn mới. Phần in chỉ in bản mẫu, không tạo đơn thật, không gửi ảnh đơn và không ghi thu. **RULE 09** kiểm soát bảng và print.
 
 ## Bộ mẫu gốc có thể lấy mã trực tiếp (UI-V15)
 
 **Mở tại [Bộ mẫu gốc · Lấy mã](https://1sl2tp.github.io/2027/#sample-patterns).**
 
-Bản V15 bổ sung **32 mẫu HTML đã phân loại trong 9 nhóm** để đưa vào nhiều màn mà không phải tự viết lại từng nút/ô nhập. Cùng một định nghĩa trong `web/src/ui-patterns.ts` dùng cho **preview và nút Sao chép HTML**. Có chọn nhóm, tìm kiếm (có/không dấu), thử một số trạng thái tương tác, sao chép hướng dẫn kết nối CSS/icon, xuất JSON danh mục và mở mã của từng mẫu.
+Bản V15 bổ sung **35 mẫu HTML đã phân loại trong 9 nhóm** để đưa vào nhiều màn mà không phải tự viết lại từng nút/ô nhập. Cùng một định nghĩa trong `web/src/ui-patterns.ts` dùng cho **preview và nút Sao chép HTML**. Có chọn nhóm, tìm kiếm (có/không dấu), thử một số trạng thái tương tác, sao chép hướng dẫn kết nối CSS/icon, xuất JSON danh mục và mở mã của từng mẫu.
 
-**Mẫu hiện có:** chữ/trạng thái (2), nút/thanh công cụ/số lượng/tabs (4), nhập liệu (3), chat/media (4), bảng/bán hàng (3), **hóa đơn & phiếu (10)**, công việc/công nợ/báo giá (3), cài đặt (1), popup/phản hồi (2). Các mẫu mới sử dụng class `.ui-*` và `.ds-*`, một `web/styles.css` và một `web/icons.svg` **không có bộ CSS riêng cho CHAT và TAPHOA**.
+**Mẫu hiện có:** chữ/trạng thái (2), nút/thanh công cụ/số lượng/tabs (4), nhập liệu (3), chat/media (4), bảng/bán hàng (3), **hóa đơn & phiếu (13)**, công việc/công nợ/báo giá (3), cài đặt (1), popup/phản hồi (2). Các mẫu mới sử dụng class `.ui-*` và `.ds-*`, một `web/styles.css` và một `web/icons.svg` **không có bộ CSS riêng cho CHAT và TAPHOA**.
 
 Tham khảo kiến trúc thiết kế: [GitHub Primer](https://primer.style/product/getting-started/foundations/), [Meta StyleX](https://engineering.fb.com/2025/11/11/web/stylex-a-styling-library-for-css-at-scale/), [Brad Frost Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/) và [Radix Primitives](https://www.radix-ui.com/primitives/docs/overview/introduction). Chỉ tham khảo nguyên tắc dùng lại, không copy code vendor hoặc khẳng định tương đương CSS Meta/Facebook.
 
