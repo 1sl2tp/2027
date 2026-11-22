@@ -204,3 +204,22 @@ test("V08 gives grouped quantity and text inputs a single outer focus ring",()=>
   assert.ok(css.includes("box-shadow:none;"));
   assert.ok(css.includes("appearance:textfield;-webkit-appearance:textfield"));
 });
+
+test("R04 grounds three vendor reference captures in the one canonical RULES file",()=>{
+  const rule=read("RULES.md"),comparison=read("references/CHATGPT_FACEBOOK_GEMINI_UI_COMPARISON_2026-11-22.md");
+  assert.ok(rule.includes("## RULE 04"));
+  assert.ok(rule.includes("UI-REF-01"));
+  assert.ok(rule.includes("UI-REF-05"));
+  assert.ok(rule.includes("một `web/styles.css`"));
+  for(const name of ["ChatGPT","Facebook","Gemini"]){
+    assert.ok(rule.includes(name));
+    assert.ok(comparison.includes(name));
+  }
+  for(const term of ["--fds-blue-60","#1877F2","--gem-sys-spacing--xs","--ssr-sidenav-open-width","--app-color-border-focus","--ui-bg","--ui-surface"]){
+    assert.ok(comparison.includes(term),term);
+  }
+  assert.ok(comparison.includes("Facebook Reel"));
+  assert.ok(comparison.includes("codex"));
+  assert.ok(comparison.includes("Không copy"));
+  assert.ok(read("README.md").includes("CHATGPT_FACEBOOK_GEMINI_UI_COMPARISON_2026-11-22.md"));
+});

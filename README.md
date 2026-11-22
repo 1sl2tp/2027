@@ -12,6 +12,10 @@
 
 Ảnh lỗi từ Safari cho thấy khi chọn số lượng ở mẫu số 01 và số 05, viền xanh `input:focus-visible` xuất hiện **bên trong** nhóm `− | số | +`, che đường phân cách và tạo hiệu ứng đứt viền. V08 sửa tận gốc tại **`web/styles.css` dùng chung**: nhóm có một viền focus bao quanh toàn khối, ô nhập số bên trong không còn outline/shadow riêng; hai nút −/+ trong nhóm cũng dùng dấu focus của nhóm. Input chữ có icon và tìm kiếm dùng cùng quy tắc; input đơn lẻ và các ô rời vẫn hiển thị focus quanh chính ô đó để phục vụ điều hướng bàn phím. Chuẩn hóa `appearance: textfield` trên Safari. Không thay đổi tính toán số lượng, dữ liệu hoặc app production.
 
+## Tham chiếu ba hệ UI lớn
+
+Đã đối chiếu bản lưu **ChatGPT × Facebook × Gemini** trong [Google Drive – UI 2027](https://drive.google.com/drive/folders/1uPNFbeA_lbJjIEZW0O__g4lTWWXJEVSj?hl=vi). Bảng nguồn cụ thể: [`references/CHATGPT_FACEBOOK_GEMINI_UI_COMPARISON_2026-11-22.md`](./references/CHATGPT_FACEBOOK_GEMINI_UI_COMPARISON_2026-11-22.md). Các nguyên tắc được ghi vào **RULE 04** của `RULES.md`, không tạo thêm file rule. Tài liệu tách rõ biến CSS từ bản lưu và đề xuất cho 2027; chưa đổi giao diện V08 hoặc ứng dụng CHAT production.
+
 ## Tham chiếu ChatGPT từ Google Drive
 
 [Đối chiếu ảnh hiện tại với thư viện CSS đã lưu tháng 9/2026](./references/CHATGPT_UI_SOURCE_AUDIT_2026-11-22.md): có nguồn, bảng màu, thang chữ, spacing, shell, composer, icon, bảng, menu và quy tắc đối chiếu ảnh tiếp theo. Đây là tài liệu phân tích, **chưa tự ý áp lại toàn bộ giao diện demo hoặc CHAT production**.
@@ -111,4 +115,4 @@ Yêu cầu JDK 17, Android SDK 35, Gradle 8.11.1. V04 là cập nhật Web Libra
 
 ## Ghi chú thiết kế
 
-[**RULES.md**](./RULES.md) chứa nguyên tắc UI/UX R01–R03. V04 đang minh họa các nguyên tắc đó; không tạo một hệ rule song song. Việc xem/nghiệm thu trên thiết bị iOS/Android thật khác với việc CI compile thành công.
+[**RULES.md**](./RULES.md) chứa nguyên tắc UI/UX R01–R04. V04 đang minh họa các nguyên tắc đó; không tạo một hệ rule song song. Việc xem/nghiệm thu trên thiết bị iOS/Android thật khác với việc CI compile thành công.
