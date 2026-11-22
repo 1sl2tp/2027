@@ -7,6 +7,7 @@ import {
 } from "./design.js";
 import { initComposerGallery } from "./composer-gallery.js";
 import { initMessageActions } from "./action-gallery.js";
+import { initRootButtonCatalog } from "./root-button-library.js";
 
 type BlockId="title"|"body"|"section"|"description"|"list"|"table"|"number"|"money"|"note"|"caption";
 type SelectId=BlockId|"all";
@@ -483,6 +484,7 @@ window.addEventListener("hashchange",()=>{
 });
 const initialGalleryCategory=galleryCategoryFromHash();
 if(initialGalleryCategory)activeGalleryCategory=initialGalleryCategory;
+initRootButtonCatalog(); // Build the source catalog before text-search discovers gallery content.
 updateGallery();
 
 // UI-V12 · The SAME ui-button/ui-icon controls that are used by every chat composer.

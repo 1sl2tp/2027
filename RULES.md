@@ -1,7 +1,7 @@
 # 2027 — RULES.md
 
 > **Nguồn quy tắc duy nhất (Single Source of Truth)**  
-> Repo: `1sl2tp/2027` · Trạng thái: **R06 / UI-V12 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
+> Repo: `1sl2tp/2027` · Trạng thái: **R07 / UI-V14 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
 > Phạm vi: Web App/PWA (TypeScript + HTML + CSS) và Android APK native (Kotlin + Jetpack Compose).
 
 ## RULE 01 — MỘT FILE RULE DUY NHẤT
@@ -344,3 +344,34 @@ Khi bổ sung mẫu mới vào thư viện, **không được tạo nút, biểu
 - **Web:** sửa `index.html` V12, `web/styles.css`, `web/icons.svg`, `web/src/app.ts`, `web/src/composer-gallery.ts` và đóng gói Pages; 4 composer vẫn mô phỏng, không tải lên hay gửi thật.
 - **APK:** chưa đổi. **Ứng dụng CHAT/TAPHOA thật:** chưa đổi. **Nguồn trong Drive:** không đổi.
 - **Hoàn tác:** revert commit V12 để quay về V11; nhánh lưu V08 nguyên trạng. Nếu thiếu icon khi đóng gói, sửa lại bước sao chép `web/icons.svg` trong workflow và kiểm thử.
+
+---
+
+## RULE 07 — DANH MỤC NÚT THEO NGUỒN VÀ NGỮ CẢNH, MỘT HỆ CSS CHUNG
+
+**Mã:** 2027-R07 · **Ngày:** 22/11/2026 (VN) · **Trạng thái:** Đã có mẫu Web V14; CI/phát hành/kiểm thử thiết bị được xác nhận riêng theo bằng chứng.
+
+### 7.1. Mục đích và nguồn nghiên cứu
+
+Mục tiêu là **một thư viện nút đủ rộng để phục vụ cả CHAT và TAPHOA**, không tự tạo kiểu nút trong từng màn. Kế thừa RULE 06 (Button/Icon có một owner) và ánh xạ nguồn: [`references/CHAT_TAPHOA_BUTTON_SOURCE_CATALOG_2026-11-22.md`](./references/CHAT_TAPHOA_BUTTON_SOURCE_CATALOG_2026-11-22.md).
+
+- **CHAT:** bản `ui-library/index.html` đang đọc được **44 button entries `I01–I44`**, được kiểm kê vào V14 theo ID, primitive, scope, selector và source file.
+- **TAPHOA:** 44 mẫu nút từ các file markup/CSS cụ thể, **là mẫu chọn lọc, chưa phải kiểm kê toàn bộ tất cả nút runtime**. Không dùng số 44 để tuyên bố TAPHOA chỉ có 44 nút.
+- Có **11 họ**: Điều hướng; Tin nhắn; Composer; Ảnh/media; Tài khoản; Gọi điện; Admin; Bán hàng; Đơn hàng; Công nợ; Cài đặt/mẫu hóa đơn.
+
+### 7.2. Các điều kiện bắt buộc
+
+1. **Phân loại trước khi mở rộng:** mỗi nút có `id`, `origin`, `family`, `primitive`, `variant`, `icon`, `source` và `selector` trong bảng `web/src/root-button-data.ts`. Nếu chưa có nguồn cụ thể, ghi là *mẫu đề xuất*, không gán nhãn nguyên bản CHAT/TAPHOA.
+2. **Không phân tán CSS hoặc SVG:** icon mới vào `web/icons.svg`, loại nút mới định nghĩa trong `web/styles.css` trên nền `.ui-button` và `.ui-icon`. Các compositional rows chỉ tổ chức bố cục, không có hệ token riêng cho CHAT/TAPHOA.
+3. **Ưu tiên chức năng nút:** các variant chính gồm `primary`, `secondary`, `quiet`, `outline`, `success`, `warning`, `danger`, `segment`, `toggle` và trạng thái `idle`, `pressed`, `disabled`, `loading`, `success`, `error`/chờ xác nhận. Tất cả cần có vùng chạm hợp lý, nhãn và focus bàn phím; trạng thái không được chỉ phân biệt bằng màu.
+4. **Dữ liệu và môi trường:** bản dùng thử Web `index.html#sample-actions` có bộ lọc CHAT/TAPHOA, nhóm chức năng, tìm kiếm và thông tin selector nguồn. **Chọn mẫu không thực thi handler gốc**, không tạo bản sao backend; các thao tác Bán ngay, Thu tiền, Xóa tài khoản và Duyệt chỉ hiển thị phản hồi demo.
+5. **Bố cục ghép theo ngữ cảnh:** `#sample-layouts` dùng lại nút gốc để dựng thanh thao tác CHAT, Bán hàng, Công nợ, Đơn hàng. Không sao chép CSS rồi đổi màu từng nghiệp vụ.
+6. **Quy trình mở rộng:** đọc mã nguồn gốc và xác nhận selector/owner → ghi family và trạng thái → nếu thiếu SVG thì thêm registry → render mẫu trong nhóm Nút & biểu tượng → tạo ví dụ ứng dụng trong Hàng & bố cục nếu cần → kiểm thử build, mobile, focus, tương phản và hit area.
+7. **Không giả hoàn thành nghiệp vụ:** mẫu loading chỉ mô phỏng vòng quay; nút tham chiếu thu, giao, duyệt, gọi, xóa hoặc thông báo không được kích hoạt API/RPC/Auth, ghi tiền, gửi tin hay gọi thật. Tách `Đã phát hành demo` khỏi `Đã nghiệm thu Safari/Chrome/PWA`.
+
+### 7.3. Ảnh hưởng, bằng chứng, hoàn tác
+
+- **Web 2027:** thêm dữ liệu nguồn `web/src/root-button-data.ts`, trình duyệt mẫu `web/src/root-button-library.ts`, mở rộng SVG và token ở stylesheet dùng chung; bổ sung 3 card mẫu/ma trận/trạng thái và ghép luồng. Không thay logic các màn V04/V09 hoặc V08 archive.
+- **TAPHOA/CHAT production:** không chỉnh sửa. **APK:** không đổi. **Nguồn Drive:** không đổi.
+- **Kiểm thử:** bảo đảm 44 nút CHAT + 44 ví dụ TAPHOA, 11 họ, 51 icon, 21 bộ mẫu, không duplicate ID, không JS gọi mạng; phải xác minh CI thực và xem trên thiết bị thật mới đánh dấu nghiệm thu.
+- **Hoàn tác:** revert commit V14 trên repo 2027; thư viện V13 trước đó và archive V08 không bị sửa.
