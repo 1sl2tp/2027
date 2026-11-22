@@ -2524,13 +2524,28 @@ body.simple-first .topbar-end{gap:0}
  display:flex;flex-direction:column;min-width:115px;gap:5px;
  font:600 11px/1.4 var(--ui-font);color:var(--ui-text-muted)
 }
-.ui-column-matrix-toolbar select{
+.ui-column-matrix-toolbar :is(select,input){
  min-width:0;width:100%;min-height:var(--ui-control-hit);
  border:1px solid var(--ui-border);border-radius:var(--ui-button-radius);
  padding:6px 10px;background:var(--ui-bg);color:var(--ui-text);
  font:400 14px/1.4 var(--ui-font)
 }
 .ui-column-matrix-toolbar .ui-button{min-height:var(--ui-control-hit)}
+/* UI-V36 · one main table with up to twenty fields, no extra table design system. */
+.ui-column-presets{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:8px 0 4px}
+.ui-column-presets .ui-button{min-height:var(--ui-control-hit);flex:0 0 auto}
+
+.ui-column-role-list{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 11px;min-width:0}
+.ui-column-role-chip{
+ display:inline-flex;align-items:center;max-width:100%;min-height:24px;
+ padding:3px 7px;border:1px solid var(--ui-border);border-radius:6px;
+ background:var(--ui-bg);color:var(--ui-text-muted);
+ font:500 10px/1.4 var(--ui-font);overflow-wrap:anywhere
+}
+.ui-column-role-chip[data-align="right"]{font-variant-numeric:tabular-nums}
+.ui-column-legacy-styles{margin-top:13px}
+.ui-column-legacy-title{font:600 12px/1.5 var(--ui-font);color:var(--ui-text);margin:9px 0}
+.ui-column-legacy-styles .variant-grid{margin-top:10px}
 .ui-column-matrix-preview{
  container:column-preview / inline-size;display:block;box-sizing:border-box;
  width:100%;max-width:100%;min-width:0;
@@ -2570,10 +2585,15 @@ body.simple-first .topbar-end{gap:0}
 .ds-table.ds-table--schema :is(th,td)[data-col-role="index"],
 .ds-table.ds-table--schema :is(th,td)[data-col-role="number"],
 .ds-table.ds-table--schema :is(th,td)[data-col-role="quantity"],
+.ds-table.ds-table--schema :is(th,td)[data-col-role="code"],
+.ds-table.ds-table--schema :is(th,td)[data-col-role="unit"],
+.ds-table.ds-table--schema :is(th,td)[data-col-role="date"],
+.ds-table.ds-table--schema :is(th,td)[data-col-role="time"],
 .ds-table.ds-table--schema :is(th,td)[data-col-role="status"]{
  text-align:center;font-variant-numeric:tabular-nums
 }
-.ds-table.ds-table--schema :is(th,td)[data-col-role="money"]{
+.ds-table.ds-table--schema :is(th,td)[data-col-role="money"],
+.ds-table.ds-table--schema :is(th,td)[data-col-role="percent"]{
  text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap
 }
 .ds-table.ds-table--schema :is(th,td)[data-col-role="text"],
@@ -2595,10 +2615,15 @@ body.simple-first .topbar-end{gap:0}
  font-weight:inherit;font-size:11px;line-height:1.35;
  color:inherit;text-align:inherit;overflow-wrap:anywhere
 }
-.ds-table.ds-table--schema th[data-col-role="money"] .ui-column-sort{justify-content:flex-end;text-align:right}
+.ds-table.ds-table--schema th[data-col-role="money"] .ui-column-sort,
+.ds-table.ds-table--schema th[data-col-role="percent"] .ui-column-sort{justify-content:flex-end;text-align:right}
 .ds-table.ds-table--schema th[data-col-role="index"] .ui-column-sort,
 .ds-table.ds-table--schema th[data-col-role="number"] .ui-column-sort,
 .ds-table.ds-table--schema th[data-col-role="quantity"] .ui-column-sort,
+.ds-table.ds-table--schema th[data-col-role="code"] .ui-column-sort,
+.ds-table.ds-table--schema th[data-col-role="unit"] .ui-column-sort,
+.ds-table.ds-table--schema th[data-col-role="date"] .ui-column-sort,
+.ds-table.ds-table--schema th[data-col-role="time"] .ui-column-sort,
 .ds-table.ds-table--schema th[data-col-role="status"] .ui-column-sort{justify-content:center;text-align:center}
 .ds-table.ds-table--schema th[data-col-role="text"] .ui-column-sort,
 .ds-table.ds-table--schema th[data-col-role="note"] .ui-column-sort{justify-content:flex-start;text-align:left}
@@ -2632,6 +2657,7 @@ body.simple-first .topbar-end{gap:0}
  overflow-wrap:anywhere;text-align:right
 }
 .ui-column-card dd[data-col-role="money"],
+.ui-column-card dd[data-col-role="percent"],
 .ui-column-card dd[data-col-role="quantity"],
 .ui-column-card dd[data-col-role="number"],
 .ui-column-card dd[data-col-role="index"]{font-variant-numeric:tabular-nums}
