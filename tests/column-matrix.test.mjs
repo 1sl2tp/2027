@@ -116,8 +116,8 @@ test("V36 preserves source audit and ships a cache-safe page",()=>{
  const html=read("index.html"),workflow=read(".github/workflows/pages.yml");
  for(const repo of ["assistant-ui/assistant-ui","vercel/streamdown","lobehub/streamdown","vercel/ai-elements","openai/apps-sdk-ui","mrigankad/Lumi-UI"])
   assert.ok(audit.includes(repo));
- assert.ok(html.includes('data-ui-version="2027-UI-V42"'));
- assert.ok(html.includes('src="./web/dist-v42/app.js"'));
- assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v42"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V43"'));
+ assert.ok(html.includes('src="./web/dist-v43/app.js"'));
+ assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v43"));
  assert.ok(workflow.includes("ET.parse('web/icons.svg')"));
 });

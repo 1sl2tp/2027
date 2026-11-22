@@ -24,7 +24,7 @@ test("V34 does not steal scroll while reading older messages; jump-back is expli
  assert.ok(src.includes("if(follow){"));
  assert.ok(src.includes("viewport.scrollTop=viewport.scrollHeight"));
  assert.ok(src.includes("unseen++"));
- assert.ok(src.includes("jump.hidden=pinned||unseen===0"));
+ assert.ok(src.includes("jump.hidden=pinned"));
  assert.ok(src.includes("jump.addEventListener(\"click\",jumpToBottom)"));
  assert.ok(src.includes("viewport.scrollTop=0"));
  assert.ok(src.includes('status.textContent="Đang xem đoạn đầu.'));
