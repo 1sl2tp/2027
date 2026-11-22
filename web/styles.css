@@ -2539,7 +2539,7 @@ body.simple-first .topbar-end{gap:0}
 .simple-table-field-summary:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 .simple-table-field-map{
  display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));
- gap:8px 17px;padding:10px 0 10px 24px;margin:0;
+ gap:8px 17px;padding:10px 0;margin:0;list-style:none;
  font:400 12px/1.5 var(--ui-font);color:var(--ui-text-muted)
 }
 .simple-table-field-map li{padding-left:0;overflow-wrap:anywhere}
