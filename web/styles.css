@@ -2517,53 +2517,37 @@ body.simple-first .topbar-end{gap:0}
 #tableColumnMatrixCard{scroll-margin-top:105px}
 @media(max-width:760px){#tableColumnMatrixCard{scroll-margin-top:22px}}
 
-/* UI-V37 · The sole public table presentation matches numbered typography rows.
-   Reuses ds-table--schema, COLUMN_SCHEMA and --ds-table-cell-pad-x. */
+/* UI-V38 · One complete table in section 8, same ds-table primitive.
+   A separate metadata index is not another table; it documents stable column positions. */
 #simpleTables{scroll-margin-top:22px}
-.simple-table-row{
- margin:0;padding:0;border:0;border-bottom:1px solid #ebebeb;
- background:#fff;color:#171717;min-width:0
+.simple-table-content{width:100%;min-width:0;margin-top:16px}
+.simple-table-master{
+ width:100%;max-width:100%;min-width:0;margin:0;
+ overflow-x:auto;overscroll-behavior-x:contain;
+ border:1px solid var(--ui-border);border-radius:7px;background:var(--ui-bg)
 }
-.simple-table-row:last-child{border-bottom:0}
-.simple-table-summary{
- display:grid;grid-template-columns:30px minmax(0,1fr) 22px;
- align-items:center;gap:9px;min-height:68px;min-width:0;
- padding:12px 2px;cursor:pointer;list-style:none
+.simple-table-master .ds-table.ds-table--schema{width:100%;border-radius:0}
+.simple-table-master .ds-table.ds-table--schema :is(th,td){
+ border-bottom:1px solid var(--ui-border)
 }
-.simple-table-summary::-webkit-details-marker{display:none}
-.simple-table-summary::marker{content:""}
-.simple-table-summary:hover{background:#fafafa}
-.simple-table-summary:focus-visible{outline:2px solid #222;outline-offset:-2px}
-.simple-table-title{
- display:block;color:#171717;font:600 14px/1.4 system-ui,-apple-system,"Segoe UI",Arial,sans-serif
+.simple-table-master .ds-table.ds-table--schema thead th{background:var(--ui-surface)}
+.simple-table-field-index{margin:12px 0 4px;padding:0;border:0}
+.simple-table-field-summary{
+ min-height:40px;display:flex;align-items:center;cursor:pointer;
+ font:600 12px/1.5 var(--ui-font);color:var(--ui-text)
 }
-.simple-table-summary .simple-font-meta{
- display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
- overflow:hidden;overflow-wrap:anywhere
+.simple-table-field-summary:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.simple-table-field-map{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));
+ gap:8px 17px;padding:10px 0 10px 24px;margin:0;
+ font:400 12px/1.5 var(--ui-font);color:var(--ui-text-muted)
 }
-.simple-table-chevron{
- display:block;width:7px;height:7px;border-right:1.5px solid #888;border-bottom:1.5px solid #888;
- transform:rotate(45deg);justify-self:center;transition:transform .12s ease
-}
-.simple-table-row[open] .simple-table-chevron{transform:rotate(225deg)}
-.simple-table-preview{
- margin:0 0 15px 39px;min-width:0;max-width:calc(100% - 39px);
- border:1px solid #e5e5e5;border-radius:5px;
- overflow-x:auto;overscroll-behavior-x:contain;background:#fff
-}
-.simple-table-preview .ds-table.ds-table--schema{
- width:100%;border-radius:0;
-}
-.simple-table-preview .ds-table.ds-table--schema :is(th,td){
- border-bottom:1px solid #ebebeb;
-}
-.simple-table-preview .ds-table.ds-table--schema thead th{background:#fafafa}
+.simple-table-field-map li{padding-left:0;overflow-wrap:anywhere}
 .simple-table-footnote{margin-top:14px}
 @media(max-width:760px){
- .simple-table-summary{grid-template-columns:25px minmax(0,1fr) 20px;gap:7px;min-height:65px}
- .simple-table-preview{margin-left:32px;max-width:calc(100% - 32px)}
+ .simple-table-master{max-width:100%;width:100%}
+ .simple-table-field-map{grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:7px 12px}
 }
-@media(prefers-reduced-motion:reduce){.simple-table-chevron{transition:none}}
 
 /* UI-V34 · RULE 09: schema-driven ds-table projection; geometry shared by th and td. */
 .ui-column-matrix-card .studio-component-content{min-width:0}
