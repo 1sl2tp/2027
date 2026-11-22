@@ -1,4 +1,4 @@
-// UI-V40 · RULE 12: structural contracts — classification before creating CSS.
+// UI-V41 · RULE 12: structural contracts — classification before creating CSS.
 // Public GitHub inspiration: assistant-ui ComposerPrimitive, AI Elements PromptInput
 // and OpenAI Apps SDK UI Button/Textarea. This is original 2027 metadata, not vendor code.
 export type ComponentLayer="screen"|"region"|"composition"|"primitive"|"token";
@@ -13,8 +13,14 @@ export const COMPONENT_CONTRACTS:readonly ComponentContract[]=[
  {id:"CHAT-THREAD",parent:"CHAT-SCREEN",layer:"region",nature:"container",cardinality:"one",owner:"thread layout",description:"Vùng nội dung hội thoại, một owner cuộn"},
  {id:"CHAT-MESSAGE-LIST",parent:"CHAT-THREAD",layer:"composition",nature:"container",cardinality:"one",owner:"thread layout",description:"Danh sách nhiều tin nhắn"},
  {id:"CHAT-MESSAGE",parent:"CHAT-MESSAGE-LIST",layer:"composition",nature:"container",cardinality:"many",owner:"message template",description:"Một tin nhắn có nhiều phần tùy chọn"},
- {id:"CHAT-MESSAGE-TEXT",parent:"CHAT-MESSAGE",layer:"primitive",nature:"content",cardinality:"optional",owner:"typography tokens",description:"Nội dung chữ, không phải button"},
- {id:"CHAT-MESSAGE-ACTIONS",parent:"CHAT-MESSAGE",layer:"composition",nature:"container",cardinality:"optional",owner:"ui-action-strip",description:"Vùng nhiều hành động của tin"},
+ {id:"CHAT-MESSAGE-TEXT",parent:"CHAT-MESSAGE",layer:"primitive",nature:"content",cardinality:"optional",owner:"typography tokens",description:"Chữ legacy; bản tin hỗn hợp dùng MESSAGE-CONTENT-PARTS"},
+ {id:"MESSAGE-CONTENT-PARTS",parent:"CHAT-MESSAGE",layer:"composition",nature:"container",cardinality:"one",owner:"message template",description:"Vùng chứa tuần tự nhiều loại nội dung trong cùng một tin"},
+ {id:"MESSAGE-TEXT-PART",parent:"MESSAGE-CONTENT-PARTS",layer:"primitive",nature:"content",cardinality:"many",owner:"typography tokens",description:"Mỗi đoạn chữ là một part, 0–n"},
+ {id:"MESSAGE-TABLE-PART",parent:"MESSAGE-CONTENT-PARTS",layer:"composition",nature:"container",cardinality:"many",owner:"message layout",description:"Slot đặt DATA-TABLE gốc, không phát minh bảng mới"},
+ {id:"MESSAGE-MEDIA-PART",parent:"MESSAGE-CONTENT-PARTS",layer:"composition",nature:"container",cardinality:"many",owner:"message media layout",description:"Vùng nhóm ảnh trong một tin"},
+ {id:"MESSAGE-MEDIA-TILE",parent:"MESSAGE-MEDIA-PART",layer:"primitive",nature:"content",cardinality:"many",owner:"media tile",description:"Mỗi ô ảnh là con một nhóm media"},
+ {id:"CHAT-MESSAGE-ACTIONS",parent:"CHAT-MESSAGE",layer:"composition",nature:"container",cardinality:"optional",owner:"ui-action-strip",description:"Vùng nhiều hành động của đúng tin"},
+ {id:"MESSAGE-COPY-BUTTON",parent:"CHAT-MESSAGE-ACTIONS",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Nút sao chép tất cả parts của đúng tin"},
  {id:"CHAT-COMPOSER",parent:"CHAT-THREAD",layer:"composition",nature:"container",cardinality:"one",owner:"ds-composer",description:"Cha của textarea, đính kèm và toolbar"},
  {id:"COMPOSER-ATTACHMENTS",parent:"CHAT-COMPOSER",layer:"composition",nature:"container",cardinality:"optional",owner:"composer attachment slots",description:"Vùng có 0–n ảnh/tệp trước khi gửi"},
  {id:"COMPOSER-ATTACHMENT",parent:"COMPOSER-ATTACHMENTS",layer:"composition",nature:"content",cardinality:"many",owner:"attachment preview",description:"Một ảnh/tệp với nút bỏ riêng"},
@@ -31,6 +37,97 @@ export const COMPONENT_CONTRACTS:readonly ComponentContract[]=[
  {id:"DATA-TABLE",parent:"CHAT-SCREEN",layer:"composition",nature:"container",cardinality:"optional",owner:"ds-table",description:"Một bảng có nhiều cột từ schema"},
  {id:"TABLE-COLUMN",parent:"DATA-TABLE",layer:"primitive",nature:"content",cardinality:"many",owner:"COLUMN_SCHEMA",description:"Một cột có key/label/role bất biến"}
 ];
+
+/** Component definitions have one canonical catalog parent. Other hosts are explicit
+ * placements, not copies of a primitive, stylesheet, or second schema. */
+export interface ComponentPlacement {
+ id:string;host:string;child:string;cardinality:ComponentCardinality;
+}
+export const COMPONENT_PLACEMENTS:readonly ComponentPlacement[]=[
+ {id:"message-table",host:"MESSAGE-TABLE-PART",child:"DATA-TABLE",cardinality:"one"}
+];
+export function getAllowedComponentParents(id:string):string[]{
+ const canonical=getComponentContract(id)?.parent;
+ return [
+  ...(canonical?[canonical]:[]),
+  ...COMPONENT_PLACEMENTS.filter(placement=>placement.child===id).map(placement=>placement.host)
+ ];
+}
+/** Validate placements against canonical definitions and the complete multi-parent graph. */
+export function auditComponentPlacements(
+ contracts:readonly ComponentContract[]=COMPONENT_CONTRACTS,
+ placements:readonly ComponentPlacement[]=COMPONENT_PLACEMENTS
+):string[]{
+ const issues:string[]=[],ids=new Set<string>();
+ const byId=new Map(contracts.map(item=>[item.id,item]));
+ const edges=new Map<string,string[]>();
+ for(const item of contracts){
+  if(item.parent)edges.set(item.parent,[...(edges.get(item.parent)||[]),item.id]);
+ }
+ for(const item of placements){
+  if(ids.has(item.id))issues.push("Trùng placement: "+item.id);
+  ids.add(item.id);
+  if(!byId.has(item.host))issues.push(item.id+" thiếu host "+item.host);
+  if(!byId.has(item.child))issues.push(item.id+" thiếu child "+item.child);
+  if(byId.get(item.host)?.nature!=="container")issues.push(item.id+" host không là container");
+  if(item.host===item.child)issues.push(item.id+" tự lồng chính nó");
+  if(byId.has(item.host)&&byId.has(item.child))
+   edges.set(item.host,[...(edges.get(item.host)||[]),item.child]);
+ }
+ const visited=new Set<string>(),active=new Set<string>();
+ const walk=(id:string):void=>{
+  if(active.has(id)){issues.push("Chu trình placement: "+id);return;}
+  if(visited.has(id))return;
+  active.add(id);
+  for(const child of edges.get(id)||[])walk(child);
+  active.delete(id);visited.add(id);
+ };
+ for(const item of contracts)walk(item.id);
+ return issues;
+}
+/** Audits the visible V41 message instance independently of the canonical catalog. */
+export function auditMessageTree(root:Element):string[]{
+ const errors:string[]=[];
+ const message=root.matches('[data-ui-component="CHAT-MESSAGE"]')
+  ?root:root.querySelector('[data-ui-component="CHAT-MESSAGE"]');
+ if(!message)return ["CHAT-MESSAGE: thiếu tin cha"];
+ const children=Array.from(message.children) as HTMLElement[];
+ const direct=(id:string)=>children.filter(child=>child.dataset.uiComponent===id);
+ const parts=direct("MESSAGE-CONTENT-PARTS"),actions=direct("CHAT-MESSAGE-ACTIONS");
+ if(parts.length!==1)errors.push("MESSAGE-CONTENT-PARTS: phải có đúng một vùng con");
+ if(actions.length>1)errors.push("CHAT-MESSAGE-ACTIONS: tối đa một vùng thao tác");
+ if(!message.getAttribute("data-message-id"))errors.push("CHAT-MESSAGE: thiếu message ID");
+ if(parts.length===1){
+  if(parts[0].children.length===0)errors.push("MESSAGE-CONTENT-PARTS: không có nội dung");
+  for(const node of Array.from(parts[0].children) as HTMLElement[]){
+   const id=node.dataset.uiComponent;
+   if(!["MESSAGE-TEXT-PART","MESSAGE-TABLE-PART","MESSAGE-MEDIA-PART"].includes(id||""))
+    errors.push("MESSAGE-CONTENT-PARTS: part sai loại "+id);
+   if(id==="MESSAGE-TABLE-PART"){
+    const tables=node.querySelectorAll('table[data-ui-component="DATA-TABLE"]');
+    if(tables.length!==1)errors.push("MESSAGE-TABLE-PART: dùng đúng một DATA-TABLE gốc");
+    if(!getAllowedComponentParents("DATA-TABLE").includes("MESSAGE-TABLE-PART"))
+     errors.push("MESSAGE-TABLE-PART: chưa đăng ký placement");
+   }
+   if(id==="MESSAGE-MEDIA-PART"){
+    if(!node.children.length)errors.push("MESSAGE-MEDIA-PART: thiếu tile");
+    for(const tile of Array.from(node.children) as HTMLElement[])
+     if(tile.dataset.uiComponent!=="MESSAGE-MEDIA-TILE")
+      errors.push("MESSAGE-MEDIA-PART: tile sai loại");
+   }
+  }
+ }
+ if(actions.length===1){
+  const buttons=Array.from(actions[0].children) as HTMLElement[];
+  for(const button of buttons){
+   if(button.dataset.uiComponent!=="MESSAGE-COPY-BUTTON"||
+      button.tagName!=="BUTTON"||!button.classList.contains("ui-button"))
+    errors.push("MESSAGE-ACTIONS: phải dùng button primitive gốc");
+  }
+  if(buttons.length>1)errors.push("MESSAGE-ACTIONS: quá một nút copy mẫu");
+ }
+ return errors;
+}
 
 export function getComponentContract(id:string):ComponentContract|undefined{
  return COMPONENT_CONTRACTS.find(node=>node.id===id);
@@ -116,6 +213,13 @@ export function initComponentContractTree():void{
    const note=document.createElement("small");
    note.textContent=item.description+" · owner: "+item.owner;
    row.append(title,label,note);
+   // Shared primitives are referenced by placement; never render a second
+   // canonical DATA-TABLE definition inside the Message subtree.
+   for(const use of COMPONENT_PLACEMENTS.filter(x=>x.host===item.id)){
+    const ref=document.createElement("small");
+    ref.textContent="↳ sử dụng "+use.child+" ("+use.cardinality+") · không nhân bản primitive";
+    row.append(ref);
+   }
    if(COMPONENT_CONTRACTS.some(x=>x.parent===item.id))row.append(render(item.id,depth+1));
    list.append(row);
   }
