@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Có ba trang chính và một phòng thử nguồn GitHub:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V17**: một văn bản chỉnh font/nền như trước, bên dưới là **23 bộ mẫu được chia vào 9 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V17**: một văn bản chỉnh font/nền như trước, bên dưới là **22 bộ mẫu được chia vào 9 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
 - **[Nguồn GitHub & phòng thử Chat UI](https://1sl2tp.github.io/2027/github-sources.html)** — `github-sources.html`, SOURCE-V01: đối chiếu 8 repo mở và thử khung chat, input, bàn phím giả lập, bảng, danh bạ 1–4 dòng, media 1–4 ảnh, menu/popup. [Audit và ranh giới áp dụng](./references/GITHUB_CHAT_UI_SOURCE_LAB_2026-11-22.md).
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
@@ -10,6 +10,15 @@
 
 
 
+
+## Bảng chính duy nhất 1–20 cột (UI-V36)
+
+**[Xem bảng chính và các lựa chọn 6 / 10 / 15 / 20 cột](https://1sl2tp.github.io/2027/#tableColumnMatrixCard)**. Thay vì ba card bảng tách biệt, nhóm Bảng & dữ liệu nay chỉ còn một mẫu bảng dùng chung `ds-table ds-table--schema`. Sáu kiểu trang trí lịch sử vẫn có thể xem trong phần tham khảo thu gọn, không coi là bảng khác.
+
+- **Dữ liệu mẫu gồm 20 trường có tên:** STT, Tên hàng, Số, Số lượng, Đơn giá, Thành tiền, Mã hàng, ĐVT, Ngày, Giờ, Nhóm, Nhà cung cấp, Giá vốn, Chiết khấu, Thuế %, Còn lại, Trạng thái, Người phụ trách, Cập nhật, Ghi chú. Mặc định vẫn mở 6 cột cho dễ kiểm lề.
+- **Tên tiêu đề quyết định căn:** `roleFromHeader` phân loại tiêu đề tiếng Việt thành trái/giữa/phải, chọn cột và đổi tên thử ngay trên trang; bảng giữ nguyên giá trị mẫu, không cập nhật dữ liệu nghiệp vụ.
+- **Cùng trục header/dữ liệu:** `colgroup`, `minPx`, `data-col-role`, `--ds-table-cell-pad-x`; ba mật độ padding 6/10/14px, ba kiểu viền và chế độ cuộn ngang/thẻ mobile. Không dùng `nth-child` để giả định “cột 5 là tiền”.
+- Quy tắc duy nhất được bổ sung vào **RULE 09 §9.7**, không có module CSS mới; bảng hóa đơn và CHAT/TAPHOA thật không thay đổi. Kiểm thử `tests/column-matrix.test.mjs` xác minh cả 20 tên và role; thiết bị Safari/Chrome thực tế vẫn cần nghiệm thu.
 
 ## Chuẩn trục bảng và giữ vị trí cuộn (UI-V34)
 
@@ -21,7 +30,7 @@
 - Nguồn tham khảo ScrollAnchor: [assistant-ui ScrollAnchor](https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/scroll-anchor.mdx).
 - Kiểm tra tự động: `tests/column-matrix.test.mjs` + `tests/scroll-anchor.test.mjs`; nghiệm thu Safari/Chrome/PWA, bàn phím và zoom cần kiểm thử thiết bị thật.
 
-## Bảng linh hoạt 1–8 cột và kiểm kê sáu thư viện GitHub (UI-V33)
+## Lịch sử V33: bảng 1–8 cột và kiểm kê sáu thư viện GitHub (đã mở rộng lên 20 cột trong V36)
 
 **[Mở bảng 1–8 cột trong nhóm Bảng & dữ liệu](https://1sl2tp.github.io/2027/#tableColumnMatrixCard)**. Chọn số cột 1–8, khung mobile 360px hoặc rộng, chế độ tự động/bảng cuộn ngang/thẻ có nhãn, thử sort và sao chép HTML bảng đang xem. Một `COLUMN_SCHEMA` và `SAMPLE_ROWS` dùng cho mọi dạng xem; lớp `ds-table ds-table--schema` bổ sung trong đúng CSS gốc, không thay hóa đơn INV-xx.
 
