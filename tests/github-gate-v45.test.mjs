@@ -9,7 +9,7 @@ const sources=[
  ["dip/cmdk","MIT","Đối chiếu"],
  ["bvaughn/react-resizable-panels","MIT","Đối chiếu"],
  ["petyosi/react-virtuoso","Message List thương mại","Hạn chế giấy phép"],
- ["emilkowalski/vaul","không còn duy trì","Không chọn triển khai"]
+ ["emilkowalski/vaul","unmaintained","Không chọn triển khai"]
 ];
 test("V45 new source choices are verified, categorized, and expose licensing/maintenance blockers",()=>{
  const html=read("github-sources.html"),doc=read("references/UI_V45_GITHUB_DESIGN_INDEPENDENCE.md");
