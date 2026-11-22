@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027: nguồn GitHub đã đối chiếu và phòng thử thành phần ChatGPT-style trên mobile/desktop.">
-  <title>2027 · Nguồn GitHub & thử mẫu chat · SOURCE-V01</title>
-  <link rel="stylesheet" href="./web/styles.css?v=source-v01">
+  <title>2027 · Nguồn GitHub & thử mẫu chat · SOURCE-V02</title>
+  <link rel="stylesheet" href="./web/styles.css?v=source-v02">
 </head>
 <body class="source-lab">
   <header class="topbar">
     <a class="brand" href="./" aria-label="Về thư viện UI 2027">
       <span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">Nguồn GitHub</span>
     </a>
-    <div class="topbar-end"><a class="flow-return" href="./">Thư viện mẫu ↗</a><a class="flow-return" href="./base.html">Bộ khung ↗</a><span class="version">SOURCE-V01</span></div>
+    <div class="topbar-end"><a class="flow-return" href="./">Thư viện mẫu ↗</a><a class="flow-return" href="./base.html">Bộ khung ↗</a><span class="version">SOURCE-V02</span></div>
   </header>
   <main class="source-main">
     <div class="source-heading">
@@ -23,22 +23,27 @@
     </div>
     <nav class="source-jumps" aria-label="Đến nhóm mẫu">
       <a href="#source-map">Bản đồ nguồn</a><a href="#source-playground">Khung chat</a>
-      <a href="#source-rows">Hàng & bảng</a><a href="#source-media">Ảnh & trạng thái</a><a href="#source-checklist">Tiêu chí nhận mẫu</a>
+      <a href="#source-message-parts">Tin nhiều nội dung</a><a href="#source-rows">Hàng & bảng</a><a href="#source-media">Ảnh & trạng thái</a><a href="#source-checklist">Tiêu chí nhận mẫu</a>
     </nav>
     <section class="source-section" id="source-map">
-      <div class="source-section-head"><div><span class="eyebrow">01 / NGUỒN MỞ</span><h2>8 nguồn tham khảo, không cài cả bộ</h2></div><span class="source-note">Nguồn ≠ mã giao diện của chatgpt.com</span></div>
+      <div class="source-section-head"><div><span class="eyebrow">01 / NGUỒN MỞ</span><h2>13 nguồn tham khảo, không cài cả bộ</h2></div><span class="source-note">Nguồn ≠ mã giao diện của chatgpt.com</span></div>
       <div class="source-table-scroll" role="region" tabindex="0" aria-label="Bảng nguồn GitHub, có thể cuộn ngang">
         <table class="source-table">
-          <thead><tr><th>Nguồn GitHub</th><th>Vai trò cần học</th><th>Ứng dụng trong 2027</th><th>Trạng thái</th></tr></thead>
+          <thead><tr><th>Nguồn GitHub</th><th>Vai trò cần học</th><th>Loại / cha áp dụng</th><th>Ứng dụng trong 2027</th><th>Trạng thái</th></tr></thead>
           <tbody>
-            <tr><td><a href="https://github.com/openai/apps-sdk-ui" target="_blank" rel="noopener noreferrer">OpenAI Apps SDK UI</a><small>MIT</small></td><td>Input, textarea, button, token</td><td>Chuẩn viền/focus/disabled, font ≥16px khi nhập trên iOS</td><td><span class="source-tag">Tham khảo</span></td></tr>
-            <tr><td><a href="https://github.com/assistant-ui/assistant-ui" target="_blank" rel="noopener noreferrer">assistant-ui</a><small>MIT</small></td><td>Thread, composer, message actions</td><td>Thứ bậc khung chat; chỉ cân nhắc adapter nếu đổi sang React</td><td><span class="source-tag">Tham khảo</span></td></tr>
-            <tr><td><a href="https://github.com/vercel/ai-elements" target="_blank" rel="noopener noreferrer">Vercel AI Elements</a><small>Apache-2.0</small></td><td>Message, attachment, reasoning</td><td>Kiểu hiển thị phản hồi; không kéo cả AI SDK vào app chat</td><td><span class="source-tag">Tham khảo</span></td></tr>
-            <tr><td><a href="https://github.com/radix-ui/primitives" target="_blank" rel="noopener noreferrer">Radix Primitives</a><small>MIT</small></td><td>Dialog, menu, focus, keyboard</td><td>Hợp đồng hành vi cho popup cấp 1–4</td><td><span class="source-tag">Tham khảo</span></td></tr>
-            <tr><td><a href="https://github.com/floating-ui/floating-ui" target="_blank" rel="noopener noreferrer">Floating UI</a><small>MIT</small></td><td>Định vị popover/tooltip</td><td>Chỉ cân nhắc nếu menu khó xử lý tràn cạnh màn</td><td><span class="source-tag">Đánh giá</span></td></tr>
-            <tr><td><a href="https://github.com/TanStack/virtual" target="_blank" rel="noopener noreferrer">TanStack Virtual</a><small>MIT</small></td><td>Danh sách rất dài</td><td>Chỉ thử khi log cho thấy nghẽn render danh bạ/tin nhắn</td><td><span class="source-tag">Đánh giá</span></td></tr>
-            <tr><td><a href="https://github.com/lucide-icons/lucide" target="_blank" rel="noopener noreferrer">Lucide</a><small>ISC</small></td><td>Icon SVG nhất quán</td><td>So sánh rồi đưa icon cần dùng vào <code>web/icons.svg</code></td><td><span class="source-tag">Tham khảo</span></td></tr>
-            <tr><td><a href="https://github.com/Andarist/react-textarea-autosize" target="_blank" rel="noopener noreferrer">react-textarea-autosize</a><small>MIT</small></td><td>Ô gõ nhiều dòng tự tăng chiều cao</td><td>Học cơ chế đo chiều cao; 2027 giữ textarea thuần</td><td><span class="source-tag">Đánh giá</span></td></tr>
+            <tr><td><a href="https://github.com/openai/apps-sdk-ui" target="_blank" rel="noopener noreferrer">OpenAI Apps SDK UI</a><small>MIT</small></td><td>Input, textarea, button, token</td><td><code>primitive: Input / Button → cha Composer, Search</code></td><td>Chuẩn viền/focus/disabled, font ≥16px khi nhập trên iOS</td><td><span class="source-tag">Tham khảo</span></td></tr>
+            <tr><td><a href="https://github.com/assistant-ui/assistant-ui" target="_blank" rel="noopener noreferrer">assistant-ui</a><small>MIT</small></td><td>Thread, composer, message actions</td><td><code>composition: Thread → Message/Composer</code></td><td>Thứ bậc khung chat; chỉ cân nhắc adapter nếu đổi sang React</td><td><span class="source-tag">Tham khảo</span></td></tr>
+            <tr><td><a href="https://github.com/vercel/ai-elements" target="_blank" rel="noopener noreferrer">Vercel AI Elements</a><small>Apache-2.0</small></td><td>Message, attachment, reasoning</td><td><code>composition: Message → ContentParts; Composer → Slots</code></td><td>Kiểu hiển thị phản hồi; không kéo cả AI SDK vào app chat</td><td><span class="source-tag">Tham khảo</span></td></tr>
+            <tr><td><a href="https://github.com/radix-ui/primitives" target="_blank" rel="noopener noreferrer">Radix Primitives</a><small>MIT</small></td><td>Dialog, menu, focus, keyboard</td><td><code>composition: OverlayRoot → Trigger/Content</code></td><td>Hợp đồng hành vi cho popup cấp 1–4</td><td><span class="source-tag">Tham khảo</span></td></tr>
+            <tr><td><a href="https://github.com/floating-ui/floating-ui" target="_blank" rel="noopener noreferrer">Floating UI</a><small>MIT</small></td><td>Định vị popover/tooltip</td><td><code>utility: OverlayContent sở hữu vị trí</code></td><td>Chỉ cân nhắc nếu menu khó xử lý tràn cạnh màn</td><td><span class="source-tag">Đánh giá</span></td></tr>
+            <tr><td><a href="https://github.com/TanStack/virtual" target="_blank" rel="noopener noreferrer">TanStack Virtual</a><small>MIT</small></td><td>Danh sách rất dài</td><td><code>utility: MessageList sở hữu cuộn</code></td><td>Chỉ thử khi log cho thấy nghẽn render danh bạ/tin nhắn</td><td><span class="source-tag">Đánh giá</span></td></tr>
+            <tr><td><a href="https://github.com/lucide-icons/lucide" target="_blank" rel="noopener noreferrer">Lucide</a><small>ISC</small></td><td>Icon SVG nhất quán</td><td><code>decoration: Icon là con của Button</code></td><td>So sánh rồi đưa icon cần dùng vào <code>web/icons.svg</code></td><td><span class="source-tag">Tham khảo</span></td></tr>
+            <tr><td><a href="https://github.com/Andarist/react-textarea-autosize" target="_blank" rel="noopener noreferrer">react-textarea-autosize</a><small>MIT</small></td><td>Ô gõ nhiều dòng tự tăng chiều cao</td><td><code>utility: COMPOSER-INPUT sở hữu chiều cao</code></td><td>Học cơ chế đo chiều cao; 2027 giữ textarea thuần</td><td><span class="source-tag">Đánh giá</span></td></tr>
+            <tr><td><a href="https://github.com/mui/base-ui" target="_blank" rel="noopener noreferrer">Base UI</a><small>MIT</small></td><td>Primitive popup, menu, selector, focus</td><td><code>OverlayRoot → Trigger/Popup/Content</code></td><td>Học state và focus trước khi chuẩn hóa popup; hiện tại chưa nhập React</td><td><span class="source-tag">Tham khảo mới</span></td></tr>
+            <tr><td><a href="https://github.com/adobe/react-spectrum" target="_blank" rel="noopener noreferrer">React Aria Components</a><small>Giấy phép theo package</small></td><td>Table, GridList, Menu, SearchField, NumberField</td><td><code>Table → Header/Body → Row/Cell</code></td><td>Đối chiếu focus, bàn phím, chọn dòng; bảng 20 cột vẫn một schema</td><td><span class="source-tag">Tham khảo mới</span></td></tr>
+            <tr><td><a href="https://github.com/vercel/components.build" target="_blank" rel="noopener noreferrer">components.build</a><small>Đặc tả, không phải UI kit</small></td><td>Compound composition, slot và contract</td><td><code>Root → Slots → Primitives</code></td><td>Làm rõ cha trực tiếp, state owner, cardinality trước mỗi lần sửa</td><td><span class="source-tag">Áp dụng nguyên tắc</span></td></tr>
+            <tr><td><a href="https://github.com/shadcn-ui/ui" target="_blank" rel="noopener noreferrer">shadcn/ui</a><small>Registry nhiều nền</small></td><td>Mẫu chat scroll và registry Base/Radix/React Aria</td><td><code>MessageList → ScrollBehavior (utility)</code></td><td>Chỉ xem pattern; không nhập trùng Button/Table trong 2027</td><td><span class="source-tag">Tham khảo mới</span></td></tr>
+            <tr><td><a href="https://github.com/vercel-labs/ui" target="_blank" rel="noopener noreferrer">Vercel UI SDK</a><small>Beta, điều khoản riêng</small></td><td>Hành vi UI headless &amp; tương tác</td><td><code>Primitive behavior → owner cụ thể</code></td><td>Theo dõi và đánh giá; không dùng dependency beta làm chuẩn hiện tại</td><td><span class="source-tag">Theo dõi</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -75,6 +80,47 @@
         <div class="source-mini-card"><strong>01 · Một chủ sở hữu cuộn</strong><p>Thread cuộn; header và composer giữ vị trí. Không ép toàn bộ trang cuộn theo nội dung khi có bàn phím.</p></div>
         <div class="source-mini-card"><strong>02 · Một viền input</strong><p>Nhóm composer chịu trách nhiệm border, radius, focus. Textarea con không dùng border/outline riêng.</p></div>
         <div class="source-mini-card"><strong>03 · Ảnh và số linh hoạt</strong><p>Vùng tên dùng <code>min-width:0</code>; số lượng và thời gian có cột riêng, không bị ép xuống bởi chữ dài.</p></div>
+      </div>
+    </section>
+
+
+    <section class="source-section" id="source-message-parts">
+      <div class="source-section-head"><div><span class="eyebrow">02A / MESSAGE COMPOSITION</span><h2>Một tin nhắn có nhiều nội dung — không tách thành ba tin</h2></div><span class="source-note">Mẫu DOM cục bộ, chưa nối backend hoặc registry runtime của CHAT</span></div>
+      <p class="source-note">Root là một <code>CHAT-MESSAGE</code> có một container <code>MESSAGE-CONTENT-PARTS</code>. Text, bảng và nhóm ảnh là các con lặp được; thanh thao tác thuộc tin nhắn, không thuộc ô gõ hay danh bạ.</p>
+      <div class="source-parts-grid">
+        <article class="source-parts-message" data-ui-component="CHAT-MESSAGE" data-message-id="sample-mixed-01" aria-label="Một tin mẫu gồm chữ, bảng, ảnh và thao tác">
+          <div class="source-parts-stack" data-ui-component="MESSAGE-CONTENT-PARTS">
+            <p data-ui-component="MESSAGE-TEXT-PART">Đơn mẫu gồm danh sách hàng và hai ảnh đính kèm. Đây là dữ liệu thử, không phải đơn hàng thật.</p>
+            <div data-ui-component="MESSAGE-TABLE-PART">
+              <div class="source-table-scroll" role="region" aria-label="Bảng mặt hàng nằm trong tin mẫu" tabindex="0">
+                <table class="ds-table source-table source-parts-table" data-ui-component="DATA-TABLE">
+                  <caption class="source-sr-only">Hai mặt hàng mẫu</caption>
+                  <thead><tr><th scope="col">Tên</th><th scope="col">SL</th><th scope="col">Thành tiền</th></tr></thead>
+                  <tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="source-parts-media" data-ui-component="MESSAGE-MEDIA-PART" aria-label="Hai ô ảnh giữ chỗ trong một tin nhắn">
+              <span data-ui-component="MESSAGE-MEDIA-TILE">Ảnh mẫu 1</span><span data-ui-component="MESSAGE-MEDIA-TILE">Ảnh mẫu 2</span>
+            </div>
+          </div>
+          <div class="source-parts-actions" data-ui-component="CHAT-MESSAGE-ACTIONS">
+            <button type="button" class="ui-button ui-button--secondary" data-ui-component="MESSAGE-COPY-BUTTON" id="sourceMessageCopy">Sao chép nội dung tin mẫu</button>
+            <span class="source-parts-status" id="sourceMessageStatus" role="status" aria-live="polite"></span>
+          </div>
+        </article>
+        <div class="source-parts-contract">
+          <strong>Cấu trúc cha → con</strong>
+          <pre>CHAT-MESSAGE [1 tin]
+├─ MESSAGE-CONTENT-PARTS [1]
+│  ├─ TEXT-PART [0..n]
+│  ├─ TABLE-PART [0..n] → DATA-TABLE gốc
+│  └─ MEDIA-PART [0..n] → TILE [1..n]
+└─ MESSAGE-ACTIONS [0..1]
+   └─ COPY-BUTTON [0..1] → ui-button</pre>
+          <p><strong>Owner:</strong> Message sở hữu thứ tự phần nội dung và action; Table sở hữu căn cột; MediaGrid sở hữu ô ảnh; Button sở hữu hit-area, radius, focus.</p>
+          <p><strong>Giới hạn:</strong> chưa có gửi/chuyển tiếp thật, ảnh thực, lưu nháp, focus restore hay nghiệm thu bàn phím trên thiết bị.</p>
+        </div>
       </div>
     </section>
 
@@ -115,7 +161,7 @@
       </div>
       <p class="source-note">Phòng thử này chỉ xác minh bố cục DOM/CSS và tương tác cục bộ. Nghiệm thu bàn phím, cuộn, zoom ảnh trên thiết bị thật là bước riêng.</p>
     </section>
-    <footer class="page-footer"><span>2027 UI Library · SOURCE-V01</span><span>Không cài package · Không gửi dữ liệu thật</span></footer>
+    <footer class="page-footer"><span>2027 UI Library · SOURCE-V02</span><span>Không cài package · Không gửi dữ liệu thật</span></footer>
   </main>
   <dialog id="sourceDialog" class="source-dialog" aria-labelledby="sourceDialogTitle"><h2 id="sourceDialogTitle">Popup mẫu</h2><p>Kiểm tra vị trí, giới hạn chiều rộng và đóng bằng Escape. Chưa nối nghiệp vụ.</p><div><button type="button" id="sourceDialogClose">Đóng</button></div></dialog>
   <script>
@@ -141,6 +187,17 @@
       const p=document.createElement('p');p.className='source-message source-outgoing';p.textContent=value;
       thread.appendChild(p);thread.scrollTop=thread.scrollHeight;text.value='';text.style.height='auto';
       say('Chỉ thêm tin vào phòng thử tại chỗ. Không gửi lên máy chủ.');
+    });
+    document.getElementById('sourceMessageCopy').addEventListener('click',async()=>{
+      const message=document.querySelector('[data-message-id="sample-mixed-01"]');
+      const parts=message?.querySelector('[data-ui-component="MESSAGE-CONTENT-PARTS"]');
+      const status=document.getElementById('sourceMessageStatus');
+      if(!parts||!status)return;
+      try{
+        if(!navigator.clipboard?.writeText)throw new Error('Clipboard API unavailable');
+        await navigator.clipboard.writeText(parts.textContent.trim());
+        status.textContent='Đã sao chép nội dung của đúng tin mẫu.';
+      }catch{status.textContent='Trình duyệt chưa cho phép sao chép.';}
     });
     document.getElementById('sourceImageCount').addEventListener('change',(event)=>{
       const count=Number(event.target.value),grid=document.getElementById('sourceMediaGrid');
