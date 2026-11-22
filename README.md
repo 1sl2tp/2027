@@ -1,12 +1,23 @@
 # 2027 — Thư viện UI/UX và ba bộ khung liên thông
 
-**2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có hai trang Web:
+**2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có ba trang Web:
 
 - **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V08**: một văn bản giống phong cách trình bày ChatGPT, chọn và chỉnh riêng 10 loại nội dung; bên dưới có thư viện mẫu thành phần: 6 bảng, 5 ô số lượng −/+, 6 ô input, chữ 1–4 dòng, icon + chữ + vùng phụ, nút, tìm kiếm, chat, menu và popup.
+- **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
 
 
 
+
+## Mẫu gốc dùng chung 2027 (UI-V09)
+
+- [**Mở mẫu gốc**](https://1sl2tp.github.io/2027/base.html) · một khung giao diện chuẩn gồm header/rail/sidebar, nội dung Chat, Công việc, Bán hàng, bảng, nút, icon, input, stepper số lượng, composer, menu và popup.
+- Chọn **Gốc 2027 / ChatGPT / Facebook / Gemini** để so sánh trực tiếp trên đúng cùng cấu trúc và dữ liệu mẫu. Đây là các bộ token `2027` thiết kế theo nghiên cứu nguồn, không phải stylesheet hay bản sao chính thức của ba hãng.
+- Cả bốn phương án dùng chung `web/styles.css` và `web/src/base.ts`; không cài hệ CSS khác. Có chọn Rộng/Mobile, nhập chat cục bộ, đổi mô-đun, tăng/giảm số lượng, tìm kiếm, mở menu/popup, sao chép token, đặt lại.
+- **Đã lưu gốc V08** tại nhánh [`archive/ui-v08-original-before-foundation-20261122`](https://github.com/1sl2tp/2027/tree/archive/ui-v08-original-before-foundation-20261122), commit [`7e10663b72e85c63621462048a262897f36c3182`](https://github.com/1sl2tp/2027/commit/7e10663b72e85c63621462048a262897f36c3182).
+- Danh mục [**nguồn gốc Drive + mốc phục hồi**](./references/ORIGINAL_UI_SOURCES_AND_BASELINE_2026-11-22.md). Không sao chép trọn CSS/HTML nhúng từ Save Page hoặc thay đổi các tệp nguồn trong Drive.
+
+**Ranh giới:** mẫu UI chỉ chạy tại máy người xem, chưa kết nối CHAT/TAPHOA, không gửi tin nhắn hoặc làm phát sinh khoản thu/đơn hàng thật. Bản V08 đang có ở trang chính được giữ nguyên; V09 là một trang mới.
 
 ## Sửa thống nhất viền focus input (UI-V08)
 
@@ -64,8 +75,10 @@ Các mẫu đều kế thừa `--ui-font`, `--ui-bg`, `--ui-surface`, `--ui-text
 web/styles.css           ← MỘT CSS cho thư viện, các thành phần và 3 luồng
 index.html               ← Văn bản mẫu + thành phần (V06)
 flows.html               ← Trang xem ba khung (V04)
+base.html                ← Mẫu gốc 2027 (V09)
 web/src/design.ts        ← Nguồn token màu/chữ, công thức tương phản, xuất CSS
 web/src/app.ts           ← Điều khiển từng vùng văn bản và 8 mẫu thành phần
+web/src/base.ts          ← Điều khiển mẫu gốc và 4 preset
 web/src/flows.ts         ← Một state mẫu chung cho ba mô-đun
 web/dist/*.js            ← Đầu ra TypeScript khi chạy npm run build
 tests/layout.test.mjs    ← Kiểm thử cấu trúc và gói phát hành
@@ -102,7 +115,7 @@ python3 -m http.server 8000
 
 Mở `http://localhost:8000/` (thư viện font) hoặc `http://localhost:8000/flows.html` (ba khung). `npm run verify` chạy kiểm thử Node rồi biên dịch TypeScript từ `web/src/*.ts` sang `web/dist/*.js`.
 
-Workflow `.github/workflows/pages.yml` kiểm thử và đóng gói cả hai trang, **chỉ một stylesheet** và toàn bộ JS đã biên dịch. URL trên chỉ được coi là bản mới sau khi Pages deploy thành công.
+Workflow `.github/workflows/pages.yml` kiểm thử và đóng gói cả hai trang, **chỉ một stylesheet** và toàn bộ JS đã biên dịch (bao gồm `base.html`). URL trên chỉ được coi là bản mới sau khi Pages deploy thành công.
 
 ## Android (khung từ các vòng trước)
 
@@ -115,4 +128,4 @@ Yêu cầu JDK 17, Android SDK 35, Gradle 8.11.1. V04 là cập nhật Web Libra
 
 ## Ghi chú thiết kế
 
-[**RULES.md**](./RULES.md) chứa nguyên tắc UI/UX R01–R04. V04 đang minh họa các nguyên tắc đó; không tạo một hệ rule song song. Việc xem/nghiệm thu trên thiết bị iOS/Android thật khác với việc CI compile thành công.
+[**RULES.md**](./RULES.md) chứa nguyên tắc UI/UX R01–R05. V04 đang minh họa các nguyên tắc đó; không tạo một hệ rule song song. Việc xem/nghiệm thu trên thiết bị iOS/Android thật khác với việc CI compile thành công.

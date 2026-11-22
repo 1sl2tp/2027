@@ -2,7 +2,7 @@ name: Preview 2027 UI Library
 on:
   push:
     branches: [main]
-    paths: ["index.html", "flows.html", "web/**", "RULES.md", "package.json", "tsconfig.json", "tests/**", ".github/workflows/pages.yml"]
+    paths: ["index.html", "flows.html", "base.html", "web/**", "RULES.md", "package.json", "tsconfig.json", "tests/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,7 +24,7 @@ jobs:
       - name: Package standalone Web preview
         run: |
           mkdir -p _site/web
-          cp index.html flows.html _site/
+          cp index.html flows.html base.html _site/
           cp web/styles.css _site/web/
           cp -R web/dist _site/web/
           touch _site/.nojekyll
