@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện quy tắc nội dung nút · V32</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V32">
-  <script type="module" src="./web/dist-v32/app.js"></script>
+  <title>2027 · Thư viện quy tắc nội dung nút · V33</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V33">
+  <script type="module" src="./web/dist-v33/app.js"></script>
 </head>
-<body data-ui-version="2027-UI-V32" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V33" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V32</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V33</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
@@ -220,11 +220,11 @@
   <div class="gallery-browser" aria-label="Tìm và lọc thư viện">
     <div class="gallery-browser-tools">
       <label class="gallery-search-box" for="gallerySearch"><span aria-hidden="true">⌕</span><input id="gallerySearch" type="search" placeholder="Tìm mẫu: bảng, input, icon…" autocomplete="off"><button type="button" id="galleryClearSearch" aria-label="Xóa từ khóa tìm mẫu">×</button></label>
-      <div class="gallery-view-count" id="galleryCount" aria-live="polite">23 bộ mẫu · 9 nhóm</div>
+      <div class="gallery-view-count" id="galleryCount" aria-live="polite">24 bộ mẫu · 9 nhóm</div>
     </div>
     <label class="gallery-mobile-filter" for="galleryMobileFilter"><span>Chọn danh mục mẫu</span>
       <select id="galleryMobileFilter" aria-label="Chọn danh mục mẫu">
-        <option value="all">Tất cả · 23 bộ mẫu</option>
+        <option value="all">Tất cả · 24 bộ mẫu</option>
         <option value="patterns">Bộ mẫu gốc</option>
         <option value="typography">Chữ & nhiều dòng</option>
         <option value="tables">Bảng & dữ liệu</option>
@@ -310,7 +310,7 @@
       <div class="gallery-category-heading">
         <div class="gallery-category-index">02</div>
         <div class="gallery-category-intro"><h3 id="galleryTitle-tables">Bảng & dữ liệu</h3><p>Bảng gọn, kẻ ngang/dọc, không viền, xen kẽ và dạng thẻ trên mobile.</p></div>
-        <span class="gallery-category-count">2 bộ mẫu · 7 kiểu bảng</span>
+        <span class="gallery-category-count">3 bộ mẫu · 7 kiểu bảng + 1–8 cột</span>
       </div>
       <div class="studio-component-grid">
         <div class="studio-component-card">
@@ -354,6 +354,38 @@
                       <p class="studio-component-feedback" id="variantTableFeedback" role="status" aria-live="polite">Chưa chọn kiểu bảng. Các giá trị là dữ liệu mẫu.</p>
                     </div>
                   </section>
+        <section class="studio-component-card variant-wide ui-column-matrix-card" id="tableColumnMatrixCard" aria-labelledby="tableColumnMatrixTitle">
+          <div class="studio-component-label">
+            <strong id="tableColumnMatrixTitle">Bảng từ 1 đến 8 cột · một bộ quy tắc</strong>
+            <span>Cùng schema · bảng cuộn ngang / thẻ mobile / sắp xếp</span>
+          </div>
+          <div class="studio-component-content" id="columnMatrix">
+            <p class="variant-intro">Không dựa vào vị trí cột thứ 1, 2, 3 để quyết định căn chữ. Mỗi cột có vai trò (tên, số lượng, tiền, ngày, trạng thái…), độ ưu tiên và nhãn. Chuyển số cột để quan sát trên khung rộng hoặc mobile.</p>
+            <div class="ui-column-matrix-toolbar">
+              <label for="columnMatrixCount">Số cột<select id="columnMatrixCount" aria-label="Số cột của bảng"></select></label>
+              <label for="columnMatrixMode">Kiểu hiển thị<select id="columnMatrixMode" aria-label="Kiểu hiển thị bảng">
+                <option value="auto">Tự động</option>
+                <option value="scroll">Bảng + cuộn ngang</option>
+                <option value="cards">Thẻ có nhãn</option>
+              </select></label>
+              <label for="columnMatrixWidth">Khung xem<select id="columnMatrixWidth" aria-label="Chiều rộng vùng bảng">
+                <option value="mobile">Mobile 360px</option>
+                <option value="desktop">Rộng</option>
+              </select></label>
+              <button type="button" id="columnMatrixCopy" class="ui-button ui-button--secondary"><svg class="ui-icon" aria-hidden="true"><use href="./web/icons.svg#ui-icon-copy"/></svg>Sao chép HTML</button>
+            </div>
+            <div class="ui-column-matrix-preview" id="columnMatrixPreview" aria-label="Bảng linh hoạt minh họa"></div>
+            <p class="studio-component-feedback" id="columnMatrixStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+            <p class="ui-column-matrix-hint">Thử 7–8 cột trên mobile: bảng sẽ ưu tiên cuộn ngang hoặc chuyển thành thẻ, vẫn giữ toàn bộ trường dữ liệu. Cột nhận diện giữ bên trái khi cuộn bảng rộng; bấm tên cột để thử sắp xếp. Dữ liệu chỉ là minh họa.</p>
+            <details class="ui-column-matrix-reference">
+              <summary>Đối chiếu nguồn và cách chọn quy tắc</summary>
+              <p><a href="https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/data-table.mdx" target="_blank" rel="noopener noreferrer">assistant-ui DataTable</a> có schema columns/rows, sorting và card view theo container;
+                 <a href="https://github.com/vercel/streamdown/blob/main/skills/streamdown/references/features.md" target="_blank" rel="noopener noreferrer">Streamdown</a> có bảng Markdown và copy CSV/Markdown;
+                 <a href="https://tanstack.com/table/latest/docs/guide/column-visibility" target="_blank" rel="noopener noreferrer">TanStack Table</a> hướng dẫn chọn cột hiển thị;
+                 <a href="https://www.w3.org/WAI/tutorials/tables/" target="_blank" rel="noopener noreferrer">W3C WAI</a> hướng dẫn cấu trúc header. Bản 2027 tự xây mẫu TypeScript, không cài các thư viện này.</p>
+            </details>
+          </div>
+        </section>
       </div>
     </section>
     <section class="gallery-category" data-gallery-category="invoices" id="sample-invoices" aria-labelledby="galleryTitle-invoices">
@@ -900,7 +932,7 @@
         <div><span class="eyebrow">CÙNG MỘT BỘ CSS</span><h2>Thông số đã chọn</h2><p>Toàn bộ thành phần dùng <code>web/styles.css</code> và các token chung. Có thể sao chép để triển khai cho những khung khác.</p></div>
         <pre id="cssPreview" aria-label="CSS hiện hành"></pre>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V32</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V33</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>
