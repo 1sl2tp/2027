@@ -122,4 +122,12 @@ export function initSimpleButtons():void{
    }
    chosen.textContent="Đã chọn: "+spec.label;chosen.hidden=false;
  });
+ const geometry=document.getElementById("simpleButtonSizeKit");
+ geometry?.addEventListener("click",event=>{
+   if(!(event.target instanceof Element))return;
+   const button=event.target.closest<HTMLButtonElement>("[data-geometry-preview]");
+   if(!button)return;
+   feedback.textContent="Đã thử "+button.dataset.geometryPreview+". Không thực hiện thao tác thật.";
+ });
+
 }
