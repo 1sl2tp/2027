@@ -36,7 +36,7 @@ test("V41: shared DATA-TABLE may have two hosts but remains ONE definition",asyn
  assert.equal(getComponentContract("DATA-TABLE").parent,"CHAT-SCREEN");
  assert.deepEqual(getAllowedComponentParents("DATA-TABLE"),["CHAT-SCREEN","MESSAGE-TABLE-PART"]);
  assert.deepEqual(auditComponentPlacements(),[]);
- assert.equal(COMPONENT_PLACEMENTS.length,2);
+ assert.equal(COMPONENT_PLACEMENTS.length,6);
  assert.ok(COMPONENT_PLACEMENTS.some(p=>p.id==="thread-search-input"&&p.child==="SEARCH-FIELD"));
  const base=COMPONENT_PLACEMENTS[0];
  assert.equal(base.cardinality,"one");

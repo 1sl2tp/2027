@@ -58,7 +58,9 @@ export const COMPONENT_CONTRACTS:readonly ComponentContract[]=[
  {id:"MESSAGE-FORWARD-ACTION",parent:"CHAT-MESSAGE-ACTIONS",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Chuyển tiếp đúng message ID"},
  {id:"MESSAGE-REPLY-ACTION",parent:"CHAT-MESSAGE-ACTIONS",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Trả lời đúng message ID"},
  {id:"MESSAGE-COPY-BUTTON",parent:"CHAT-MESSAGE-ACTIONS",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Nút sao chép tất cả parts của đúng tin"},
- {id:"CHAT-COMPOSER",parent:"CHAT-THREAD",layer:"composition",nature:"container",cardinality:"one",owner:"ds-composer",description:"Cha của textarea, đính kèm và toolbar"},
+ {id:"CHAT-COMPOSER",parent:"CHAT-THREAD",layer:"composition",nature:"container",cardinality:"one",owner:"ds-composer",description:"Cha logic của textarea, đính kèm và toolbar"},
+ {id:"COMPOSER-SURFACE",parent:"CHAT-COMPOSER",layer:"composition",nature:"container",cardinality:"one",owner:"composer surface",description:"Physical DOM #composerShell trong #composerForm; dùng cùng primitives gốc"},
+ {id:"COMPOSER-EDITOR-WRAP",parent:"COMPOSER-SURFACE",layer:"composition",nature:"container",cardinality:"one",owner:"composer editor geometry",description:"Physical DOM #editorWrap chứa đúng một textarea gốc"},
  {id:"COMPOSER-REPLY-CONTEXT",parent:"CHAT-COMPOSER",layer:"composition",nature:"container",cardinality:"optional",owner:"app.js",description:"Reply preview là con composer"},
  {id:"COMPOSER-ACTION-MENU",parent:"CHAT-COMPOSER",layer:"composition",nature:"container",cardinality:"optional",owner:"admin-composer-actions.js",description:"Menu mở từ + và đóng theo cùng owner"},
  {id:"COMPOSER-ATTACHMENTS",parent:"CHAT-COMPOSER",layer:"composition",nature:"container",cardinality:"optional",owner:"composer attachment slots",description:"Vùng có 0–n ảnh/tệp trước khi gửi"},
@@ -84,7 +86,11 @@ export interface ComponentPlacement {
 }
 export const COMPONENT_PLACEMENTS:readonly ComponentPlacement[]=[
  {id:"message-table",host:"MESSAGE-TABLE-PART",child:"DATA-TABLE",cardinality:"one"},
- {id:"thread-search-input",host:"THREAD-SEARCH-OVERLAY",child:"SEARCH-FIELD",cardinality:"one"}
+ {id:"thread-search-input",host:"THREAD-SEARCH-OVERLAY",child:"SEARCH-FIELD",cardinality:"one"},
+ {id:"composer-editor-input",host:"COMPOSER-EDITOR-WRAP",child:"COMPOSER-INPUT",cardinality:"one"},
+ {id:"composer-surface-toolbar",host:"COMPOSER-SURFACE",child:"COMPOSER-TOOLBAR",cardinality:"one"},
+ {id:"composer-surface-attachments",host:"COMPOSER-SURFACE",child:"COMPOSER-ATTACHMENTS",cardinality:"optional"},
+ {id:"composer-surface-reply",host:"COMPOSER-SURFACE",child:"COMPOSER-REPLY-CONTEXT",cardinality:"optional"}
 ];
 export function getAllowedComponentParents(id:string):string[]{
  const canonical=getComponentContract(id)?.parent;

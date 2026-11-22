@@ -18,12 +18,14 @@ test("V44 CHAT crosswalk references canonical contracts, not a second registry",
  const start=code.indexOf("export const CHAT_LIVE_BINDINGS:");
  const end=code.indexOf("export const CHAT_PLATFORM_OWNERS",start);
  const bindings=[...code.slice(start,end).matchAll(/\{id:"([^"]+)",selector:"([^"]+)",file:"([^"]+)"/g)];
- assert.equal(bindings.length,54);
+ assert.equal(bindings.length,56);
  const ids=bindings.map(m=>m[1]);
- assert.equal(new Set(ids).size,54);
+ assert.equal(new Set(ids).size,56);
  for(const id of ids)assert.ok(getComponentContract(id),"missing "+id);
  assert.equal(COMPONENT_CONTRACTS.filter(c=>c.id==="SEARCH-FIELD").length,1);
  assert.ok(COMPONENT_PLACEMENTS.some(x=>x.host==="THREAD-SEARCH-OVERLAY"&&x.child==="SEARCH-FIELD"));
+ assert.ok(COMPONENT_PLACEMENTS.some(x=>x.host==="COMPOSER-EDITOR-WRAP"&&x.child==="COMPOSER-INPUT"));
+ assert.ok(COMPONENT_PLACEMENTS.some(x=>x.host==="COMPOSER-SURFACE"&&x.child==="COMPOSER-TOOLBAR"));
  assert.ok(code.includes('import {COMPONENT_CONTRACTS,getComponentContract} from "./component-contracts.js"'));
 });
 test("V44 CHAT source selectors and owner map protect parent-child boundaries",async()=>{
@@ -39,6 +41,8 @@ test("V44 CHAT source selectors and owner map protect parent-child boundaries",a
   "HEADER-AVATAR":"HEADER-IDENTITY",
   "THREAD-JUMP-TO-LATEST":"CHAT-MESSAGE-LIST",
   "CHAT-COMPOSER":"CHAT-THREAD",
+  "COMPOSER-SURFACE":"CHAT-COMPOSER",
+  "COMPOSER-EDITOR-WRAP":"COMPOSER-SURFACE",
   "COMPOSER-ACTION-MENU":"CHAT-COMPOSER",
   "CHAT-WORK-REGION":"CHAT-SCREEN",
   "WORK-SUMMARY":"CHAT-WORK-REGION",

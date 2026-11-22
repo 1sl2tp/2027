@@ -727,3 +727,6 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 - **Phân biệt cha logic và DOM mount:** `THREAD-JUMP-TO-LATEST` do MessageList quản lý nhưng ở CHAT thật `#threadScrollControlWrap` gắn gần `#thread-bottom-container` bên ngoài `#messageWindow`. V44 không di chuyển DOM để ép nó thành con vật lý.
 - **Tìm kiếm dùng lại:** một `SEARCH-FIELD`, placement `THREAD-SEARCH-OVERLAY`; không tạo primitive tìm mới. `conversation-search.js` đã thực hiện searchLoaded/revealLoadedMessage trên tin đã tải; không coi Search là gap chức năng toàn CHAT.
 - **Chỉ nâng thư viện 2027:** không thay production CHAT; phân biệt thiếu mẫu/thẻ trong 2027 với thiếu feature ở CHAT. E4/E5 cần nghiệm thu mobile Safari/Chrome/PWA. [Crosswalk V44](references/UI_V44_CHAT_CODE_CROSSWALK.md).
+
+
+**V44 chỉnh chuẩn physical Composer:** `#composerForm → #composerShell → #editorWrap → #editor` là DOM CHAT thật; dùng `COMPONENT_PLACEMENTS` để gắn `COMPOSER-INPUT`, `COMPOSER-TOOLBAR`, `COMPOSER-ATTACHMENTS` vào shell vật lý mà không phá canonical Composer trực tiếp trong mẫu 2027. `#composerActionMenu` là popover sibling của form có owner logic Composer; `#threadScrollControl` cũng tách vị trí mount khỏi scroll owner.
