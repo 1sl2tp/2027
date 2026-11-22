@@ -1,7 +1,7 @@
 // V46 · A NEW, 2027-owned master library. No CHAT/TAPHOA implementation is loaded.
 // All specimens are original, local demonstrations. Shared primitives: ui-button,
 // ds-composer, ds-qty, ds-table, COLUMN_SCHEMA and web/icons.svg.
-import {getComponentContract,getAllowedComponentParents} from "./component-contracts.js";
+import {getComponentContract} from "./component-contracts.js";
 import {COLUMN_SCHEMA} from "./column-matrix.js";
 import {iconNode} from "./icon-motion-gallery.js";
 export type MasterMode="chat"|"sales"|"work"|"report";
@@ -27,7 +27,13 @@ function frame(title:string):HTMLElement{
  const shell=mark(make("section","master-v46-frame"),"UI-SHELL");
  const header=make("header","master-v46-top");
  header.append(make("strong","",title),make("small","","UI 2027 · minh họa"));
- shell.append(header);return shell;
+ const screenSlot=mark(make("div"),"UI-SCREEN-SLOT");
+ shell.append(header,screenSlot);return shell;
+}
+function placeScreen(shell:HTMLElement,screen:HTMLElement):void{
+ const slot=shell.querySelector<HTMLElement>('[data-ui-component="UI-SCREEN-SLOT"]');
+ if(!slot)throw new Error("2027 screen requires UI-SCREEN-SLOT");
+ slot.append(screen);
 }
 function message(text:string,author="other"):HTMLElement{
  const item=mark(make("article","master-v46-message"),"CHAT-MESSAGE");
@@ -45,9 +51,21 @@ function chat():HTMLElement{
  const input=mark(make("textarea"),"COMPOSER-INPUT");input.placeholder="Nhập nội dung mẫu…";input.rows=1;
  input.setAttribute("aria-label","Nội dung soạn mẫu");
  const toolbar=mark(make("div","ds-composer-actions master-v46-toolbar"),"COMPOSER-TOOLBAR");
- toolbar.append(control("Đính kèm mẫu","plus"),control("Gửi thử (không gửi thật)","send-up"));
- composer.append(input,toolbar);composer.addEventListener("submit",event=>event.preventDefault());
- thread.append(list,composer);screen.append(thread);view.append(screen);return view;
+ const attach=control("Mở khay đính kèm mẫu","plus");
+ const send=control("Thêm tin mẫu cục bộ","send-up");
+ const hint=make("p","master-v46-inline-hint");hint.hidden=true;
+ attach.addEventListener("click",()=>{
+  hint.hidden=!hint.hidden;
+  hint.textContent="Khay mẫu: ảnh · tệp (không mở thiết bị hoặc upload).";
+ });
+ const onSend=()=>{
+  const text=input.value.trim();if(!text)return;
+  list.append(message(text,"self"));input.value="";
+ };
+ send.addEventListener("click",onSend);
+ toolbar.append(attach,send);composer.append(input,toolbar,hint);
+ composer.addEventListener("submit",event=>{event.preventDefault();onSend();});
+ thread.append(list,composer);screen.append(thread);placeScreen(view,screen);return view;
 }
 function table(keys:readonly string[],rows:readonly (readonly string[])[]):HTMLElement{
  const outer=make("div","master-v46-scroll-table");
@@ -77,12 +95,14 @@ function sales():HTMLElement{
  const qty=mark(make("div","ds-qty"),"QUANTITY-STEPPER");
  const minus=control("Giảm số lượng","minus"),plus=control("Tăng số lượng","plus");
  const value=mark(make("input"),"QUANTITY-VALUE");value.value="2";value.inputMode="numeric";value.setAttribute("aria-label","Số lượng minh họa");
- minus.addEventListener("click",()=>{value.value=String(Math.max(0,Number(value.value)||0)-1<0?0:Math.max(0,(Number(value.value)||0)-1));});
+ const sanitize=()=>{const digits=value.value.replace(/[^0-9]/g,"");const n=Number.parseInt(digits,10);value.value=String(Number.isFinite(n)?Math.min(99,Math.max(0,n)):0);};
+ value.addEventListener("input",sanitize);
+ minus.addEventListener("click",()=>{sanitize();value.value=String(Math.max(0,Number(value.value)-1));});
  plus.addEventListener("click",()=>{value.value=String(Math.min(99,(Number(value.value)||0)+1));});
  qty.append(minus,value,plus);slot.append(qty);row.append(slot);list.append(row);
  const tableSlot=mark(make("div"),"SALES-TABLE-SLOT");
  tableSlot.append(table(["index","name","quantity","price","total"],[["1","Mặt hàng mẫu","2","12.000","24.000"]]));
- screen.append(list,tableSlot);shell.append(screen);return shell;
+ screen.append(list,tableSlot);placeScreen(shell,screen);return shell;
 }
 function work():HTMLElement{
  const shell=frame("Công việc · mẫu 2027"),screen=mark(make("div","master-v46-screen"),"WORK-SCREEN");
@@ -91,13 +111,13 @@ function work():HTMLElement{
   const row=mark(make("div","master-v46-task-row"),"WORK-TASK-ROW");
   row.append(make("span","",title),make("small","",state));list.append(row);
  }
- screen.append(list);shell.append(screen);return shell;
+ screen.append(list);placeScreen(shell,screen);return shell;
 }
 function report():HTMLElement{
  const shell=frame("Báo cáo · mẫu 2027"),screen=mark(make("div","master-v46-screen"),"REPORT-SCREEN");
  const slot=mark(make("div"),"REPORT-TABLE-SLOT");
  slot.append(table(["index","name","quantity","total"],[["1","Nhóm A","12","120.000"],["2","Nhóm B","4","64.000"]]));
- screen.append(slot);shell.append(screen);return shell;
+ screen.append(slot);placeScreen(shell,screen);return shell;
 }
 function renderPath(id:string):string[]{
  const path:string[]=[],seen=new Set<string>();
