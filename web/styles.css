@@ -2607,7 +2607,8 @@ body.simple-first .topbar-end{gap:0}
  text-align:left
 }
 .ds-table.ds-table--schema thead th{
- background:var(--ui-surface);font-weight:650;line-height:1.35
+ background:var(--ui-surface);font-weight:650;line-height:1.35;
+ overflow-wrap:normal;word-break:normal;hyphens:none;white-space:nowrap
 }
 .ds-table.ds-table--schema tbody tr:last-child td{border-bottom:0}
 .ds-table.ds-table--schema[data-borders="grid"] :is(th,td):not(:last-child){
@@ -2640,12 +2641,15 @@ body.simple-first .topbar-end{gap:0}
 .ds-table.ds-table--schema[data-wide="true"] thead th:first-child{
  z-index:2;background:var(--ui-surface)
 }
-.ui-column-sort{
+/* RULE 09 §9.10: the entire header is the click target, but its label must
+   remain one line. Sort icons are mounted only for actively sorted columns. */
+.ds-table.ds-table--schema .ui-column-sort{
  display:inline-flex;align-items:center;width:100%;min-width:0;
- min-height:var(--ui-control-hit);padding:0;gap:4px;
- border:0;border-radius:0;white-space:normal;
+ min-height:28px;padding:0;gap:4px;
+ border:0;border-radius:0;white-space:nowrap;
  font-weight:inherit;font-size:11px;line-height:1.35;
- color:inherit;text-align:inherit;overflow-wrap:anywhere
+ color:inherit;text-align:inherit;overflow-wrap:normal;
+ word-break:normal;hyphens:none
 }
 .ds-table.ds-table--schema th[data-col-role="money"] .ui-column-sort,
 .ds-table.ds-table--schema th[data-col-role="percent"] .ui-column-sort{justify-content:flex-end;text-align:right}
@@ -2663,7 +2667,9 @@ body.simple-first .topbar-end{gap:0}
 .ds-table.ds-table--schema th[aria-sort="descending"] .ui-column-sort{
  font-weight:750;text-decoration:underline;text-underline-offset:3px
 }
-.ds-table.ds-table--schema .ui-column-sort-icon{opacity:.35;flex:none;margin-inline-start:1px}
+.ds-table.ds-table--schema .ui-column-sort-icon{
+ opacity:1;flex:none;margin-inline-start:1px;width:11px;height:11px
+}
 .ds-table.ds-table--schema th[aria-sort="ascending"] .ui-column-sort-icon{
  opacity:1;transform:rotate(180deg)
 }
