@@ -70,3 +70,56 @@ export function auditComposerTree(root:Element):string[]{
   errors.push("COMPOSER-SEND-BUTTON: không được có hai nút gửi");
  return errors;
 }
+
+
+/** Pure registry audit: suitable for CI and for reviewing new components. */
+export function auditComponentRegistry(contracts:readonly ComponentContract[]=COMPONENT_CONTRACTS):string[]{
+ const issues:string[]=[];
+ const byId=new Map<string,ComponentContract>();
+ for(const item of contracts){
+  if(byId.has(item.id))issues.push("Trùng ID: "+item.id);
+  byId.set(item.id,item);
+  if(!item.owner.trim())issues.push("Thiếu owner: "+item.id);
+ }
+ for(const item of contracts){
+  if(item.parent!==null&&!byId.has(item.parent))issues.push(item.id+" thiếu cha "+item.parent);
+  const seen=new Set<string>();let cursor:ComponentContract|undefined=item;
+  while(cursor){
+   if(seen.has(cursor.id)){issues.push("Chu trình cha-con: "+item.id);break;}
+   seen.add(cursor.id);
+   cursor=cursor.parent?byId.get(cursor.parent):undefined;
+  }
+  if(item.layer==="token"&&item.nature==="control")
+   issues.push("Token không thể tự là nút: "+item.id);
+ }
+ return issues;
+}
+/** Simple, collapsible text tree, not a second design system or dashboard. */
+export function initComponentContractTree():void{
+ const target=document.getElementById("componentContractTree");
+ if(!target)return;
+ const parentLabel:{[key:string]:string}={
+  screen:"Màn hình",region:"Vùng cha",composition:"Vùng ghép",
+  primitive:"Thành phần gốc",token:"Token / icon"
+ };
+ const quantityLabel:{[key:string]:string}={one:"1",many:"0–n",optional:"0–1"};
+ const render=(parent:string|null,depth=0):HTMLUListElement=>{
+  const list=document.createElement("ul");
+  list.className="simple-component-tree-level";
+  list.dataset.depth=String(depth);
+  for(const item of COMPONENT_CONTRACTS.filter(x=>x.parent===parent)){
+   const row=document.createElement("li");
+   row.dataset.componentId=item.id;
+   row.dataset.layer=item.layer;
+   const title=document.createElement("strong");title.textContent=item.id;
+   const label=document.createElement("span");label.textContent=" · "+parentLabel[item.layer]+" · "+quantityLabel[item.cardinality];
+   const note=document.createElement("small");
+   note.textContent=item.description+" · owner: "+item.owner;
+   row.append(title,label,note);
+   if(COMPONENT_CONTRACTS.some(x=>x.parent===item.id))row.append(render(item.id,depth+1));
+   list.append(row);
+  }
+  return list;
+ };
+ target.replaceChildren(render(null));
+}
