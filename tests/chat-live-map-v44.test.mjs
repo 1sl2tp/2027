@@ -63,23 +63,17 @@ test("V44 CHAT source selectors and owner map protect parent-child boundaries",a
  assert.ok(map.includes('shell-form-viewport-policy.js'));
  assert.ok(map.includes('interaction-controller.js'));
 });
-test("V44: UI tree is inside existing Section 5, uses source links but no duplicate CSS primitive",()=>{
- const html=read("index.html"),app=read("web/src/app.ts"),css=read("web/styles.css");
- const section=html.indexOf('id="simpleFields"');
- const part=html.indexOf('id="chatLiveMapV44"');
- const next=html.indexOf('id="simpleButtons"');
- assert.ok(section>=0&&part>section&&next>part);
- assert.ok(html.includes('id="chatLiveMapTree"'));
- assert.ok(html.includes('id="chatLiveMapScope"'));
- assert.ok(app.includes('import { initChatLiveMap } from "./chat-live-map.js";'));
- assert.ok(app.includes("initChatLiveMap();"));
- assert.ok(css.includes(".chat-live-map .simple-component-tree-level"));
- const scope=css.slice(css.indexOf("/* V44: this is a source-aware reader"),css.indexOf(".simple-component-contract{"));
- assert.doesNotMatch(scope,/\.ui-button\s*\{|\.ds-table\s*\{|\.ds-composer\s*\{/);
- assert.ok(html.includes('data-ui-version="2027-UI-V45"'));
- assert.ok(html.includes('src="./web/dist-v45/app.js"'));
- assert.ok(read(".github/workflows/pages.yml").includes("cp -R web/dist _site/web/dist-v45"));
+test("V46 archives legacy CHAT DOM map and mounts only the new master library",()=>{
+ const html=read("index.html"),app=read("web/src/app.ts");
+ assert.ok(html.includes('id="masterLibraryV46"'));
+ assert.ok(!html.includes('id="chatLiveMapV44"'));
+ assert.ok(!app.includes("initChatLiveMap();"));
+ assert.ok(app.includes('import { initMasterLibraryV46 } from "./master-library-v46.js";'));
+ assert.ok(app.includes("initMasterLibraryV46();"));
+ assert.ok(read("web/src/chat-live-map.ts").includes("CHAT_LIVE_BINDINGS"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V46"'));
 });
+
 test("V44 source audit distinguishes CHAT live implementation from 2027 preview",()=>{
  const doc=read("references/UI_V44_CHAT_CODE_CROSSWALK.md");
  for(const key of ["index.source.html","keyboard-inset-core.js","conversation-search.js","image-viewer","P0","P4"])
