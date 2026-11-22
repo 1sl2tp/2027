@@ -2,10 +2,24 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có hai trang Web:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V06**: một văn bản giống phong cách trình bày ChatGPT, chọn và chỉnh riêng 10 loại nội dung; bên dưới có 8 mẫu thành phần gồm bảng, nút, icon vuông/tròn, số lượng, tìm kiếm, gõ chat, menu phụ và popup.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V07**: một văn bản giống phong cách trình bày ChatGPT, chọn và chỉnh riêng 10 loại nội dung; bên dưới có thư viện mẫu thành phần: 6 bảng, 5 ô số lượng −/+, 6 ô input, chữ 1–4 dòng, icon + chữ + vùng phụ, nút, tìm kiếm, chat, menu và popup.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
 
 
+
+
+## Bộ sưu tập biến thể thành phần UI-V07
+
+Tập trung xây dựng các mẫu **so sánh song song** trên trang chính; không thay thế luồng nghiệp vụ V04.
+
+- **6 mẫu bảng:** kẻ ô dọc/ngang, không viền, hàng xen kẽ, mật độ cao, thẻ xếp hàng cho mobile. Bảng có tên hàng căn trái, số lượng căn giữa và số tiền căn phải. Có nút chọn mẫu để đánh dấu.
+- **5 kiểu nhập số lượng:** − / + trong một viền bo; dạng viên thuốc; các nút bo riêng; nút tròn tối giản; cùng tên sản phẩm trên một hàng. Có thể tăng/giảm/nhập độc lập; giới hạn mẫu 0–99.
+- **6 kiểu input:** vuông, bo 10px, bo pill, chỉ gạch dưới, nền mờ, và icon + ô nhập + nút xóa. Cỡ input 16px khi gõ để phù hợp mobile.
+- **4 mẫu chữ:** giới hạn 1, 2, 3, 4 dòng, ellipsis và thao tác xem đầy đủ/thu gọn. Không tự thay đổi nội dung gốc.
+- **4 kiểu hàng icon-chữ:** chỉ icon+chữ; icon+chữ+mũi tên; icon+tiêu đề/nhãn phụ+trạng thái; icon+chữ+số tiền+menu.
+- **4 bố cục nhiều vùng:** danh bạ, sản phẩm, công việc và khoản thu, minh họa phối hợp icon–chữ–phụ đề–số/nút/trạng thái.
+
+Các mẫu đều kế thừa `--ui-font`, `--ui-bg`, `--ui-surface`, `--ui-text` và `--ui-border` từ hệ design tokens, **chỉ một `web/styles.css`**. Dữ liệu hiển thị và thao tác là thử nghiệm cục bộ, không tác động tài khoản CHAT/TAPHOA, Supabase hoặc hóa đơn thật. CI kiểm thử tĩnh và TypeScript; cần xem trên thiết bị thật trước khi chốt kích thước.
 
 ## Studio văn bản + thành phần (UI-V06)
 
