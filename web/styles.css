@@ -2443,7 +2443,7 @@ svg.simple-button-inner-icon,
 .simple-button-inner-photo{margin-block:0}
 svg.simple-button-inner-icon{transform:translateY(-.5px)}
 svg.simple-button-inner-icon:where(.simple-button-inner-optical){transform:translate(1px,-.5px)}
-.simple-button-inner-demo:is(svg.simple-button-inner-icon,.simple-button-inner-letter,.simple-button-inner-number,.simple-button-inner-arrow){
+.simple-button-inner-demo:is(.simple-button-inner-icon,.simple-button-inner-letter,.simple-button-inner-number,.simple-button-inner-arrow){
  padding:0;width:44px;height:44px;min-height:44px;min-width:44px;max-width:44px;border-radius:10px}
 .simple-button-inner-glyph{font:700 18px/1 system-ui,-apple-system,Arial,sans-serif;
  text-align:center}
