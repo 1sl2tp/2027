@@ -95,7 +95,7 @@ test("V04 one CSS owner and linked data model for Chat Work Sales",()=>{
   for(const feature of ["renderAuth","renderChat","renderPayments","renderSummary","renderInvoice","renderDebts","renderQuotes","renderProducts","renderDrafts","renderDelivered","renderSettings","shareInvoice","shareQuote","makeDraft","addProduct","deliveredTotal","paidTotal","debt"]){
     assert.ok(flow.includes(feature),feature);
   }
-  assert.match(flow,/newState\(\):UiState/);
+  assert.match(flow,/newState=\(\):UiState/);
   assert.match(flow,/state\.orders\.push\(draft\)/);
   assert.match(flow,/state\.payments\.push/);
   assert.match(flow,/canvas\.toDataURL\("image\/png"\)/);
