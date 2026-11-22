@@ -11,6 +11,16 @@
 
 
 
+## Chuẩn trục bảng và giữ vị trí cuộn (UI-V34)
+
+**[Xem bảng STT · Tên · Số · Số lượng · Đơn giá · Thành tiền](https://1sl2tp.github.io/2027/#tableColumnMatrixCard)**. Mặc định sáu cột, mode bảng cuộn ngang trên mobile 360px; có chọn 1–8 cột, kiểu kẻ ô/chỉ ngang/không kẻ và padding ngang 6/10/14px. Header/dòng dữ liệu chung `colgroup`, `minPx`, `data-col-role`, `table-layout:fixed` và `ds-table`. Các tổng ví dụ đúng bằng số lượng nhân đơn giá. “Số” là mã/số hàng giả định, tách với “Số lượng”.
+
+**[Thử ScrollAnchor không tự kéo xuống khi đang đọc](https://1sl2tp.github.io/2027/#scrollAnchorLab)**. Cuộn lên/xem tin cũ rồi thêm tin mẫu hoặc mô phỏng 3 đoạn streaming. Vùng đọc giữ vị trí, hiển thị đếm tin mới và nút về cuối; tất cả chỉ là demo, không gửi tin thật.
+
+- Quy tắc: RULE 09 §9.6 (bảng) và RULE 11 §11.6 (scroll), không tạo hệ rules/stylesheet riêng.
+- Nguồn tham khảo ScrollAnchor: [assistant-ui ScrollAnchor](https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/scroll-anchor.mdx).
+- Kiểm tra tự động: `tests/column-matrix.test.mjs` + `tests/scroll-anchor.test.mjs`; nghiệm thu Safari/Chrome/PWA, bàn phím và zoom cần kiểm thử thiết bị thật.
+
 ## Bảng linh hoạt 1–8 cột và kiểm kê sáu thư viện GitHub (UI-V33)
 
 **[Mở bảng 1–8 cột trong nhóm Bảng & dữ liệu](https://1sl2tp.github.io/2027/#tableColumnMatrixCard)**. Chọn số cột 1–8, khung mobile 360px hoặc rộng, chế độ tự động/bảng cuộn ngang/thẻ có nhãn, thử sort và sao chép HTML bảng đang xem. Một `COLUMN_SCHEMA` và `SAMPLE_ROWS` dùng cho mọi dạng xem; lớp `ds-table ds-table--schema` bổ sung trong đúng CSS gốc, không thay hóa đơn INV-xx.
