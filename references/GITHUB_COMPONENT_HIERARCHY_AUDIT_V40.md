@@ -20,7 +20,7 @@ Bổ sung nguồn hiện hành chính thức: [assistant-ui primitives architect
 | `FIELD-11` trong `web/src/simple-fields.ts` | Gọi “Ô gõ chat”, vẽ textarea + `+`/`↑` từ `smallButton` có style riêng `.simple-field-action` | Chỉ là một **mẫu composer** trong nhóm input. Parent `form.ds-composer`; con Textarea và Toolbar; nút có `.ui-button` và icon lấy từ `web/icons.svg` |
 | `FIELD-10` | Nhìn như ba phần rời | `QUANTITY-STEPPER` là cha của giảm, giá trị, tăng |
 | `FIELD-04` | Nhìn như input có ký tự search | `SEARCH-FIELD` là cha; input và icon là con |
-| `web/src/composer-gallery.ts` | Bốn demo composer ẩn phía gallery cũ đã dùng primitive `ui-button`, nhưng trạng thái gửi/dừng có chỗ hiển thị icon dừng khi nút bị disable | Cần kiểm định action theo trạng thái trong một lượt riêng; không khẳng định tất cả luồng đã đạt E4/E5 |
+| `web/src/composer-gallery.ts` | Bốn demo composer ở gallery cũ dùng `ui-button`. Phát hiện Stop icon xuất hiện khi nút đang disable | V40 sửa thành Stop action có handler hủy timer, label riêng và `type=button`; cần nghiệm thu E4/E5 trên thiết bị |
 | `web/src/column-matrix.ts` | Có một schema 20 cột, key và vị trí riêng | `DATA-TABLE` (cha) và `TABLE-COLUMN` (many) — giữ nguyên R09 |
 
 ## 3. Nguyên tắc bổ sung nhưng KHÔNG thêm hệ CSS
