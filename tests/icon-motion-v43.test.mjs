@@ -63,7 +63,7 @@ test("V43 motion preserves canonical styles, reduced-motion and safe backend bou
  assert.ok(css.includes("animation:none!important"));
  assert.ok(css.includes("ui-v43-shimmer"));
  assert.ok(css.includes("ui-v43-dots"));
- assert.ok(src.includes('button.classList'));
+ assert.ok(src.includes('demo.classList.remove("is-playing")'));
  assert.ok(src.includes('navigator.clipboard.writeText'));
  assert.doesNotMatch(src,/\bfetch\s*\(|WebSocket|XMLHttpRequest|supabase|getUserMedia/i);
  assert.ok(html.includes('data-ui-version="2027-UI-V43"'));

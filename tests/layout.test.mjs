@@ -548,7 +548,7 @@ test("V14 one registry owns icons used by all root button specs",()=>{
  const icons=[...new Set([...source.matchAll(/"icon": "([^"]+)"/g)].map(m=>m[1]))];
  assert.ok(icons.length>=40);
  for(const icon of icons)assert.ok(svg.includes('id="ui-icon-'+icon+'"'),icon);
- assert.equal((svg.match(/<symbol /g)||[]).length,51);
+ assert.equal((svg.match(/<symbol /g)||[]).length,69);
  assert.ok(read(".github/workflows/pages.yml").includes("cp web/icons.svg _site/web/"));
  assert.equal((read("index.html").match(/<link rel="stylesheet"/g)||[]).length,1);
 });
