@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <!-- Canonical UI 2027 icon registry. Use from any HTML page with
-       <svg class="ui-icon"><use href="./web/icons.svg#ui-icon-plus"/>  <!-- V13: message actions and loading / downloading are registry icons, not per-screen drawings. -->
+  <!-- Canonical UI 2027 icon registry, referenced through SVG use elements. -->
+  <!-- Message actions, loading and download share this one sprite. -->
   <symbol id="ui-icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
   <symbol id="ui-icon-thumbs-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M7 10v10H5a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h2Zm0 0 5-7a2.5 2.5 0 0 1 2.5 2.5L14 9h5a2 2 0 0 1 2 2l-1 8a2 2 0 0 1-2 1H7"/></symbol>
   <symbol id="ui-icon-thumbs-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M7 14V4H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2Zm0 0 5 7a2.5 2.5 0 0 0 2.5-2.5L14 15h5a2 2 0 0 0 2-2l-1-8a2 2 0 0 0-2-1H7"/></symbol>
