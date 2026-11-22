@@ -2,11 +2,15 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có hai trang Web:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V07**: một văn bản giống phong cách trình bày ChatGPT, chọn và chỉnh riêng 10 loại nội dung; bên dưới có thư viện mẫu thành phần: 6 bảng, 5 ô số lượng −/+, 6 ô input, chữ 1–4 dòng, icon + chữ + vùng phụ, nút, tìm kiếm, chat, menu và popup.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V08**: một văn bản giống phong cách trình bày ChatGPT, chọn và chỉnh riêng 10 loại nội dung; bên dưới có thư viện mẫu thành phần: 6 bảng, 5 ô số lượng −/+, 6 ô input, chữ 1–4 dòng, icon + chữ + vùng phụ, nút, tìm kiếm, chat, menu và popup.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
 
 
 
+
+## Sửa thống nhất viền focus input (UI-V08)
+
+Ảnh lỗi từ Safari cho thấy khi chọn số lượng ở mẫu số 01 và số 05, viền xanh `input:focus-visible` xuất hiện **bên trong** nhóm `− | số | +`, che đường phân cách và tạo hiệu ứng đứt viền. V08 sửa tận gốc tại **`web/styles.css` dùng chung**: nhóm có một viền focus bao quanh toàn khối, ô nhập số bên trong không còn outline/shadow riêng; hai nút −/+ trong nhóm cũng dùng dấu focus của nhóm. Input chữ có icon và tìm kiếm dùng cùng quy tắc; input đơn lẻ và các ô rời vẫn hiển thị focus quanh chính ô đó để phục vụ điều hướng bàn phím. Chuẩn hóa `appearance: textfield` trên Safari. Không thay đổi tính toán số lượng, dữ liệu hoặc app production.
 
 ## Bộ sưu tập biến thể thành phần UI-V07
 
