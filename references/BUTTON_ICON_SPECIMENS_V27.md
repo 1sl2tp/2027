@@ -1,5 +1,8 @@
 # Thư viện 2027 · Mục 6: Nút và icon (V27)
 
+> **Lưu ý lịch sử (V30):** Các tài liệu V27–V29 chỉ ghi nhận quá trình thử. Quy tắc chuẩn tắc là [RULES.md](../RULES.md), đặc biệt RULE 06–08. Bản V29 đã tạo mục 6.1 kích thước và token `--ds-btn-*` song song là sai; V30 bỏ phần đó, trả mục 6.1 về cấu tạo nút, và dùng chung `.ui-button`, `.ui-icon`, `--ui-control-*`. Không lấy tên lớp `simple-button-demo-*` làm chuẩn mới.
+
+
 Phạm vi: **chỉ thư viện giao diện 1sl2tp/2027**. Không thay CHAT, TAPHOA, Songoku; không gửi tin hay tạo giao dịch.
 
 ## Đối chiếu nguồn
