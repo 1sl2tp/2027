@@ -54,8 +54,9 @@ function iconFor(spec:Specimen):string{
 }
 function sampleButton(spec:Specimen):HTMLButtonElement{
  const button=document.createElement("button");button.type="button";
- button.className="simple-button-demo simple-button-"+spec.style;
- button.setAttribute("aria-label",spec.kind==="icon"?spec.label+" · mẫu":spec.label+" · mẫu");
+ button.className="simple-button-demo simple-button-demo-"+spec.style;
+ button.setAttribute("aria-label",(spec.caption||spec.label)+" · mẫu");
+ button.title=spec.label;
  const ico=iconFor(spec);
  if(ico&&spec.style!=="icon-end")button.append(spriteIcon(ico));
  if(spec.caption){const text=document.createElement("span");text.textContent=spec.caption;button.append(text);}
@@ -64,7 +65,7 @@ function sampleButton(spec:Specimen):HTMLButtonElement{
    const spin=document.createElement("span");spin.className="simple-button-spinner";spin.setAttribute("aria-hidden","true");
    button.prepend(spin);button.disabled=true;button.setAttribute("aria-busy","true");
  }
- if(spec.style==="disabled")button.disabled=true;
+ if(spec.style==="disabled"){button.disabled=true;button.setAttribute("aria-disabled","true");}
  if(spec.style==="toggle")button.setAttribute("aria-pressed","false");
  return button;
 }
