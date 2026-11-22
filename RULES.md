@@ -1,7 +1,7 @@
 # 2027 — RULES.md
 
 > **Nguồn quy tắc duy nhất (Single Source of Truth)**  
-> Repo: `1sl2tp/2027` · Trạng thái: **R08 / UI-V15 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
+> Repo: `1sl2tp/2027` · Trạng thái: **R09 / UI-V16 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
 > Phạm vi: Web App/PWA (TypeScript + HTML + CSS) và Android APK native (Kotlin + Jetpack Compose).
 
 ## RULE 01 — MỘT FILE RULE DUY NHẤT
@@ -410,3 +410,32 @@ Mục tiêu là **một thư viện nút đủ rộng để phục vụ cả CHA
 - **CHAT/TAPHOA/Drive/APK:** chưa sửa. Để nhập 2027 vào ứng dụng thật cần PR riêng và kiểm tra global CSS/selector xung đột; chưa thể mặc định một stylesheet từ demo áp nguyên vào production là hoàn hảo.
 - **Kiểm thử:** 22 mẫu/8 nhóm trong bộ gốc, 8 nhóm thư viện chính, mã preview = mã xuất, nhất quán CSS/SVG, không có handler hoặc URL nguồn ngoài trong snippet. Mục tiêu kiểm chứng E0–E5 và nghiệm thu thủ công trên Safari/Chrome mobile trước khi đưa app thật vào dùng.
 - **Hoàn tác:** revert commit V15 trong `1sl2tp/2027`; giữ V14 và archive V08. Các ứng dụng thật không bị đổi.
+
+---
+
+## RULE 09 — BẢNG HÓA ĐƠN DÙNG CHUNG HỆ CỘT VÀ KIỂU IN
+
+**Mã:** 2027-R09 · **Ngày:** 22/11/2026 (VN) · **Trạng thái:** đã tạo mẫu Web V16, chưa đưa vào ứng dụng thật.
+
+### 9.1. Nguồn và giới hạn đối chiếu
+
+- [TAPHOA `src/fixed-ui-invoice-templates.js`](https://github.com/1sl2tp/taphoaxyz/blob/main/src/fixed-ui-invoice-templates.js) xác định **4 palette**: `print` = **00 đen trắng**, `minimal` = **01 tối giản** (header `#eff2f4`), `navy` = **02 Business Navy** (`#203c52`), `sage` = **03 Retail Green** (`#406e56`). Đó là *cơ sở lựa chọn màu*, không chứng minh các bảng HTML mới giống pixel/mã render ảnh hóa đơn production.
+- [TAPHOA `src/fixed-ui-semantic-columns.css`](https://github.com/1sl2tp/taphoaxyz/blob/main/src/fixed-ui-semantic-columns.css) quy định **STT ở giữa, tên trái, số lượng giữa, tiền bên phải với số dạng tabular**; cấu trúc cột phải có trục ngang thống nhất, không chỉnh vị trí header và từng hàng độc lập.
+- Bản mẫu `2027` do thư viện tự dựng, chỉ dùng dữ liệu minh họa. Mọi trạng thái `đơn tạm`, `đã giao`, `đã thu`, `còn nợ` phải có ý nghĩa riêng, không tự suy diễn lẫn nhau.
+
+### 9.2. Quy tắc dùng chung
+
+1. **Một hợp đồng HTML:** tất cả mẫu hóa đơn phải có `INV-xx`, `group:"invoices"`, `title`, `description`, `html` trong `web/src/ui-patterns.ts`. Dữ liệu này vừa nuôi vùng xem tại `#sample-invoices`, vừa nuôi chức năng lấy HTML ở `#sample-patterns`. Không tạo bản HTML thứ hai cho trang chi tiết.
+2. **Một CSS cho các cách trình bày:** một `.ds-invoice` gốc trong `web/styles.css`; các modifier `--print`, `--minimal`, `--navy`, `--sage`, `--full-grid`, `--compact`, `--draft`, `--delivered`, `--checklist`, `--debt` chỉ đổi điều cần thiết và dùng lại token `--inv-*`.
+3. **Tài liệu in và bảng:** có tiêu đề, tên khách, mã đơn, thời gian, bảng hàng hóa, số lượng, đơn giá, thành tiền, tổng, ghi chú; các mẫu checklist/công nợ có phần nghiệp vụ bổ sung phù hợp. Dùng `<th scope="col">` ở đầu cột. Bảng giữ tên/SL/số tiền trên một trục; trên mobile cho cuộn ngang ở khung bảng khi cần, không tự đè cột.
+4. **Số tiền mẫu được tính thống nhất:** `2 × 32.000 + 3 × 25.000 + 1 × 48.000 = 187.000 đ`; giảm `7.000 đ`, còn `180.000 đ`. Ở mẫu công nợ giả định đã thu `100.000 đ`, dư nợ `80.000 đ`. Bảng kiểm có 5/6 sản phẩm theo số lượng được đối chiếu. Kiểm thử phải phát hiện số liệu không nhất quán.
+5. **In mẫu:** chỉ in **bản hóa đơn được chọn**, clone tạm ra vùng in thuộc `body` để không in menu/khung thư viện; CSS `@media print` đưa về **đen trắng** và kiểm soát ngắt hàng. Chế độ in là thao tác trình duyệt do người dùng chủ động bấm, không có chức năng gửi ảnh đơn hay lưu DB.
+6. **Trạng thái/điều kiện:** đơn tạm không tự đánh dấu đã giao, hóa đơn đã giao không tự đánh dấu đã thu, công nợ mẫu không tạo khoản thu. Các ví dụ chỉ hiển thị nhận diện khác nhau, không được gọi API/Auth/Supabase/thanh toán/nhắn tin.
+7. **Hồi quy và phê duyệt:** khi thay đổi một trục bảng, phải kiểm tra 10 mẫu, preview và mã sao chép đều được cập nhật từ nguồn chung; kiểm tra 320/375/390px và màn rộng, Safari/Chrome, in A4, chữ dài, số nhiều chữ số, focus và safe area trước khi áp dụng vào production.
+
+### 9.3. Phạm vi, kiểm thử và hoàn tác
+
+- **Web 2027:** thêm `index.html#sample-invoices`, module `web/src/invoice-gallery.ts` và dữ liệu `INV-00`–`INV-09` trong `ui-patterns.ts`; giữ một `web/styles.css`. Bộ dùng lại tăng 22 → 32 mẫu (8 → 9 nhóm); thư viện chính tăng 22 → 23 bộ (8 → 9 nhóm).
+- **CHAT/TAPHOA thật, APK, Drive:** không sửa, không đổi mẫu hóa đơn đã lưu trên thiết bị trong TAPHOA.
+- **Kiểm thử:** xác nhận đủ 10 ID, 4 palette, cấu trúc cột, phép tính mẫu, một tệp CSS, in tách khỏi shell, không gọi mạng. Kiểm thử tự động không thay thế ảnh so sánh trên thiết bị thật.
+- **Hoàn tác:** revert commit V16 của `2027`, quay về V15; bản gốc V08 và các repo khác không thay đổi.

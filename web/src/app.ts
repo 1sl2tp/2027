@@ -9,6 +9,7 @@ import { initComposerGallery } from "./composer-gallery.js";
 import { initMessageActions } from "./action-gallery.js";
 import { initRootButtonCatalog } from "./root-button-library.js";
 import { initPatternKit } from "./pattern-kit.js";
+import { initInvoiceGallery } from "./invoice-gallery.js";
 
 type BlockId="title"|"body"|"section"|"description"|"list"|"table"|"number"|"money"|"note"|"caption";
 type SelectId=BlockId|"all";
@@ -411,8 +412,8 @@ for(const b of Array.from(document.querySelectorAll<HTMLButtonElement>("[data-la
 
 // UI-V10 · Browse the existing samples by purpose instead of one long gallery.
 // No component is recreated: grouped sections and all previous demo handlers stay intact.
-type GalleryCategory = "all"|"typography"|"tables"|"quantity"|"inputs"|"actions"|"layouts"|"overlays";
-const galleryCategories:GalleryCategory[]=["all","typography","tables","quantity","inputs","actions","layouts","overlays"];
+type GalleryCategory = "all"|"typography"|"tables"|"invoices"|"quantity"|"inputs"|"actions"|"layouts"|"overlays";
+const galleryCategories:GalleryCategory[]=["all","typography","tables","invoices","quantity","inputs","actions","layouts","overlays"];
 const gallerySearch=get<HTMLInputElement>("gallerySearch");
 const gallerySections=Array.from(document.querySelectorAll<HTMLElement>("[data-gallery-category]"));
 const galleryFilterButtons=Array.from(document.querySelectorAll<HTMLButtonElement>("[data-gallery-filter]"));
@@ -486,6 +487,7 @@ window.addEventListener("hashchange",()=>{
 const initialGalleryCategory=galleryCategoryFromHash();
 if(initialGalleryCategory)activeGalleryCategory=initialGalleryCategory;
 initPatternKit();
+initInvoiceGallery();
 initRootButtonCatalog(); // Build the source catalog before text-search discovers gallery content.
 updateGallery();
 

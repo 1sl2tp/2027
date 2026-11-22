@@ -1,4 +1,4 @@
-// UI 2027 V15 · One portable visual contract, multiple copyable compositions.
+// UI 2027 V16 · One portable visual contract, multiple copyable compositions.
 // No app data or backend calls. Previews are hard-coded owned HTML, never user HTML.
 import {UI_PATTERNS,UI_PATTERN_GROUPS,type UiPattern} from "./ui-patterns.js";
 export function initPatternKit():void{
@@ -98,13 +98,13 @@ export function initPatternKit():void{
  copyButton.addEventListener("click",()=>{if(sourceInput.value)void copyValue(sourceInput.value,"HTML mẫu "+selected.id);});
  copySetup.addEventListener("click",()=>void copyValue(setupText,"hướng dẫn nạp CSS/icon"));
  download.addEventListener("click",()=>{
-  const manifest={version:"2027-UI-V15",status:"presentation-only",source:"1sl2tp/2027",
+  const manifest={version:"2027-UI-V16",status:"presentation-only",source:"1sl2tp/2027",
    stylesheet:"web/styles.css",iconRegistry:"web/icons.svg",
    patterns:UI_PATTERNS.map(item=>({id:item.id,group:item.group,title:item.title,description:item.description,html:item.html}))};
   const blob=new Blob([JSON.stringify(manifest,null,2)],{type:"application/json;charset=utf-8"});
   const url=URL.createObjectURL(blob);
   const a=document.createElement("a");
-  a.href=url;a.download="2027-ui-pattern-catalog-v15.json";
+  a.href=url;a.download="2027-ui-pattern-catalog-v16.json";
   document.body.append(a);a.click();a.remove();
   window.setTimeout(()=>URL.revokeObjectURL(url),1000);
   tell("Đã tạo yêu cầu tải JSON danh mục mẫu. Đây là dữ liệu thiết kế, không có dữ liệu khách.");
