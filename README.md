@@ -2,8 +2,17 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có hai trang Web:
 
-- **[Chữ & màu nền](https://1sl2tp.github.io/2027/)** — `index.html`, bản xem trực tiếp font, cỡ chữ, độ đậm, giãn dòng và palette.
+- **[Chữ & màu nền](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V05**: 4 palette trung tính, 5 vai trò màu, 4 họ font, cỡ 13–21px, đậm 400–700, chữ thường/nghiêng, giãn dòng/ký tự, mẫu tiếng Việt/số tiền, xem rộng/mobile, bảng đo tương phản, sao chép CSS và đặt lại.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
+
+
+## Hoàn thiện nền tảng màu & kiểu chữ (UI-V05)
+
+- **Nguồn token duy nhất:** `web/src/design.ts` định nghĩa màu nền/nền thẻ/chữ chính/chữ phụ/viền, 4 họ font, kiểu thường/nghiêng, cỡ chữ, giãn dòng và giãn ký tự. Bộ CSS `web/styles.css` tiêu thụ các token bằng biến `--ui-*`, không tạo CSS riêng cho mỗi khung.
+- **Kiểm tra tương phản:** mô-đun tự tính tỷ lệ WCAG 2.2 cho 4 cặp màu gồm chữ chính/nền, chữ phụ/nền, chữ phụ/nền thẻ, chữ trên nút chính. Toàn bộ palette gốc đã được chọn để từng cặp **đạt ít nhất 4.5:1** qua kiểm thử tự động. Đây không phải tuyên bố ứng dụng đã đạt tất cả tiêu chí WCAG.
+- **Thử nghiệm:** chọn màu/font/đậm/nghiêng/size/line-height/tracking, sửa nội dung mẫu, chuyển mobile/rộng, xem vai trò màu và CSS theo lựa chọn. Các giá trị được lưu **cục bộ bằng localStorage**, reset xóa lựa chọn. Không gửi máy chủ.
+- **Phạm vi:** hoàn thiện trước **trang mẫu nền tảng**. Các màn luồng V04 vẫn là bản mẫu trước đó; chưa coi việc chọn font/màu V05 là đã áp tự động lên tất cả khung V04 hoặc ứng dụng thật. Đồng bộ nâng cấp giao diện từng luồng là bước riêng sau khi duyệt bộ nền tảng.
+- **Nghiệm thu:** CI kiểm tra cấu trúc và toán học tương phản; việc dùng thiết bị thật ở nhiều viewport, zoom/font scaling, bàn phím và dark mode phải kiểm chứng riêng.
 
 ## Cấu trúc và quyền sở hữu
 
@@ -11,6 +20,7 @@
 web/styles.css           ← MỘT CSS cho thư viện, các thành phần và 3 luồng
 index.html               ← Trang mẫu font / màu (V03)
 flows.html               ← Trang xem ba khung (V04)
+web/src/design.ts        ← Nguồn token màu/chữ, công thức tương phản, xuất CSS
 web/src/app.ts           ← Điều khiển trang font / màu
 web/src/flows.ts         ← Một state mẫu chung cho ba mô-đun
 web/dist/*.js            ← Đầu ra TypeScript khi chạy npm run build
