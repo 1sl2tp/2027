@@ -111,9 +111,9 @@ test("V31 keeps a valid, singly rooted SVG sprite and safe deployment",()=>{
   assert.equal(ids.length,new Set(ids).size);
   assert.equal(sprite.split("</svg>").length-1,1);
   assert.ok(sprite.trimEnd().endsWith("</svg>"));
-  assert.ok(html.includes('data-ui-version="2027-UI-V37"'));
-  assert.ok(html.includes('src="./web/dist-v37/app.js"'));
-  assert.ok(html.includes('./web/styles.css?v=2027-UI-V37'));
-  assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v37"));
+  assert.ok(html.includes('data-ui-version="2027-UI-V38"'));
+  assert.ok(html.includes('src="./web/dist-v38/app.js"'));
+  assert.ok(html.includes('./web/styles.css?v=2027-UI-V38'));
+  assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v38"));
   assert.ok(workflow.includes("ET.parse('web/icons.svg')"));
 });
