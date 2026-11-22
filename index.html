@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
   <title>2027 · Thư viện mẫu theo nhóm · V12</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V12">
-  <script type="module" src="./web/dist/app.js?v=2027-UI-V12"></script>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V13">
+  <script type="module" src="./web/dist/app.js?v=2027-UI-V13"></script>
 </head>
-<body data-ui-version="2027-UI-V12" class="studio-page">
+<body data-ui-version="2027-UI-V13" class="studio-page">
 
 <div class="app" id="app">
   <header class="topbar">
@@ -36,7 +36,7 @@
       <a class="nav-link" href="./flows.html#chat/contacts"><span class="nav-numeral">11</span><span>Trò chuyện</span><small>↗</small></a>
       <a class="nav-link" href="./flows.html#work/summary"><span class="nav-numeral">12</span><span>Công việc</span><small>↗</small></a>
       <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">13</span><span>Bán hàng</span><small>↗</small></a>
-      <div class="sidebar-footer">UI-V12 · RULE 03<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
+      <div class="sidebar-footer">UI-V13 · RULE 03<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
     </aside>
     <main class="main studio-main" id="main">
       <div class="studio-heading">
@@ -129,16 +129,16 @@
   <div class="gallery-browser" aria-label="Tìm và lọc thư viện">
     <div class="gallery-browser-tools">
       <label class="gallery-search-box" for="gallerySearch"><span aria-hidden="true">⌕</span><input id="gallerySearch" type="search" placeholder="Tìm mẫu: bảng, input, icon…" autocomplete="off"><button type="button" id="galleryClearSearch" aria-label="Xóa từ khóa tìm mẫu">×</button></label>
-      <div class="gallery-view-count" id="galleryCount" aria-live="polite">16 bộ mẫu · 7 nhóm</div>
+      <div class="gallery-view-count" id="galleryCount" aria-live="polite">18 bộ mẫu · 7 nhóm</div>
     </div>
     <div class="gallery-filter-nav" role="group" aria-label="Lọc các loại mẫu">
-      <button type="button" class="selected" aria-pressed="true" data-gallery-filter="all">Tất cả <span>16</span></button>
+      <button type="button" class="selected" aria-pressed="true" data-gallery-filter="all">Tất cả <span>18</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="typography">Chữ & nhiều dòng <span>1</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="tables">Bảng & dữ liệu <span>2</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="quantity">Số lượng − / + <span>2</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="inputs">Ô nhập & gõ chat <span>4</span></button>
-      <button type="button" aria-pressed="false" data-gallery-filter="actions">Nút & biểu tượng <span>3</span></button>
-      <button type="button" aria-pressed="false" data-gallery-filter="layouts">Hàng & bố cục <span>2</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="actions">Nút & biểu tượng <span>4</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="layouts">Hàng & bố cục <span>3</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="overlays">Menu & popup <span>2</span></button>
     </div>
   </div>
@@ -440,7 +440,7 @@
       <div class="gallery-category-heading">
         <div class="gallery-category-index">05</div>
         <div class="gallery-category-intro"><h3 id="galleryTitle-actions">Nút & biểu tượng</h3><p>Nút chính/phụ, icon vuông/tròn và bộ nút dùng chung cho ô gõ chat.</p></div>
-        <span class="gallery-category-count">3 bộ mẫu</span>
+        <span class="gallery-category-count">4 bộ mẫu</span>
       </div>
       <div class="studio-component-grid">
         <div class="studio-component-card">
@@ -493,13 +493,58 @@
     <p id="sharedActionFeedback" class="studio-component-feedback" role="status" aria-live="polite">Bấm các nút để xem trạng thái tương tác. Các khung gõ chat kế thừa trực tiếp bộ mẫu này.</p>
   </div>
 </section>
+        <section class="studio-component-card variant-wide ui-action-message-gallery" data-ui-library="message-actions" aria-labelledby="messageActionsTitle">
+ <div class="studio-component-label"><strong id="messageActionsTitle">Cụm nút tin nhắn, chia sẻ, sao chép, tải xuống</strong><span>Biến thể gọn · có nhãn · loading/trạng thái</span></div>
+ <div class="studio-component-content">
+  <p class="ui-action-library-description">Các nút là biến thể của <code>ui-button</code> và lấy icon từ <code>web/icons.svg</code>. Biểu tượng nhỏ, vùng chạm đủ lớn. <b>Loading</b> là trạng thái đang xử lý; <b>Tải xuống</b> là hành động lấy tệp.</p>
+  <div class="ui-message-action-grid">
+   <div class="ui-message-example" data-action-scope>
+    <span class="ui-message-example-name">01 · Thanh thao tác gọn</span>
+    <p data-action-content>Đây là nội dung mẫu để thử sao chép, chia sẻ và phản hồi. Không liên quan đến tin nhắn thật.</p>
+    <div class="ui-action-strip" role="group" aria-label="Thanh thao tác dưới tin nhắn">
+      <button type="button" class="ui-button ui-button--message-action " data-action-kind="copy" aria-label="Sao chép" title="Sao chép" ><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-copy"/></svg><span class="ui-action-label">Sao chép</span></button>
+<button type="button" class="ui-button ui-button--message-action " data-action-kind="like" aria-label="Thích" title="Thích" aria-pressed="false"><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-thumbs-up"/></svg><span class="ui-action-label">Thích</span></button>
+<button type="button" class="ui-button ui-button--message-action " data-action-kind="dislike" aria-label="Không thích" title="Không thích" aria-pressed="false"><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-thumbs-down"/></svg><span class="ui-action-label">Không thích</span></button>
+<button type="button" class="ui-button ui-button--message-action " data-action-kind="speak" aria-label="Đọc nội dung" title="Đọc nội dung" aria-pressed="false"><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-volume"/></svg><span class="ui-action-label">Đọc nội dung</span></button>
+<button type="button" class="ui-button ui-button--message-action " data-action-kind="share" aria-label="Chia sẻ" title="Chia sẻ" ><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-share"/></svg><span class="ui-action-label">Chia sẻ</span></button>
+<button type="button" class="ui-button ui-button--message-action ui-action-more" data-action-kind="more" aria-label="Thêm" title="Thêm" ><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-ellipsis"/></svg><span class="ui-action-label">Thêm</span></button>
+      <div class="ui-action-popup" data-action-menu role="menu" hidden>
+  <button type="button" role="menuitem" data-action-kind="copy">Sao chép văn bản</button>
+  <button type="button" role="menuitem" data-action-kind="download">Tải bản mẫu</button>
+</div>
+    </div>
+    <p class="studio-component-feedback" data-action-feedback role="status" aria-live="polite">Thử các nút nhỏ dưới nội dung.</p>
+   </div>
+   <div class="ui-message-example" data-action-scope>
+    <span class="ui-message-example-name">02 · Nút có nhãn</span>
+    <p data-action-content>Văn bản mẫu UI 2027. Sao chép, chia sẻ hoặc tải xuống bản TXT cục bộ.</p>
+    <div class="ui-action-strip ui-action-strip--labeled" role="group" aria-label="Sao chép, chia sẻ và tải nội dung mẫu">
+      <button type="button" class="ui-button ui-button--message-action ui-button--message-labeled" data-action-kind="copy" aria-label="Sao chép" title="Sao chép" ><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-copy"/></svg><span class="ui-action-label">Sao chép</span></button>
+<button type="button" class="ui-button ui-button--message-action ui-button--message-labeled" data-action-kind="share" aria-label="Chia sẻ" title="Chia sẻ" ><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-share"/></svg><span class="ui-action-label">Chia sẻ</span></button>
+<button type="button" class="ui-button ui-button--message-action ui-button--message-labeled" data-action-kind="download" aria-label="Tải xuống" title="Tải xuống" ><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-download"/></svg><span class="ui-action-label">Tải xuống</span></button>
+    </div>
+    <p class="studio-component-feedback" data-action-feedback role="status" aria-live="polite">Có chữ bên cạnh icon để dễ hiểu.</p>
+   </div>
+   <div class="ui-message-example" data-action-scope>
+    <span class="ui-message-example-name">03 · Loading / hoàn tất / không khả dụng</span>
+    <p data-action-content>Ví dụ trạng thái tải của nút. Không truy cập mạng hoặc API.</p>
+    <div class="ui-action-strip ui-action-strip--labeled" role="group" aria-label="Trạng thái xử lý thao tác">
+      <button type="button" class="ui-button ui-button--message-action ui-button--message-labeled" data-action-kind="load" data-action-state="idle" aria-label="Thử trạng thái đang tải"><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-refresh"/></svg><span class="ui-action-label">Thử loading</span></button>
+      <button type="button" class="ui-button ui-button--message-action ui-button--message-labeled" data-action-kind="download" aria-label="Tải tệp TXT thử"><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-download"/></svg><span class="ui-action-label">Tải TXT mẫu</span></button>
+      <button type="button" class="ui-button ui-button--message-action ui-button--message-labeled" disabled aria-label="Nút vô hiệu"><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-share"/></svg><span class="ui-action-label">Vô hiệu</span></button>
+    </div>
+    <p class="studio-component-feedback" data-action-feedback role="status" aria-live="polite">Bấm Loading để xem vòng quay rồi dấu hoàn tất.</p>
+   </div>
+  </div>
+ </div>
+</section>
       </div>
     </section>
     <section class="gallery-category" data-gallery-category="layouts" id="sample-layouts" aria-labelledby="galleryTitle-layouts">
       <div class="gallery-category-heading">
         <div class="gallery-category-index">06</div>
         <div class="gallery-category-intro"><h3 id="galleryTitle-layouts">Hàng & bố cục</h3><p>Icon + tên + dòng phụ + vùng số tiền, trạng thái, mũi tên hoặc nút.</p></div>
-        <span class="gallery-category-count">2 bộ mẫu · 8 kiểu hàng</span>
+        <span class="gallery-category-count">3 bộ mẫu · 8 kiểu hàng + thao tác tin nhắn</span>
       </div>
       <div class="studio-component-grid">
         <section class="studio-component-card variant-wide" aria-labelledby="iconRowsTitle">
@@ -526,6 +571,30 @@
                       <p class="studio-component-feedback" id="compoundFeedback" role="status" aria-live="polite">Thử các bố cục này để kiểm tra khoảng trống dành cho chữ, số tiền và nút nhỏ bên phải.</p>
                     </div>
                   </section>
+        <section class="studio-component-card variant-wide ui-message-layout-card" aria-labelledby="messageActionLayoutTitle">
+ <div class="studio-component-label"><strong id="messageActionLayoutTitle">Cụm thao tác đặt dưới nội dung chat</strong><span>Mẫu ứng dụng sử dụng đúng nút ở thư viện</span></div>
+ <div class="studio-component-content">
+  <div class="ui-message-layout-demo" data-action-scope>
+   <div class="ui-message-layout-content" data-action-content>
+    <p>Mình đã tổng hợp thông tin đơn hàng mẫu. Bạn có thể <strong>sao chép</strong>, <strong>chia sẻ</strong> hoặc tải xuống phần nội dung này.</p>
+    <p class="ui-message-layout-secondary">Các thao tác bên dưới thuộc hệ nút phụ, không cạnh tranh với nội dung chính.</p>
+   </div>
+   <div class="ui-action-strip" role="group" aria-label="Thao tác tin nhắn tại vị trí thực tế">
+     <button type="button" class="ui-button ui-button--message-action " data-action-kind="copy" aria-label="Sao chép" title="Sao chép" ><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-copy"/></svg><span class="ui-action-label">Sao chép</span></button>
+<button type="button" class="ui-button ui-button--message-action " data-action-kind="like" aria-label="Thích" title="Thích" aria-pressed="false"><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-thumbs-up"/></svg><span class="ui-action-label">Thích</span></button>
+<button type="button" class="ui-button ui-button--message-action " data-action-kind="dislike" aria-label="Không thích" title="Không thích" aria-pressed="false"><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-thumbs-down"/></svg><span class="ui-action-label">Không thích</span></button>
+<button type="button" class="ui-button ui-button--message-action " data-action-kind="speak" aria-label="Đọc nội dung" title="Đọc nội dung" aria-pressed="false"><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-volume"/></svg><span class="ui-action-label">Đọc nội dung</span></button>
+<button type="button" class="ui-button ui-button--message-action " data-action-kind="share" aria-label="Chia sẻ" title="Chia sẻ" ><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-share"/></svg><span class="ui-action-label">Chia sẻ</span></button>
+<button type="button" class="ui-button ui-button--message-action " data-action-kind="more" aria-label="Thêm" title="Thêm" ><svg class="ui-icon ui-icon--action " aria-hidden="true"><use href="./web/icons.svg#ui-icon-ellipsis"/></svg><span class="ui-action-label">Thêm</span></button>
+     <div class="ui-action-popup" data-action-menu role="menu" hidden>
+  <button type="button" role="menuitem" data-action-kind="copy">Sao chép văn bản</button>
+  <button type="button" role="menuitem" data-action-kind="download">Tải bản mẫu</button>
+</div>
+   </div>
+   <p class="studio-component-feedback" data-action-feedback role="status" aria-live="polite">Khi ghép vào chat, không tạo kiểu icon mới.</p>
+  </div>
+ </div>
+</section>
       </div>
     </section>
     <section class="gallery-category" data-gallery-category="overlays" id="sample-overlays" aria-labelledby="galleryTitle-overlays">

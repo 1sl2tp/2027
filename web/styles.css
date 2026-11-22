@@ -1298,3 +1298,88 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid #fff
  .composer-gallery-card .studio-component-content{padding:11px}
  .composer-variant--compact .composer-surface{column-gap:0}
 }
+
+/* UI-V13 · Shared subtle actions & loading/download primitives.
+   Same ui-button/ui-icon as the composer; modifiers only describe the action role.
+   No vendor CSS, images, or new standalone stylesheet. */
+:root{
+ --ui-action-glyph:17px;
+ --ui-action-hit:44px;
+ --ui-action-gap:1px;
+ --ui-action-text-size:12px;
+ --ui-action-muted:var(--ui-text-muted);
+ --ui-action-active:var(--ui-text);
+}
+.ui-button--message-action{
+ min-height:var(--ui-action-hit);height:var(--ui-action-hit);
+ min-width:var(--ui-action-hit);width:var(--ui-action-hit);
+ padding:0;border:1px solid transparent;border-radius:9px;
+ color:var(--ui-action-muted);background:transparent;gap:6px;
+ font:500 var(--ui-action-text-size)/1.25 var(--ui-font);
+}
+.ui-button--message-action:hover:not(:disabled),
+.ui-button--message-action[aria-pressed="true"]{
+ background:var(--ui-surface);color:var(--ui-action-active);
+}
+.ui-button--message-action[aria-pressed="true"]{box-shadow:inset 0 0 0 1px var(--ui-border)}
+.ui-icon--action{width:var(--ui-action-glyph);height:var(--ui-action-glyph);stroke:currentColor}
+.ui-button--message-action .ui-action-label{display:none}
+.ui-button--message-labeled{
+ width:auto;min-width:var(--ui-action-hit);padding:0 12px;
+ border-color:var(--ui-border);background:var(--ui-bg);color:var(--ui-text);
+}
+.ui-button--message-labeled .ui-action-label{display:inline;white-space:nowrap}
+.ui-button--message-labeled:disabled{opacity:.45}
+.ui-action-strip{display:flex;align-items:center;gap:var(--ui-action-gap);
+ flex-wrap:wrap;max-width:100%;position:relative;min-width:0}
+.ui-action-strip--labeled{gap:8px}
+.ui-action-strip .ui-button{flex:none}
+.ui-action-popup{
+ position:absolute;z-index:12;top:calc(100% + 3px);right:0;
+ width:min(220px,100%);padding:5px;display:flex;flex-direction:column;
+ border:1px solid var(--ui-border);border-radius:11px;
+ background:var(--ui-bg);box-shadow:0 12px 30px #0000001c;
+}
+.ui-action-popup[hidden]{display:none}
+.ui-action-popup button{
+ display:block;min-height:42px;text-align:left;padding:9px 12px;border-radius:8px;
+ background:var(--ui-bg);color:var(--ui-text);font:500 12px/1.4 var(--ui-font);
+}
+.ui-action-popup button:hover,.ui-action-popup button:focus-visible{background:var(--ui-surface)}
+.ui-button--message-action[data-action-state="loading"]{color:var(--ui-action-active)}
+.ui-button--message-action[data-action-state="success"]{
+ color:var(--ui-action-active);border-color:var(--ui-border);
+}
+.ui-icon--loading{animation:ui-action-rotate .8s linear infinite;transform-origin:center}
+@keyframes ui-action-rotate{to{transform:rotate(360deg)}}
+.ui-message-action-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ui-message-example{
+ min-width:0;border:1px solid var(--ui-border);background:var(--ui-bg);
+ border-radius:11px;padding:15px;display:flex;flex-direction:column;gap:10px;
+}
+.ui-message-example-name{font-size:12px;font-weight:730;color:var(--ui-text)}
+.ui-message-example>p[data-action-content]{font-size:13px;line-height:1.65;
+ color:var(--ui-text);margin:0;min-height:52px;overflow-wrap:anywhere}
+.ui-message-example .studio-component-feedback{margin:2px 0 0;min-height:27px}
+.ui-message-example:last-child{grid-column:1 / -1}
+.ui-message-example:last-child>p[data-action-content]{min-height:0}
+.ui-message-layout-demo{max-width:720px;margin:0 auto;padding:14px 14px 8px;
+ border:1px solid var(--ui-border);border-radius:12px;background:var(--ui-bg);min-width:0}
+.ui-message-layout-content{font-size:14px;line-height:1.65;color:var(--ui-text)}
+.ui-message-layout-content p{margin:0 0 12px}
+.ui-message-layout-secondary{font-size:12px;color:var(--ui-text-muted)}
+.ui-message-layout-demo .ui-action-strip{margin-left:-7px}
+.ui-message-layout-demo .studio-component-feedback{margin:2px 0 0}
+@media(max-width:920px){.ui-message-action-grid{grid-template-columns:1fr}
+ .ui-message-example:last-child{grid-column:auto}}
+@media(max-width:760px){
+ .ui-message-example{padding:12px}
+ .ui-action-strip--labeled{gap:5px}
+ .ui-button--message-labeled{padding:0 9px;font-size:11px;gap:5px}
+ .ui-message-layout-demo{padding:12px}
+}
+@media(max-width:390px){
+ .ui-button--message-labeled{padding:0 7px}
+ .ui-message-action-grid{gap:8px}
+}
+@media(prefers-reduced-motion:reduce){.ui-icon--loading{animation:none}}

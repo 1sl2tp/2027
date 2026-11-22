@@ -6,6 +6,7 @@ import {
   type DesignSettings,type FontKey,type PaletteKey,type ViewportKey
 } from "./design.js";
 import { initComposerGallery } from "./composer-gallery.js";
+import { initMessageActions } from "./action-gallery.js";
 
 type BlockId="title"|"body"|"section"|"description"|"list"|"table"|"number"|"money"|"note"|"caption";
 type SelectId=BlockId|"all";
@@ -505,6 +506,7 @@ for(const button of Array.from(document.querySelectorAll<HTMLButtonElement>("[da
  });
 }
 initComposerGallery();
+initMessageActions();
 render();
 // When a user opens #sample-inputs directly, filtering hides preceding sections.
 // Reposition the anchor once the visible layout has settled.
