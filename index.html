@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Văn bản và thành phần · V06</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V08">
-  <script type="module" src="./web/dist/app.js?v=2027-UI-V08"></script>
+  <title>2027 · Thư viện mẫu theo nhóm · V10</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V10">
+  <script type="module" src="./web/dist/app.js?v=2027-UI-V10"></script>
 </head>
-<body data-ui-version="2027-UI-V08" class="studio-page">
+<body data-ui-version="2027-UI-V10" class="studio-page">
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
@@ -20,18 +20,26 @@
       <div class="sidebar-group-title">MẪU GIAO DIỆN</div>
       <a class="nav-link active" href="#document"><span class="nav-numeral">01</span><span>Văn bản mẫu</span></a>
       <a class="nav-link" href="#controls"><span class="nav-numeral">02</span><span>Chỉnh chữ & nền</span></a>
-      <a class="nav-link" href="#components"><span class="nav-numeral">03</span><span>Bảng, nút & input</span></a>
-      <a class="nav-link" href="#overlays"><span class="nav-numeral">04</span><span>Menu & popup</span></a>
+      <div class="sidebar-separator"></div>
+      <div class="sidebar-group-title">CHỌN LOẠI MẪU</div>
+      <a class="nav-link" href="#components"><span class="nav-numeral">03</span><span>Tất cả mẫu</span></a>
+      <a class="nav-link" href="#sample-typography"><span class="nav-numeral">04</span><span>Chữ & nhiều dòng</span></a>
+      <a class="nav-link" href="#sample-tables"><span class="nav-numeral">05</span><span>Bảng & dữ liệu</span></a>
+      <a class="nav-link" href="#sample-quantity"><span class="nav-numeral">06</span><span>Số lượng − / +</span></a>
+      <a class="nav-link" href="#sample-inputs"><span class="nav-numeral">07</span><span>Ô nhập & gõ chat</span></a>
+      <a class="nav-link" href="#sample-actions"><span class="nav-numeral">08</span><span>Nút & biểu tượng</span></a>
+      <a class="nav-link" href="#sample-layouts"><span class="nav-numeral">09</span><span>Hàng & bố cục</span></a>
+      <a class="nav-link" href="#sample-overlays"><span class="nav-numeral">10</span><span>Menu & popup</span></a>
       <div class="sidebar-separator"></div>
       <div class="sidebar-group-title">LUỒNG ĐÃ DỰNG</div>
-      <a class="nav-link" href="./flows.html#chat/contacts"><span class="nav-numeral">05</span><span>Trò chuyện</span><small>↗</small></a>
-      <a class="nav-link" href="./flows.html#work/summary"><span class="nav-numeral">06</span><span>Công việc</span><small>↗</small></a>
-      <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">07</span><span>Bán hàng</span><small>↗</small></a>
-      <div class="sidebar-footer">UI-V08 · RULE 03<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
+      <a class="nav-link" href="./flows.html#chat/contacts"><span class="nav-numeral">11</span><span>Trò chuyện</span><small>↗</small></a>
+      <a class="nav-link" href="./flows.html#work/summary"><span class="nav-numeral">12</span><span>Công việc</span><small>↗</small></a>
+      <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">13</span><span>Bán hàng</span><small>↗</small></a>
+      <div class="sidebar-footer">UI-V10 · RULE 03<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
     </aside>
     <main class="main studio-main" id="main">
       <div class="studio-heading">
-        <div class="eyebrow">THƯ VIỆN THIẾT KẾ / V06</div>
+        <div class="eyebrow">THƯ VIỆN THIẾT KẾ / V10</div>
         <h1>Chỉnh ngay trên một văn bản mẫu</h1>
         <p>Giống cách ChatGPT sắp xếp nội dung: tiêu đề, đoạn văn, danh sách, bảng, số tiền và ghi chú. Chạm vào phần muốn chỉnh rồi đổi font, cỡ chữ, đậm, nghiêng, gạch chân hoặc nền.</p>
       </div>
@@ -110,205 +118,292 @@
         </div>
         <div class="studio-status-bar"><span id="statusText" role="status" aria-live="polite">Bấm vào một phần của văn bản để chọn.</span><span id="savedStatus">Mẫu cục bộ</span></div>
       </div>
-      <section class="studio-component-gallery" id="components">
-        <div class="studio-gallery-heading"><span class="eyebrow">THƯ VIỆN THÀNH PHẦN / 02</span><h2>Bảng, số lượng, input và bố cục</h2><p>Cùng một font và bảng màu. Các nút, ô nhập và biểu tượng đều có trạng thái thử trực tiếp.</p></div>
-        <div class="studio-component-grid" id="componentTheme">
-          <div class="studio-component-card">
-            <div class="studio-component-label"><strong>01 · Mẫu bảng</strong><span>Căn cột, giá trị, viền</span></div>
-            <div class="studio-component-content">
-              <table class="studio-data-table studio-mini-table"><thead><tr><th scope="col">Tên hàng</th><th scope="col">SL</th><th scope="col">Thành tiền</th></tr></thead><tbody>
-                <tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr><tr><td>Tổng cộng</td><td>15</td><td><b>222.000 đ</b></td></tr>
-              </tbody></table>
-            </div>
-          </div>
-          <div class="studio-component-card">
-            <div class="studio-component-label"><strong>02 · Mẫu nút</strong><span>Chính, phụ, văn bản</span></div>
-            <div class="studio-component-content">
-              <div class="studio-example-buttons">
-                <button type="button" class="studio-action-primary" data-demo="primary">Nút chính</button>
-                <button type="button" class="studio-action-secondary" data-demo="secondary">Nút phụ</button>
-                <button type="button" class="studio-action-text" data-demo="text">Dạng chữ</button>
-                <button type="button" class="studio-action-secondary" disabled>Không hoạt động</button>
-              </div>
-              <p class="studio-component-feedback" id="buttonFeedback" role="status" aria-live="polite">Chọn một nút để thử phản hồi.</p>
-            </div>
-          </div>
-          <div class="studio-component-card">
-            <div class="studio-component-label"><strong>03 · Icon vuông và tròn</strong><span>Chung hệ kích thước chạm</span></div>
-            <div class="studio-component-content">
-              <div class="studio-icon-examples">
-                <button type="button" class="studio-icon-button square" data-icon="Tìm kiếm" aria-label="Icon tìm kiếm vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg></button>
-                <button type="button" class="studio-icon-button round" data-icon="Thêm" aria-label="Icon thêm tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
-                <button type="button" class="studio-icon-button square filled" data-icon="Gửi" aria-label="Icon gửi vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-5 16-3.5-6.5L4 12Z"></path><path d="m20 4-8.5 9.5"></path></svg></button>
-                <button type="button" class="studio-icon-button round outline" data-icon="Menu" aria-label="Icon menu tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle></svg></button>
-              </div>
-              <p class="studio-component-feedback" id="iconFeedback" role="status" aria-live="polite">Vùng chạm minh họa 44 × 44 px.</p>
-            </div>
-          </div>
-          <div class="studio-component-card">
-            <div class="studio-component-label"><strong>04 · Ô số lượng</strong><span>Giảm / tăng, kiểm soát giới hạn</span></div>
-            <div class="studio-component-content">
-              <label class="studio-demo-label" for="quantityInput">Số lượng sản phẩm</label>
-              <div class="studio-qty">
-                <button type="button" id="qtyMinus" aria-label="Giảm số lượng">−</button>
-                <input id="quantityInput" type="number" value="2" min="0" max="99" inputmode="numeric" aria-label="Số lượng sản phẩm">
-                <button type="button" id="qtyPlus" aria-label="Tăng số lượng">+</button>
-              </div>
-              <p class="studio-component-feedback" id="qtyFeedback" role="status" aria-live="polite">Số lượng hiện tại: 2</p>
-            </div>
-          </div>
-          <div class="studio-component-card">
-            <div class="studio-component-label"><strong>05 · Ô tìm kiếm</strong><span>Lọc ngay, không kết nối máy chủ</span></div>
-            <div class="studio-component-content">
-              <label class="studio-demo-label" for="searchInput">Tìm sản phẩm mẫu</label>
-              <div class="studio-search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg><input id="searchInput" type="search" placeholder="Ví dụ: sữa, bánh…" autocomplete="off"></div>
-              <div id="searchResults" class="studio-search-results" role="status" aria-live="polite">Sữa hộp · Bánh quy · Nước khoáng</div>
-            </div>
-          </div>
-          <div class="studio-component-card">
-            <div class="studio-component-label"><strong>06 · Ô gõ chat</strong><span>Text nhiều dòng, nút gửi mẫu</span></div>
-            <div class="studio-component-content">
-              <div class="studio-chat-example" id="chatExamples"><div class="studio-chat-bubble">Đây là tin nhắn mẫu hiển thị như một hội thoại.</div></div>
-              <form id="chatDemoForm" class="studio-chat-compose"><label class="studio-visually-hidden" for="chatInput">Tin nhắn thử</label><textarea id="chatInput" rows="1" maxlength="500" placeholder="Nhập tin nhắn mẫu…"></textarea><button type="submit" aria-label="Thêm tin nhắn vào bản mẫu">Gửi</button></form>
-              <p class="studio-component-feedback" id="chatFeedback" role="status" aria-live="polite">Tin nhắn chỉ hiện trong trang mẫu, không gửi thật.</p>
-            </div>
-          </div>
-          <div class="studio-component-card studio-overlay-card" id="overlays">
-            <div class="studio-component-label"><strong>07 · Menu phụ</strong><span>Nút ba chấm, mở/đóng bằng Escape</span></div>
-            <div class="studio-component-content">
-              <div class="studio-menu-anchor" id="menuAnchor">
-                <span>Đơn hàng mẫu <small>DH-001</small></span>
-                <button type="button" class="studio-icon-button square" id="menuButton" aria-label="Mở menu phụ" aria-haspopup="menu" aria-expanded="false">⋯</button>
-                <div id="sampleMenu" class="studio-pop-menu" role="menu" hidden>
-                  <button type="button" role="menuitem" data-menu-item="Xem chi tiết">Xem chi tiết</button>
-                  <button type="button" role="menuitem" data-menu-item="Sao chép thông tin">Sao chép thông tin</button>
-                  <button type="button" role="menuitem" data-menu-item="Đóng menu">Đóng menu</button>
-                </div>
-              </div>
-              <p class="studio-component-feedback" id="menuFeedback" role="status" aria-live="polite">Nhấn dấu ba chấm để mở menu.</p>
-            </div>
-          </div>
-          <div class="studio-component-card">
-            <div class="studio-component-label"><strong>08 · Popup</strong><span>Hộp thoại có nền mờ, focus, đóng</span></div>
-            <div class="studio-component-content"><div class="studio-popup-example">
-              <p>Thử một hộp thoại xác nhận như khi hoàn tất một thao tác.</p>
-              <button type="button" class="studio-action-primary" id="openPopupButton">Mở popup mẫu</button>
-            </div></div>
-          </div>
-
-          <!-- V07 · Variant library: components are designed to be compared side by side. -->
-          <section class="studio-component-card variant-wide" aria-labelledby="tableVariantsTitle">
-            <div class="studio-component-label"><strong id="tableVariantsTitle">09 · Sáu mẫu bảng</strong><span>Kẻ dọc / kẻ ngang / tối giản / sọc / gọn / thẻ</span></div>
-            <div class="studio-component-content">
-              <div class="variant-intro">Cùng dữ liệu, sáu cách trình bày. Bấm tên mẫu để chọn, so sánh căn trái tên hàng, giữa số lượng và phải số tiền.</div>
-              <div class="variant-grid table-variant-grid">
-                <article class="variant-sample">
-                  <button type="button" class="variant-select" data-variant-select="table-border" aria-pressed="false"><span>01 · Bảng có ô kẻ dọc</span><span>Chọn</span></button>
-                  <div class="variant-table-scroll"><table class="variant-table table-border"><thead><tr><th>Tên hàng</th><th>SL</th><th>Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr></tbody></table></div>
-                </article>
-                <article class="variant-sample">
-                  <button type="button" class="variant-select" data-variant-select="table-lines" aria-pressed="false"><span>02 · Chỉ kẻ ngang</span><span>Chọn</span></button>
-                  <div class="variant-table-scroll"><table class="variant-table table-lines"><thead><tr><th>Tên hàng</th><th>SL</th><th>Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr></tbody></table></div>
-                </article>
-                <article class="variant-sample">
-                  <button type="button" class="variant-select" data-variant-select="table-clean" aria-pressed="false"><span>03 · Tối giản, không viền</span><span>Chọn</span></button>
-                  <div class="variant-table-scroll"><table class="variant-table table-clean"><thead><tr><th>Tên hàng</th><th>SL</th><th>Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr></tbody></table></div>
-                </article>
-                <article class="variant-sample">
-                  <button type="button" class="variant-select" data-variant-select="table-zebra" aria-pressed="false"><span>04 · Hàng nền xen kẽ</span><span>Chọn</span></button>
-                  <div class="variant-table-scroll"><table class="variant-table table-zebra"><thead><tr><th>Tên hàng</th><th>SL</th><th>Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr></tbody></table></div>
-                </article>
-                <article class="variant-sample">
-                  <button type="button" class="variant-select" data-variant-select="table-compact" aria-pressed="false"><span>05 · Bảng gọn mật độ cao</span><span>Chọn</span></button>
-                  <div class="variant-table-scroll"><table class="variant-table table-compact"><thead><tr><th>Tên hàng</th><th>SL</th><th>Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr></tbody></table></div>
-                </article>
-                <article class="variant-sample">
-                  <button type="button" class="variant-select" data-variant-select="table-stacked" aria-pressed="false"><span>06 · Danh sách thẻ, mobile</span><span>Chọn</span></button>
-                  <div class="table-stacked"><div class="table-stacked-row"><strong>Sữa hộp</strong><span>12 × 12.000</span><b>144.000 đ</b></div><div class="table-stacked-row"><strong>Bánh quy</strong><span>3 × 26.000</span><b>78.000 đ</b></div></div>
-                </article>
-              </div>
-              <p class="studio-component-feedback" id="variantTableFeedback" role="status" aria-live="polite">Chưa chọn kiểu bảng. Các giá trị là dữ liệu mẫu.</p>
-            </div>
-          </section>
-          <section class="studio-component-card variant-wide" aria-labelledby="qtyVariantsTitle">
-            <div class="studio-component-label"><strong id="qtyVariantsTitle">10 · Năm kiểu ô số lượng − / +</strong><span>Liền khối, bo tròn, ô rời, tối giản và dạng hàng</span></div>
-            <div class="studio-component-content">
-              <div class="variant-grid quantity-variant-grid">
-                <div class="variant-sample"><span class="variant-name">01 · Viền liền, bo 10px</span>
-                  <div class="qty-variant qty-joined" data-qty-kind="joined"><button type="button" data-step="-1" aria-label="Giảm kiểu liền khối">−</button><input type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng kiểu liền khối"><button type="button" data-step="1" aria-label="Tăng kiểu liền khối">+</button></div>
-                </div>
-                <div class="variant-sample"><span class="variant-name">02 · Viền dạng viên thuốc</span>
-                  <div class="qty-variant qty-pill" data-qty-kind="pill"><button type="button" data-step="-1" aria-label="Giảm kiểu viên thuốc">−</button><input type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng kiểu viên thuốc"><button type="button" data-step="1" aria-label="Tăng kiểu viên thuốc">+</button></div>
-                </div>
-                <div class="variant-sample"><span class="variant-name">03 · Nút − + tách rời</span>
-                  <div class="qty-variant qty-separated" data-qty-kind="separated"><button type="button" data-step="-1" aria-label="Giảm kiểu nút rời">−</button><input type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng kiểu nút rời"><button type="button" data-step="1" aria-label="Tăng kiểu nút rời">+</button></div>
-                </div>
-                <div class="variant-sample"><span class="variant-name">04 · Không viền ngoài</span>
-                  <div class="qty-variant qty-minimal" data-qty-kind="minimal"><button type="button" data-step="-1" aria-label="Giảm kiểu tối giản">−</button><input type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng kiểu tối giản"><button type="button" data-step="1" aria-label="Tăng kiểu tối giản">+</button></div>
-                </div>
-                <div class="variant-sample"><span class="variant-name">05 · Có tên hàng bên trái</span>
-                  <div class="qty-variant qty-inline" data-qty-kind="inline"><span class="qty-item-name">Sữa hộp</span><button type="button" data-step="-1" aria-label="Giảm số lượng sữa hộp">−</button><input type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng sữa hộp"><button type="button" data-step="1" aria-label="Tăng số lượng sữa hộp">+</button></div>
-                </div>
-              </div>
-              <p class="studio-component-feedback" id="variantQtyFeedback" role="status" aria-live="polite">Bấm − / + hoặc nhập trực tiếp, giới hạn 0–99; các mẫu độc lập.</p>
-            </div>
-          </section>
-          <section class="studio-component-card variant-wide" aria-labelledby="inputVariantsTitle">
-            <div class="studio-component-label"><strong id="inputVariantsTitle">11 · Sáu kiểu viền và vùng nhập</strong><span>Vuông, bo, viên thuốc, gạch dưới, nền mờ, icon và chữ phụ</span></div>
-            <div class="studio-component-content">
-              <div class="variant-grid input-variant-grid">
-                <label class="variant-sample"><span class="variant-name">01 · Viền vuông</span><input class="input-variant input-square" type="text" placeholder="Nhập tên sản phẩm"></label>
-                <label class="variant-sample"><span class="variant-name">02 · Viền bo mềm</span><input class="input-variant input-rounded" type="text" placeholder="Nhập tên khách hàng"></label>
-                <label class="variant-sample"><span class="variant-name">03 · Dạng viên thuốc</span><input class="input-variant input-pill" type="text" placeholder="Tìm nhanh…"></label>
-                <label class="variant-sample"><span class="variant-name">04 · Gạch dưới</span><input class="input-variant input-underline" type="text" placeholder="Nhập ghi chú"></label>
-                <label class="variant-sample"><span class="variant-name">05 · Nền mờ, không viền</span><input class="input-variant input-filled" type="text" placeholder="Nhập nội dung"></label>
-                <label class="variant-sample"><span class="variant-name">06 · Icon + input + nút xóa</span><span class="input-variant-shell"><span aria-hidden="true">⌕</span><input id="variantSearchInput" type="text" placeholder="Lọc trong mẫu" aria-label="Tìm theo mẫu input có icon"><button type="button" id="variantClearInput" aria-label="Xóa nội dung ô này">×</button></span></label>
-              </div>
-              <p class="studio-component-feedback" id="variantInputFeedback" role="status" aria-live="polite">Nhấn vào từng ô để xem viền focus và gõ thử. Có thể dùng nút × để xóa ô cuối.</p>
-            </div>
-          </section>
-          <section class="studio-component-card variant-wide" aria-labelledby="linesVariantsTitle">
-            <div class="studio-component-label"><strong id="linesVariantsTitle">12 · Chữ giới hạn 1, 2, 3 và 4 dòng</strong><span>Kiểm soát tràn, có nút mở rộng nội dung</span></div>
-            <div class="studio-component-content">
-              <div class="variant-grid lines-variant-grid">
-                <div class="variant-sample"><span class="variant-name">01 · Một dòng, dấu …</span><p class="line-preview" data-lines="1">Sữa hộp dinh dưỡng bổ sung hương vani loại đóng thùng, đơn mẫu với tên hàng rất dài cần được thu gọn khoa học.</p><button class="variant-text-action" type="button" data-expand-lines aria-expanded="false">Xem đủ</button></div>
-                <div class="variant-sample"><span class="variant-name">02 · Hai dòng</span><p class="line-preview" data-lines="2">Khách cần kiểm tra lại số lượng và đơn giá từng sản phẩm trong đơn hàng. Văn bản đủ dài để nhìn rõ hai dòng và dấu ba chấm.</p><button class="variant-text-action" type="button" data-expand-lines aria-expanded="false">Xem đủ</button></div>
-                <div class="variant-sample"><span class="variant-name">03 · Ba dòng</span><p class="line-preview" data-lines="3">Ghi chú đơn hàng: giao trước buổi trưa nếu có thể, những sản phẩm chưa đủ số lượng sẽ giữ trong đơn tạm. Phần đã xác nhận cần được trình bày gọn và không ảnh hưởng vùng gõ chat.</p><button class="variant-text-action" type="button" data-expand-lines aria-expanded="false">Xem đủ</button></div>
-                <div class="variant-sample"><span class="variant-name">04 · Bốn dòng</span><p class="line-preview" data-lines="4">Nội dung hội thoại nhiều dòng gồm tên sản phẩm, số lượng, đơn giá và ghi chú. Phải luôn căn đúng trục ngang và trục dọc, nếu dài quá thì có thể mở rộng, còn khi thu gọn vẫn phải giữ nguyên vị trí của nút thao tác bên cạnh.</p><button class="variant-text-action" type="button" data-expand-lines aria-expanded="false">Xem đủ</button></div>
-              </div>
-            </div>
-          </section>
-          <section class="studio-component-card variant-wide" aria-labelledby="iconRowsTitle">
-            <div class="studio-component-label"><strong id="iconRowsTitle">13 · Icon + chữ + vùng phụ</strong><span>4 kiểu căn theo trục: 2 phần / 3 phần / 4 phần / hai dòng</span></div>
-            <div class="studio-component-content">
-              <div class="variant-grid icon-layout-grid">
-                <div class="variant-sample"><span class="variant-name">01 · Icon + chữ</span><button class="icon-layout-row" type="button" data-layout-action="Icon + chữ"><span class="layout-icon round">◉</span><span class="layout-main"><strong>Trò chuyện</strong></span></button></div>
-                <div class="variant-sample"><span class="variant-name">02 · Icon + chữ + mũi tên</span><button class="icon-layout-row" type="button" data-layout-action="Icon + chữ + mũi tên"><span class="layout-icon square">▣</span><span class="layout-main"><strong>Đơn hàng</strong></span><span class="layout-trailing">›</span></button></div>
-                <div class="variant-sample"><span class="variant-name">03 · Icon + chữ 2 dòng + trạng thái</span><button class="icon-layout-row" type="button" data-layout-action="Icon + nhãn phụ + trạng thái"><span class="layout-icon round">◎</span><span class="layout-main"><strong>Khách mẫu A</strong><small>Đã nhận nội dung</small></span><span class="layout-status">Mới</span></button></div>
-                <div class="variant-sample"><span class="variant-name">04 · Icon + chữ + số tiền + menu</span><button class="icon-layout-row" type="button" data-layout-action="Icon + số tiền + menu"><span class="layout-icon square">₫</span><span class="layout-main"><strong>Công nợ</strong><small>Thông tin mẫu</small></span><span class="layout-amount">282.000 đ</span><span class="layout-trailing">⋯</span></button></div>
-              </div>
-              <p class="studio-component-feedback" id="iconLayoutFeedback" role="status" aria-live="polite">Các hàng này là mẫu bề mặt nhấn được, giữ vùng chữ co giãn và vùng bên phải thẳng trục.</p>
-            </div>
-          </section>
-          <section class="studio-component-card variant-wide" aria-labelledby="compoundLayoutsTitle">
-            <div class="studio-component-label"><strong id="compoundLayoutsTitle">14 · Mẫu bố cục nhiều vùng</strong><span>Icon / tên / mô tả / số / nút / menu tùy ngữ cảnh</span></div>
-            <div class="studio-component-content">
-              <div class="variant-grid compound-grid">
-                <div class="variant-sample"><span class="variant-name">01 · Danh bạ: avatar + 2 dòng + thời gian</span><div class="compound-row"><span class="layout-icon round">A</span><span class="layout-main"><strong>Khách mẫu A</strong><small class="text-ellipsis">Đơn hàng đã được cập nhật hôm nay</small></span><time class="layout-meta">08:30</time></div></div>
-                <div class="variant-sample"><span class="variant-name">02 · Sản phẩm: icon + tên + số lượng</span><div class="compound-row"><span class="layout-icon square">▣</span><span class="layout-main"><strong>Sữa hộp 180ml</strong><small>Đơn giá 12.000 đ</small></span><span class="layout-status">× 12</span></div></div>
-                <div class="variant-sample"><span class="variant-name">03 · Công việc: icon + mô tả + hành động</span><div class="compound-row"><span class="layout-icon square">✓</span><span class="layout-main"><strong>Kiểm tra đơn</strong><small class="text-two-lines">Đối soát số lượng với ảnh đơn đã giao</small></span><button type="button" class="compound-action" data-layout-action="Kiểm tra đơn">Mở</button></div></div>
-                <div class="variant-sample"><span class="variant-name">04 · Thu tiền: icon + 2 dòng + tiền + dấu ›</span><div class="compound-row"><span class="layout-icon round">₫</span><span class="layout-main"><strong>Khoản thu mẫu</strong><small>Chưa xác nhận</small></span><span class="layout-amount">30.000 đ</span><span class="layout-trailing">›</span></div></div>
-              </div>
-              <p class="studio-component-feedback" id="compoundFeedback" role="status" aria-live="polite">Thử các bố cục này để kiểm tra khoảng trống dành cho chữ, số tiền và nút nhỏ bên phải.</p>
-            </div>
-          </section>
-        </div>
-      </section>
+      
+<section class="studio-component-gallery" id="components">
+  <div class="studio-gallery-heading">
+    <span class="eyebrow">THƯ VIỆN THÀNH PHẦN / DANH MỤC</span>
+    <h2>Chọn loại mẫu cần xem</h2>
+    <p>Đã phân thành <strong>7 nhóm</strong> để bạn tìm nhanh. Nhấn một nhóm để chỉ xem các mẫu thuộc nhóm đó; chọn <strong>Tất cả</strong> để so sánh theo từng mục.</p>
+  </div>
+  <div class="gallery-browser" aria-label="Tìm và lọc thư viện">
+    <div class="gallery-browser-tools">
+      <label class="gallery-search-box" for="gallerySearch"><span aria-hidden="true">⌕</span><input id="gallerySearch" type="search" placeholder="Tìm mẫu: bảng, input, icon…" autocomplete="off"><button type="button" id="galleryClearSearch" aria-label="Xóa từ khóa tìm mẫu">×</button></label>
+      <div class="gallery-view-count" id="galleryCount" aria-live="polite">14 bộ mẫu · 7 nhóm</div>
+    </div>
+    <div class="gallery-filter-nav" role="group" aria-label="Lọc các loại mẫu">
+      <button type="button" class="selected" aria-pressed="true" data-gallery-filter="all">Tất cả <span>14</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="typography">Chữ & nhiều dòng <span>1</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="tables">Bảng & dữ liệu <span>2</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="quantity">Số lượng − / + <span>2</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="inputs">Ô nhập & gõ chat <span>3</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="actions">Nút & biểu tượng <span>2</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="layouts">Hàng & bố cục <span>2</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="overlays">Menu & popup <span>2</span></button>
+    </div>
+  </div>
+  <div id="componentTheme" class="studio-gallery-groups">
+    <section class="gallery-category" data-gallery-category="typography" id="sample-typography" aria-labelledby="galleryTitle-typography">
+      <div class="gallery-category-heading">
+        <div class="gallery-category-index">01</div>
+        <div class="gallery-category-intro"><h3 id="galleryTitle-typography">Chữ & nhiều dòng</h3><p>Xem chữ dài 1–4 dòng, mở rộng/thu gọn. Phần chỉnh font và nền nằm ở văn bản phía trên.</p></div>
+        <span class="gallery-category-count">1 mẫu</span>
+      </div>
+      <div class="studio-component-grid">
+        <section class="studio-component-card variant-wide" aria-labelledby="linesVariantsTitle">
+                    <div class="studio-component-label"><strong id="linesVariantsTitle">Chữ giới hạn 1, 2, 3 và 4 dòng</strong><span>Kiểm soát tràn, có nút mở rộng nội dung</span></div>
+                    <div class="studio-component-content">
+                      <div class="variant-grid lines-variant-grid">
+                        <div class="variant-sample"><span class="variant-name">01 · Một dòng, dấu …</span><p class="line-preview" data-lines="1">Sữa hộp dinh dưỡng bổ sung hương vani loại đóng thùng, đơn mẫu với tên hàng rất dài cần được thu gọn khoa học.</p><button class="variant-text-action" type="button" data-expand-lines aria-expanded="false">Xem đủ</button></div>
+                        <div class="variant-sample"><span class="variant-name">02 · Hai dòng</span><p class="line-preview" data-lines="2">Khách cần kiểm tra lại số lượng và đơn giá từng sản phẩm trong đơn hàng. Văn bản đủ dài để nhìn rõ hai dòng và dấu ba chấm.</p><button class="variant-text-action" type="button" data-expand-lines aria-expanded="false">Xem đủ</button></div>
+                        <div class="variant-sample"><span class="variant-name">03 · Ba dòng</span><p class="line-preview" data-lines="3">Ghi chú đơn hàng: giao trước buổi trưa nếu có thể, những sản phẩm chưa đủ số lượng sẽ giữ trong đơn tạm. Phần đã xác nhận cần được trình bày gọn và không ảnh hưởng vùng gõ chat.</p><button class="variant-text-action" type="button" data-expand-lines aria-expanded="false">Xem đủ</button></div>
+                        <div class="variant-sample"><span class="variant-name">04 · Bốn dòng</span><p class="line-preview" data-lines="4">Nội dung hội thoại nhiều dòng gồm tên sản phẩm, số lượng, đơn giá và ghi chú. Phải luôn căn đúng trục ngang và trục dọc, nếu dài quá thì có thể mở rộng, còn khi thu gọn vẫn phải giữ nguyên vị trí của nút thao tác bên cạnh.</p><button class="variant-text-action" type="button" data-expand-lines aria-expanded="false">Xem đủ</button></div>
+                      </div>
+                    </div>
+                  </section>
+      </div>
+    </section>
+    <section class="gallery-category" data-gallery-category="tables" id="sample-tables" aria-labelledby="galleryTitle-tables">
+      <div class="gallery-category-heading">
+        <div class="gallery-category-index">02</div>
+        <div class="gallery-category-intro"><h3 id="galleryTitle-tables">Bảng & dữ liệu</h3><p>Bảng gọn, kẻ ngang/dọc, không viền, xen kẽ và dạng thẻ trên mobile.</p></div>
+        <span class="gallery-category-count">2 bộ mẫu · 7 kiểu bảng</span>
+      </div>
+      <div class="studio-component-grid">
+        <div class="studio-component-card">
+                    <div class="studio-component-label"><strong>Mẫu bảng</strong><span>Căn cột, giá trị, viền</span></div>
+                    <div class="studio-component-content">
+                      <table class="studio-data-table studio-mini-table"><thead><tr><th scope="col">Tên hàng</th><th scope="col">SL</th><th scope="col">Thành tiền</th></tr></thead><tbody>
+                        <tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr><tr><td>Tổng cộng</td><td>15</td><td><b>222.000 đ</b></td></tr>
+                      </tbody></table>
+                    </div>
+                  </div>
+        <section class="studio-component-card variant-wide" aria-labelledby="tableVariantsTitle">
+                    <div class="studio-component-label"><strong id="tableVariantsTitle">Sáu mẫu bảng</strong><span>Kẻ dọc / kẻ ngang / tối giản / sọc / gọn / thẻ</span></div>
+                    <div class="studio-component-content">
+                      <div class="variant-intro">Cùng dữ liệu, sáu cách trình bày. Bấm tên mẫu để chọn, so sánh căn trái tên hàng, giữa số lượng và phải số tiền.</div>
+                      <div class="variant-grid table-variant-grid">
+                        <article class="variant-sample">
+                          <button type="button" class="variant-select" data-variant-select="table-border" aria-pressed="false"><span>01 · Bảng có ô kẻ dọc</span><span>Chọn</span></button>
+                          <div class="variant-table-scroll"><table class="variant-table table-border"><thead><tr><th>Tên hàng</th><th>SL</th><th>Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr></tbody></table></div>
+                        </article>
+                        <article class="variant-sample">
+                          <button type="button" class="variant-select" data-variant-select="table-lines" aria-pressed="false"><span>02 · Chỉ kẻ ngang</span><span>Chọn</span></button>
+                          <div class="variant-table-scroll"><table class="variant-table table-lines"><thead><tr><th>Tên hàng</th><th>SL</th><th>Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr></tbody></table></div>
+                        </article>
+                        <article class="variant-sample">
+                          <button type="button" class="variant-select" data-variant-select="table-clean" aria-pressed="false"><span>03 · Tối giản, không viền</span><span>Chọn</span></button>
+                          <div class="variant-table-scroll"><table class="variant-table table-clean"><thead><tr><th>Tên hàng</th><th>SL</th><th>Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr></tbody></table></div>
+                        </article>
+                        <article class="variant-sample">
+                          <button type="button" class="variant-select" data-variant-select="table-zebra" aria-pressed="false"><span>04 · Hàng nền xen kẽ</span><span>Chọn</span></button>
+                          <div class="variant-table-scroll"><table class="variant-table table-zebra"><thead><tr><th>Tên hàng</th><th>SL</th><th>Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr></tbody></table></div>
+                        </article>
+                        <article class="variant-sample">
+                          <button type="button" class="variant-select" data-variant-select="table-compact" aria-pressed="false"><span>05 · Bảng gọn mật độ cao</span><span>Chọn</span></button>
+                          <div class="variant-table-scroll"><table class="variant-table table-compact"><thead><tr><th>Tên hàng</th><th>SL</th><th>Thành tiền</th></tr></thead><tbody><tr><td>Sữa hộp</td><td>12</td><td>144.000 đ</td></tr><tr><td>Bánh quy</td><td>3</td><td>78.000 đ</td></tr></tbody></table></div>
+                        </article>
+                        <article class="variant-sample">
+                          <button type="button" class="variant-select" data-variant-select="table-stacked" aria-pressed="false"><span>06 · Danh sách thẻ, mobile</span><span>Chọn</span></button>
+                          <div class="table-stacked"><div class="table-stacked-row"><strong>Sữa hộp</strong><span>12 × 12.000</span><b>144.000 đ</b></div><div class="table-stacked-row"><strong>Bánh quy</strong><span>3 × 26.000</span><b>78.000 đ</b></div></div>
+                        </article>
+                      </div>
+                      <p class="studio-component-feedback" id="variantTableFeedback" role="status" aria-live="polite">Chưa chọn kiểu bảng. Các giá trị là dữ liệu mẫu.</p>
+                    </div>
+                  </section>
+      </div>
+    </section>
+    <section class="gallery-category" data-gallery-category="quantity" id="sample-quantity" aria-labelledby="galleryTitle-quantity">
+      <div class="gallery-category-heading">
+        <div class="gallery-category-index">03</div>
+        <div class="gallery-category-intro"><h3 id="galleryTitle-quantity">Số lượng − / +</h3><p>Các nhóm nhập số và kiểu viền bo, viên thuốc, nút tròn và nút tách rời.</p></div>
+        <span class="gallery-category-count">2 bộ mẫu · 6 kiểu số lượng</span>
+      </div>
+      <div class="studio-component-grid">
+        <div class="studio-component-card">
+                    <div class="studio-component-label"><strong>Ô số lượng</strong><span>Giảm / tăng, kiểm soát giới hạn</span></div>
+                    <div class="studio-component-content">
+                      <label class="studio-demo-label" for="quantityInput">Số lượng sản phẩm</label>
+                      <div class="studio-qty">
+                        <button type="button" id="qtyMinus" aria-label="Giảm số lượng">−</button>
+                        <input id="quantityInput" type="number" value="2" min="0" max="99" inputmode="numeric" aria-label="Số lượng sản phẩm">
+                        <button type="button" id="qtyPlus" aria-label="Tăng số lượng">+</button>
+                      </div>
+                      <p class="studio-component-feedback" id="qtyFeedback" role="status" aria-live="polite">Số lượng hiện tại: 2</p>
+                    </div>
+                  </div>
+        <section class="studio-component-card variant-wide" aria-labelledby="qtyVariantsTitle">
+                    <div class="studio-component-label"><strong id="qtyVariantsTitle">Năm kiểu ô số lượng − / +</strong><span>Liền khối, bo tròn, ô rời, tối giản và dạng hàng</span></div>
+                    <div class="studio-component-content">
+                      <div class="variant-grid quantity-variant-grid">
+                        <div class="variant-sample"><span class="variant-name">01 · Viền liền, bo 10px</span>
+                          <div class="qty-variant qty-joined" data-qty-kind="joined"><button type="button" data-step="-1" aria-label="Giảm kiểu liền khối">−</button><input type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng kiểu liền khối"><button type="button" data-step="1" aria-label="Tăng kiểu liền khối">+</button></div>
+                        </div>
+                        <div class="variant-sample"><span class="variant-name">02 · Viền dạng viên thuốc</span>
+                          <div class="qty-variant qty-pill" data-qty-kind="pill"><button type="button" data-step="-1" aria-label="Giảm kiểu viên thuốc">−</button><input type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng kiểu viên thuốc"><button type="button" data-step="1" aria-label="Tăng kiểu viên thuốc">+</button></div>
+                        </div>
+                        <div class="variant-sample"><span class="variant-name">03 · Nút − + tách rời</span>
+                          <div class="qty-variant qty-separated" data-qty-kind="separated"><button type="button" data-step="-1" aria-label="Giảm kiểu nút rời">−</button><input type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng kiểu nút rời"><button type="button" data-step="1" aria-label="Tăng kiểu nút rời">+</button></div>
+                        </div>
+                        <div class="variant-sample"><span class="variant-name">04 · Không viền ngoài</span>
+                          <div class="qty-variant qty-minimal" data-qty-kind="minimal"><button type="button" data-step="-1" aria-label="Giảm kiểu tối giản">−</button><input type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng kiểu tối giản"><button type="button" data-step="1" aria-label="Tăng kiểu tối giản">+</button></div>
+                        </div>
+                        <div class="variant-sample"><span class="variant-name">05 · Có tên hàng bên trái</span>
+                          <div class="qty-variant qty-inline" data-qty-kind="inline"><span class="qty-item-name">Sữa hộp</span><button type="button" data-step="-1" aria-label="Giảm số lượng sữa hộp">−</button><input type="number" inputmode="numeric" min="0" max="99" value="2" aria-label="Số lượng sữa hộp"><button type="button" data-step="1" aria-label="Tăng số lượng sữa hộp">+</button></div>
+                        </div>
+                      </div>
+                      <p class="studio-component-feedback" id="variantQtyFeedback" role="status" aria-live="polite">Bấm − / + hoặc nhập trực tiếp, giới hạn 0–99; các mẫu độc lập.</p>
+                    </div>
+                  </section>
+      </div>
+    </section>
+    <section class="gallery-category" data-gallery-category="inputs" id="sample-inputs" aria-labelledby="galleryTitle-inputs">
+      <div class="gallery-category-heading">
+        <div class="gallery-category-index">04</div>
+        <div class="gallery-category-intro"><h3 id="galleryTitle-inputs">Ô nhập & gõ chat</h3><p>Tìm kiếm, tin nhắn nhiều dòng và các kiểu viền/nền của input.</p></div>
+        <span class="gallery-category-count">3 bộ mẫu</span>
+      </div>
+      <div class="studio-component-grid">
+        <div class="studio-component-card">
+                    <div class="studio-component-label"><strong>Ô tìm kiếm</strong><span>Lọc ngay, không kết nối máy chủ</span></div>
+                    <div class="studio-component-content">
+                      <label class="studio-demo-label" for="searchInput">Tìm sản phẩm mẫu</label>
+                      <div class="studio-search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg><input id="searchInput" type="search" placeholder="Ví dụ: sữa, bánh…" autocomplete="off"></div>
+                      <div id="searchResults" class="studio-search-results" role="status" aria-live="polite">Sữa hộp · Bánh quy · Nước khoáng</div>
+                    </div>
+                  </div>
+        <div class="studio-component-card">
+                    <div class="studio-component-label"><strong>Ô gõ chat</strong><span>Text nhiều dòng, nút gửi mẫu</span></div>
+                    <div class="studio-component-content">
+                      <div class="studio-chat-example" id="chatExamples"><div class="studio-chat-bubble">Đây là tin nhắn mẫu hiển thị như một hội thoại.</div></div>
+                      <form id="chatDemoForm" class="studio-chat-compose"><label class="studio-visually-hidden" for="chatInput">Tin nhắn thử</label><textarea id="chatInput" rows="1" maxlength="500" placeholder="Nhập tin nhắn mẫu…"></textarea><button type="submit" aria-label="Thêm tin nhắn vào bản mẫu">Gửi</button></form>
+                      <p class="studio-component-feedback" id="chatFeedback" role="status" aria-live="polite">Tin nhắn chỉ hiện trong trang mẫu, không gửi thật.</p>
+                    </div>
+                  </div>
+        <section class="studio-component-card variant-wide" aria-labelledby="inputVariantsTitle">
+                    <div class="studio-component-label"><strong id="inputVariantsTitle">Sáu kiểu viền và vùng nhập</strong><span>Vuông, bo, viên thuốc, gạch dưới, nền mờ, icon và chữ phụ</span></div>
+                    <div class="studio-component-content">
+                      <div class="variant-grid input-variant-grid">
+                        <label class="variant-sample"><span class="variant-name">01 · Viền vuông</span><input class="input-variant input-square" type="text" placeholder="Nhập tên sản phẩm"></label>
+                        <label class="variant-sample"><span class="variant-name">02 · Viền bo mềm</span><input class="input-variant input-rounded" type="text" placeholder="Nhập tên khách hàng"></label>
+                        <label class="variant-sample"><span class="variant-name">03 · Dạng viên thuốc</span><input class="input-variant input-pill" type="text" placeholder="Tìm nhanh…"></label>
+                        <label class="variant-sample"><span class="variant-name">04 · Gạch dưới</span><input class="input-variant input-underline" type="text" placeholder="Nhập ghi chú"></label>
+                        <label class="variant-sample"><span class="variant-name">05 · Nền mờ, không viền</span><input class="input-variant input-filled" type="text" placeholder="Nhập nội dung"></label>
+                        <label class="variant-sample"><span class="variant-name">06 · Icon + input + nút xóa</span><span class="input-variant-shell"><span aria-hidden="true">⌕</span><input id="variantSearchInput" type="text" placeholder="Lọc trong mẫu" aria-label="Tìm theo mẫu input có icon"><button type="button" id="variantClearInput" aria-label="Xóa nội dung ô này">×</button></span></label>
+                      </div>
+                      <p class="studio-component-feedback" id="variantInputFeedback" role="status" aria-live="polite">Nhấn vào từng ô để xem viền focus và gõ thử. Có thể dùng nút × để xóa ô cuối.</p>
+                    </div>
+                  </section>
+      </div>
+    </section>
+    <section class="gallery-category" data-gallery-category="actions" id="sample-actions" aria-labelledby="galleryTitle-actions">
+      <div class="gallery-category-heading">
+        <div class="gallery-category-index">05</div>
+        <div class="gallery-category-intro"><h3 id="galleryTitle-actions">Nút & biểu tượng</h3><p>Nút chính/phụ, dạng chữ và icon vuông, tròn, có nền hoặc viền.</p></div>
+        <span class="gallery-category-count">2 bộ mẫu</span>
+      </div>
+      <div class="studio-component-grid">
+        <div class="studio-component-card">
+                    <div class="studio-component-label"><strong>Mẫu nút</strong><span>Chính, phụ, văn bản</span></div>
+                    <div class="studio-component-content">
+                      <div class="studio-example-buttons">
+                        <button type="button" class="studio-action-primary" data-demo="primary">Nút chính</button>
+                        <button type="button" class="studio-action-secondary" data-demo="secondary">Nút phụ</button>
+                        <button type="button" class="studio-action-text" data-demo="text">Dạng chữ</button>
+                        <button type="button" class="studio-action-secondary" disabled>Không hoạt động</button>
+                      </div>
+                      <p class="studio-component-feedback" id="buttonFeedback" role="status" aria-live="polite">Chọn một nút để thử phản hồi.</p>
+                    </div>
+                  </div>
+        <div class="studio-component-card">
+                    <div class="studio-component-label"><strong>Icon vuông và tròn</strong><span>Chung hệ kích thước chạm</span></div>
+                    <div class="studio-component-content">
+                      <div class="studio-icon-examples">
+                        <button type="button" class="studio-icon-button square" data-icon="Tìm kiếm" aria-label="Icon tìm kiếm vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg></button>
+                        <button type="button" class="studio-icon-button round" data-icon="Thêm" aria-label="Icon thêm tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+                        <button type="button" class="studio-icon-button square filled" data-icon="Gửi" aria-label="Icon gửi vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-5 16-3.5-6.5L4 12Z"></path><path d="m20 4-8.5 9.5"></path></svg></button>
+                        <button type="button" class="studio-icon-button round outline" data-icon="Menu" aria-label="Icon menu tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle></svg></button>
+                      </div>
+                      <p class="studio-component-feedback" id="iconFeedback" role="status" aria-live="polite">Vùng chạm minh họa 44 × 44 px.</p>
+                    </div>
+                  </div>
+      </div>
+    </section>
+    <section class="gallery-category" data-gallery-category="layouts" id="sample-layouts" aria-labelledby="galleryTitle-layouts">
+      <div class="gallery-category-heading">
+        <div class="gallery-category-index">06</div>
+        <div class="gallery-category-intro"><h3 id="galleryTitle-layouts">Hàng & bố cục</h3><p>Icon + tên + dòng phụ + vùng số tiền, trạng thái, mũi tên hoặc nút.</p></div>
+        <span class="gallery-category-count">2 bộ mẫu · 8 kiểu hàng</span>
+      </div>
+      <div class="studio-component-grid">
+        <section class="studio-component-card variant-wide" aria-labelledby="iconRowsTitle">
+                    <div class="studio-component-label"><strong id="iconRowsTitle">Icon + chữ + vùng phụ</strong><span>4 kiểu căn theo trục: 2 phần / 3 phần / 4 phần / hai dòng</span></div>
+                    <div class="studio-component-content">
+                      <div class="variant-grid icon-layout-grid">
+                        <div class="variant-sample"><span class="variant-name">01 · Icon + chữ</span><button class="icon-layout-row" type="button" data-layout-action="Icon + chữ"><span class="layout-icon round">◉</span><span class="layout-main"><strong>Trò chuyện</strong></span></button></div>
+                        <div class="variant-sample"><span class="variant-name">02 · Icon + chữ + mũi tên</span><button class="icon-layout-row" type="button" data-layout-action="Icon + chữ + mũi tên"><span class="layout-icon square">▣</span><span class="layout-main"><strong>Đơn hàng</strong></span><span class="layout-trailing">›</span></button></div>
+                        <div class="variant-sample"><span class="variant-name">03 · Icon + chữ 2 dòng + trạng thái</span><button class="icon-layout-row" type="button" data-layout-action="Icon + nhãn phụ + trạng thái"><span class="layout-icon round">◎</span><span class="layout-main"><strong>Khách mẫu A</strong><small>Đã nhận nội dung</small></span><span class="layout-status">Mới</span></button></div>
+                        <div class="variant-sample"><span class="variant-name">04 · Icon + chữ + số tiền + menu</span><button class="icon-layout-row" type="button" data-layout-action="Icon + số tiền + menu"><span class="layout-icon square">₫</span><span class="layout-main"><strong>Công nợ</strong><small>Thông tin mẫu</small></span><span class="layout-amount">282.000 đ</span><span class="layout-trailing">⋯</span></button></div>
+                      </div>
+                      <p class="studio-component-feedback" id="iconLayoutFeedback" role="status" aria-live="polite">Các hàng này là mẫu bề mặt nhấn được, giữ vùng chữ co giãn và vùng bên phải thẳng trục.</p>
+                    </div>
+                  </section>
+        <section class="studio-component-card variant-wide" aria-labelledby="compoundLayoutsTitle">
+                    <div class="studio-component-label"><strong id="compoundLayoutsTitle">Mẫu bố cục nhiều vùng</strong><span>Icon / tên / mô tả / số / nút / menu tùy ngữ cảnh</span></div>
+                    <div class="studio-component-content">
+                      <div class="variant-grid compound-grid">
+                        <div class="variant-sample"><span class="variant-name">01 · Danh bạ: avatar + 2 dòng + thời gian</span><div class="compound-row"><span class="layout-icon round">A</span><span class="layout-main"><strong>Khách mẫu A</strong><small class="text-ellipsis">Đơn hàng đã được cập nhật hôm nay</small></span><time class="layout-meta">08:30</time></div></div>
+                        <div class="variant-sample"><span class="variant-name">02 · Sản phẩm: icon + tên + số lượng</span><div class="compound-row"><span class="layout-icon square">▣</span><span class="layout-main"><strong>Sữa hộp 180ml</strong><small>Đơn giá 12.000 đ</small></span><span class="layout-status">× 12</span></div></div>
+                        <div class="variant-sample"><span class="variant-name">03 · Công việc: icon + mô tả + hành động</span><div class="compound-row"><span class="layout-icon square">✓</span><span class="layout-main"><strong>Kiểm tra đơn</strong><small class="text-two-lines">Đối soát số lượng với ảnh đơn đã giao</small></span><button type="button" class="compound-action" data-layout-action="Kiểm tra đơn">Mở</button></div></div>
+                        <div class="variant-sample"><span class="variant-name">04 · Thu tiền: icon + 2 dòng + tiền + dấu ›</span><div class="compound-row"><span class="layout-icon round">₫</span><span class="layout-main"><strong>Khoản thu mẫu</strong><small>Chưa xác nhận</small></span><span class="layout-amount">30.000 đ</span><span class="layout-trailing">›</span></div></div>
+                      </div>
+                      <p class="studio-component-feedback" id="compoundFeedback" role="status" aria-live="polite">Thử các bố cục này để kiểm tra khoảng trống dành cho chữ, số tiền và nút nhỏ bên phải.</p>
+                    </div>
+                  </section>
+      </div>
+    </section>
+    <section class="gallery-category" data-gallery-category="overlays" id="sample-overlays" aria-labelledby="galleryTitle-overlays">
+      <div class="gallery-category-heading">
+        <div class="gallery-category-index">07</div>
+        <div class="gallery-category-intro"><h3 id="galleryTitle-overlays">Menu & popup</h3><p>Menu ba chấm và hộp thoại mẫu với hành vi đóng/mở.</p></div>
+        <span class="gallery-category-count">2 bộ mẫu</span>
+      </div>
+      <div class="studio-component-grid">
+        <div class="studio-component-card studio-overlay-card" id="overlays">
+                    <div class="studio-component-label"><strong>Menu phụ</strong><span>Nút ba chấm, mở/đóng bằng Escape</span></div>
+                    <div class="studio-component-content">
+                      <div class="studio-menu-anchor" id="menuAnchor">
+                        <span>Đơn hàng mẫu <small>DH-001</small></span>
+                        <button type="button" class="studio-icon-button square" id="menuButton" aria-label="Mở menu phụ" aria-haspopup="menu" aria-expanded="false">⋯</button>
+                        <div id="sampleMenu" class="studio-pop-menu" role="menu" hidden>
+                          <button type="button" role="menuitem" data-menu-item="Xem chi tiết">Xem chi tiết</button>
+                          <button type="button" role="menuitem" data-menu-item="Sao chép thông tin">Sao chép thông tin</button>
+                          <button type="button" role="menuitem" data-menu-item="Đóng menu">Đóng menu</button>
+                        </div>
+                      </div>
+                      <p class="studio-component-feedback" id="menuFeedback" role="status" aria-live="polite">Nhấn dấu ba chấm để mở menu.</p>
+                    </div>
+                  </div>
+        <div class="studio-component-card">
+                    <div class="studio-component-label"><strong>Popup</strong><span>Hộp thoại có nền mờ, focus, đóng</span></div>
+                    <div class="studio-component-content"><div class="studio-popup-example">
+                      <p>Thử một hộp thoại xác nhận như khi hoàn tất một thao tác.</p>
+                      <button type="button" class="studio-action-primary" id="openPopupButton">Mở popup mẫu</button>
+                    </div></div>
+                  </div>
+      </div>
+    </section>
+  </div>
+  <div class="gallery-empty" id="galleryEmpty" hidden>
+    <strong>Không tìm thấy mẫu phù hợp.</strong>
+    <p>Thử tìm theo “số lượng”, “bảng”, “viền” hoặc mở lại tất cả các nhóm.</p>
+    <button type="button" id="galleryShowAll">Xem tất cả mẫu</button>
+  </div>
+</section>
       <section class="studio-css-section" id="sourceCss">
         <div><span class="eyebrow">CÙNG MỘT BỘ CSS</span><h2>Thông số đã chọn</h2><p>Toàn bộ thành phần dùng <code>web/styles.css</code> và các token chung. Có thể sao chép để triển khai cho những khung khác.</p></div>
         <pre id="cssPreview" aria-label="CSS hiện hành"></pre>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V06</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V10</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>
