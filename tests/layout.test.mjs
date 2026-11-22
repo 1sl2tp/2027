@@ -111,7 +111,7 @@ test("V04 one CSS owner and linked data model for Chat Work Sales",()=>{
 test("V04 Pages bundles every frame with one stylesheet",()=>{
   const yaml=read(".github/workflows/pages.yml");
   assert.ok(yaml.includes('"flows.html"'));
-  assert.ok(yaml.includes("cp index.html flows.html _site/"));
+  assert.ok(yaml.includes("cp index.html flows.html base.html _site/"));
   assert.ok(yaml.includes("cp web/styles.css _site/web/"));
   assert.ok(yaml.includes("cp -R web/dist _site/web/"));
   const links=[read("index.html"),read("flows.html")];
