@@ -2430,20 +2430,20 @@ body.simple-first .topbar-end{gap:0}
  min-width:0;max-width:100%;gap:var(--inner-gap)}
 .simple-button-inner-text{display:block;min-width:0;max-width:100%;
  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:20px}
-.simple-button-inner-icon{display:block;flex:none;width:var(--inner-icon-size);height:var(--inner-icon-size);
+svg.simple-button-inner-icon{display:block;flex:none;width:var(--inner-icon-size);height:var(--inner-icon-size);
  fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
 .simple-button-inner-photo{width:28px;height:28px;min-width:28px;flex:0 0 28px;
  display:block;object-fit:cover;aspect-ratio:1;border-radius:6px;
  border:1px solid #e6e6e6;box-sizing:border-box}
-.simple-button-inner-icon,.simple-button-inner-photo{vertical-align:middle}
-.simple-button-inner-icon,
+svg.simple-button-inner-icon,.simple-button-inner-photo{vertical-align:middle}
+svg.simple-button-inner-icon,
 .simple-button-inner-photo,
 .simple-button-inner-text{align-self:center}
-.simple-button-inner-icon,
+svg.simple-button-inner-icon,
 .simple-button-inner-photo{margin-block:0}
-.simple-button-inner-icon{transform:translateY(-.5px)}
-.simple-button-inner-icon:where(.simple-button-inner-optical){transform:translate(1px,-.5px)}
-.simple-button-inner-demo:is(.simple-button-inner-icon,.simple-button-inner-letter,.simple-button-inner-number,.simple-button-inner-arrow){
+svg.simple-button-inner-icon{transform:translateY(-.5px)}
+svg.simple-button-inner-icon:where(.simple-button-inner-optical){transform:translate(1px,-.5px)}
+.simple-button-inner-demo:is(svg.simple-button-inner-icon,.simple-button-inner-letter,.simple-button-inner-number,.simple-button-inner-arrow){
  padding:0;width:44px;height:44px;min-height:44px;min-width:44px;max-width:44px;border-radius:10px}
 .simple-button-inner-glyph{font:700 18px/1 system-ui,-apple-system,Arial,sans-serif;
  text-align:center}
@@ -2455,7 +2455,7 @@ body.simple-first .topbar-end{gap:0}
 .simple-button-inner-stack .simple-button-inner-text{font-size:13px;line-height:18px}
 .simple-button-inner-stack .simple-button-inner-text+ .simple-button-inner-text{font-weight:400;font-size:11px;color:#777;line-height:16px}
 .simple-button-inner-demo:is(.simple-button-inner-count,.simple-button-inner-identity){
- width:min(100%,260px);justify-content:stretch}
+ width:min(100%,260px);justify-content:center}
 .simple-button-inner-grid{display:grid;grid-template-columns:24px minmax(0,1fr) 24px;
  width:100%;gap:8px;align-items:center;justify-items:center}
 .simple-button-inner-grid>.simple-button-inner-text{justify-self:center;min-width:0;text-align:center;
@@ -2465,7 +2465,7 @@ body.simple-first .topbar-end{gap:0}
 .simple-button-inner-slot>.simple-button-inner-text{font-size:11px;line-height:18px;
  font-weight:700;border-radius:999px;padding:0 5px;background:#ededed;
  font-variant-numeric:tabular-nums}
-.simple-button-inner-grid-photo .simple-button-inner-slot>.simple-button-inner-icon{width:18px;height:18px}
+.simple-button-inner-grid-photo .simple-button-inner-slot>svg.simple-button-inner-icon{width:18px;height:18px}
 .simple-button-inner-truncate{width:min(100%,232px)}
 .simple-button-inner-truncate .simple-button-inner-group{width:100%;min-width:0}
 .simple-button-inner-truncate .simple-button-inner-text{flex:1}
