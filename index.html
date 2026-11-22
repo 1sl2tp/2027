@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện giao diện và phân cấp · V42</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V42">
-  <script type="module" src="./web/dist-v42/app.js"></script>
+  <title>2027 · Thư viện giao diện và phân cấp · V43</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V43">
+  <script type="module" src="./web/dist-v43/app.js"></script>
 </head>
-<body data-ui-version="2027-UI-V42" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V43" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V42</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V43</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
@@ -48,7 +48,7 @@
       <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">13</span><span>Bán hàng</span><small>↗</small></a>
       <div class="sidebar-separator"></div>
       <a class="nav-link" href="#githubSourcesV42"><span class="nav-numeral">GH</span><span>Nguồn GitHub · cuối trang</span></a>
-      <div class="sidebar-footer">UI-V42 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
+      <div class="sidebar-footer">UI-V43 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
     </aside>
     <main class="main studio-main" id="main">
       <section class="simple-kit" id="simpleKit" aria-labelledby="simpleKitTitle">
@@ -105,6 +105,13 @@
         <div id="simpleButtonsItems" class="simple-font-list" role="group" aria-label="24 mẫu nút và icon"></div>
         <p id="simpleButtonsChosen" class="simple-font-chosen" role="status" aria-live="polite" hidden></p>
         <p id="simpleButtonsFeedback" class="simple-buttons-feedback" role="status" aria-live="polite"></p>
+        <section class="ui-v43-icon-library" id="iconV43" aria-labelledby="iconV43Title">
+          <h3 id="iconV43Title">6.2. Bộ icon thống nhất · SVG gốc</h3>
+          <p class="simple-font-intro">Một thư viện icon dùng lại theo đúng cha: điều hướng, Composer, tin nhắn, trạng thái, media và công cụ. Bấm icon để sao chép mã. Icon chỉ là con hiển thị; nút cha giữ hành động và kích thước.</p>
+          <p id="iconV43Count" class="ui-v43-count"></p>
+          <div id="iconV43Gallery" class="ui-v43-icon-library-groups" aria-label="Danh mục tất cả icon gốc 2027"></div>
+          <p id="iconV43Feedback" role="status" aria-live="polite" class="ui-v43-feedback"></p>
+        </section>
         <div class="simple-button-rule-section" id="simpleButtonRules">
           <h3>6.1. Cấu tạo bên trong nút — dùng thành phần gốc</h3>
           <p class="simple-font-intro">Mỗi mẫu dùng <code>.ui-button</code>, <code>.ui-icon</code> và <code>web/icons.svg</code> theo RULE 06–08. Chỉ phần bố cục bên trong thay đổi; không tạo bộ kích thước nút mới.</p>
@@ -137,12 +144,20 @@
           <span>Chờ nội dung</span><span aria-hidden="true">→</span><span>Đang nhận chữ</span><span aria-hidden="true">→</span><span>Hoàn tất / Dừng</span>
         </div>
         <div class="ui-motion-list" id="uiMotionItems" aria-label="Sáu kiểu hiệu ứng text và loading"></div>
+        <section class="ui-v43-motion-library" id="motionV43" aria-labelledby="motionV43Title">
+          <h3 id="motionV43Title">7.2. Bộ hiệu ứng tương tác · dùng chung</h3>
+          <p class="ui-motion-desc">Hiệu ứng là trạng thái của nút, message, indicator hoặc popup — không phải một component cha riêng. Mỗi mẫu có thể thử lại và tôn trọng tùy chọn giảm chuyển động.</p>
+          <div id="motionV43Gallery" class="ui-v43-motion-grid"></div>
+        </section>
         <section class="ui-scroll-anchor-lab" id="scrollAnchorLab" aria-labelledby="scrollAnchorTitle">
-          <h3 id="scrollAnchorTitle">7.1. Giữ vị trí khi có nội dung mới · ScrollAnchor</h3>
-          <p class="ui-motion-desc">Cuộn lên đọc đoạn cũ, sau đó bấm “Thêm tin mẫu” hoặc “Mô phỏng streaming”. Nội dung mới không được kéo bạn xuống; nút “Về tin mới” chỉ xuất hiện khi cần. Dữ liệu chỉ là ví dụ, không gửi tin thật.</p>
+          <h3 id="scrollAnchorTitle">7.1. Neo vị trí và mũi tên về tin mới · ScrollAnchor</h3>
+          <p class="ui-motion-desc">Cuộn lên để thấy nút mũi tên xuống nổi trong vùng hội thoại. Thêm tin mới để xem badge đếm; bấm mũi tên để quay về cuối. Tin nhắn và hiệu ứng đều là dữ liệu mô phỏng, không gửi thật.</p>
           <div class="ui-scroll-anchor-shell">
             <div id="scrollAnchorViewport" class="ui-scroll-anchor-viewport" tabindex="0" role="log" aria-label="Hội thoại mẫu có thể cuộn" aria-live="off"></div>
-            <button type="button" class="ui-button ui-button--secondary ui-scroll-anchor-jump" id="scrollAnchorJump" hidden>Về tin mới</button>
+            <button type="button" class="ui-button ui-button--secondary ui-button--icon ui-button--uniform ui-button--pill ui-scroll-anchor-jump" id="scrollAnchorJump" data-ui-component="THREAD-JUMP-TO-LATEST" aria-label="Về tin mới" title="Về tin mới" hidden>
+              <svg class="ui-icon" data-ui-component="THREAD-JUMP-ICON" aria-hidden="true"><use href="./web/icons.svg#ui-icon-arrow-down"/></svg>
+              <span id="scrollAnchorCount" class="ui-scroll-anchor-count" data-ui-component="THREAD-UNSEEN-COUNT" aria-hidden="true" hidden></span>
+            </button>
           </div>
           <div class="ui-scroll-anchor-actions">
             <button type="button" class="ui-button ui-button--secondary" id="scrollAnchorAdd">Thêm tin mẫu</button>
@@ -1008,11 +1023,12 @@
             <li><a href="https://github.com/LibreChat-AI/LibreChat" target="_blank" rel="noopener noreferrer">LibreChat</a><small>Danh sách hội thoại, tìm kiếm, media và trạng thái</small></li>
             <li><a href="https://github.com/mrigankad/Lumi-UI" target="_blank" rel="noopener noreferrer">Lumi UI</a><small>Composer, streaming, nút và feedback</small></li>
             <li><a href="https://github.com/openai/apps-sdk-ui" target="_blank" rel="noopener noreferrer">OpenAI Apps SDK UI</a><small>Button/Input/Textarea public primitives, không phải CSS ChatGPT</small></li>
+            <li><a href="https://github.com/lucide-icons/lucide" target="_blank" rel="noopener noreferrer">Lucide</a><small>Kho SVG icon nguồn mở; tham khảo hệ nét và kích thước, không cài thêm framework</small></li>
           </ul></div>
         </div>
         <p><a href="./github-sources.html">Phòng thử nguồn GitHub</a> · <a href="https://github.com/1sl2tp/2027/blob/main/references/UI_V42_GITHUB_SOURCES.md" target="_blank" rel="noopener noreferrer">Nhật ký nguồn V42</a></p>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V42</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V43</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>

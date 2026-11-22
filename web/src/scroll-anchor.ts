@@ -1,5 +1,5 @@
 import {captureVisibleAnchor,restoreVisibleAnchor,type MessageAnchor} from "./scroll-preserve.js";
-// UI-V42 · ScrollAnchor specimen under RULE 11 / RULE 12.
+// UI-V43 · ScrollAnchor specimen under RULE 11 / RULE 12.
 // Follows assistant-ui public ScrollAnchor behavior in spirit, not its React source.
 // New text never steals scroll position once a reader scrolls away from the end.
 type Author="user"|"assistant";
@@ -35,10 +35,12 @@ export function initScrollAnchorLab():void{
  const older=document.getElementById("scrollAnchorOld") as HTMLButtonElement|null;
  const reset=document.getElementById("scrollAnchorReset") as HTMLButtonElement|null;
  const status=document.getElementById("scrollAnchorStatus");
+ const count=document.getElementById("scrollAnchorCount");
  const prepend=document.getElementById("scrollAnchorPrepend") as HTMLButtonElement|null;
  const reflow=document.getElementById("scrollAnchorReflow") as HTMLButtonElement|null;
- if(!viewport||!jump||!add||!stream||!older||!reset||!status||!prepend||!reflow)return;
+ if(!viewport||!jump||!add||!stream||!older||!reset||!status||!count||!prepend||!reflow)return;
  let pinned=true,unseen=0,sequence=0,streamTimer:number|null=null;
+ let seekingLatest=false;
  let historic=0,restoring=false,anchor:MessageAnchor|null=null;
  const watched=new Set<Element>();
  const resizeObserver=typeof ResizeObserver==="undefined"?null:new ResizeObserver(()=>{
@@ -64,18 +66,28 @@ export function initScrollAnchorLab():void{
  };
  const atBottom=()=>viewport.scrollHeight-viewport.scrollTop-viewport.clientHeight<=32;
  const updateJump=()=>{
-  jump.hidden=pinned||unseen===0;
-  jump.textContent=unseen>0?"Về tin mới · "+unseen:"Về tin mới";
+  // Only MessageList owns this control. Away from tail: show arrow even with no unseen.
+  jump.hidden=pinned;
+  count.hidden=unseen===0;
+  count.textContent=unseen>99?"99+":String(unseen);
+  jump.setAttribute("aria-label",unseen>0?"Về tin mới, "+unseen+" tin chưa xem":"Về tin mới");
  };
+
  const jumpToBottom=()=>{
-  pinned=true;unseen=0;
-  viewport.scrollTop=viewport.scrollHeight;
+  pinned=true;unseen=0;seekingLatest=true;
+  const reduced=window.matchMedia?.("(prefers-reduced-motion: reduce)").matches===true;
+  viewport.scrollTo({top:viewport.scrollHeight,behavior:reduced?"auto":"smooth"});
+  if(reduced)seekingLatest=false;
   updateJump();
-  status.textContent="Đang ở cuối hội thoại; tin mới sẽ xuất hiện ở dưới.";
+  status.textContent="Đã chọn về tin mới; đang trở về cuối hội thoại.";
  };
  const onScroll=()=>{
   // User initiated scroll away from the tail breaks follow mode.
   if(restoring)return;
+  if(seekingLatest){
+   if(atBottom()){seekingLatest=false;pinned=true;unseen=0;updateJump();}
+   return;
+  }
   pinned=atBottom();
   anchor=captureVisibleAnchor(viewport);
   if(pinned)unseen=0;
@@ -108,7 +120,7 @@ export function initScrollAnchorLab():void{
   resizeObserver?.disconnect();watched.clear();
   viewport.replaceChildren(...SEED.map(messageItem));
   watchItems();
-  pinned=true;unseen=0;sequence=0;historic=0;
+  pinned=true;unseen=0;sequence=0;historic=0;seekingLatest=false;
   viewport.scrollTop=viewport.scrollHeight;
   anchor=captureVisibleAnchor(viewport);
   updateJump();status.textContent="Sẵn sàng: cuộn lên, rồi thêm tin để thử không tự nhảy.";

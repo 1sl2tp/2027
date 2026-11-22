@@ -19,6 +19,7 @@ import { initSimpleButtonRules } from "./simple-button-rules.js";
 import { initTextMotionGallery } from "./text-motion.js";
 import { initColumnMatrix, initSimpleMasterTable } from "./column-matrix.js";
 import { initScrollAnchorLab } from "./scroll-anchor.js";
+import { initIconMotionGallery } from "./icon-motion-gallery.js";
 
 type BlockId="title"|"body"|"section"|"description"|"list"|"table"|"number"|"money"|"note"|"caption";
 type SelectId=BlockId|"all";
@@ -528,6 +529,7 @@ initTextMotionGallery();
 initColumnMatrix();
 initSimpleMasterTable();
 initScrollAnchorLab();
+initIconMotionGallery();
 initPatternKit();
 initInvoiceGallery();
 initRootButtonCatalog(); // Build the source catalog before text-search discovers gallery content.

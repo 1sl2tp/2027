@@ -36,6 +36,7 @@ jobs:
           cp -R web/dist _site/web/dist-v40
           cp -R web/dist _site/web/dist-v41
           cp -R web/dist _site/web/dist-v42
+          cp -R web/dist _site/web/dist-v43
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

@@ -712,3 +712,10 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 - Theo cuối chỉ khi đang pinned; nếu cuộn lên thì tin mới tăng unseen, không tự kéo cuối. ResizeObserver của các item giữ điểm đọc, browser native anchoring được tắt trên vùng demo để tránh bù hai lần.
 - Nguồn tham khảo công khai nằm **sau các mẫu và CSS, ngay trước footer** trong `index.html#githubSourcesV42`, kèm chủ đề và giới hạn tích hợp. Không có tin thật hay API production.
 - Kiểm thử tĩnh/CI là E2/E3; iOS/Android/PWA với ảnh thật và bàn phím cần E4/E5 riêng.
+
+
+### 12.9. V43 — Icon + motion là thành phần con, không phải hệ cha mới
+- `CHAT-MESSAGE-LIST → THREAD-JUMP-TO-LATEST → THREAD-JUMP-ICON + THREAD-UNSEEN-COUNT`. Nút luôn là `ui-button`, icon luôn `ui-icon` từ `web/icons.svg`, không gán kích thước tùy tiện ở SVG riêng lẻ; badge chỉ chứa trạng thái do MessageList tính.
+- Bỏ nhãn chữ “Về tin mới” khỏi hình hiển thị; giữ `aria-label` và `title`. Nút mũi tên xuất hiện khi rời cuối (kể cả chưa có tin mới), badge ẩn khi unseen=0. Click cuộn mềm khi được phép; thiết bị yêu cầu reduced motion thì cuộn ngay.
+- `icon-motion-gallery.ts` là phần xem catalog, không tạo định nghĩa icon thứ hai. Các hiệu ứng (fade/rise/press/shimmer/dots/spin/pulse) là state của nút, message hoặc indicator, không tạo component CSS chủ mới.
+- Hệ màu và `--ui-control-*` gốc quyết định kích thước. `prefers-reduced-motion:reduce` vô hiệu hóa chuyển động không thiết yếu. Chỉ demo client-side, không cài dependency hoặc truyền dữ liệu thật. [Audit V43](references/UI_V43_GITHUB_ICON_MOTION.md).
