@@ -507,6 +507,17 @@ Bổ sung **vào RULE 09 đã có**, không tạo bộ CSS bảng khác. Mẫu `
 - **Kiểm chứng:** test số bảng DOM của UI chính chỉ là một, số th/td/col đúng 20, mapping đủ key/position, thứ tự mục 1–8, URL cũ chuyển `#simpleTables` và version V38. E4/E5 vẫn phải thử Chrome/Safari di động và bàn phím.
 
 ---
+### 9.10. V39: bảng 20 cột phải cân trục tiêu đề/dữ liệu, không bẻ tên cột
+
+- **Lỗi có bằng chứng ảnh (22/11/2026):** trong mục 8, nhãn `STT` bị ép thành `S` / `T` / `T` theo chiều dọc. Nguyên nhân là cột nhỏ (52px) phải chứa cùng lúc padding trái/phải (10px mỗi bên), nhãn và icon sort luôn hiện dù chưa sắp xếp; header dùng nút có min-height 44px cộng padding ô, dẫn tới đầu bảng quá cao và không cân đối.
+- **Một nguồn hình học:** chỉ sửa `COLUMN_SCHEMA` ở `web/src/column-matrix.ts` cùng `.ds-table.ds-table--schema` trong `web/styles.css`; không tạo CSS bảng mới. Sáu cột đầu có `minPx` lần lượt **64 / 198 / 72 / 102 / 124 / 142**, phần còn lại giữ role/width hiện có. Header và ô dữ liệu dùng cùng `<colgroup>`, `--ds-table-cell-pad-x=10px`, `table-layout:fixed`.
+- **Không bẻ chữ của tiêu đề:** toàn bộ nút sort trong `th` có `white-space:nowrap`, `word-break:normal`, `overflow-wrap:normal` và không tự chèn dấu gạch nối. Cột đủ chiều rộng theo tiêu đề, đặc biệt STT, Số, SL, Giá/Tiền. Nội dung *tên hàng dài* ở body vẫn được xuống dòng bình thường; ô số tiền giữ trên một dòng, căn phải/tabular-nums.
+- **Icon không được cướp diện tích:** khi `aria-sort=none` chỉ hiển thị nhãn, **không render SVG sort**; chỉ cột đang sort mới hiện icon SVG từ `web/icons.svg`, và giữ `aria-sort` trên `<th>`. Nút vẫn có label để người dùng biết có thể sắp xếp.
+- **Chiều cao:** nút tiêu đề min-height 28px và padding ô 8px trên/dưới → hàng tiêu đề tối thiểu 44px, cùng mốc hàng dữ liệu; không cộng 44px của button với 16px padding khiến header cao 60px.
+- **Kẻ trục nhất quán:** bảng chính 20 cột mặc định dùng `data-borders=grid`, nét ngang/dọc 1px nhẹ. Cột đầu sticky vẫn giữ 1 đường phân cách, không cộng shadow thành đường đôi. Desktop/mobile đều dùng cuộn ngang nếu thiếu không gian, **không co 20 cột để vừa một màn**.
+- **Bảo vệ hồi quy:** test xác nhận min width sáu cột, `data-borders=grid`, một bảng duy nhất ở mục 8, CSS header không ngắt chữ, SVG sort chỉ xuất hiện khi active, khung 44px, 20 định danh trường. E2/E3 dựa trên CI/Pages, E4/E5 chỉ đạt sau đo hình học bằng trình duyệt Safari/Chrome thực tế và kiểm sticky/zoom/text dài.
+
+---
 ## RULE 10 — ĐẶT TÊN NÚT THEO ĐÚNG VAI TRÒ, KHÔNG ĐÁNH TRÁO KIỂU VÀ BỐ CỤC
 
 **Mã:** `2027-R10` · **Ngày:** 22/11/2026 (VN) · **Phạm vi:** mục 6 / 6.1 của UI Library Web. **Trạng thái:** E0–E1; E2, E3 và nghiệm thu thiết bị E4/E5 phải xác nhận bằng CI/deploy/bằng chứng riêng.

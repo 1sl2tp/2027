@@ -11,6 +11,15 @@
 
 
 
+## Cân trục bảng 20 cột, không bẻ tên header (UI-V39)
+
+**[Mở mục 8 · Bảng & dữ liệu](https://1sl2tp.github.io/2027/#simpleTables)**. Theo ảnh nghiệm thu V38, STT bị xuống ba dòng vì icon sắp xếp chiếm diện tích trong cột 52px, nút header cao 44px cộng padding ô làm tiêu đề thừa chiều cao. V39 sửa ngay primitive `ds-table ds-table--schema` và schema, không tạo bảng mới.
+
+- Sáu cột đầu có min width **64/198/72/102/124/142px** (STT/Tên/Số/SL/Đơn giá/Thành tiền), một `colgroup` cho header và body; tiền căn phải, SL/STT căn giữa.
+- Tên header **không bẻ chữ** (`nowrap`, `word-break:normal`); icon sort chỉ xuất hiện ở cột đã sắp xếp, giữ `aria-sort`. Nút header cao tối thiểu 28px + padding ô 8px × 2 → hàng tiêu đề tối thiểu 44px.
+- Bảng chính dùng đường kẻ ngang/dọc 1px nhẹ để đối chiếu trục; cột STT sticky không bị kẻ đôi. Tên hàng dài vẫn xuống dòng, bảng 20 cột cuộn ngang.
+- Quy tắc và bài kiểm tra hồi quy ở **RULE 09 §9.10** và `tests/table-header-geometry.test.mjs`. CI/Pages kiểm tra tự động không thay thế nghiệm thu hình ảnh Safari/Chrome thực tế.
+
 ## Mục 8 – Một bảng 20 cột chuẩn (UI-V38)
 
 **[Xem mục 8 · Bảng & dữ liệu](https://1sl2tp.github.io/2027/#simpleTables)**. Mục 1 chỉ còn kiểu chữ. Mục 8, đặt sau phần 7 về chữ streaming, hiển thị **một bảng duy nhất có đủ 20 cột** với các hàng dữ liệu mẫu, không còn 20 bảng riêng theo số cột.
