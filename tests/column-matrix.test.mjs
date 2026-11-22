@@ -87,8 +87,8 @@ test("V34 keeps reference attribution and versioned Pages assets",()=>{
  const html=read("index.html"),workflow=read(".github/workflows/pages.yml");
  for(const repo of ["assistant-ui/assistant-ui","vercel/streamdown","lobehub/streamdown","vercel/ai-elements","openai/apps-sdk-ui","mrigankad/Lumi-UI"])
   assert.ok(audit.includes(repo));
- assert.ok(html.includes('data-ui-version="2027-UI-V34"'));
- assert.ok(html.includes('src="./web/dist-v34/app.js"'));
- assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v34"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V35"'));
+ assert.ok(html.includes('src="./web/dist-v35/app.js"'));
+ assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v35"));
  assert.ok(workflow.includes("ET.parse('web/icons.svg')"));
 });
