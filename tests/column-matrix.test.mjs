@@ -29,7 +29,7 @@ test("V36 has exactly one main table card with 1–20 columns and existing galle
  assert.ok(section.includes("<details")&&section.includes('id="variantTableFeedback"'),"old styles only as optional reference");
  assert.ok(html.includes('data-gallery-filter="tables">Bảng & dữ liệu <span>1</span>'));
  assert.ok(html.includes('data-gallery-filter="all">Tất cả <span>22</span>'));
- assert.ok(app.includes('import { initColumnMatrix } from "./column-matrix.js";'));
+ assert.ok(app.includes('import { initColumnMatrix, initSimpleTableList } from "./column-matrix.js";'));
  assert.ok(app.includes("initColumnMatrix();"));
  assert.ok(rules.includes("### 9.7. V36: Một bảng chính cho 1–20 cột"));
  assert.ok(!rules.includes("## RULE 12"),"extend R09 instead of making a parallel ruleset");
@@ -116,8 +116,8 @@ test("V36 preserves source audit and ships a cache-safe page",()=>{
  const html=read("index.html"),workflow=read(".github/workflows/pages.yml");
  for(const repo of ["assistant-ui/assistant-ui","vercel/streamdown","lobehub/streamdown","vercel/ai-elements","openai/apps-sdk-ui","mrigankad/Lumi-UI"])
   assert.ok(audit.includes(repo));
- assert.ok(html.includes('data-ui-version="2027-UI-V36"'));
- assert.ok(html.includes('src="./web/dist-v36/app.js"'));
- assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v36"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V37"'));
+ assert.ok(html.includes('src="./web/dist-v37/app.js"'));
+ assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v37"));
  assert.ok(workflow.includes("ET.parse('web/icons.svg')"));
 });
