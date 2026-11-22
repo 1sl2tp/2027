@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Chọn mẫu giao diện đơn giản · V19</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V19">
-  <script type="module" src="./web/dist/app.js?v=2027-UI-V19"></script>
+  <title>2027 · Cỡ chữ và font · V20</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V20">
+  <script type="module" src="./web/dist/app.js?v=2027-UI-V20"></script>
 </head>
-<body data-ui-version="2027-UI-V19" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V20" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><span class="version">V19</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><span class="version">V20</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
-      <div class="sidebar-group-title">CHỌN NHANH</div>
-      <a class="nav-link active" href="#simpleKit"><span class="nav-numeral">00</span><span>Gói chủ đề & mẫu</span></a>
+      <div class="sidebar-group-title">MẪU CHỮ</div>
+      <a class="nav-link active" href="#simpleKit"><span class="nav-numeral">00</span><span>1. Cỡ chữ, font</span></a>
       <div class="sidebar-separator"></div>
       <div class="sidebar-group-title">THƯ VIỆN NÂNG CAO</div>
       <a class="nav-link active" href="#document"><span class="nav-numeral">01</span><span>Văn bản mẫu</span></a>
@@ -44,50 +44,11 @@
       <div class="sidebar-footer">UI-V14 · RULE 03<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
     </aside>
     <main class="main studio-main" id="main">
-      <section class="simple-kit" id="simpleKit" data-theme="chatgpt" aria-labelledby="simpleKitTitle">
-        <div class="simple-kit-heading">
-          <span class="eyebrow">2027 / THƯ VIỆN MẪU / V19</span>
-          <h1 id="simpleKitTitle">Chọn mẫu giao diện</h1>
-          <p>Chọn <strong>gói chủ đề</strong> để dùng chung font và màu. Sau đó chọn <strong>loại mẫu</strong>, xem từng dòng và bấm <b>Chọn</b>. Không cần chỉnh CSS.</p>
-        </div>
-        <div class="simple-kit-controls">
-          <label for="simpleTheme"><span>01 · Gói chủ đề</span>
-            <select id="simpleTheme">
-              <option value="chatgpt">Sáng tối giản · tham khảo ChatGPT</option>
-              <option value="facebook">Xanh sáng · tham khảo Facebook</option>
-              <option value="gemini">Tím dịu · tham khảo Gemini</option>
-              <option value="mono">Đen trắng · trung tính</option>
-            </select>
-          </label>
-          <label for="simpleCategory"><span>02 · Loại mẫu</span>
-            <select id="simpleCategory">
-              <option value="text">Kiểu chữ · 10 mẫu</option>
-              <option value="input">Ô nhập · 10 mẫu</option>
-              <option value="button">Nút · 10 mẫu</option>
-              <option value="icon">Icon · 10 mẫu</option>
-              <option value="table">Bảng · 6 mẫu</option>
-              <option value="layout">Bố cục · 4 mẫu</option>
-              <option value="popup">Menu & popup · 4 mẫu</option>
-            </select>
-          </label>
-        </div>
-        <div class="simple-kit-results">
-          <div class="simple-kit-results-heading"><h2 id="simpleCategoryTitle">Kiểu chữ</h2><span id="simpleCount">10 mẫu</span></div>
-          <div id="simpleItems" class="simple-kit-items" aria-label="Các mẫu để chọn"></div>
-        </div>
-        <div class="simple-kit-selected">
-          <span id="simpleChosen">Đang chọn: TEXT-01</span>
-          <button type="button" id="simpleCopy">Sao chép mã mẫu</button>
-        </div>
-        <p id="simpleStatus" class="simple-kit-status" role="status" aria-live="polite">Chọn một dòng để lấy mẫu.</p>
-        <details id="simpleCodeDetails" class="simple-kit-code">
-          <summary>Xem mã HTML đã chọn</summary>
-          <textarea id="simpleSource" readonly spellcheck="false" rows="4" aria-label="Mã HTML của mẫu đã chọn"></textarea>
-        </details>
-        <div class="simple-kit-more">
-          <button type="button" id="simpleAdvancedToggle" aria-expanded="false">Mở thư viện nâng cao</button>
-          <span>Nâng cao: chỉnh từng thuộc tính, toàn bộ 13 mẫu hóa đơn và bộ mẫu gốc.</span>
-        </div>
+      <section class="simple-kit" id="simpleKit" aria-labelledby="simpleKitTitle">
+        <h1 id="simpleKitTitle">1. Cỡ chữ, font</h1>
+        <p class="simple-font-intro">Chạm vào một mẫu chữ để chọn.</p>
+        <div id="simpleItems" class="simple-font-list" role="group" aria-label="10 mẫu cỡ chữ và font"></div>
+        <p id="simpleChosen" class="simple-font-chosen" role="status" aria-live="polite"></p>
       </section>
       <div class="studio-heading">
         <div class="eyebrow">THƯ VIỆN THIẾT KẾ / V12</div>
@@ -859,7 +820,7 @@
         <div><span class="eyebrow">CÙNG MỘT BỘ CSS</span><h2>Thông số đã chọn</h2><p>Toàn bộ thành phần dùng <code>web/styles.css</code> và các token chung. Có thể sao chép để triển khai cho những khung khác.</p></div>
         <pre id="cssPreview" aria-label="CSS hiện hành"></pre>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V19</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V20</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>
