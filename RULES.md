@@ -1,7 +1,7 @@
 # 2027 — RULES.md
 
 > **Nguồn quy tắc duy nhất (Single Source of Truth)**  
-> Repo: `1sl2tp/2027` · Trạng thái: **R04 / UI-V08 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
+> Repo: `1sl2tp/2027` · Trạng thái: **R05 / UI-V09 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
 > Phạm vi: Web App/PWA (TypeScript + HTML + CSS) và Android APK native (Kotlin + Jetpack Compose).
 
 ## RULE 01 — MỘT FILE RULE DUY NHẤT
@@ -290,3 +290,29 @@ Dùng các bản lưu nguồn **ChatGPT, Facebook, Gemini** do người dùng đ
 **Bằng chứng:** tài liệu đối chiếu trích các giá trị trong ba tệp HTML Save Page, liệt kê giới hạn trang Facebook Reel, preset ChatGPT Codex và các CSS theme/viewport Gemini; kiểm thử hợp đồng bảo đảm R04 và tài liệu không bị rơi khỏi repo. **Chưa có:** E4/E5 nghiệm thu trên thiết bị thực.
 
 **Hoàn tác:** revert commit R04 (tài liệu + kiểm thử hợp đồng), không có schema/backend/CSS/app data cần đảo ngược.
+
+---
+
+## RULE 05 — GIỮ MỐC GỐC VÀ TÁI SỬ DỤNG MỘT MẪU NỀN TẢNG
+
+**Mã:** 2027-R05 · **Ngày:** 22/11/2026 (VN) · **Trạng thái:** Đã ghi và có triển khai mẫu V09; chỉ đánh dấu đã kiểm thử/phát hành sau khi CI xác nhận, chưa nghiệm thu thiết bị thật.
+
+### 5.1. Mục đích và lý do
+
+Giữ nguyên bản thư viện hiện có trước khi tạo mẫu mới, đồng thời xây **một mẫu gốc 2027** độc lập có thể so sánh các hướng giao diện từ **ChatGPT, Facebook và Gemini** theo RULE 04. Tránh mất bản đã duyệt hoặc sửa chắp vá theo từng hãng.
+
+### 5.2. Quy tắc chuẩn tắc
+
+1. **Mốc bảo tồn:** commit `7e10663b72e85c63621462048a262897f36c3182` là V08 nguyên trạng; nhánh `archive/ui-v08-original-before-foundation-20261122` chỉ làm nhãn tham chiếu. Không ghi đè hoặc dùng làm nơi phát triển; commit SHA là mốc bất biến.
+2. **Tệp nguồn hãng:** giữ ba bản Save Page trong [Drive UI 2027](https://drive.google.com/drive/folders/1uPNFbeA_lbJjIEZW0O__g4lTWWXJEVSj?hl=vi) nguyên trạng; danh mục và giới hạn nguồn ở `references/ORIGINAL_UI_SOURCES_AND_BASELINE_2026-11-22.md`. Không đưa toàn bộ HTML/CSS minified hoặc nội dung tài khoản đã lưu vào repo.
+3. **Mẫu gốc duy nhất:** `base.html` là bề mặt thử các mẫu gốc; `web/src/base.ts` chỉ điều khiển state demo; **`web/styles.css` vẫn là tệp CSS duy nhất**. Không thêm stylesheet riêng theo tên hãng hay theo mô-đun.
+4. **Bốn hướng, một DOM:** `original` là kiểu nền tảng chuẩn của 2027. `chatgpt`, `facebook`, `gemini` là các **preset token tham khảo** cùng một bố cục để đo khác biệt, không khẳng định giống 100% hoặc là thiết kế chính thức.
+5. **Cấu trúc xuyên mô-đun:** rail/sidebar/header/main/composer/overlay, typography, bảng, hàng icon + chữ, nút, input và vùng số lượng chỉ dùng vai trò/token thống nhất. UI bàn phím, focus, tràn chữ, nút chạm và cuộn phải qua kiểm thử mobile/rộng.
+6. **An toàn và trung thực:** nút gửi tin, nhập số, đổi khách, chọn module, popup và menu chỉ mô phỏng, không thực hiện giao dịch. Mọi thao tác thử phải tạo phản hồi rõ hoặc báo không hỗ trợ, không giả lập thành công trên hệ thống thật.
+
+### 5.3. Kiểm thử và trạng thái
+
+- Kiểm tra một tệp CSS trên cả `index.html`, `flows.html`, `base.html`; build `web/src/base.ts` cùng TS hiện có, đóng gói `base.html` trong Pages.
+- Kiểm tra bốn lựa chọn preset, hai viewport, ba mô-đun, input focus, số lượng 0–99, menu và popup; không gọi mạng, không gửi chat/số tiền thật.
+- **Đã thực hiện:** lưu snapshot branch và khai báo base. **Chưa được xác nhận nếu chưa có báo cáo CI:** build, deploy và nghiệm thu mobile Safari/Chrome.
+- **Phạm vi Web:** thêm demo V09, không thay nội dung V08 hoặc logic V04; **APK:** chưa đổi. **Hoàn tác:** revert các commit V09 trên main, vẫn còn mốc gốc và nguồn Drive.
