@@ -337,7 +337,7 @@ test("V11 adds four distinct composers inside the existing input gallery",()=>{
  for(const hook of ["data-composer-form","data-composer-text","data-composer-add","data-composer-file",
    "data-composer-previews","data-composer-send","data-composer-mic","data-composer-mode",
    "data-composer-status","data-composer-log"]){
-   assert.equal((inputs.split(hook).length-1),4,hook);
+   assert.equal((inputs.match(new RegExp(hook+"(?=[\\s>])","g"))||[]).length,4,hook);
  }
  assert.ok(inputs.includes("Ảnh mẫu 1"));
  assert.ok(inputs.includes("Ảnh mẫu 3"));
