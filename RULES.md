@@ -685,3 +685,12 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 4. **Khi tiếp tục triển khai:** ưu tiên (A) `CHAT-MESSAGE → CONTENT-PARTS [0..n] + MESSAGE-ACTIONS`, (B) `MESSAGE-LIST` neo theo message ID khi prepend/append và item height đổi, (C) overlay focus/keyboard/portal, (D) workspace 3 panel; sau đó mới draft/command/lightbox/motion. Mỗi phần mở rộng đúng `COMPONENT_CONTRACTS` và có E0–E5.
 5. **Không nhân bản bản mẫu đã có:** R11 đã có skeleton/caret/streaming và ScrollAnchor, R09 có bảng 20 cột, R12 đã có Composer cha. Chỉ thêm hành vi/slot còn thiếu, không thêm CSS owner hoặc rule khác chỉ vì nguồn bên ngoài có mẫu.
 
+
+### 12.6. SOURCE-V02 — Gắn nguồn vào đúng cha, kiểm mẫu tin đa nội dung
+
+**Đã sửa trong repo 2027:** [Phòng thử SOURCE-V02](github-sources.html) và [audit V02](references/GITHUB_SOURCE_V02_2026-11-22.md). Thêm 5 nguồn Base UI, React Aria, components.build, shadcn/ui và UI SDK beta vào 8 nguồn trước, có cột `Loại / cha áp dụng`. Một mẫu `CHAT-MESSAGE` chứa `MESSAGE-CONTENT-PARTS` gồm text/table/media, còn `CHAT-MESSAGE-ACTIONS` là con của đúng Message. Nút copy dùng `ui-button` sẵn có, không tạo CSS nút riêng, không gửi dữ liệu.
+
+- **Quy tắc tiếp nhận:** nguồn thư viện không tự động là component độc lập; React Aria/Base UI là primitives, Floating UI/TanStack Virtual là utilities của parent, components.build là đặc tả composition, registry shadcn chỉ là nguồn mẫu.
+- **Chưa áp dụng toàn hệ:** nhãn DOM `MESSAGE-CONTENT-PARTS` ở phòng lab chưa phải là contract đã đăng ký và nghiệm thu trên CHAT production. Cần xử lý primitive đa cha (ví dụ cùng `DATA-TABLE` xuất hiện ở màn đơn và bên trong tin) trước khi đưa vào registry; không lách bằng hai bộ Table.
+- **Bằng chứng:** test tĩnh `tests/github-source-lab-v02.test.mjs`; quy trình E0–E5 vẫn bắt buộc và E4/E5 trên thiết bị thật chưa đạt. Không bổ sung rule song song hay dependency React cho 2027 hiện tại.
+
