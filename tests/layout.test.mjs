@@ -757,3 +757,37 @@ test("V17 price-before-quantity prints and scales via shared semantic column mod
  assert.ok(html.includes("GIÁ → SL"));
  assert.ok(read("web/src/pattern-kit.ts").includes("2027-ui-pattern-catalog-v17.json"));
 });
+
+
+test("V18 mobile gallery uses native pickers, a collapsible source, and preserves complete invoice cells",()=>{
+ const html=read("index.html");
+ const css=read("web/styles.css");
+ const gallery=read("web/src/app.ts");
+ const invoice=read("web/src/invoice-gallery.ts");
+ const patterns=read("web/src/ui-patterns.ts");
+ for(const marker of [
+   'id="galleryMobileFilter"','id="invoiceMobileSelect"',
+   'id="invoiceSourceDetails"','id="invoiceSource"',
+   'data-gallery-filter="invoices"'
+ ])assert.ok(html.includes(marker),marker);
+ for(const marker of [
+   '.gallery-mobile-filter select','.gallery-filter-nav{display:none}',
+   '.ui-invoice-variant-list{display:none}',
+   '.ds-invoice-table{display:block;width:100%;min-width:0',
+   '.ds-invoice-table tbody tr{display:grid',
+   '.ds-invoice-table--price-first tbody td:nth-child(3)::before{content:"Giá"}',
+   '.ds-invoice-table--price-first tbody td:nth-child(4)::before{content:"SL"}',
+   '.ds-invoice-table--check tbody td:nth-child(3)::before{content:"SL đặt"}',
+   '.ds-invoice-table--check tbody td:nth-child(4)::before{content:"SL thực"}',
+   '.ds-invoice-table--check tbody td:nth-child(5)::before{content:"Ghi chú"}'
+ ])assert.ok(css.includes(marker),marker);
+ assert.ok(css.includes('@media screen and (max-width:760px)'),"mobile-only styles preserve print");
+ assert.ok(gallery.includes('galleryMobileFilter.addEventListener("change"'),"mobile category selection");
+ assert.ok(gallery.includes('galleryMobileFilter.value=activeGalleryCategory'),"category picker stays synced");
+ assert.ok(invoice.includes('mobileSelect.addEventListener("change"'),"mobile invoice selection");
+ assert.ok(invoice.includes('sourceDetails.open=!narrowScreen.matches'),"source collapsed on phone");
+ assert.ok(invoice.includes('sourceDetails.open=true'),"clipboard fallback exposes source");
+ assert.ok(invoice.includes('source.value=item.html'),"copied HTML stays original");
+ assert.ok(patterns.includes("INV-12"),"all thirteen invoice variants remain available");
+ assert.ok(css.includes('@media print'),"A4 print rules retained");
+});
