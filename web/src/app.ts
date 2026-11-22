@@ -484,6 +484,26 @@ const initialGalleryCategory=galleryCategoryFromHash();
 if(initialGalleryCategory)activeGalleryCategory=initialGalleryCategory;
 updateGallery();
 
+// UI-V12 · The SAME ui-button/ui-icon controls that are used by every chat composer.
+for(const button of Array.from(document.querySelectorAll<HTMLButtonElement>("[data-ui-control-preview]"))){
+ button.addEventListener("click",()=>{
+  const kind=button.dataset.uiControlPreview;
+  let message="Đã thử nút gốc 2027.";
+  if(kind==="plus")message="Nút +: hành động thêm media trong ô gõ chat (chỉ minh họa tại thư viện).";
+  if(kind==="mode"){
+    const label=button.querySelector<HTMLElement>("[data-ui-demo-mode]");
+    if(label)label.textContent=label.textContent==="Cao"?"Nhanh":"Cao";
+    message="Đã thay đổi nhãn chế độ mẫu. Bốn ô chat dùng chung kiểu chữ và icon chevron này.";
+  }
+  if(kind==="mic"){
+    const active=button.getAttribute("aria-pressed")!=="true";
+    button.setAttribute("aria-pressed",String(active));
+    message=active?"Mic ở trạng thái nhấn (mẫu, không truy cập micro).":"Mic trở về trạng thái bình thường.";
+  }
+  if(kind==="send")message="Đã thử nút gửi gốc. Không gửi dữ liệu thật.";
+  get<HTMLElement>("sharedActionFeedback").textContent=message;
+ });
+}
 initComposerGallery();
 render();
 // When a user opens #sample-inputs directly, filtering hides preceding sections.
