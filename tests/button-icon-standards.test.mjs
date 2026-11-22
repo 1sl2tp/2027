@@ -30,7 +30,7 @@ test("V29 only uses valid single-level XML comments in the icon registry",()=>{
   for(const icon of ["plus","minus","search","close","copy","edit","trash","share","send-up","ellipsis","save","arrow-right"]){
     assert.ok(ids.includes("ui-icon-"+icon),"missing icon "+icon);
   }
-  assert.equal((sprite.match(/<\\/svg>/g)||[]).length,1,"all symbols must remain inside one SVG root");
+  assert.equal(sprite.split("</svg>").length-1,1,"all symbols must remain inside one SVG root");
   assert.ok(sprite.trimEnd().endsWith("</svg>"));
 });
 
