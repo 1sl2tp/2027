@@ -142,7 +142,7 @@ function renderInspector():void{
  get<HTMLElement>("leadingOutput").textContent=s.leading.toFixed(2);
  get<HTMLInputElement>("trackingRange").value=s.tracking.toFixed(2);
  get<HTMLElement>("trackingOutput").textContent=s.tracking.toFixed(2)+" em";
- get<HTMLElement>("selectedBlockLabel").textContent=all?"Toàn văn bản":blockTypes[selected].label;
+ get<HTMLElement>("selectedBlockLabel").textContent=selected==="all"?"Toàn văn bản":blockTypes[selected].label;
  const allButton=get<HTMLButtonElement>("selectAllButton");
  allButton.classList.toggle("selected",all);allButton.setAttribute("aria-pressed",String(all));
  for(const [id,pressed] of [
