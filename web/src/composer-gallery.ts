@@ -4,6 +4,7 @@
 export function initComposerGallery():void {
   const cards=Array.from(document.querySelectorAll<HTMLElement>("[data-composer-sample]"));
   const imageUrls=new Set<string>();
+  const pendingTimers=new Set<number>();
   const maxFileSize=10*1024*1024;
   const create=<T extends keyof HTMLElementTagNameMap>(tag:T):HTMLElementTagNameMap[T]=>document.createElement(tag);
   for(const card of cards){
@@ -22,6 +23,7 @@ export function initComposerGallery():void {
     const log=card.querySelector<HTMLElement>("[data-composer-log]");
     if(!text||!form||!filePicker||!previews||!add||!mic||!mode||!modeLabel||!send||!sendIcon||!status||!log)continue;
     let sending=false;
+    let pendingTimer:number|null=null;
     const maximum=kind==="single"?1:4;
     const countImages=()=>previews.querySelectorAll(".composer-preview").length;
     const report=(message:string):void=>{status.textContent=message;};
@@ -29,8 +31,10 @@ export function initComposerGallery():void {
       previews.hidden=countImages()===0;
       const hasContent=Boolean(text.value.trim()||countImages());
       sendIcon.setAttribute("href",sending?"./web/icons.svg#ui-icon-stop":hasContent?"./web/icons.svg#ui-icon-send-up":"./web/icons.svg#ui-icon-voice");
-      send.setAttribute("aria-label",text.value.trim()||countImages()?"Mô phỏng gửi nội dung":"Thử chế độ giọng nói");
-      send.title=text.value.trim()||countImages()?"Mô phỏng gửi nội dung":"Giọng nói mẫu (không thu âm)";
+      send.type=sending?"button":"submit";
+      send.disabled=false;
+      send.setAttribute("aria-label",sending?"Dừng mô phỏng gửi":hasContent?"Mô phỏng gửi nội dung":"Thử chế độ giọng nói");
+      send.title=sending?"Dừng mô phỏng":hasContent?"Mô phỏng gửi nội dung":"Giọng nói mẫu (không thu âm)";
       const lineHeight=24;
       const minHeight=kind==="compact"?42:kind==="sending"?63:58;
       text.style.height="auto";
@@ -95,6 +99,18 @@ export function initComposerGallery():void {
       mic.setAttribute("aria-label",on?"Tắt trạng thái ghi âm mẫu":"Thử trạng thái ghi âm");
       report(on?"Đang mô phỏng trạng thái ghi âm. Không truy cập micro.":"Đã tắt trạng thái ghi âm mẫu.");
     });
+    // A Stop icon is a real, enabled Cancel action — never a disabled Send button.
+    send.addEventListener("click",()=>{
+      if(!sending)return;
+      if(pendingTimer!==null){
+        window.clearTimeout(pendingTimer);
+        pendingTimers.delete(pendingTimer);
+        pendingTimer=null;
+      }
+      sending=false;send.dataset.composerBusy="false";
+      refresh();
+      report("Đã dừng mô phỏng; không có tin hoặc ảnh nào được gửi thật.");
+    });
     form.addEventListener("submit",event=>{
       event.preventDefault();
       if(sending)return;
@@ -108,10 +124,11 @@ export function initComposerGallery():void {
       }
       sending=true;
       send.dataset.composerBusy="true";
-      send.disabled=true;
-      sendIcon.setAttribute("href","./web/icons.svg#ui-icon-stop");
+      refresh();
       report("Đang mô phỏng gửi "+(attached?attached+" ảnh":"nội dung")+". Không kết nối mạng.");
-      window.setTimeout(()=>{
+      pendingTimer=window.setTimeout(()=>{
+        if(pendingTimer!==null)pendingTimers.delete(pendingTimer);
+        pendingTimer=null;
         const entry=create("p");
         entry.textContent="Đã thử: "+(message?message.slice(0,110):"Không có chữ")+
           (attached?" · "+attached+" ảnh":"")+" — chỉ trên bản mẫu.";
@@ -119,14 +136,17 @@ export function initComposerGallery():void {
         while(log.childElementCount>2)log.lastElementChild?.remove();
         text.value="";
         mic.setAttribute("aria-pressed","false");
-        sending=false;send.dataset.composerBusy="false";send.disabled=false;
+        sending=false;send.dataset.composerBusy="false";
         refresh();
         report("Đã mô phỏng xong, không gửi tin nhắn hoặc ảnh thật.");
       },650);
+      pendingTimers.add(pendingTimer);
     });
     refresh();
   }
   window.addEventListener("pagehide",()=>{
+    for(const timer of pendingTimers)window.clearTimeout(timer);
+    pendingTimers.clear();
     for(const url of imageUrls)URL.revokeObjectURL(url);
     imageUrls.clear();
   });
