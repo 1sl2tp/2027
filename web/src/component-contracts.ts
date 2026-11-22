@@ -15,7 +15,7 @@ export const COMPONENT_CONTRACTS:readonly ComponentContract[]=[
  {id:"CHAT-MESSAGE",parent:"CHAT-MESSAGE-LIST",layer:"composition",nature:"container",cardinality:"many",owner:"message template",description:"Một tin nhắn có nhiều phần tùy chọn"},
  {id:"THREAD-JUMP-TO-LATEST",parent:"CHAT-MESSAGE-LIST",layer:"primitive",nature:"control",cardinality:"optional",owner:"ui-button",description:"Một nút tròn mũi tên về cuối, chỉ MessageList điều khiển"},
  {id:"THREAD-JUMP-ICON",parent:"THREAD-JUMP-TO-LATEST",layer:"token",nature:"decoration",cardinality:"one",owner:"web/icons.svg",description:"Arrow down, con của nút, không tự có hành động"},
- {id:"THREAD-UNSEEN-COUNT",parent:"THREAD-JUMP-TO-LATEST",layer:"primitive",nature:"content",cardinality:"optional",owner:"message list state",description:"Badge số tin chưa xem do đúng MessageList tính"}
+ {id:"THREAD-UNSEEN-COUNT",parent:"THREAD-JUMP-TO-LATEST",layer:"primitive",nature:"content",cardinality:"optional",owner:"message list state",description:"Badge số tin chưa xem do đúng MessageList tính"},
  {id:"CHAT-MESSAGE-TEXT",parent:"CHAT-MESSAGE",layer:"primitive",nature:"content",cardinality:"optional",owner:"typography tokens",description:"Chữ legacy; bản tin hỗn hợp dùng MESSAGE-CONTENT-PARTS"},
  {id:"MESSAGE-CONTENT-PARTS",parent:"CHAT-MESSAGE",layer:"composition",nature:"container",cardinality:"one",owner:"message template",description:"Vùng chứa tuần tự nhiều loại nội dung trong cùng một tin"},
  {id:"MESSAGE-TEXT-PART",parent:"MESSAGE-CONTENT-PARTS",layer:"primitive",nature:"content",cardinality:"many",owner:"typography tokens",description:"Mỗi đoạn chữ là một part, 0–n"},
