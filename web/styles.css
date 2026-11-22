@@ -2012,3 +2012,24 @@ body.simple-first .topbar-end{gap:0}
  .simple-font-row{min-height:65px;grid-template-columns:25px minmax(0,1fr) 20px;gap:7px}
  .simple-font-preview{max-width:100%}
 }
+
+
+/* UI-V21 · Section 2 shares the same plain list anatomy as font samples. */
+.simple-multi-kit{margin-top:26px;padding-top:6px}
+.simple-multi-kit h2{font:720 22px/1.35 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+ letter-spacing:-.4px;margin:0 0 6px;color:#181818}
+.simple-multi-preview{display:block;font:400 16px/1.55 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+ color:#171717;white-space:pre-line;overflow-wrap:anywhere}
+.simple-multi-bold{font-weight:700}
+.simple-multi-italic{font-style:italic}
+.simple-multi-underline{text-decoration:underline;text-underline-offset:3px}
+.simple-multi-strike{text-decoration:line-through;text-decoration-color:#666}
+.simple-multi-mixed{display:flex;flex-direction:column;gap:3px}
+.simple-multi-mixed strong{font-weight:700}
+.simple-multi-muted{font-size:13px;color:#707070;line-height:1.5}
+.simple-multi-row{min-height:70px}
+@media(max-width:760px){
+ .simple-multi-kit{margin-top:22px}
+ .simple-multi-kit h2{font-size:20px}
+ .simple-multi-row{padding-top:13px;padding-bottom:13px}
+}
