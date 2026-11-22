@@ -4,74 +4,103 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="2027 UI Library — Trang mẫu font, cỡ chữ, kiểu chữ và màu nền.">
-  <title>2027 · Thư viện UI — Chữ & màu nền</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V03">
-  <script type="module" src="./web/dist/app.js?v=2027-UI-V03"></script>
+  <meta name="description" content="2027 UI Library — Thử màu nền, font, kiểu chữ, thang chữ và kiểm tra tương phản WCAG 2.2 AA.">
+  <title>2027 · Màu nền & Typography · UI V05</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V05">
+  <script type="module" src="./web/dist/app.js?v=2027-UI-V05"></script>
 </head>
-<body data-ui-version="2027-UI-V03">
+<body data-ui-version="2027-UI-V05">
 <div class="app" id="app">
   <header class="topbar">
     <div class="brand"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></div>
-    <div class="topbar-end"><a href="./flows.html" class="flow-return">Ba bộ khung liên thông ↗</a><span class="version">V03</span></div>
+    <div class="topbar-end"><a href="./flows.html" class="flow-return">Ba bộ khung liên thông</a><span class="version">V05</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar" aria-label="Danh mục thư viện">
       <div class="sidebar-group-title">THƯ VIỆN MẪU</div>
       <a class="nav-link active" href="#colors"><span class="nav-numeral">01</span><span>Màu nền</span></a>
       <a class="nav-link" href="#typography"><span class="nav-numeral">02</span><span>Font & kiểu chữ</span></a>
-      <a class="nav-link" href="#preview"><span class="nav-numeral">03</span><span>Khung xem trước</span></a>
+      <a class="nav-link" href="#preview"><span class="nav-numeral">03</span><span>Xem trước</span></a>
+      <a class="nav-link" href="#contrast"><span class="nav-numeral">04</span><span>Kiểm tra tương phản</span></a>
       <div class="sidebar-separator"></div>
       <div class="sidebar-group-title">BỘ KHUNG</div>
-      <a class="nav-link" href="./flows.html#chat/contacts"><span class="nav-numeral">04</span><span>Trò chuyện</span><small>↗</small></a>
-      <a class="nav-link" href="./flows.html#work/summary"><span class="nav-numeral">05</span><span>Công việc</span><small>↗</small></a>
-      <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">06</span><span>Bán hàng</span><small>↗</small></a>
-      <div class="sidebar-footer">Thư viện mẫu · Không dùng dữ liệu thật</div>
+      <a class="nav-link" href="./flows.html#chat/contacts"><span class="nav-numeral">05</span><span>Trò chuyện</span><small>↗</small></a>
+      <a class="nav-link" href="./flows.html#work/summary"><span class="nav-numeral">06</span><span>Công việc</span><small>↗</small></a>
+      <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">07</span><span>Bán hàng</span><small>↗</small></a>
+      <div class="sidebar-footer">UI V05 · Mẫu nền tảng<br>Áp dụng RULE 03: UX-02, 04, 08, 10, 11, 12</div>
     </aside>
     <main class="main" id="main">
       <div class="page-heading">
-        <span class="eyebrow">THƯ VIỆN THIẾT KẾ / MẪU 01</span>
+        <span class="eyebrow">UI LIBRARY / NỀN TẢNG THỊ GIÁC / V05</span>
         <h1>Chữ & màu nền</h1>
-        <p>Chọn font, cỡ chữ, độ đậm và màu nền để so sánh trực tiếp trên cùng một giao diện.</p>
+        <p>Một nơi thử, so sánh và chốt hệ màu, font và phân cấp chữ trước khi xây tiếp các khung Chat, Công việc, Bán hàng.</p>
+        <div class="foundation-facts" aria-label="Thông số nền tảng">
+          <span><b>04</b> bảng màu</span><span><b>04</b> họ font</span><span><b>04</b> mức đậm</span><span><b>AA</b> kiểm tra tương phản</span>
+        </div>
       </div>
       <section id="colors" class="section">
-        <div class="section-heading"><div><span class="section-kicker">01 / MÀU SẮC</span><h2>Màu nền</h2><p>Đổi nền để kiểm tra độ tương phản giữa nền, chữ, đường viền và khối nội dung.</p></div><span class="section-number">01</span></div>
+        <div class="section-heading"><div><span class="section-kicker">01 / BẢNG MÀU</span><h2>Màu nền</h2><p>Bốn sắc độ trung tính, mỗi bảng có vai trò riêng cho nền, thẻ, chữ chính, chữ phụ và đường viền.</p></div><span class="section-number">01</span></div>
         <div class="palette-grid" role="group" aria-label="Chọn bảng màu">
-          <button type="button" class="palette-item selected" data-palette="white" aria-pressed="true"><span class="palette-preview white"><i></i><i></i><i></i></span><span class="palette-name">Trắng tinh</span><code>#FFFFFF</code></button>
-          <button type="button" class="palette-item" data-palette="warm" aria-pressed="false"><span class="palette-preview warm"><i></i><i></i><i></i></span><span class="palette-name">Trắng ấm</span><code>#FAF9F6</code></button>
-          <button type="button" class="palette-item" data-palette="mist" aria-pressed="false"><span class="palette-preview mist"><i></i><i></i><i></i></span><span class="palette-name">Xám dịu</span><code>#F3F4F6</code></button>
-          <button type="button" class="palette-item" data-palette="dark" aria-pressed="false"><span class="palette-preview dark"><i></i><i></i><i></i></span><span class="palette-name">Đen than</span><code>#181818</code></button>
+          <button type="button" class="palette-item selected" data-palette="white" aria-pressed="true">
+            <span class="palette-preview white"><i></i><i></i><i></i></span><span class="palette-name">Trắng tinh</span><code>#FFFFFF</code>
+          </button>
+          <button type="button" class="palette-item" data-palette="warm" aria-pressed="false">
+            <span class="palette-preview warm"><i></i><i></i><i></i></span><span class="palette-name">Trắng ấm</span><code>#FAF9F6</code>
+          </button>
+          <button type="button" class="palette-item" data-palette="mist" aria-pressed="false">
+            <span class="palette-preview mist"><i></i><i></i><i></i></span><span class="palette-name">Xám dịu</span><code>#F3F4F6</code>
+          </button>
+          <button type="button" class="palette-item" data-palette="dark" aria-pressed="false">
+            <span class="palette-preview dark"><i></i><i></i><i></i></span><span class="palette-name">Đen than</span><code>#181818</code>
+          </button>
+        </div>
+        <div class="color-roles">
+          <div class="color-roles-head"><strong>Vai trò màu đang chọn</strong><span id="paletteLabel">Trắng tinh</span></div>
+          <div class="color-roles-grid">
+            <div class="color-role"><span class="role-swatch" id="swatchBackground"></span><span>Nền chính</span><code id="roleBackground">#FFFFFF</code></div>
+            <div class="color-role"><span class="role-swatch" id="swatchSurface"></span><span>Nền thẻ</span><code id="roleSurface">#F7F7F8</code></div>
+            <div class="color-role"><span class="role-swatch" id="swatchInk"></span><span>Chữ chính</span><code id="roleInk">#171717</code></div>
+            <div class="color-role"><span class="role-swatch" id="swatchMuted"></span><span>Chữ phụ</span><code id="roleMuted">#646464</code></div>
+            <div class="color-role"><span class="role-swatch" id="swatchBorder"></span><span>Viền</span><code id="roleBorder">#E0E0E0</code></div>
+          </div>
         </div>
       </section>
       <section id="typography" class="section">
-        <div class="section-heading"><div><span class="section-kicker">02 / TYPOGRAPHY</span><h2>Font & kiểu chữ</h2><p>Thử từng kiểu chữ và quan sát sự khác biệt giữa tiêu đề, nội dung và nhãn phụ.</p></div><span class="section-number">02</span></div>
+        <div class="section-heading"><div><span class="section-kicker">02 / HỆ CHỮ</span><h2>Font & kiểu chữ</h2><p>Thử tiếng Việt có dấu, số tiền và câu dài. Độ lớn, độ đậm, giãn dòng và kiểu nghiêng thay đổi ngay trên bản xem trước.</p></div><span class="section-number">02</span></div>
         <div class="settings-grid">
           <div class="setting-card">
-            <div class="setting-heading"><h3>Họ font</h3><span>Font có sẵn trên thiết bị</span></div>
+            <div class="setting-heading"><h3>Họ font</h3><span>Không tải font bên ngoài</span></div>
             <div class="font-list" role="group" aria-label="Chọn họ font">
-              <button type="button" class="font-choice selected" data-font="system" aria-pressed="true"><strong class="font-system">Aa</strong><span><b>System UI</b><small>Font hệ điều hành</small></span><span class="choice-dot"></span></button>
-              <button type="button" class="font-choice" data-font="arial" aria-pressed="false"><strong class="font-arial">Aa</strong><span><b>Arial</b><small>Sans-serif phổ biến</small></span><span class="choice-dot"></span></button>
-              <button type="button" class="font-choice" data-font="serif" aria-pressed="false"><strong class="font-serif">Aa</strong><span><b>Georgia</b><small>Serif cổ điển</small></span><span class="choice-dot"></span></button>
-              <button type="button" class="font-choice" data-font="mono" aria-pressed="false"><strong class="font-mono">Aa</strong><span><b>Mono</b><small>Chữ đơn cách</small></span><span class="choice-dot"></span></button>
+              <button type="button" class="font-choice selected" data-font="system" aria-pressed="true"><strong class="font-system">Aa</strong><span><b>System UI</b><small>Mặc định hệ điều hành</small></span><span class="choice-dot"></span></button>
+              <button type="button" class="font-choice" data-font="arial" aria-pressed="false"><strong class="font-arial">Aa</strong><span><b>Arial</b><small>Nét đều, dễ đọc</small></span><span class="choice-dot"></span></button>
+              <button type="button" class="font-choice" data-font="serif" aria-pressed="false"><strong class="font-serif">Aa</strong><span><b>Georgia</b><small>Chữ có chân</small></span><span class="choice-dot"></span></button>
+              <button type="button" class="font-choice" data-font="mono" aria-pressed="false"><strong class="font-mono">Aa</strong><span><b>Mono</b><small>Chữ đều độ rộng</small></span><span class="choice-dot"></span></button>
             </div>
+            <div class="font-check"><span>Thử dấu tiếng Việt</span><strong id="fontSample">Đường, sữa, Nguyễn · 1.250.000 đ</strong></div>
           </div>
           <div class="setting-card">
-            <div class="setting-heading"><h3>Thông số chữ</h3><span>Thay đổi trực tiếp</span></div>
-            <div class="slider-setting"><div class="setting-row"><label for="sizeRange">Cỡ chữ nội dung</label><output id="sizeOutput" for="sizeRange">16 px</output></div><input id="sizeRange" type="range" min="13" max="21" value="16" step="1"></div>
+            <div class="setting-heading"><h3>Thông số chữ</h3><span>Điều chỉnh trực tiếp</span></div>
+            <div class="slider-setting"><div class="setting-row"><label for="sizeRange">Cỡ chữ nội dung</label><output id="sizeOutput" for="sizeRange">16 px</output></div><input id="sizeRange" type="range" min="13" max="21" step="1" value="16"></div>
             <div class="slider-setting"><div class="setting-row"><label for="leadingRange">Giãn dòng</label><output id="leadingOutput" for="leadingRange">1.50</output></div><input id="leadingRange" type="range" min="1.2" max="1.9" step="0.05" value="1.5"></div>
-            <div class="setting-row weight-label"><span>Độ đậm nội dung</span><output id="weightOutput">400</output></div>
-            <div class="weight-options" role="group" aria-label="Độ đậm chữ">
+            <div class="slider-setting"><div class="setting-row"><label for="trackingRange">Giãn ký tự</label><output id="trackingOutput" for="trackingRange">0.00 em</output></div><input id="trackingRange" type="range" min="-0.02" max="0.08" step="0.01" value="0"></div>
+            <div class="setting-row weight-label"><span>Độ đậm</span><output id="weightOutput">400</output></div>
+            <div class="weight-options" role="group" aria-label="Chọn độ đậm chữ">
               <button type="button" data-weight="400" class="selected" aria-pressed="true">400</button>
               <button type="button" data-weight="500" aria-pressed="false">500</button>
               <button type="button" data-weight="600" aria-pressed="false">600</button>
               <button type="button" data-weight="700" aria-pressed="false">700</button>
             </div>
-            <div class="control-footnote">Thông số điều chỉnh cho phần xem trước, không thay đổi font của thanh công cụ.</div>
+            <div class="setting-row weight-label"><span>Kiểu dáng</span><output id="styleOutput">Thường</output></div>
+            <div class="weight-options style-options" role="group" aria-label="Chọn kiểu dáng chữ">
+              <button type="button" data-text-style="normal" class="selected" aria-pressed="true">Thường</button>
+              <button type="button" data-text-style="italic" aria-pressed="false"><i>Nghiêng</i></button>
+            </div>
+            <div class="control-footnote">Dòng chữ, các nút và thẻ mẫu dùng cùng họ font; kiểm soát trạng thái theo RULE 03.</div>
           </div>
         </div>
       </section>
       <section id="preview" class="section section-last">
-        <div class="section-heading"><div><span class="section-kicker">03 / XEM TRƯỚC</span><h2>Áp dụng vào giao diện</h2><p>Kiểm tra chữ và màu trên các cấp tiêu đề, văn bản, thẻ và ô nhập.</p></div><span class="section-number">03</span></div>
+        <div class="section-heading"><div><span class="section-kicker">03 / XEM TRƯỚC</span><h2>Thử trên giao diện thật</h2><p>Thang chữ, nội dung, giá tiền, thẻ, nút và ô nhập cùng thay đổi theo bộ chọn.</p></div><span class="section-number">03</span></div>
         <div class="preview-toolbar">
           <div class="segmented" role="group" aria-label="Chiều rộng mô phỏng">
             <button type="button" data-viewport="desktop" class="selected" aria-pressed="true">Rộng</button>
@@ -84,30 +113,48 @@
         <div class="preview-stage">
           <div class="demo-canvas" id="demoCanvas" data-viewport="desktop">
             <div class="demo-shell">
-              <div class="demo-top"><span class="demo-top-title">Mẫu giao diện</span><span class="demo-top-icons" aria-hidden="true">○ &nbsp; ⋯</span></div>
+              <div class="demo-top"><span class="demo-top-title">Thiết kế dùng chung</span><span class="demo-top-icons" aria-hidden="true">○ &nbsp; ⋯</span></div>
               <div class="demo-body">
                 <div class="type-specimens">
                   <div class="specimen-block"><span class="specimen-name">DISPLAY <span id="displaySize">32 px</span></span><div class="sample-display">Thiết kế rõ ràng.</div></div>
                   <div class="specimen-block"><span class="specimen-name">TIÊU ĐỀ <span id="titleSize">24 px</span></span><div class="sample-title">Phân cấp nội dung</div></div>
-                  <div class="specimen-block"><span class="specimen-name">NỘI DUNG <span id="bodySize">16 px</span></span><p class="sample-body">Một giao diện tốt giúp người dùng nhận biết điều quan trọng, đọc dễ dàng và thao tác chính xác trên mọi kích thước màn hình.</p></div>
-                  <div class="specimen-block"><span class="specimen-name">NHÃN PHỤ <span id="captionSize">12 px</span></span><p class="sample-caption">Thông tin bổ sung · Nhãn trạng thái · Thời gian</p></div>
+                  <div class="specimen-block"><span class="specimen-name">NỘI DUNG <span id="bodySize">16 px</span></span><p class="sample-body" id="sampleBodyText">Giao diện tốt giúp người dùng đọc dễ, hiểu nhanh và thao tác chính xác. Sản phẩm 180ml × 12 hộp = 144.000 đ.</p></div>
+                  <div class="specimen-block"><span class="specimen-name">NHÃN PHỤ <span id="captionSize">12 px</span></span><p class="sample-caption">Thông tin bổ sung · Nhãn trạng thái · 08:30</p></div>
+                  <div class="specimen-block"><span class="specimen-name">BẢNG & SỐ</span><div class="sample-item"><span>Sữa hộp 180ml <small>× 12</small></span><strong>144.000 đ</strong></div></div>
                 </div>
                 <div class="component-specimens">
                   <span class="specimen-name">THÀNH PHẦN</span>
                   <div class="sample-card"><span class="sample-card-icon" aria-hidden="true">▤</span><div><strong>Thẻ nội dung</strong><p>Vùng phụ có nền khác biệt nhẹ.</p></div></div>
                   <div class="sample-controls"><button class="sample-primary" type="button" id="sampleButton">Nút chính</button><button class="sample-secondary" type="button" id="sampleSecondary">Nút phụ</button></div>
                   <label class="demo-input-label" for="sampleInput">Ô nhập</label>
-                  <input type="text" id="sampleInput" placeholder="Nhập thử nội dung…" autocomplete="off">
+                  <input type="text" id="sampleInput" placeholder="Nhập thử tiếng Việt…" autocomplete="off">
                   <div class="sample-feedback" id="sampleFeedback" role="status" aria-live="polite"></div>
                 </div>
               </div>
-              <div class="demo-bottom"><span>2027 · UI-V03</span><span id="activeStyleLabel">System UI · 16 px · Trắng tinh</span></div>
+              <div class="demo-bottom"><span>2027 · UI-V05</span><span id="activeStyleLabel">System UI · 16 px · Trắng tinh</span></div>
             </div>
           </div>
         </div>
-        <div class="preview-status"><span class="status-dot"></span><span id="statusText" role="status" aria-live="polite">Thay đổi mẫu trực tiếp. Không kết nối dữ liệu thật.</span></div>
+        <div class="preview-editor">
+          <label for="sampleText">Thử nội dung của bạn</label>
+          <textarea id="sampleText" rows="2" maxlength="360">Giao diện tốt giúp người dùng đọc dễ, hiểu nhanh và thao tác chính xác. Sản phẩm 180ml × 12 hộp = 144.000 đ.</textarea>
+          <span>Tin thử chỉ xuất hiện trong khu vực xem trước; không gửi hoặc lưu lên máy chủ.</span>
+        </div>
+        <div class="preview-status"><span class="status-dot"></span><span id="statusText" role="status" aria-live="polite">Thay đổi được áp dụng vào bản xem trước.</span><span class="saved-state" id="savedStatus">Mẫu mặc định</span></div>
       </section>
-      <footer class="page-footer"><span>2027 UI Library</span><span>Mẫu nền tảng · V03</span></footer>
+      <section id="contrast" class="section">
+        <div class="section-heading"><div><span class="section-kicker">04 / KHẢ NĂNG ĐỌC</span><h2>Kiểm tra tương phản chữ</h2><p>Đo tỷ lệ màu theo công thức WCAG 2.2. Văn bản thường cần tỷ lệ từ 4.5:1; đây là kiểm tra các cặp màu, không phải chứng nhận toàn bộ giao diện.</p></div><span class="section-number">04</span></div>
+        <div class="contrast-card">
+          <div class="contrast-top"><strong id="contrastSummary">4/4 cặp màu đạt AA</strong><span id="contrastPalette">Trắng tinh</span></div>
+          <div class="contrast-grid" id="contrastResults" role="list" aria-label="Kết quả tương phản từng cặp màu"></div>
+          <div class="contrast-foot"><span>WCAG 2.2 · văn bản thường ≥ 4.5:1</span><span>Chưa thay thế kiểm thử toàn bộ UI, kích cỡ chữ và thiết bị thật</span></div>
+        </div>
+        <div class="token-panel">
+          <div><strong>CSS của bộ mẫu hiện tại</strong><span>Biến dùng chung, có thể sao chép để dùng lại</span></div>
+          <pre id="cssPreview" aria-label="Các biến CSS hiện tại"></pre>
+        </div>
+      </section>
+      <footer class="page-footer"><span>2027 UI Library · RULE 03</span><span>Chữ & màu nền · V05</span></footer>
     </main>
   </div>
 </div>
