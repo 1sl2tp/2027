@@ -595,7 +595,7 @@ test("V16 offers 32 unique portable HTML patterns with nine functional groups",(
  assert.equal(examples.length,32);
  assert.equal(new Set(examples.map(x=>x.id)).size,32);
  const groupIds=groups.map(x=>x.id);
- assert.equal(new Set(groupIds).size,8);
+ assert.equal(new Set(groupIds).size,9);
  assert.ok(examples.every(x=>groupIds.includes(x.group)&&x.title&&x.description&&x.html));
  for(const entry of examples){
    assert.ok(!/on(click|submit|load|error)\s*=/i.test(entry.html),entry.id);
