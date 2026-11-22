@@ -11,6 +11,15 @@
 
 
 
+## Bảng linh hoạt 1–8 cột và kiểm kê sáu thư viện GitHub (UI-V33)
+
+**[Mở bảng 1–8 cột trong nhóm Bảng & dữ liệu](https://1sl2tp.github.io/2027/#tableColumnMatrixCard)**. Chọn số cột 1–8, khung mobile 360px hoặc rộng, chế độ tự động/bảng cuộn ngang/thẻ có nhãn, thử sort và sao chép HTML bảng đang xem. Một `COLUMN_SCHEMA` và `SAMPLE_ROWS` dùng cho mọi dạng xem; lớp `ds-table ds-table--schema` bổ sung trong đúng CSS gốc, không thay hóa đơn INV-xx.
+
+- **[Báo cáo đối chiếu từng repo và danh mục còn thiếu](./references/GITHUB_COMPONENT_TABLE_EFFECT_AUDIT_V33.md)**: assistant-ui DataTable/ScrollAnchor/NumberTicker, Vercel Streamdown bảng Markdown/copy/download, LobeHub Streamdown smooth reveal, AI Elements code/tool/plan/test, Apps SDK UI ShimmerText/Animate/AnimateLayout, Lumi-UI chat/composer.
+- Quy tắc xem ở **RULE 09 §9.5** (bảng dữ liệu nhiều cột) và **RULE 11 §11.5** (hiệu ứng/nhóm còn thiếu), không có stylesheet hay RULE khác để vá.
+- Tự chuyển bảng 4+ cột thành thẻ khi vùng xem hẹp; vẫn có thể buộc cuộn ngang để so sánh trên một hàng. Không tự giấu SL/giá/thành tiền. Bảng dùng `scope=col`, `aria-sort`, cột tiền phải/tabular, số lượng giữa, tên và ghi chú trái.
+- Chưa cài DataTable/TanStack/React; đây là bản thử vanilla TypeScript, chưa nghiệm thu iPhone/Android E4/E5 và chưa triển khai CHAT/TAPHOA thật.
+
 ## Mẫu chữ đang tải và Streaming (UI-V32)
 
 **[Mở mục 7 — Chữ đang chạy & trạng thái tải](https://1sl2tp.github.io/2027/#simpleMotion)**: sáu mẫu thử chạy cục bộ (waiting dots, chữ shimmer, skeleton, chữ theo từ + caret, khối nội dung + caret, và vòng đời chờ → streaming → hoàn tất/dừng). Mỗi mẫu có nút Chạy thử/Dừng, không gửi tin thật hay dùng API AI.
