@@ -5,28 +5,28 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027: nguồn GitHub đã đối chiếu và phòng thử thành phần ChatGPT-style trên mobile/desktop.">
-  <title>2027 · Nguồn GitHub & thử mẫu chat · SOURCE-V02</title>
-  <link rel="stylesheet" href="./web/styles.css?v=source-v02">
+  <title>2027 · Nguồn GitHub & thử mẫu chat · SOURCE-V03</title>
+  <link rel="stylesheet" href="./web/styles.css?v=source-v03">
 </head>
 <body class="source-lab">
   <header class="topbar">
     <a class="brand" href="./" aria-label="Về thư viện UI 2027">
       <span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">Nguồn GitHub</span>
     </a>
-    <div class="topbar-end"><a class="flow-return" href="./">Thư viện mẫu ↗</a><a class="flow-return" href="./base.html">Bộ khung ↗</a><span class="version">SOURCE-V02</span></div>
+    <div class="topbar-end"><a class="flow-return" href="./">Thư viện mẫu ↗</a><a class="flow-return" href="./base.html">Bộ khung ↗</a><span class="version">SOURCE-V03</span></div>
   </header>
   <main class="source-main">
     <div class="source-heading">
       <span class="eyebrow">ĐỐI CHIẾU GITHUB · 22/11/2026</span>
       <h1>Chọn nguồn đúng trước khi bổ sung giao diện chat</h1>
-      <p>Chỉ dùng GitHub làm nguồn tham khảo kỹ thuật. Các mẫu bên dưới là HTML/CSS mới của 2027, dùng chung <code>web/styles.css</code>, không sao chép nguyên giao diện hoặc CSS nội bộ ChatGPT. Không cài thư viện runtime, không gửi dữ liệu thật.</p>
+      <p>Đây là thư viện thiết kế độc lập, dựa trên UI/UX và GitHub công khai. CHAT/TAPHOA chỉ làm tài liệu tham chiếu về nghiệp vụ và luồng cũ, không quyết định màu sắc, kích thước, bố cục hoặc CSS của thư viện. Phòng thử dùng chung <code>web/styles.css</code>, không cài thêm thư viện hay gọi API.</p>
     </div>
     <nav class="source-jumps" aria-label="Đến nhóm mẫu">
       <a href="#source-map">Bản đồ nguồn</a><a href="#source-playground">Khung chat</a>
       <a href="#source-message-parts">Tin nhiều nội dung</a><a href="#source-rows">Hàng & bảng</a><a href="#source-media">Ảnh & trạng thái</a><a href="#source-checklist">Tiêu chí nhận mẫu</a>
     </nav>
     <section class="source-section" id="source-map">
-      <div class="source-section-head"><div><span class="eyebrow">01 / NGUỒN MỞ</span><h2>13 nguồn tham khảo, không cài cả bộ</h2></div><span class="source-note">Nguồn ≠ mã giao diện của chatgpt.com</span></div>
+      <div class="source-section-head"><div><span class="eyebrow">01 / NGUỒN MỞ</span><h2>19 nguồn GitHub đã đối chiếu · có đánh giá giấy phép</h2></div><span class="source-note">Nguồn ≠ mã giao diện của chatgpt.com</span></div>
       <div class="source-table-scroll" role="region" tabindex="0" aria-label="Bảng nguồn GitHub, có thể cuộn ngang">
         <table class="source-table">
           <thead><tr><th>Nguồn GitHub</th><th>Vai trò cần học</th><th>Loại / cha áp dụng</th><th>Ứng dụng trong 2027</th><th>Trạng thái</th></tr></thead>
@@ -44,10 +44,16 @@
             <tr><td><a href="https://github.com/vercel/components.build" target="_blank" rel="noopener noreferrer">components.build</a><small>Đặc tả, không phải UI kit</small></td><td>Compound composition, slot và contract</td><td><code>Root → Slots → Primitives</code></td><td>Làm rõ cha trực tiếp, state owner, cardinality trước mỗi lần sửa</td><td><span class="source-tag">Áp dụng nguyên tắc</span></td></tr>
             <tr><td><a href="https://github.com/shadcn-ui/ui" target="_blank" rel="noopener noreferrer">shadcn/ui</a><small>Registry nhiều nền</small></td><td>Mẫu chat scroll và registry Base/Radix/React Aria</td><td><code>MessageList → ScrollBehavior (utility)</code></td><td>Chỉ xem pattern; không nhập trùng Button/Table trong 2027</td><td><span class="source-tag">Tham khảo mới</span></td></tr>
             <tr><td><a href="https://github.com/vercel-labs/ui" target="_blank" rel="noopener noreferrer">Vercel UI SDK</a><small>Beta, điều khoản riêng</small></td><td>Hành vi UI headless &amp; tương tác</td><td><code>Primitive behavior → owner cụ thể</code></td><td>Theo dõi và đánh giá; không dùng dependency beta làm chuẩn hiện tại</td><td><span class="source-tag">Theo dõi</span></td></tr>
+            <tr><td><a href="https://github.com/vercel/streamdown" target="_blank" rel="noopener noreferrer">vercel/streamdown</a><small>Apache-2.0 · packages/streamdown</small></td><td>Incomplete Markdown, code block, bảng trong streaming</td><td><code>MESSAGE-CONTENT-PARTS → Text/Code/Table</code></td><td>Học hiển thị Markdown chưa hoàn tất; chưa nhập React/CSS, kiểm an toàn nội dung và reflow</td><td><span class="source-tag">Ưu tiên nghiên cứu</span></td></tr>
+            <tr><td><a href="https://github.com/chakra-ui/zag" target="_blank" rel="noopener noreferrer">chakra-ui/zag</a><small>MIT</small></td><td>State machine cho menu, popover, combobox, dialog</td><td><code>OverlayRoot / ComposerMenu → trạng thái + focus</code></td><td>Học machine, keyboard, ESC, focus/ARIA; có thể thử core thuần JS nhưng chưa cài</td><td><span class="source-tag">Ưu tiên nghiên cứu</span></td></tr>
+            <tr><td><a href="https://github.com/dip/cmdk" target="_blank" rel="noopener noreferrer">dip/cmdk</a><small>MIT</small></td><td>Command menu/combobox, tìm và điều hướng bàn phím</td><td><code>SearchOverlay / ComposerCommand → Input + Results</code></td><td>Học danh sách kết quả, Up/Down, Enter, Escape; giữ SearchField gốc</td><td><span class="source-tag">Đối chiếu</span></td></tr>
+            <tr><td><a href="https://github.com/bvaughn/react-resizable-panels" target="_blank" rel="noopener noreferrer">bvaughn/react-resizable-panels</a><small>MIT</small></td><td>PanelGroup, Panel, ResizeHandle, keyboard resize</td><td><code>AppShell → Workspace/Region1/2/3</code></td><td>Học desktop resize, min/max và lưu tỉ lệ; mobile do Shell đổi bố cục</td><td><span class="source-tag">Đối chiếu</span></td></tr>
+            <tr><td><a href="https://github.com/petyosi/react-virtuoso" target="_blank" rel="noopener noreferrer">petyosi/react-virtuoso</a><small>Core MIT; Message List thương mại</small></td><td>Danh sách biến chiều cao, prepend và follow new messages</td><td><code>MessageList → Virtualizer utility</code></td><td>Chỉ học hành vi; không nhập @virtuoso.dev/message-list nếu chưa có giấy phép</td><td><span class="source-tag">Hạn chế giấy phép</span></td></tr>
+            <tr><td><a href="https://github.com/emilkowalski/vaul" target="_blank" rel="noopener noreferrer">emilkowalski/vaul</a><small>MIT; README báo không còn duy trì</small></td><td>Drawer/bottom sheet và gestures</td><td><code>OverlayRoot → BottomSheet/Handle/Content</code></td><td>Không chọn làm dependency mới; chỉ tham khảo gesture, không thay Radix/Zag</td><td><span class="source-tag">Không chọn triển khai</span></td></tr>
           </tbody>
         </table>
       </div>
-      <p class="source-note">Ứng dụng thực tế hiện tại dùng TypeScript/DOM và CSS chung. Nhập trực tiếp component React từ các nguồn trên sẽ tăng phụ thuộc và đòi hỏi đổi kiến trúc; chưa được phép xem là đã tích hợp.</p>
+      <p class="source-note">Mã demo hiện là TypeScript/DOM và CSS chung. React component từ các nguồn trên chỉ được nhập sau khi đánh giá kiến trúc, giấy phép, chất lượng và khả năng bảo trì. Core React Virtuoso miễn phí không đồng nghĩa Virtuoso Message List miễn phí; Vaul ghi rõ không bảo trì.</p>
     </section>
 
     <section class="source-section" id="source-playground">
@@ -161,7 +167,7 @@
       </div>
       <p class="source-note">Phòng thử này chỉ xác minh bố cục DOM/CSS và tương tác cục bộ. Nghiệm thu bàn phím, cuộn, zoom ảnh trên thiết bị thật là bước riêng.</p>
     </section>
-    <footer class="page-footer"><span>2027 UI Library · SOURCE-V02</span><span>Không cài package · Không gửi dữ liệu thật</span></footer>
+    <footer class="page-footer"><span>2027 UI Library · SOURCE-V03</span><span>Không cài package · Không gửi dữ liệu thật</span></footer>
   </main>
   <dialog id="sourceDialog" class="source-dialog" aria-labelledby="sourceDialogTitle"><h2 id="sourceDialogTitle">Popup mẫu</h2><p>Kiểm tra vị trí, giới hạn chiều rộng và đóng bằng Escape. Chưa nối nghiệp vụ.</p><div><button type="button" id="sourceDialogClose">Đóng</button></div></dialog>
   <script>

@@ -730,3 +730,14 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 
 
 **V44 chỉnh chuẩn physical Composer:** `#composerForm → #composerShell → #editorWrap → #editor` là DOM CHAT thật; dùng `COMPONENT_PLACEMENTS` để gắn `COMPOSER-INPUT`, `COMPOSER-TOOLBAR`, `COMPOSER-ATTACHMENTS` vào shell vật lý mà không phá canonical Composer trực tiếp trong mẫu 2027. `#composerActionMenu` là popover sibling của form có owner logic Composer; `#threadScrollControl` cũng tách vị trí mount khỏi scroll owner.
+
+### 12.11. V45 — UI/UX có nguồn độc lập, CHAT/TAPHOA chỉ đối chiếu nghiệp vụ
+
+- **Nguồn quyết định UI/UX:** nghiên cứu UX, các nguồn GitHub công khai đã xác minh, các primitive/token/layout hiện hành của thư viện 2027, kiểm chứng thiết bị và khả năng truy cập. Hình thức mới được thay đổi khi có lý do và bằng chứng; không cố sao chép 100% CSS nội bộ ChatGPT vì không phải mã nguồn công khai.
+- **Nguồn hiểu nghiệp vụ:** CHAT/TAPHOA cũ chỉ giúp xác định ý định thao tác, dữ liệu, thứ tự luồng và các trạng thái có thật. `chat-live-map.ts` chỉ là **crosswalk lịch sử** (file/selector), **không phải nguồn thiết kế chuẩn**; không tự bê layout, màu, font, gap, kích thước, breakpoint, workaround CSS vào UI/UX mới.
+- **Tách ba câu hỏi trước khi nhận mẫu:** (1) người dùng làm gì? (business flow), (2) UI/UX tốt nhất ở đâu và vì sao? (source + quality), (3) ai là owner/cha? (Platform/Shell/Region/Component/Control). Không gộp thành một bước.
+- **Nhập đúng phạm vi:** ưu tiên pattern và semantics trước dependency. Giữ một `ui-button`, `ds-table`, `ds-composer`, `SEARCH-FIELD`, `COLUMN_SCHEMA`, `web/icons.svg`. Không nhân bản token/primitive để giống từng repo; một hành vi có một owner.
+- **Đánh giá nguồn:** xác minh repository, giấy phép package cụ thể, bảo trì, khả năng accessibility (focus/keyboard/ARIA/reduced motion), mobile keyboard/scroll, hiệu năng và mức phù hợp TypeScript/DOM. Không coi demo đẹp là bằng chứng sản xuất được.
+- **Chặn nguồn rủi ro:** `@virtuoso.dev/message-list` là thương mại dù React Virtuoso core MIT; `emilkowalski/vaul` README ghi repo không được duy trì, nên không chọn làm dependency mới. Không copy private ChatGPT CSS.
+- **Ưu tiên cập nhật:** MessageContent streaming Markdown (Streamdown); focus/overlay state (Zag/Radix/React Aria); search keyboard (cmdk); vùng desktop (react-resizable-panels); list dài chỉ sau benchmark. Kiểm E0–E5 riêng trước khi chuyển sản phẩm.
+- **Vị trí nguồn:** mục GitHub nằm cuối thư viện chính; phòng thử `github-sources.html` chỉ là bảng đối chiếu và nơi kiểm mẫu. [Audit V45](references/UI_V45_GITHUB_DESIGN_INDEPENDENCE.md).

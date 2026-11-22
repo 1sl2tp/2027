@@ -3025,3 +3025,12 @@ body.simple-first .topbar-end{gap:0}
  .source-lab .top-hint{display:none}
 }
 @media(prefers-reduced-motion:reduce){.source-preview{transition:none}}
+
+/* V45: Source decision prose at the bottom; use inherited tokens, not a new component theme. */
+.github-v45-policy{border-top:1px solid var(--ui-border);margin-top:20px;padding-top:13px;min-width:0}
+.github-v45-policy>summary{cursor:pointer;min-height:40px;display:flex;align-items:center;font:650 13px/1.45 var(--ui-font);color:var(--ui-text)}
+.github-v45-policy-body{padding:0 0 3px 12px;border-left:1px solid var(--ui-border)}
+.github-v45-policy-body p{font:400 12px/1.6 var(--ui-font);color:var(--ui-text-muted);margin:8px 0}
+.github-v45-policy-body strong{color:var(--ui-text)}
+.github-v45-reference-links{margin-top:12px!important}
+.github-v42-group li small a{font:inherit}

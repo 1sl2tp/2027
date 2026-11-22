@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Có ba trang chính và một phòng thử nguồn GitHub:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V44**: thư viện dạng danh sách tối giản như các mẫu font, bổ sung mẫu 4.1 tin nhắn đa nội dung. Bảng gốc vẫn giữ schema 20 cột; mẫu trong tin chỉ sử dụng các cột cần thiết, không tạo bảng gốc thứ hai.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V45**: thư viện dạng danh sách tối giản như các mẫu font, bổ sung mẫu 4.1 tin nhắn đa nội dung. Bảng gốc vẫn giữ schema 20 cột; mẫu trong tin chỉ sử dụng các cột cần thiết, không tạo bảng gốc thứ hai.
 - **[Nguồn GitHub & phòng thử Chat UI](https://1sl2tp.github.io/2027/github-sources.html)** — `github-sources.html`, **SOURCE-V02**: đối chiếu 13 nguồn, phân loại đúng primitive/composition/utility và cha sở hữu; thêm một tin mẫu gồm text, bảng, media và action bar thuộc chính tin đó. [Audit V02](./references/GITHUB_SOURCE_V02_2026-11-22.md), [audit V01](./references/GITHUB_CHAT_UI_SOURCE_LAB_2026-11-22.md).
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
@@ -320,3 +320,7 @@ Mục 6.2 có danh mục icon gốc trong `web/icons.svg` theo owner; mục 7.2 
 
 ## V44 — Đối chiếu cây CHAT thật vào thư viện 2027
 Mục **5.2** đọc từ cùng registry RULE 12, phân vùng **Danh bạ / Header / Hội thoại / Composer / Work / Overlay** và dẫn selector + file nguồn thật tại `1sl2tp/chat`. Phân biệt owner logic và DOM mount, không cài thư viện song song hay sửa dữ liệu CHAT. [Báo cáo](references/UI_V44_CHAT_CODE_CROSSWALK.md).
+
+
+## V45 — GitHub là nền tảng nghiên cứu UI/UX; CHAT/TAPHOA chỉ là nghiệp vụ cũ
+Thư viện mới không kế thừa thẩm mỹ của CHAT/TAPHOA. Mục cuối trang **GitHub hỗ trợ UI/UX ChatGPT** được bổ sung 6 nguồn và chính sách xét mẫu theo nguồn/owner/giấy phép; `github-sources.html` có 19 nguồn được đối chiếu, đánh dấu rủi ro rõ. Xem [quyết định V45](references/UI_V45_GITHUB_DESIGN_INDEPENDENCE.md) và `RULES.md → 12.11`.

@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện giao diện và phân cấp · V44</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V44">
-  <script type="module" src="./web/dist-v44/app.js"></script>
+  <title>2027 · Thư viện UI/UX theo nguồn GitHub · V45</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V45">
+  <script type="module" src="./web/dist-v45/app.js"></script>
 </head>
-<body data-ui-version="2027-UI-V44" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V45" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V44</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V45</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
@@ -48,7 +48,7 @@
       <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">13</span><span>Bán hàng</span><small>↗</small></a>
       <div class="sidebar-separator"></div>
       <a class="nav-link" href="#githubSourcesV42"><span class="nav-numeral">GH</span><span>Nguồn GitHub · cuối trang</span></a>
-      <div class="sidebar-footer">UI-V44 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
+      <div class="sidebar-footer">UI-V45 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
     </aside>
     <main class="main studio-main" id="main">
       <section class="simple-kit" id="simpleKit" aria-labelledby="simpleKitTitle">
@@ -1025,8 +1025,8 @@
       </section>
       <section class="github-v42-sources" id="githubSourcesV42" aria-labelledby="githubSourcesV42Title">
         <span class="eyebrow">NGUỒN THAM KHẢO · CUỐI THƯ VIỆN</span>
-        <h2 id="githubSourcesV42Title">GitHub hỗ trợ UI/UX ChatGPT</h2>
-        <p>Chỉ dùng mẫu công khai để học cấu trúc cha → con, trạng thái và hành vi. Đây không phải CSS nội bộ của ChatGPT; không tự cài dependency vào 2027.</p>
+        <h2 id="githubSourcesV42Title">GitHub hỗ trợ UI/UX ChatGPT · Rà soát V45</h2>
+        <p>Thư viện chọn phương án theo chất lượng UI/UX, khả năng tiếp cận, hiệu năng và cấu trúc cha → con. <strong>CHAT/TAPHOA chỉ dùng để hiểu luồng nghiệp vụ cũ</strong>; không lấy màu, gap, vị trí nút hay CSS cũ làm chuẩn thẩm mỹ. GitHub là nguồn kỹ thuật công khai, không phải CSS nội bộ của ChatGPT.</p>
         <div class="github-v42-groups">
           <div class="github-v42-group"><h3>01 · Bố cục và tin nhắn</h3><ul>
             <li><a href="https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/examples/chatgpt.mdx" target="_blank" rel="noopener noreferrer">assistant-ui · ChatGPT example</a><small>Thread → Message/Composer, shell và vùng nội dung</small></li>
@@ -1045,10 +1045,31 @@
             <li><a href="https://github.com/openai/apps-sdk-ui" target="_blank" rel="noopener noreferrer">OpenAI Apps SDK UI</a><small>Button/Input/Textarea public primitives, không phải CSS ChatGPT</small></li>
             <li><a href="https://github.com/lucide-icons/lucide" target="_blank" rel="noopener noreferrer">Lucide</a><small>Kho SVG icon nguồn mở; tham khảo hệ nét và kích thước, không cài thêm framework</small></li>
           </ul></div>
-        </div>
-        <p><a href="./github-sources.html">Phòng thử nguồn GitHub</a> · <a href="https://github.com/1sl2tp/2027/blob/main/references/UI_V42_GITHUB_SOURCES.md" target="_blank" rel="noopener noreferrer">Nhật ký nguồn V42</a></p>
+                    <div class="github-v42-group"><h3>04 · Hiển thị nội dung đang sinh</h3><ul>
+            <li><a href="https://github.com/vercel/streamdown" target="_blank" rel="noopener noreferrer">Streamdown</a><small>Markdown chưa hoàn chỉnh, code/table khi streaming; owner: MessageContent. Nghiên cứu ưu tiên, chưa cài React.</small></li>
+          </ul></div>
+          <div class="github-v42-group"><h3>05 · Tương tác và bố cục</h3><ul>
+            <li><a href="https://github.com/chakra-ui/zag" target="_blank" rel="noopener noreferrer">Zag</a><small>State machine cho menu/popover/focus, ưu tiên học hành vi.</small></li>
+            <li><a href="https://github.com/dip/cmdk" target="_blank" rel="noopener noreferrer">cmdk</a><small>Input + Results + điều hướng phím; thuộc SearchOverlay/CommandMenu.</small></li>
+            <li><a href="https://github.com/bvaughn/react-resizable-panels" target="_blank" rel="noopener noreferrer">react-resizable-panels</a><small>Desktop 3 vùng, vùng chia kéo được; Shell là cha quản lý.</small></li>
+          </ul></div>
+          <div class="github-v42-group"><h3>06 · Tham khảo có hạn chế</h3><ul>
+            <li><a href="https://github.com/petyosi/react-virtuoso" target="_blank" rel="noopener noreferrer">React Virtuoso</a><small>Core MIT; <a href="https://virtuoso.dev/message-list/licensing/" target="_blank" rel="noopener noreferrer">Virtuoso Message List cần giấy phép thương mại</a>. Không nhập bản Message List.</small></li>
+            <li><a href="https://github.com/emilkowalski/vaul" target="_blank" rel="noopener noreferrer">Vaul</a><small>Kho đã ghi ngừng bảo trì; chỉ xem cử chỉ BottomSheet, không chọn dependency mới.</small></li>
+          </ul></div>
+</div>
+        <details class="github-v45-policy" open>
+          <summary>Nguyên tắc chọn mẫu UI/UX · không rập khuôn CHAT/TAPHOA</summary>
+          <div class="github-v45-policy-body">
+            <p><strong>Thiết kế:</strong> dựa trên chuẩn UI/UX, mẫu GitHub phù hợp, thử trên mobile/desktop và khả năng đọc–chạm–focus. Chỉ đưa mẫu tốt nhất vào primitive hiện có.</p>
+            <p><strong>Nghiệp vụ:</strong> CHAT/TAPHOA chỉ trả lời người dùng làm gì, dữ liệu nào, trình tự nào, có trạng thái nào. Không chép màu, viền, khoảng cách hay lối bố cục cũ.</p>
+            <p><strong>Kiến trúc:</strong> P0 Platform → P1 Shell → P2 Region → P3 Component → P4 Control; một owner cho scroll, focus, menu và trạng thái. Không dựng button, input, bảng hoặc icon thứ hai.</p>
+            <p><strong>Giấy phép & chất lượng:</strong> ưu tiên nguồn được bảo trì, có keyboard/ARIA, có giấy phép rõ và thực sự hợp công nghệ. Không cài chỉ vì giao diện nhìn đẹp.</p>
+          </div>
+        </details>
+        <p class="github-v45-reference-links"><a href="./github-sources.html#source-map">Xem bảng 19 nguồn GitHub</a> · <a href="https://github.com/1sl2tp/2027/blob/main/references/UI_V45_GITHUB_DESIGN_INDEPENDENCE.md" target="_blank" rel="noopener noreferrer">Quyết định nguồn và thứ tự ưu tiên V45</a></p>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V44</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V45</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>
