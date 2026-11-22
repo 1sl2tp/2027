@@ -44,9 +44,12 @@ function previewField(item:FieldSample):HTMLElement{
   case "pill":shell.classList.add("simple-field-shell-pill");
     add(textInput("text","Nhập nội dung","Ô bo tròn mẫu"));break;
   case "search":{
+    shell.dataset.uiComponent="SEARCH-FIELD";shell.dataset.uiLayer="composition";
     const prefix=document.createElement("span");prefix.className="simple-field-adornment";
     prefix.textContent="⌕";prefix.setAttribute("aria-hidden","true");
-    add(prefix,textInput("search","Tìm sản phẩm…","Tìm kiếm sản phẩm mẫu"));break;
+    const search=textInput("search","Tìm sản phẩm…","Tìm kiếm sản phẩm mẫu");
+    search.dataset.uiComponent="SEARCH-INPUT";search.dataset.uiLayer="primitive";
+    add(prefix,search);break;
   }
   case "clear":{
     const input=textInput("text","Nhập nội dung","Ô nhập có nút xóa mẫu");
@@ -86,9 +89,11 @@ function previewField(item:FieldSample):HTMLElement{
     });add(input,unit);break;
   }
   case "quantity":{
+    shell.dataset.uiComponent="QUANTITY-STEPPER";shell.dataset.uiLayer="composition";
     const minus=smallButton("Giảm số lượng","−");
     const number=textInput("text","","Số lượng mẫu");number.inputMode="numeric";
     number.classList.add("simple-field-quantity-input");number.value="12";
+    number.dataset.uiComponent="QUANTITY-VALUE";number.dataset.uiLayer="primitive";
     const plus=smallButton("Tăng số lượng","+");
     const sanitize=()=>{const digits=onlyDigits(number.value);number.value=digits?String(Math.min(999999,Number(digits))):"0";};
     number.addEventListener("input",sanitize);
