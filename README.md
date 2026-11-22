@@ -12,6 +12,10 @@
 
 Ảnh lỗi từ Safari cho thấy khi chọn số lượng ở mẫu số 01 và số 05, viền xanh `input:focus-visible` xuất hiện **bên trong** nhóm `− | số | +`, che đường phân cách và tạo hiệu ứng đứt viền. V08 sửa tận gốc tại **`web/styles.css` dùng chung**: nhóm có một viền focus bao quanh toàn khối, ô nhập số bên trong không còn outline/shadow riêng; hai nút −/+ trong nhóm cũng dùng dấu focus của nhóm. Input chữ có icon và tìm kiếm dùng cùng quy tắc; input đơn lẻ và các ô rời vẫn hiển thị focus quanh chính ô đó để phục vụ điều hướng bàn phím. Chuẩn hóa `appearance: textfield` trên Safari. Không thay đổi tính toán số lượng, dữ liệu hoặc app production.
 
+## Tham chiếu ChatGPT từ Google Drive
+
+[Đối chiếu ảnh hiện tại với thư viện CSS đã lưu tháng 9/2026](./references/CHATGPT_UI_SOURCE_AUDIT_2026-11-22.md): có nguồn, bảng màu, thang chữ, spacing, shell, composer, icon, bảng, menu và quy tắc đối chiếu ảnh tiếp theo. Đây là tài liệu phân tích, **chưa tự ý áp lại toàn bộ giao diện demo hoặc CHAT production**.
+
 ## Bộ sưu tập biến thể thành phần UI-V07
 
 Tập trung xây dựng các mẫu **so sánh song song** trên trang chính; không thay thế luồng nghiệp vụ V04.
