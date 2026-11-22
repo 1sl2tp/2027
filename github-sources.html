@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="2027: nguồn GitHub đã đối chiếu và phòng thử thành phần ChatGPT-style trên mobile/desktop.">
+  <title>2027 · Nguồn GitHub & thử mẫu chat · SOURCE-V01</title>
+  <link rel="stylesheet" href="./web/styles.css?v=source-v01">
+</head>
+<body class="source-lab">
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Về thư viện UI 2027">
+      <span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">Nguồn GitHub</span>
+    </a>
+    <div class="topbar-end"><a class="flow-return" href="./">Thư viện mẫu ↗</a><a class="flow-return" href="./base.html">Bộ khung ↗</a><span class="version">SOURCE-V01</span></div>
+  </header>
+  <main class="source-main">
+    <div class="source-heading">
+      <span class="eyebrow">ĐỐI CHIẾU GITHUB · 22/11/2026</span>
+      <h1>Chọn nguồn đúng trước khi bổ sung giao diện chat</h1>
+      <p>Chỉ dùng GitHub làm nguồn tham khảo kỹ thuật. Các mẫu bên dưới là HTML/CSS mới của 2027, dùng chung <code>web/styles.css</code>, không sao chép nguyên giao diện hoặc CSS nội bộ ChatGPT. Không cài thư viện runtime, không gửi dữ liệu thật.</p>
+    </div>
+    <nav class="source-jumps" aria-label="Đến nhóm mẫu">
+      <a href="#source-map">Bản đồ nguồn</a><a href="#source-playground">Khung chat</a>
+      <a href="#source-rows">Hàng & bảng</a><a href="#source-media">Ảnh & trạng thái</a><a href="#source-checklist">Tiêu chí nhận mẫu</a>
+    </nav>
+    <section class="source-section" id="source-map">
+      <div class="source-section-head"><div><span class="eyebrow">01 / NGUỒN MỞ</span><h2>8 nguồn tham khảo, không cài cả bộ</h2></div><span class="source-note">Nguồn ≠ mã giao diện của chatgpt.com</span></div>
+      <div class="source-table-scroll" role="region" tabindex="0" aria-label="Bảng nguồn GitHub, có thể cuộn ngang">
+        <table class="source-table">
+          <thead><tr><th>Nguồn GitHub</th><th>Vai trò cần học</th><th>Ứng dụng trong 2027</th><th>Trạng thái</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://github.com/openai/apps-sdk-ui" target="_blank" rel="noopener noreferrer">OpenAI Apps SDK UI</a><small>MIT</small></td><td>Input, textarea, button, token</td><td>Chuẩn viền/focus/disabled, font ≥16px khi nhập trên iOS</td><td><span class="source-tag">Tham khảo</span></td></tr>
+            <tr><td><a href="https://github.com/assistant-ui/assistant-ui" target="_blank" rel="noopener noreferrer">assistant-ui</a><small>MIT</small></td><td>Thread, composer, message actions</td><td>Thứ bậc khung chat; chỉ cân nhắc adapter nếu đổi sang React</td><td><span class="source-tag">Tham khảo</span></td></tr>
+            <tr><td><a href="https://github.com/vercel/ai-elements" target="_blank" rel="noopener noreferrer">Vercel AI Elements</a><small>Apache-2.0</small></td><td>Message, attachment, reasoning</td><td>Kiểu hiển thị phản hồi; không kéo cả AI SDK vào app chat</td><td><span class="source-tag">Tham khảo</span></td></tr>
+            <tr><td><a href="https://github.com/radix-ui/primitives" target="_blank" rel="noopener noreferrer">Radix Primitives</a><small>MIT</small></td><td>Dialog, menu, focus, keyboard</td><td>Hợp đồng hành vi cho popup cấp 1–4</td><td><span class="source-tag">Tham khảo</span></td></tr>
+            <tr><td><a href="https://github.com/floating-ui/floating-ui" target="_blank" rel="noopener noreferrer">Floating UI</a><small>MIT</small></td><td>Định vị popover/tooltip</td><td>Chỉ cân nhắc nếu menu khó xử lý tràn cạnh màn</td><td><span class="source-tag">Đánh giá</span></td></tr>
+            <tr><td><a href="https://github.com/TanStack/virtual" target="_blank" rel="noopener noreferrer">TanStack Virtual</a><small>MIT</small></td><td>Danh sách rất dài</td><td>Chỉ thử khi log cho thấy nghẽn render danh bạ/tin nhắn</td><td><span class="source-tag">Đánh giá</span></td></tr>
+            <tr><td><a href="https://github.com/lucide-icons/lucide" target="_blank" rel="noopener noreferrer">Lucide</a><small>ISC</small></td><td>Icon SVG nhất quán</td><td>So sánh rồi đưa icon cần dùng vào <code>web/icons.svg</code></td><td><span class="source-tag">Tham khảo</span></td></tr>
+            <tr><td><a href="https://github.com/Andarist/react-textarea-autosize" target="_blank" rel="noopener noreferrer">react-textarea-autosize</a><small>Kiểm tra license khi tích hợp</small></td><td>Ô gõ nhiều dòng tự tăng chiều cao</td><td>Học cơ chế đo chiều cao; 2027 giữ textarea thuần</td><td><span class="source-tag">Đánh giá</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note">Ứng dụng thực tế hiện tại dùng TypeScript/DOM và CSS chung. Nhập trực tiếp component React từ các nguồn trên sẽ tăng phụ thuộc và đòi hỏi đổi kiến trúc; chưa được phép xem là đã tích hợp.</p>
+    </section>
+
+    <section class="source-section" id="source-playground">
+      <div class="source-section-head"><div><span class="eyebrow">02 / THỬ BỐ CỤC</span><h2>Khung chat, ô gõ và bàn phím</h2></div><span class="source-note">Mô phỏng cục bộ, không phải kiểm thử bàn phím thật</span></div>
+      <div class="source-controls" role="group" aria-label="Kích thước và bàn phím mô phỏng">
+        <button type="button" class="source-toggle" data-size="mobile" aria-pressed="true">Mobile 390</button>
+        <button type="button" class="source-toggle" data-size="desktop" aria-pressed="false">Rộng</button>
+        <button type="button" class="source-toggle" id="sourceKeyboardButton" aria-pressed="false">Mô phỏng bàn phím</button>
+      </div>
+      <div class="source-preview-wrap">
+        <div class="source-preview is-mobile" id="sourcePreview">
+          <div class="source-shell-head"><button type="button" class="source-icon-button" aria-label="Quay lại danh bạ" id="sourceBackButton">‹</button><div class="source-identity"><span class="source-avatar" aria-hidden="true">A</span><span><strong>Khách hàng mẫu</strong><small>Đang xem hội thoại</small></span></div><button class="source-icon-button" type="button" aria-label="Tùy chọn cuộc trò chuyện" id="sourceOptionsButton">⋯</button></div>
+          <div class="source-thread" id="sourceThread" role="region" aria-label="Nội dung hội thoại mẫu">
+            <div class="source-date">Hôm nay</div>
+            <p class="source-message source-incoming">Cho mình kiểm tra hàng và số lượng hôm nay nhé.</p>
+            <p class="source-message source-outgoing">Mình gửi danh sách để bạn soát.</p>
+            <div class="source-response"><strong>Đơn tổng hợp</strong><p>Tên sản phẩm giữ nguyên; số lượng được tách thành cột và không tự suy diễn từ ghi chú.</p><div class="source-microtable"><span>Sữa hộp</span><b>12</b><span>Bánh quy</span><b>3</b></div></div>
+            <p class="source-message source-incoming">Có thể bổ sung sau, mình sẽ kiểm tra lại.</p>
+          </div>
+          <form class="source-composer" id="sourceComposer">
+            <button class="source-icon-button" type="button" aria-label="Thử nút đính kèm" id="sourceAttachButton">+</button>
+            <label class="source-compose-label"><span class="source-sr-only">Nội dung mẫu</span><textarea id="sourceText" rows="1" placeholder="Nhập nội dung…" maxlength="600" aria-label="Nội dung mẫu"></textarea></label>
+            <button class="source-icon-button source-send" type="submit" aria-label="Hiển thị tin nhắn mẫu">↑</button>
+          </form>
+          <div class="source-fake-keyboard" aria-hidden="true"><div class="source-key-row">Q W E R T Y U I O P</div><div class="source-key-row">A S D F G H J K L</div><div class="source-key-row">⇧ Z X C V B N M ⌫</div><div class="source-key-row"><span>123</span><span>Khoảng trắng</span><span>Xong</span></div></div>
+        </div>
+      </div>
+      <p class="source-feedback" id="sourceFeedback" aria-live="polite">Thử chế độ Mobile/Rộng, bật bàn phím giả lập hoặc nhập nội dung. Ô nhập dùng một viền ngoài; textarea bên trong không tự có viền thứ hai.</p>
+      <div class="source-detail-grid">
+        <div class="source-mini-card"><strong>01 · Một chủ sở hữu cuộn</strong><p>Thread cuộn; header và composer giữ vị trí. Không ép toàn bộ trang cuộn theo nội dung khi có bàn phím.</p></div>
+        <div class="source-mini-card"><strong>02 · Một viền input</strong><p>Nhóm composer chịu trách nhiệm border, radius, focus. Textarea con không dùng border/outline riêng.</p></div>
+        <div class="source-mini-card"><strong>03 · Ảnh và số linh hoạt</strong><p>Vùng tên dùng <code>min-width:0</code>; số lượng và thời gian có cột riêng, không bị ép xuống bởi chữ dài.</p></div>
+      </div>
+    </section>
+
+    <section class="source-section" id="source-rows">
+      <div class="source-section-head"><div><span class="eyebrow">03 / HÌNH HỌC</span><h2>Hàng 1–4 dòng và bảng có trục</h2></div></div>
+      <div class="source-detail-grid">
+        <div class="source-mini-card"><strong>Danh bạ: một dòng</strong><div class="source-contact"><span class="source-avatar">B</span><span class="source-contact-copy"><b>Khách B</b></span><span class="source-trail">18:30</span></div></div>
+        <div class="source-mini-card"><strong>Danh bạ: hai dòng</strong><div class="source-contact"><span class="source-avatar">C</span><span class="source-contact-copy"><b>Khách C</b><small>Tên hàng và số lượng gần nhất</small></span><span class="source-trail">3</span></div></div>
+        <div class="source-mini-card"><strong>Ba–bốn dòng</strong><div class="source-contact"><span class="source-avatar">D</span><span class="source-contact-copy"><b>Khách D - Hội thoại sản phẩm rất dài</b><small>Đơn hàng giao theo nhiều đợt, có bổ sung sau.</small><small>Đang kiểm tra lại</small></span><span class="source-trail">09:40</span></div></div>
+      </div>
+      <div class="source-table-scroll" role="region" tabindex="0" aria-label="Bảng có thể cuộn ngang trên màn nhỏ">
+        <table class="source-table source-data-table"><thead><tr><th>STT</th><th>Tên hàng</th><th>SL</th><th>Đơn giá</th><th>Thành tiền</th></tr></thead><tbody><tr><td>1</td><td>Sữa hộp</td><td>12</td><td>12.000</td><td>144.000</td></tr><tr><td>2</td><td>Bánh quy bơ</td><td>3</td><td>26.000</td><td>78.000</td></tr><tr><td colspan="4"><strong>Tổng cộng</strong></td><td><strong>222.000</strong></td></tr></tbody></table>
+      </div>
+      <p class="source-note">Mẫu dữ liệu minh họa: STT/SL căn giữa, tên căn trái, tiền căn phải bằng chữ số tabular. Không thay bảng bằng các card rời nếu người dùng cần đối chiếu theo cột.</p>
+    </section>
+
+    <section class="source-section" id="source-media">
+      <div class="source-section-head"><div><span class="eyebrow">04 / MEDIA & OVERLAY</span><h2>Ảnh, trạng thái và menu</h2></div></div>
+      <div class="source-controls"><label for="sourceImageCount">Số ảnh trong tin</label><select id="sourceImageCount" aria-label="Chọn số ảnh mẫu"><option value="1">1 ảnh</option><option value="2">2 ảnh</option><option value="3">3 ảnh</option><option value="4" selected>4 ảnh</option></select><button class="source-toggle" id="sourceDialogOpen" type="button">Mở popup mẫu</button></div>
+      <div class="source-media-grid" data-count="4" id="sourceMediaGrid" role="group" aria-label="Lưới ảnh mẫu">
+        <div>Ảnh 1</div><div>Ảnh 2</div><div>Ảnh 3</div><div>Ảnh 4</div>
+      </div>
+      <div class="source-detail-grid">
+        <div class="source-mini-card"><strong>Tin chờ gửi</strong><p><span class="source-state">◌</span> Hiển thị trạng thái một lần, không quay vô hạn.</p></div>
+        <div class="source-mini-card"><strong>Tin đã gửi</strong><p><span class="source-state">✓</span> Metadata không chiếm hàng riêng khi không cần.</p></div>
+        <div class="source-mini-card"><strong>Menu phụ</strong><details class="source-menu"><summary>⋯ Thao tác mẫu</summary><div><button type="button" data-source-menu="Sao chép">Sao chép</button><button type="button" data-source-menu="Chuyển tiếp">Chuyển tiếp</button><button type="button" data-source-menu="Đóng">Đóng</button></div></details></div>
+      </div>
+    </section>
+    <section class="source-section" id="source-checklist">
+      <div class="source-section-head"><div><span class="eyebrow">05 / ĐIỀU KIỆN TÍCH HỢP</span><h2>Chỉ chọn một mẫu khi đạt đủ tiêu chí</h2></div></div>
+      <div class="source-checks">
+        <div><strong>Hình học</strong><span>1–4 dòng, chữ dài, icon trái/giữa/phải, gap 4px, số tiền thẳng cột</span></div>
+        <div><strong>Input</strong><span>Viền và focus thống nhất, iOS font 16px, không rung khi tự tăng cao</span></div>
+        <div><strong>Mobile</strong><span>Safe-area, bàn phím thật, portrait/landscape, Safari/Chrome, PWA/APK</span></div>
+        <div><strong>Overlay</strong><span>Escape, focus, nút đóng, không tràn mép, không chặn thao tác nền sai cách</span></div>
+        <div><strong>Hiệu năng</strong><span>Không lắp thư viện React chỉ để có một ô input; đo trước và sau</span></div>
+        <div><strong>An toàn</strong><span>Không gửi tin thật, không thay dữ liệu, không chạm CHAT/TAPHOA production</span></div>
+      </div>
+      <p class="source-note">Phòng thử này chỉ xác minh bố cục DOM/CSS và tương tác cục bộ. Nghiệm thu bàn phím, cuộn, zoom ảnh trên thiết bị thật là bước riêng.</p>
+    </section>
+    <footer class="page-footer"><span>2027 UI Library · SOURCE-V01</span><span>Không cài package · Không gửi dữ liệu thật</span></footer>
+  </main>
+  <dialog id="sourceDialog" class="source-dialog" aria-labelledby="sourceDialogTitle"><h2 id="sourceDialogTitle">Popup mẫu</h2><p>Kiểm tra vị trí, giới hạn chiều rộng và đóng bằng Escape. Chưa nối nghiệp vụ.</p><div><button type="button" id="sourceDialogClose">Đóng</button></div></dialog>
+  <script>
+  (() => {
+    const preview=document.getElementById('sourcePreview'), feedback=document.getElementById('sourceFeedback');
+    const keyboard=document.getElementById('sourceKeyboardButton'), text=document.getElementById('sourceText');
+    const thread=document.getElementById('sourceThread');
+    const say=(message)=>{ feedback.textContent=message; };
+    document.querySelectorAll('[data-size]').forEach(button=>button.addEventListener('click',()=>{
+      const mobile=button.dataset.size==='mobile';
+      preview.classList.toggle('is-mobile',mobile);preview.classList.toggle('is-desktop',!mobile);
+      document.querySelectorAll('[data-size]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+      say(mobile?'Đã chọn khung mobile 390px.':'Đã chọn khung rộng. Nội dung vẫn chỉ có một vùng cuộn.');
+    }));
+    keyboard.addEventListener('click',()=>{
+      const on=preview.classList.toggle('is-keyboard');
+      keyboard.setAttribute('aria-pressed',String(on));
+      say(on?'Bàn phím minh họa đang mở. Thread thu hẹp; composer giữ vị trí.':'Đã đóng bàn phím minh họa.');
+    });
+    text.addEventListener('input',()=>{text.style.height='auto';text.style.height=Math.min(text.scrollHeight,144)+'px';});
+    document.getElementById('sourceComposer').addEventListener('submit',(event)=>{
+      event.preventDefault();const value=text.value.trim();if(!value){say('Chưa có nội dung mẫu.');return;}
+      const p=document.createElement('p');p.className='source-message source-outgoing';p.textContent=value;
+      thread.appendChild(p);thread.scrollTop=thread.scrollHeight;text.value='';text.style.height='auto';
+      say('Chỉ thêm tin vào phòng thử tại chỗ. Không gửi lên máy chủ.');
+    });
+    document.getElementById('sourceImageCount').addEventListener('change',(event)=>{
+      const count=Number(event.target.value),grid=document.getElementById('sourceMediaGrid');
+      grid.dataset.count=String(count);Array.from(grid.children).forEach((child,index)=>{child.hidden=index>=count;});
+    });
+    const dialog=document.getElementById('sourceDialog');
+    document.getElementById('sourceDialogOpen').addEventListener('click',()=>dialog.showModal());
+    document.getElementById('sourceDialogClose').addEventListener('click',()=>dialog.close());
+    document.getElementById('sourceBackButton').addEventListener('click',()=>say('Nút quay lại chỉ là mô phỏng, không rời trang.'));
+    document.getElementById('sourceOptionsButton').addEventListener('click',()=>say('Xem menu phụ ở phần 04 để thử thao tác.'));
+    document.getElementById('sourceAttachButton').addEventListener('click',()=>say('Chưa chọn ảnh hoặc tải tệp; đây là mô phỏng.'));
+    document.querySelectorAll('[data-source-menu]').forEach(button=>button.addEventListener('click',()=>{
+      say('Đã thử thao tác '+button.dataset.sourceMenu+' tại chỗ, không thực hiện nghiệp vụ.');
+      const details=button.closest('details');if(details)details.open=false;
+    }));
+  })();
+  </script>
+</body>
+</html>
