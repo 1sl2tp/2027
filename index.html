@@ -5,19 +5,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện UI/UX theo nguồn GitHub · V45</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V45">
-  <script type="module" src="./web/dist-v45/app.js"></script>
+  <title>2027 · Thư viện UI/UX gốc độc lập · V46</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V46">
+  <script type="module" src="./web/dist-v46/app.js"></script>
 </head>
-<body data-ui-version="2027-UI-V45" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V46" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V45</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V46</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
+      <div class="sidebar-group-title">THƯ VIỆN MẸ</div>
+      <a class="nav-link" href="#masterLibraryV46"><span class="nav-numeral">00</span><span>V46 · Mẫu mới 100%</span></a>
       <div class="sidebar-group-title">MẪU CHỮ</div>
       <a class="nav-link active" href="#simpleKit"><span class="nav-numeral">00</span><span>1. Cỡ chữ, font</span></a>
       <a class="nav-link" href="#simpleMultiline"><span class="nav-numeral">02</span><span>2. Nhiều dòng, kiểu chữ</span></a>
@@ -48,9 +50,26 @@
       <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">13</span><span>Bán hàng</span><small>↗</small></a>
       <div class="sidebar-separator"></div>
       <a class="nav-link" href="#githubSourcesV42"><span class="nav-numeral">GH</span><span>Nguồn GitHub · cuối trang</span></a>
-      <div class="sidebar-footer">UI-V45 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
+      <div class="sidebar-footer">UI-V46 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
     </aside>
     <main class="main studio-main" id="main">
+      <section class="master-v46" id="masterLibraryV46" aria-labelledby="masterV46Title">
+        <div class="master-v46-head">
+          <span class="eyebrow">UI LIBRARY · MASTER CONTRACT</span>
+          <h1 id="masterV46Title">V46 · Thư viện cha, thiết kế mới 100%</h1>
+          <p><strong>2027 là nguồn thiết kế duy nhất.</strong> Không tái sử dụng mã, CSS, component hay bố cục từ CHAT/TAPHOA cũ. Hai dự án ấy chỉ gợi ý nghiệp vụ cần có; còn UI/UX được xây mới từ nguyên tắc thiết kế và các nguồn GitHub đã nghiên cứu.</p>
+        </div>
+        <div class="master-v46-modes" role="group" aria-label="Chọn dạng màn hình từ cùng thư viện cha">
+          <button type="button" class="ui-button ui-button--secondary" data-master-v46-mode="chat" aria-pressed="true">Trò chuyện</button>
+          <button type="button" class="ui-button ui-button--secondary" data-master-v46-mode="sales" aria-pressed="false">Bán hàng</button>
+          <button type="button" class="ui-button ui-button--secondary" data-master-v46-mode="work" aria-pressed="false">Công việc</button>
+          <button type="button" class="ui-button ui-button--secondary" data-master-v46-mode="report" aria-pressed="false">Báo cáo</button>
+        </div>
+        <p id="masterV46Path" class="master-v46-path" aria-label="Cây cha con của màn mẫu"></p>
+        <div id="masterV46Preview" class="master-v46-preview"></div>
+        <p id="masterV46Status" class="master-v46-status" role="status" aria-live="polite"></p>
+        <p class="master-v46-note">Mọi nội dung đều là dữ liệu mẫu cục bộ, không dùng tài khoản, khách hàng hoặc API của ứng dụng cũ. Bộ <code>ui-button</code>, <code>ds-composer</code>, <code>ds-qty</code>, <code>ds-table</code>, icon và schema cột đều thuộc thư viện 2027.</p>
+      </section>
       <section class="simple-kit" id="simpleKit" aria-labelledby="simpleKitTitle">
         <h1 id="simpleKitTitle">1. Cỡ chữ, font</h1>
         <p class="simple-font-intro">Cỡ chữ đối chiếu từ bản HTML ChatGPT đã lưu. Chạm vào dòng để chọn.</p>
@@ -98,27 +117,7 @@
           <div id="componentContractTree" aria-label="Cây cấu trúc thành phần có phân cấp và chủ sở hữu"></div>
           <p class="simple-component-contract-sources">Nguồn đối chiếu: <a href="https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/composer.mdx" target="_blank" rel="noopener noreferrer">assistant-ui Composer</a> · <a href="https://github.com/vercel/ai-elements/blob/main/skills/ai-elements/references/prompt-input.md" target="_blank" rel="noopener noreferrer">AI Elements PromptInput</a> · <a href="https://github.com/openai/apps-sdk-ui/blob/main/src/components/Button/Button.mdx" target="_blank" rel="noopener noreferrer">Apps SDK UI Button</a>.</p>
         </details>
-        <details class="simple-component-contract chat-live-map" id="chatLiveMapV44" aria-labelledby="chatLiveMapTitle">
-          <summary id="chatLiveMapTitle">5.2. CHAT đang chạy · cây cha–con, owner và vị trí DOM</summary>
-          <p>Đối chiếu trực tiếp mã nguồn <a href="https://github.com/1sl2tp/chat" target="_blank" rel="noopener noreferrer">1sl2tp/chat</a>. Phân biệt <strong>owner hành vi</strong> với <strong>DOM mount</strong>; một nút, icon hay bảng không tự là cha. Không kết nối tài khoản hoặc tin nhắn thật.</p>
-          <div id="chatLivePlatform" class="chat-live-platform" aria-label="P0 và P1 là các owner dùng chung, không phải component DOM"></div>
-          <div class="chat-live-filter">
-            <label for="chatLiveMapScope">Chọn vùng</label>
-            <select id="chatLiveMapScope" aria-label="Chọn cây cha con CHAT">
-              <option value="all">Toàn bộ cây</option>
-              <option value="directory">Vùng 1 · Danh bạ</option>
-              <option value="header">Top · Header</option>
-              <option value="thread">Vùng 2 · Hội thoại</option>
-              <option value="composer">Ô gõ · Composer</option>
-              <option value="work">Vùng 3 · Công việc</option>
-              <option value="overlay">Popup / Menu</option>
-            </select>
-          </div>
-          <div id="chatLiveMapTree" aria-label="Cây component CHAT đối chiếu mã nguồn"></div>
-          <p id="chatLiveMapStatus" class="chat-live-status" role="status" aria-live="polite"></p>
-          <p class="simple-component-contract-sources">Đối chiếu tương tự: <a href="https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/mobile-composer.mdx" target="_blank" rel="noopener noreferrer">assistant-ui Mobile Composer</a> · <a href="https://github.com/shadcn-ui/ui/blob/main/skills/shadcn/rules/chat.md" target="_blank" rel="noopener noreferrer">shadcn MessageScroller</a> · <a href="https://github.com/radix-ui/primitives" target="_blank" rel="noopener noreferrer">Radix Focus/Overlay</a>. <a href="https://github.com/1sl2tp/2027/blob/main/references/UI_V44_CHAT_CODE_CROSSWALK.md" target="_blank" rel="noopener noreferrer">Xem quyết định thay thế/giữ nguyên</a>.</p>
-        </details>
-      </section>
+        </section>
       <section class="simple-kit simple-multi-kit" id="simpleButtons" aria-labelledby="simpleButtonsTitle">
         <h2 id="simpleButtonsTitle">6. Nút và icon</h2>
         <p class="simple-font-intro">14 mẫu nút và 10 icon dùng chung component gốc. Kiểu nút, hình dạng và bố cục là những thuộc tính khác nhau; chọn ✓ để so sánh.</p>
@@ -1069,7 +1068,7 @@
         </details>
         <p class="github-v45-reference-links"><a href="./github-sources.html#source-map">Xem bảng 19 nguồn GitHub</a> · <a href="https://github.com/1sl2tp/2027/blob/main/references/UI_V45_GITHUB_DESIGN_INDEPENDENCE.md" target="_blank" rel="noopener noreferrer">Quyết định nguồn và thứ tự ưu tiên V45</a></p>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V45</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V46</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>

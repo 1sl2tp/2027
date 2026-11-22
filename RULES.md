@@ -741,3 +741,12 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 - **Chặn nguồn rủi ro:** `@virtuoso.dev/message-list` là thương mại dù React Virtuoso core MIT; `emilkowalski/vaul` README ghi repo không được duy trì, nên không chọn làm dependency mới. Không copy private ChatGPT CSS.
 - **Ưu tiên cập nhật:** MessageContent streaming Markdown (Streamdown); focus/overlay state (Zag/Radix/React Aria); search keyboard (cmdk); vùng desktop (react-resizable-panels); list dài chỉ sau benchmark. Kiểm E0–E5 riêng trước khi chuyển sản phẩm.
 - **Vị trí nguồn:** mục GitHub nằm cuối thư viện chính; phòng thử `github-sources.html` chỉ là bảng đối chiếu và nơi kiểm mẫu. [Audit V45](references/UI_V45_GITHUB_DESIGN_INDEPENDENCE.md).
+
+### 12.12. V46 — 2027 là thư viện CHA duy nhất, thiết kế mới 100%
+
+- **Nghiêm cấm sao chép/tái sử dụng** source, component, CSS, DOM, token, logic UI, bố cục, breakpoint hoặc các workaround của CHAT/TAPHOA cũ trong hệ mới. Các dự án cũ chỉ tham khảo **ý nghĩa nghiệp vụ** (chat nhiều người, đặt hàng, số lượng, báo cáo, v.v.).
+- **Thiết kế cha:** `UI-LIBRARY → UI-SHELL → UI-SCREEN-SLOT → Chat/Sales/Work/Report`. `UI-LIBRARY → UI-PRIMITIVES → Button/Icon/SearchField/QuantityStepper/DataTable`. Mọi màn mới chỉ dùng primitive của 2027, không copy ứng dụng cũ.
+- **Legacy mapping V44 đóng lưu trữ:** file `chat-live-map.ts` và báo cáo đối chiếu V44 chỉ còn là tài liệu lịch sử, không import/render vào ứng dụng thư viện chính. Các owner canonical được chuyển về tên 2027, không còn trỏ vào JS ứng dụng CHAT thật.
+- **Một định nghĩa, nhiều vị trí:** `DATA-TABLE` và `COLUMN_SCHEMA` ở library parent; `COMPONENT_PLACEMENTS` khai báo chỗ dùng cho Chat Message, Sales, Report; `QUANTITY-STEPPER` gắn tại Sales row mà không tạo stepper mới.
+- **Nguồn cải tiến:** assistant-ui, OpenAI Apps SDK UI, Radix/React Aria, shadcn/ui, Lucide, Streamdown, Zag và các nguồn GitHub khác là thông tin kỹ thuật công khai, áp dụng sau khi đánh giá giấy phép, focus, mobile, khả năng tái sử dụng. Không được gọi CSS ChatGPT private là source public.
+- **Mẫu V46:** `web/src/master-library-v46.ts` là demo hoàn toàn mới; dữ liệu giả, DOM được tạo bởi `createElement/textContent`, không gọi network/Auth/DB/tin thật. E0–E5 tách bạch: source+code+test+Pages khác kiểm thử thiết bị thật.

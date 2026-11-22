@@ -3034,3 +3034,36 @@ body.simple-first .topbar-end{gap:0}
 .github-v45-policy-body strong{color:var(--ui-text)}
 .github-v45-reference-links{margin-top:12px!important}
 .github-v42-group li small a{font:inherit}
+
+/* V46 · New 2027-owned composition only. Foundation controls/tokens remain canonical. */
+.master-v46{margin:0 0 22px;padding:17px 18px;border:1px solid var(--ui-border);border-radius:14px;background:var(--ui-bg);min-width:0}
+.master-v46-head h1{font:700 21px/1.35 var(--ui-font);margin:4px 0 8px}
+.master-v46-head p,.master-v46-note{font:400 13px/1.6 var(--ui-font);color:var(--ui-text-muted);margin:0 0 14px}
+.master-v46-head strong{color:var(--ui-text)}
+.master-v46-modes{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.master-v46-modes [aria-pressed="true"]{box-shadow:inset 0 0 0 1px var(--ui-text)}
+.master-v46-path{font:500 11px/1.6 var(--ui-font);color:var(--ui-text-muted);overflow-wrap:anywhere;margin:0 0 12px}
+.master-v46-preview{border:1px solid var(--ui-border);border-radius:12px;min-width:0;overflow:hidden}
+.master-v46-frame{max-width:100%;min-width:0;background:var(--ui-bg)}
+.master-v46-top{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--ui-border);padding:10px 15px}
+.master-v46-top strong{font:650 13px/1.5 var(--ui-font)}
+.master-v46-top small{font:400 11px var(--ui-font);color:var(--ui-text-muted)}
+.master-v46-screen{padding:13px;min-width:0}
+.master-v46-thread{max-width:740px;margin:auto}
+.master-v46-messages{display:grid;gap:9px;min-height:140px;align-content:center}
+.master-v46-message{max-width:min(85%,460px);font:400 13px/1.6 var(--ui-font);color:var(--ui-text);padding:10px 13px;border:1px solid var(--ui-border);border-radius:14px}
+.master-v46-message[data-author="self"]{justify-self:end;background:var(--ui-surface)}
+.master-v46-message p{margin:0}
+.master-v46-composer{margin-top:13px}
+.master-v46-composer textarea{min-width:0;resize:vertical}
+.master-v46-toolbar{display:flex;justify-content:flex-end;gap:8px;align-items:center}
+.master-v46-product-list{margin:0 0 13px}
+.master-v46-product-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:9px 0}
+.master-v46-item-name{font:600 13px/1.5 var(--ui-font)}
+.master-v46-scroll-table{min-width:0;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;border:1px solid var(--ui-border);border-radius:9px}
+.master-v46-task-list{display:grid;gap:7px}
+.master-v46-task-row{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid var(--ui-border);padding:11px 2px;font:500 13px/1.5 var(--ui-font)}
+.master-v46-task-row small{color:var(--ui-text-muted);font:400 11px var(--ui-font)}
+.master-v46-status{font:500 11px/1.5 var(--ui-font);color:var(--ui-text-muted);margin:10px 0}
+.master-v46-note{font-size:11px;margin:0}
+@media(max-width:560px){.master-v46{padding:12px}.master-v46-top small{display:none}.master-v46-product-row{align-items:flex-start}}
