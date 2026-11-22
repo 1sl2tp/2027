@@ -2304,3 +2304,84 @@ body.simple-first .topbar-end{gap:0}
  .simple-field-content{gap:7px}
  .simple-field-shell{padding-inline:10px}
 }
+
+
+/* UI-V27 · Button and icon. One quiet neutral family, no gradients or glow.
+   Source roles: Apps SDK Button solid/soft/outline/ghost, pill, block, uniform,
+   disabled/loading. Icons reuse the pre-existing web/icons.svg registry. */
+.simple-button-row{
+ display:grid;grid-template-columns:27px minmax(0,1fr) 42px;gap:8px;
+ min-width:0;align-items:center;border-bottom:1px solid #ededed;padding:12px 2px;
+}
+.simple-button-row:last-child{border-bottom:0}
+.simple-button-middle{min-width:0;display:flex;flex-direction:column;gap:7px}
+.simple-button-stage{display:flex;align-items:center;min-width:0;max-width:100%}
+.simple-button-demo{
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ box-sizing:border-box;max-width:100%;min-width:0;min-height:44px;
+ padding:9px 16px;border:1px solid #1e1e1e;border-radius:10px;
+ font:650 13px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+ text-align:center;background:#202020;color:#fff;cursor:pointer;
+ transition:background-color .12s ease,border-color .12s ease;
+}
+.simple-button-demo:not(:disabled):hover{filter:brightness(.94)}
+.simple-button-demo:focus-visible{outline:2px solid #444;outline-offset:3px}
+.simple-button-demo:disabled{cursor:not-allowed;opacity:.55;filter:none}
+.simple-button-demo-soft,.simple-button-demo-disabled{
+ background:#f0f0f0;color:#292929;border-color:#f0f0f0;
+}
+.simple-button-demo-outline{background:#fff;color:#222;border-color:#b6b6b6}
+.simple-button-demo-ghost{background:transparent;color:#252525;border-color:transparent}
+.simple-button-demo-ghost:hover{background:#f2f2f2}
+.simple-button-demo-pill{border-radius:999px;padding-inline:20px}
+.simple-button-demo-block{width:min(100%,360px)}
+.simple-button-demo-icon-start,.simple-button-demo-icon-end{
+ background:#fff;color:#242424;border-color:#dadada;
+}
+.simple-button-demo-square,.simple-button-demo-circle{
+ flex:0 0 44px;width:44px;height:44px;min-height:44px;padding:0;
+ background:#f2f2f2;color:#222;border-color:#e0e0e0;
+}
+.simple-button-demo-square{border-radius:9px}
+.simple-button-demo-circle{border-radius:50%}
+.simple-button-demo-danger{background:#a72a2a;border-color:#a72a2a;color:#fff}
+.simple-button-demo-loading{opacity:.7}
+.simple-button-demo-toggle{
+ background:#fff;color:#242424;border-color:#bdbdbd;
+}
+.simple-button-demo-toggle[aria-pressed="true"]{
+ background:#242424;color:#fff;border-color:#242424;
+}
+.simple-button-icon{display:block;flex:none;width:20px;height:20px;fill:none;
+ stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.simple-button-demo-icon-start .simple-button-icon,
+.simple-button-demo-icon-end .simple-button-icon{width:18px;height:18px}
+.simple-button-demo-loading .simple-button-spinner{
+ display:inline-block;flex:none;width:15px;height:15px;
+ border:2px solid currentColor;border-right-color:transparent;
+ border-radius:50%;animation:simple-button-spin .85s linear infinite;
+}
+@keyframes simple-button-spin{to{transform:rotate(360deg)}}
+.simple-button-pick{
+ display:flex;align-items:center;justify-content:center;flex:none;
+ width:40px;height:40px;border-radius:50%;padding:0;
+ border:1px solid #dedede;background:#fff;color:#777;
+ font:650 16px/1 system-ui,-apple-system,Arial,sans-serif;cursor:pointer;
+}
+.simple-button-pick[aria-pressed="true"]{
+ background:#202020;color:#fff;border-color:#202020;
+}
+.simple-button-pick:focus-visible{outline:2px solid #222;outline-offset:2px}
+.simple-buttons-feedback{font:400 12px/1.5 system-ui,-apple-system,Arial,sans-serif;
+ color:#626262;margin:9px 0 0;overflow-wrap:anywhere}
+.simple-buttons-feedback:empty{display:none}
+@media(max-width:760px){
+ .simple-button-row{grid-template-columns:23px minmax(0,1fr) 40px;
+  gap:7px;padding:12px 0}
+ .simple-button-stage{width:100%}
+ .simple-button-demo{min-height:44px}
+}
+@media(prefers-reduced-motion:reduce){
+ .simple-button-demo{transition:none}
+ .simple-button-demo-loading .simple-button-spinner{animation:none}
+}
