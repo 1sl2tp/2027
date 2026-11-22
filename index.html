@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện quy tắc nội dung nút · V40</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V40">
-  <script type="module" src="./web/dist-v40/app.js"></script>
+  <title>2027 · Thư viện giao diện và phân cấp · V41</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V41">
+  <script type="module" src="./web/dist-v41/app.js"></script>
 </head>
-<body data-ui-version="2027-UI-V40" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V41" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V40</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V41</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
@@ -46,7 +46,7 @@
       <a class="nav-link" href="./flows.html#chat/contacts"><span class="nav-numeral">11</span><span>Trò chuyện</span><small>↗</small></a>
       <a class="nav-link" href="./flows.html#work/summary"><span class="nav-numeral">12</span><span>Công việc</span><small>↗</small></a>
       <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">13</span><span>Bán hàng</span><small>↗</small></a>
-      <div class="sidebar-footer">UI-V14 · RULE 03<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
+      <div class="sidebar-footer">UI-V41 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
     </aside>
     <main class="main studio-main" id="main">
       <section class="simple-kit" id="simpleKit" aria-labelledby="simpleKitTitle">
@@ -72,6 +72,18 @@
         <p class="simple-font-intro">Khung chữ, nhãn, thông báo và tin nhắn. Chạm một dòng để chọn.</p>
         <div id="simpleFramesItems" class="simple-font-list" role="group" aria-label="24 mẫu khung chữ và bong bóng"></div>
         <p id="simpleFramesChosen" class="simple-font-chosen" role="status" aria-live="polite" hidden></p>
+        <div class="message-v41-demo" id="messageV41" aria-labelledby="messageV41Title">
+          <h3 id="messageV41Title">4.1. Một tin có nhiều loại nội dung · V41</h3>
+          <p class="simple-font-intro">Một tin là cha; chữ, bảng và ảnh là các phần con. Bảng dùng lại schema 20 cột; nút sao chép thuộc đúng tin đang xem.</p>
+          <div class="message-v41-options" role="group" aria-label="Thay đổi cấu trúc một tin nhắn">
+            <button type="button" class="ui-button ui-button--secondary" data-message-v41-variant="text" aria-pressed="false">Chỉ chữ</button>
+            <button type="button" class="ui-button ui-button--secondary" data-message-v41-variant="table" aria-pressed="false">Chữ + bảng</button>
+            <button type="button" class="ui-button ui-button--secondary selected" data-message-v41-variant="mixed" aria-pressed="true">Chữ + bảng + ảnh</button>
+          </div>
+          <div id="messageV41Preview" class="message-v41-preview" role="group" aria-label="Tin mẫu có nhiều phần nội dung"></div>
+          <p id="messageV41Feedback" class="message-v41-feedback" role="status" aria-live="polite">Đang kiểm tra thành phần…</p>
+          <p class="message-v41-note">Nguồn kỹ thuật: <a href="./github-sources.html#source-message-parts">SOURCE-V02</a>. Đây là tin mẫu trên trình duyệt, không gửi hoặc đọc dữ liệu thật.</p>
+        </div>
       </section>
       <section class="simple-kit simple-multi-kit" id="simpleFields" aria-labelledby="simpleFieldsTitle">
         <h2 id="simpleFieldsTitle">5. Ô nhập và số lượng</h2>
@@ -972,7 +984,7 @@
         <div><span class="eyebrow">CÙNG MỘT BỘ CSS</span><h2>Thông số đã chọn</h2><p>Toàn bộ thành phần dùng <code>web/styles.css</code> và các token chung. Có thể sao chép để triển khai cho những khung khác.</p></div>
         <pre id="cssPreview" aria-label="CSS hiện hành"></pre>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V33</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V41</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>
