@@ -26,6 +26,7 @@ jobs:
           mkdir -p _site/web
           cp index.html flows.html base.html _site/
           cp web/styles.css _site/web/
+          cp web/icons.svg _site/web/
           cp -R web/dist _site/web/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5

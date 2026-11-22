@@ -16,17 +16,19 @@ export function initComposerGallery():void {
     const mic=card.querySelector<HTMLButtonElement>("[data-composer-mic]");
     const mode=card.querySelector<HTMLButtonElement>("[data-composer-mode]");
     const send=card.querySelector<HTMLButtonElement>("[data-composer-send]");
-    const sendSymbol=card.querySelector<HTMLElement>("[data-composer-send-symbol]");
+    const sendIcon=card.querySelector<SVGUseElement>("[data-composer-send-icon]");
+    const modeLabel=card.querySelector<HTMLElement>("[data-composer-mode-label]");
     const status=card.querySelector<HTMLElement>("[data-composer-status]");
     const log=card.querySelector<HTMLElement>("[data-composer-log]");
-    if(!text||!form||!filePicker||!previews||!add||!mic||!mode||!send||!sendSymbol||!status||!log)continue;
+    if(!text||!form||!filePicker||!previews||!add||!mic||!mode||!modeLabel||!send||!sendIcon||!status||!log)continue;
     let sending=false;
     const maximum=kind==="single"?1:4;
     const countImages=()=>previews.querySelectorAll(".composer-preview").length;
     const report=(message:string):void=>{status.textContent=message;};
     const refresh=():void=>{
       previews.hidden=countImages()===0;
-      sendSymbol.textContent=text.value.trim()||countImages()?"↑":"≋";
+      const hasContent=Boolean(text.value.trim()||countImages());
+      sendIcon.setAttribute("href",sending?"./web/icons.svg#ui-icon-stop":hasContent?"./web/icons.svg#ui-icon-send-up":"./web/icons.svg#ui-icon-voice");
       send.setAttribute("aria-label",text.value.trim()||countImages()?"Mô phỏng gửi nội dung":"Thử chế độ giọng nói");
       send.title=text.value.trim()||countImages()?"Mô phỏng gửi nội dung":"Giọng nói mẫu (không thu âm)";
       const lineHeight=24;
@@ -84,8 +86,7 @@ export function initComposerGallery():void {
     text.addEventListener("input",refresh);
     mode.addEventListener("click",()=>{
       const high=mode.textContent?.includes("Cao")??false;
-      mode.replaceChildren(document.createTextNode(high?"Nhanh ":"Cao "));
-      const chevron=create("span");chevron.textContent="⌄";chevron.setAttribute("aria-hidden","true");mode.append(chevron);
+      modeLabel.textContent=high?"Nhanh":"Cao";
       report("Chỉ đổi nhãn chế độ để kiểm tra giao diện; không thay đổi mô hình AI.");
     });
     mic.addEventListener("click",()=>{
@@ -108,6 +109,7 @@ export function initComposerGallery():void {
       sending=true;
       send.dataset.composerBusy="true";
       send.disabled=true;
+      sendIcon.setAttribute("href","./web/icons.svg#ui-icon-stop");
       report("Đang mô phỏng gửi "+(attached?attached+" ảnh":"nội dung")+". Không kết nối mạng.");
       window.setTimeout(()=>{
         const entry=create("p");

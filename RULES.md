@@ -1,7 +1,7 @@
 # 2027 — RULES.md
 
 > **Nguồn quy tắc duy nhất (Single Source of Truth)**  
-> Repo: `1sl2tp/2027` · Trạng thái: **R05 / UI-V09 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
+> Repo: `1sl2tp/2027` · Trạng thái: **R06 / UI-V12 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
 > Phạm vi: Web App/PWA (TypeScript + HTML + CSS) và Android APK native (Kotlin + Jetpack Compose).
 
 ## RULE 01 — MỘT FILE RULE DUY NHẤT
@@ -316,3 +316,31 @@ Giữ nguyên bản thư viện hiện có trước khi tạo mẫu mới, đồ
 - Kiểm tra bốn lựa chọn preset, hai viewport, ba mô-đun, input focus, số lượng 0–99, menu và popup; không gọi mạng, không gửi chat/số tiền thật.
 - **Đã thực hiện:** lưu snapshot branch và khai báo base. **Chưa được xác nhận nếu chưa có báo cáo CI:** build, deploy và nghiệm thu mobile Safari/Chrome.
 - **Phạm vi Web:** thêm demo V09, không thay nội dung V08 hoặc logic V04; **APK:** chưa đổi. **Hoàn tác:** revert các commit V09 trên main, vẫn còn mốc gốc và nguồn Drive.
+
+---
+
+## RULE 06 — MẪU PHẢI CÓ DANH MỤC, NÚT VÀ ICON PHẢI DÙNG CHUNG
+
+**Mã:** 2027-R06 · **Ngày:** 22/11/2026 (VN) · **Trạng thái:** Đã triển khai V12 tại thư viện Web; nghiệm thu trực quan thiết bị thật còn mở.
+
+### 6.1. Mục tiêu và lý do
+
+Khi bổ sung mẫu mới vào thư viện, **không được tạo nút, biểu tượng, kiểu viền hoặc cỡ chữ rời rạc theo từng màn**. Mọi mẫu phải được phân loại vào thư viện trước, dùng token và primitive chung; các thành phần lớn (composer/chat, bảng, hàng, popup) chỉ lắp ghép các primitive đã được duyệt.
+
+### 6.2. Quy tắc bắt buộc
+
+1. **Phân loại trước:** mọi mẫu bổ sung phải vào một nhóm có chức năng rõ trong thư viện: Chữ; Bảng; Số lượng; Ô nhập/Chat; Nút & biểu tượng; Hàng & bố cục; Menu/popup. Không gắn mẫu mới trôi nổi ở một trang khác.
+2. **Nút là thành phần gốc:** `.ui-button` dùng chung, kết hợp `.ui-button--primary`, `--secondary`, `--text`, `--icon`, `--mode`, `--send`; chỉ `web/styles.css` sở hữu các kiểu này. Mẫu nút chủ nằm ở `index.html#sample-actions`.
+3. **Icon là một nguồn gốc SVG:** mọi icon chung phải được khai báo trong `web/icons.svg`. Các màn dùng `<svg class="ui-icon"><use href="./web/icons.svg#ui-icon-..."></use></svg>`, không tạo từng ký tự Unicode “↑”, “⌄” hoặc icon riêng để thế chỗ nếu đã có symbol tương ứng.
+4. **Token quyết định kích thước:** `--ui-control-hit`, `--ui-control-glyph`, `--ui-control-plus`, `--ui-control-mic`, `--ui-control-chevron`, `--ui-control-send-glyph`, `--ui-control-send-disc`, `--ui-control-label`, `--ui-control-gap`. Mặc định V12 lần lượt gồm hit **44px**, glyph **20px**, plus **22px**, mic **19px**, chevron **13px**, arrow **20px**, vòng tròn **36px**, chữ chế độ **14px**, gap **2px**. Đây là số liệu của 2027, không tuyên bố trích chính xác từ ChatGPT.
+5. **Thành phần lắp ghép chỉ sắp xếp:** bốn mẫu ô chat trong `index.html#sample-inputs` dùng chung `.ui-button`, `.ui-icon`, sprite SVG; CSS `.composer-*` chỉ quản lý chiều cao ô nhập, preview và layout, không được tự thay đổi `width/height/font-size` của nút + / Cao / mic / gửi.
+6. **Nhân rộng không sao chép:** khi cần một nút/icon mới, cập nhật nhóm Nút & biểu tượng và định nghĩa gốc trước; nơi dùng chỉ thêm class và tham chiếu icon. Nếu tác động đến các màn cũ `base.html` và `flows.html`, phải làm kiểm thử hồi quy riêng, không giả nhận đã đồng bộ mọi màn.
+7. **Kiểm thử cấu trúc và trải nghiệm:** CI xác nhận cả thư viện nút, icon, 4 composer dùng chung class, tệp SVG được đóng gói và link sâu hai nhóm; kiểm tra bằng thiết bị thật về focus, khoảng cách, kích thước chạm, media và bàn phím trước khi coi E4/E5 hoàn tất.
+
+**Tài liệu kiểm kê không phải tệp rule riêng:** [`references/UI_COMPONENT_CATALOG_2026-11-22.md`](./references/UI_COMPONENT_CATALOG_2026-11-22.md).
+
+### 6.3. Phạm vi và hoàn tác
+
+- **Web:** sửa `index.html` V12, `web/styles.css`, `web/icons.svg`, `web/src/app.ts`, `web/src/composer-gallery.ts` và đóng gói Pages; 4 composer vẫn mô phỏng, không tải lên hay gửi thật.
+- **APK:** chưa đổi. **Ứng dụng CHAT/TAPHOA thật:** chưa đổi. **Nguồn trong Drive:** không đổi.
+- **Hoàn tác:** revert commit V12 để quay về V11; nhánh lưu V08 nguyên trạng. Nếu thiếu icon khi đóng gói, sửa lại bước sao chép `web/icons.svg` trong workflow và kiểm thử.
