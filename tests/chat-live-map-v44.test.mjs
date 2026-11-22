@@ -76,9 +76,9 @@ test("V44: UI tree is inside existing Section 5, uses source links but no duplic
  assert.ok(css.includes(".chat-live-map .simple-component-tree-level"));
  const scope=css.slice(css.indexOf("/* V44: this is a source-aware reader"),css.indexOf(".simple-component-contract{"));
  assert.doesNotMatch(scope,/\.ui-button\s*\{|\.ds-table\s*\{|\.ds-composer\s*\{/);
- assert.ok(html.includes('data-ui-version="2027-UI-V44"'));
- assert.ok(html.includes('src="./web/dist-v44/app.js"'));
- assert.ok(read(".github/workflows/pages.yml").includes("cp -R web/dist _site/web/dist-v44"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V45"'));
+ assert.ok(html.includes('src="./web/dist-v45/app.js"'));
+ assert.ok(read(".github/workflows/pages.yml").includes("cp -R web/dist _site/web/dist-v45"));
 });
 test("V44 source audit distinguishes CHAT live implementation from 2027 preview",()=>{
  const doc=read("references/UI_V44_CHAT_CODE_CROSSWALK.md");

@@ -62,8 +62,8 @@ test("V41: main message sample uses COLUMN_SCHEMA, ds-table, and the existing ui
  assert.ok(html.includes('id="messageV41Preview"'));
  assert.ok(html.includes('id="simpleFrames"'));
  assert.equal((html.match(/data-message-v41-variant=/g)||[]).length,3);
- assert.ok(html.includes('data-ui-version="2027-UI-V44"'));
- assert.ok(html.includes('src="./web/dist-v44/app.js"'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V45"'));
+ assert.ok(html.includes('src="./web/dist-v45/app.js"'));
 });
 
 test("V41: source has one owner for message composition, no duplicate Button or Table CSS",()=>{
@@ -76,6 +76,6 @@ test("V41: source has one owner for message composition, no duplicate Button or 
  assert.doesNotMatch(added,/\.ui-button\s*\{|\.ds-table\s*\{/);
  assert.ok(app.includes('import { initMessagePartsGallery } from "./message-parts.js";'));
  assert.ok(app.includes("initMessagePartsGallery();"));
- assert.ok(pages.includes("cp -R web/dist _site/web/dist-v44"));
+ assert.ok(pages.includes("cp -R web/dist _site/web/dist-v45"));
  assert.ok(rules.includes("## RULE 12 — XÁC ĐỊNH CHA"));
 });
