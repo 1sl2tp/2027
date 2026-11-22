@@ -3,51 +3,56 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const read = (file) => readFileSync(new URL("../"+file, import.meta.url),"utf8");
 
-test("V05 completes the UI library typography foundation", () => {
+test("V06 starts with one interactive ChatGPT-like document and shared CSS",()=>{
   const html=read("index.html");
-  assert.match(html,/data-ui-version="2027-UI-V05"/);
-  assert.match(html,/<h1>Chữ & màu nền<\/h1>/);
-  for (const section of ["colors","typography","preview"]) assert.match(html,new RegExp('id="'+section+'"'));
-  for (const id of ["demoCanvas","sizeRange","leadingRange","weightOutput","copyButton","resetButton","sampleInput"])
-    assert.match(html,new RegExp('id="'+id+'"'));
+  assert.match(html,/data-ui-version="2027-UI-V06"/);
+  assert.match(html,/<h1>Chỉnh ngay trên một văn bản mẫu<\/h1>/);
+  for(const id of ["document","controls","components","overlays","demoCanvas","fontSelect","sizeRange","sizeOutput","weightOutput","leadingRange","trackingRange","cssPreview","resetButton","copyButton"])
+    assert.ok(html.includes('id="'+id+'"'),id);
+  for(const block of ["title","body","section","description","list","table","number","money","note","caption"])
+    assert.ok(html.includes('data-block="'+block+'"'),block);
+  assert.ok(html.includes("./web/styles.css?v=2027-UI-V06"));
+  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V06"));
   assert.doesNotMatch(html,/<script[^>]+src="https?:\/\//);
 });
 
-test("palette, font, weight and viewport choices are explicit",()=>{
-  const html=read("index.html");
-  for(const palette of ["white","warm","mist","dark"])
-    assert.match(html,new RegExp('data-palette="'+palette+'"'));
-  for(const font of ["system","arial","serif","mono"])
-    assert.match(html,new RegExp('data-font="'+font+'"'));
-  for(const weight of ["400","500","600","700"])
-    assert.match(html,new RegExp('data-weight="'+weight+'"'));
-  for(const style of ["normal","italic"]) assert.match(html,new RegExp('data-text-style="'+style+'"'));
-  for(const width of ["desktop","mobile"])
-    assert.match(html,new RegExp('data-viewport="'+width+'"'));
-});
-
-test("responsive live preview is separated from the library interface",()=>{
-  const css=read("web/styles.css");
-  for(const token of ["--sample-font","--sample-base","--sample-bg","--sample-surface","--sample-ink","--sample-leading","--sample-weight"])
-    assert.ok(css.includes(token),token);
-  assert.match(css,/\.demo-canvas\[data-viewport=mobile\]/);
-  assert.match(css,/@media\(max-width:760px\)/);
-  assert.match(css,/input\[type=range\]/);
-});
-
-test("interactions remain local with no live chat, transaction or endpoint",()=>{
-  const ts=read("web/src/app.ts");
-  for(const marker of ["applyDesignTokens","auditPalette","exportCss","sizeRange.addEventListener","leadingRange.addEventListener","trackingRange.addEventListener","copyButton","resetButton"])
-    assert.ok(ts.includes(marker),marker);
+test("V06 has actual controls for tables, icons, numeric input, search, chat, menu and popup",()=>{
+  const html=read("index.html"),ts=read("web/src/app.ts");
+  for(const id of ["quantityInput","qtyMinus","qtyPlus","searchInput","searchResults","chatDemoForm","chatInput","menuButton","sampleMenu","demoDialog","openPopupButton","dialogConfirmButton"])
+    assert.ok(html.includes('id="'+id+'"'),id);
+  for(const cssClass of ["studio-data-table","studio-icon-button square","studio-icon-button round","studio-action-primary","studio-action-secondary"])
+    assert.ok(html.includes(cssClass),cssClass);
+  for(const method of ["setQty","setMenu","showModal","dialog.close","get<HTMLFormElement>(\"chatDemoForm\")","get<HTMLInputElement>(\"searchInput\")"])
+    assert.ok(ts.includes(method),method);
+  for(const button of ["boldButton","italicButton","underlineButton","surfaceButton","selectAllButton"])
+    assert.ok(ts.includes(button),button);
   assert.doesNotMatch(ts,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:/i);
 });
 
-test("Pages builds the exact versioned assets shipped in HTML",()=>{
+test("V06 colors and fonts still reuse the central semantic token module",()=>{
+  const html=read("index.html"),ts=read("web/src/app.ts"),css=read("web/styles.css");
+  for(const palette of ["white","warm","mist","dark"])assert.ok(html.includes('data-palette="'+palette+'"'));
+  for(const font of ["system","arial","serif","mono"])assert.ok(html.includes('<option value="'+font+'">'));
+  for(const weight of ["400","500","600","700"])assert.ok(html.includes('data-weight="'+weight+'"'));
+  for(const device of ["desktop","mobile"])assert.ok(html.includes('data-viewport="'+device+'"'));
+  for(const marker of ["PALETTES","FONTS","applyDesignTokens","auditPalette","exportCss","readSavedSettings","saveSettings"])
+    assert.ok(ts.includes(marker),marker);
+  for(const token of ["--ui-font","--ui-bg","--ui-surface","--ui-text","--ui-text-muted","--ui-border"])
+    assert.ok(css.includes(token),token);
+  assert.ok(css.includes(".studio-document[data-viewport=mobile]"));
+  assert.ok(css.includes(".studio-component-grid"));
+  assert.ok(css.includes(".studio-dialog::backdrop"));
+  assert.ok(css.includes(".studio-pop-menu"));
+  assert.ok(css.includes(".studio-chat-compose"));
+  assert.match(css,/@media\(max-width:760px\)/);
+});
+
+test("Pages still builds the exact versioned assets shipped in HTML",()=>{
   const html=read("index.html");
   const config=JSON.parse(read("tsconfig.json"));
   const out=config.compilerOptions.outDir.replace(/^\.\//,"").replace(/\/$/,"");
-  assert.ok(html.includes("web/styles.css?v=2027-UI-V05"));
-  assert.ok(html.includes(out+"/app.js?v=2027-UI-V05"));
+  assert.ok(html.includes("web/styles.css?v=2027-UI-V06"));
+  assert.ok(html.includes(out+"/app.js?v=2027-UI-V06"));
   const workflow=read(".github/workflows/pages.yml");
   assert.ok(workflow.includes("npm run verify"));
   assert.ok(workflow.includes("cp -R "+out+" _site/web/"));
@@ -142,16 +147,14 @@ test("V05 one source of semantic tokens, contrast math and safe persistence",asy
   assert.ok(design.exportCss(design.DEFAULT_SETTINGS).includes("--ui-font-style: normal;"));
 });
 
-test("V05 shared stylesheet renders all design roles and has narrow screen layouts",()=>{
-  const html=read("index.html");
-  const css=read("web/styles.css");
-  for(const id of ["roleBackground","roleSurface","roleInk","roleMuted","roleBorder","paletteLabel"])
-    assert.match(html,new RegExp('id="'+id+'"'));
-  for(const varname of ["--ui-font","--ui-bg","--ui-surface","--ui-text","--ui-text-muted","--ui-border","--ui-font-size","--ui-font-style","--ui-letter-spacing"])
-    assert.ok(css.includes(varname),varname);
-  assert.match(css,/\.color-roles-grid/);
-  assert.match(css,/\.contrast-grid/);
-  assert.match(css,/@media\(max-width:420px\)/);
-  assert.match(html,/WCAG 2\.2/);
-  assert.match(html,/href="\.\/flows\.html"/);
+test("V06 keeps the library font/color and three-flow screens on one CSS file",()=>{
+  const index=read("index.html"),flows=read("flows.html"),css=read("web/styles.css");
+  assert.ok(index.includes('href="./flows.html"'));
+  assert.ok(flows.includes('./web/styles.css?v=2027-UI-V04'));
+  assert.ok(index.includes('./web/styles.css?v=2027-UI-V06'));
+  assert.equal((index.match(/<link rel="stylesheet"/g)||[]).length,1);
+  assert.equal((flows.match(/<link rel="stylesheet"/g)||[]).length,1);
+  assert.ok(css.includes(".flow-app-shell"));
+  assert.ok(css.includes(".studio-document"));
+  assert.ok(css.includes(".studio-dialog"));
 });

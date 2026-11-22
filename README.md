@@ -2,9 +2,27 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có hai trang Web:
 
-- **[Chữ & màu nền](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V05**: 4 palette trung tính, 5 vai trò màu, 4 họ font, cỡ 13–21px, đậm 400–700, chữ thường/nghiêng, giãn dòng/ký tự, mẫu tiếng Việt/số tiền, xem rộng/mobile, bảng đo tương phản, sao chép CSS và đặt lại.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V06**: một văn bản giống phong cách trình bày ChatGPT, chọn và chỉnh riêng 10 loại nội dung; bên dưới có 8 mẫu thành phần gồm bảng, nút, icon vuông/tròn, số lượng, tìm kiếm, gõ chat, menu phụ và popup.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
 
+
+
+## Studio văn bản + thành phần (UI-V06)
+
+**Thay đổi thứ tự làm việc:** ưu tiên xem **một văn bản mẫu thực tế** trước, thay vì tách thành nhiều bảng thông số. Một văn bản gồm: tiêu đề lớn, đoạn mở đầu, tiêu đề mục, đoạn nội dung, danh sách, bảng sản phẩm, số lượng, số tiền, ghi chú và nhãn phụ. Chọn phần trực tiếp hoặc chọn "Toàn văn bản"; bảng điều khiển bên cạnh thay đổi font, size, weight, in nghiêng, gạch chân, bật nền vùng, giãn dòng và giãn ký tự. Các thay đổi cục bộ được lưu thử trong localStorage. Đặt lại về mặc định.
+
+**8 mẫu thành phần dùng chung CSS:**
+
+1. Bảng đơn hàng có tiêu đề cột, đường kẻ và tiền căn phải.
+2. Nút chính / phụ / chữ / disabled.
+3. Icon vuông và tròn; vùng chạm minh họa 44×44 px.
+4. Input số lượng 0–99 cùng nút tăng/giảm.
+5. Tìm kiếm lọc danh sách sản phẩm mẫu ngay trong trình duyệt.
+6. Input chat nhiều dòng, thêm tin nhắn mẫu mà không gửi ra ngoài.
+7. Menu phụ mở bằng dấu ba chấm, đóng khi chọn, khi bấm ngoài hoặc Escape.
+8. Popup `<dialog>` đóng bằng nút hoặc Escape, có hành động xác nhận mô phỏng.
+
+**Nền tảng không đổi:** một tệp `web/styles.css`, token font và palette từ `web/src/design.ts`. Nút "Sao chép CSS" xuất token cùng CSS của mười loại nội dung. Trang luồng `flows.html` V04 vẫn giữ nguyên; chưa kết nối Supabase, không có tin hoặc giao dịch thật. Hệ số px chỉ là mẫu thử, không phải giá trị cố định của giao diện ChatGPT. Kiểm thử CI chưa thay thế nghiệm thu trên thiết bị thực.
 
 ## Hoàn thiện nền tảng màu & kiểu chữ (UI-V05)
 
@@ -18,10 +36,10 @@
 
 ```text
 web/styles.css           ← MỘT CSS cho thư viện, các thành phần và 3 luồng
-index.html               ← Trang mẫu font / màu (V03)
+index.html               ← Văn bản mẫu + thành phần (V06)
 flows.html               ← Trang xem ba khung (V04)
 web/src/design.ts        ← Nguồn token màu/chữ, công thức tương phản, xuất CSS
-web/src/app.ts           ← Điều khiển trang font / màu
+web/src/app.ts           ← Điều khiển từng vùng văn bản và 8 mẫu thành phần
 web/src/flows.ts         ← Một state mẫu chung cho ba mô-đun
 web/dist/*.js            ← Đầu ra TypeScript khi chạy npm run build
 tests/layout.test.mjs    ← Kiểm thử cấu trúc và gói phát hành
