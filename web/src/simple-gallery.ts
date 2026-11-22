@@ -1,4 +1,4 @@
-// V23 — Source-grounded ChatGPT typography + OpenAI Apps SDK UI extended scales.
+// V24 — Source-grounded typography with separate link underline treatments.
 // Source snapshot: Google Drive ChatGPT.html (22 Nov 2026), --text-* and --text-heading-* tokens.
 // Font family uses system sans; monospace is reserved for code.
 // Styling for composition variants is authored for this demo; it is not vendor CSS.
@@ -73,6 +73,22 @@ const MULTI_TEXT_SAMPLES:readonly MultiTextSample[]=[
  {id:"MULTI-44",label:"Đoạn dài tự xuống dòng",lines:["Đây là đoạn văn dài có nhiều từ và số 123.456.789 để kiểm tra khoảng cách, khả năng xuống dòng, giới hạn chiều ngang và sự dễ đọc khi thiết bị nhỏ hơn."],style:"paragraph"},
  {id:"MULTI-45",label:"Giữ khoảng trắng và xuống dòng",lines:["Đơn hàng    DH-001","Số lượng   12 hộp","Tổng tiền  125.000 đ"],style:"pre"}
 ];
+type UnderlineStyle="solid"|"subtle"|"dotted"|"dashed"|"double"|"wavy"|"offset"|"thick"|"external"|"link"|"primary"|"hover";
+interface UnderlineSample {id:string;label:string;style:UnderlineStyle;preview:string}
+const UNDERLINE_SAMPLES:readonly UnderlineSample[]=[
+ {id:"UNDER-01",label:"Gạch chân nét liền",style:"solid",preview:"Xem nội dung chi tiết"},
+ {id:"UNDER-02",label:"Gạch chân nhạt (OpenAI SDK)",style:"subtle",preview:"Xem thông tin liên kết"},
+ {id:"UNDER-03",label:"Gạch chân nét chấm (ảnh)",style:"dotted",preview:"Mở thư viện tham khảo ↗"},
+ {id:"UNDER-04",label:"Gạch chân nét đứt",style:"dashed",preview:"Đường dẫn đến tài liệu"},
+ {id:"UNDER-05",label:"Gạch chân hai nét",style:"double",preview:"Nhấn mạnh nội dung"},
+ {id:"UNDER-06",label:"Gạch chân lượn sóng",style:"wavy",preview:"Kiểm tra chính tả"},
+ {id:"UNDER-07",label:"Gạch chân cách chữ 5px",style:"offset",preview:"Xem nội dung"},
+ {id:"UNDER-08",label:"Gạch chân dày 2px",style:"thick",preview:"Tiêu đề có gạch chân"},
+ {id:"UNDER-09",label:"Liên kết nét chấm + mũi tên",style:"external",preview:"OpenAI Apps SDK UI ↗"},
+ {id:"UNDER-10",label:"Liên kết gạch chân nét liền",style:"link",preview:"Xem tài liệu hướng dẫn ↗"},
+ {id:"UNDER-11",label:"Liên kết màu nhấn, không gạch",style:"primary",preview:"Tìm hiểu thêm ↗"},
+ {id:"UNDER-12",label:"Gạch chân khi rê / focus",style:"hover",preview:"Di chuột hoặc chạm để xem"}
+];
 function renderTextTreatment(target:HTMLElement,item:MultiTextSample):void {
  target.className="simple-multi-preview simple-multi-"+item.style;
  if(item.style==="mixed"){
@@ -97,7 +113,7 @@ export function initSimpleGallery():void {
  // Older deep links still open the pre-existing advanced gallery.
  const showOriginal=():void=>{
    const hash=window.location.hash;
-   const useOriginal=hash!==""&&hash!=="#simpleKit"&&hash!=="#simple-gallery"&&hash!=="#simpleMultiline";
+   const useOriginal=hash!==""&&hash!=="#simpleKit"&&hash!=="#simple-gallery"&&hash!=="#simpleMultiline"&&hash!=="#simpleUnderline";
    document.body.classList.toggle("simple-first",!useOriginal);
  };
  window.addEventListener("hashchange",showOriginal);
@@ -159,5 +175,47 @@ export function initSimpleGallery():void {
    for(const button of Array.from(multilineList.querySelectorAll<HTMLButtonElement>(".simple-multi-row")))
       button.setAttribute("aria-pressed",String(button.dataset.sampleId===selectedMultiId));
    multilineChosen.textContent="Đã chọn: "+item.label;multilineChosen.hidden=false;
+ });
+ const underlineList=document.getElementById("simpleUnderlineItems");
+ const underlineChosen=document.getElementById("simpleUnderlineChosen");
+ if(!underlineList||!underlineChosen)return;
+ let pickedUnderline:string|null=null;
+ for(const [index,item] of UNDERLINE_SAMPLES.entries()){
+   const row=document.createElement("button");
+   row.type="button";
+   row.className="simple-font-row simple-underline-row";
+   row.dataset.sampleId=item.id;
+   row.setAttribute("aria-pressed","false");
+   row.setAttribute("aria-label","Chọn "+item.label);
+   const number=document.createElement("span");
+   number.className="simple-font-number";
+   number.textContent=String(index+1).padStart(2,"0");
+   const content=document.createElement("span");
+   content.className="simple-font-content";
+   const preview=document.createElement("span");
+   preview.className="simple-underline-preview simple-underline-"+item.style;
+   preview.textContent=item.preview;
+   const label=document.createElement("span");
+   label.className="simple-font-meta";
+   label.textContent=item.label;
+   const tick=document.createElement("span");
+   tick.className="simple-font-check";
+   tick.setAttribute("aria-hidden","true");
+   tick.textContent="✓";
+   content.append(preview,label);
+   row.append(number,content,tick);
+   underlineList.append(row);
+ }
+ underlineList.addEventListener("click",event=>{
+   if(!(event.target instanceof Element))return;
+   const row=event.target.closest<HTMLButtonElement>(".simple-underline-row");
+   if(!row)return;
+   const item=UNDERLINE_SAMPLES.find(s=>s.id===row.dataset.sampleId);
+   if(!item)return;
+   pickedUnderline=item.id;
+   for(const button of Array.from(underlineList.querySelectorAll<HTMLButtonElement>(".simple-underline-row")))
+     button.setAttribute("aria-pressed",String(button.dataset.sampleId===pickedUnderline));
+   underlineChosen.textContent="Đã chọn: "+item.label;
+   underlineChosen.hidden=false;
  });
 }
