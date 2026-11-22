@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có ba trang Web:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V12**: một văn bản chỉnh font/nền như trước, bên dưới là **16 bộ mẫu được chia vào 7 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V13**: một văn bản chỉnh font/nền như trước, bên dưới là **18 bộ mẫu được chia vào 7 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
 
@@ -18,6 +18,18 @@
 - Danh mục [**nguồn gốc Drive + mốc phục hồi**](./references/ORIGINAL_UI_SOURCES_AND_BASELINE_2026-11-22.md). Không sao chép trọn CSS/HTML nhúng từ Save Page hoặc thay đổi các tệp nguồn trong Drive.
 
 **Ranh giới:** mẫu UI chỉ chạy tại máy người xem, chưa kết nối CHAT/TAPHOA, không gửi tin nhắn hoặc làm phát sinh khoản thu/đơn hàng thật. Bản V08 đang có ở trang chính được giữ nguyên; V09 là một trang mới.
+
+## Thanh nút sao chép, chia sẻ, tải xuống và Loading (UI-V13)
+
+Trang [**Nút & biểu tượng**](https://1sl2tp.github.io/2027/#sample-actions) thêm một bộ mẫu chứa ba trạng thái:
+
+- **Cụm thao tác gọn dưới tin nhắn:** Sao chép, Thích, Không thích, Đọc nội dung (chỉ minh họa trạng thái), Chia sẻ và nút ba chấm để mở menu phụ.
+- **Các nút có nhãn:** Sao chép, Chia sẻ, Tải xuống. Chia sẻ sử dụng hộp thoại native của trình duyệt nếu hỗ trợ; Sao chép sử dụng clipboard với thông báo khi bị từ chối; Tải xuống tạo **tệp TXT mẫu trên thiết bị**, không truy cập API.
+- **Loading / hoàn tất / disabled:** bấm Loading để xem icon đang quay rồi chuyển thành dấu tích; có nút tải TXT và nút bị vô hiệu để so sánh trạng thái.
+
+Trang [**Hàng & bố cục**](https://1sl2tp.github.io/2027/#sample-layouts) cũng có một mẫu tin nhắn với đúng **cùng thanh thao tác gốc** bên dưới nội dung. SVG được đăng ký tại `web/icons.svg`, các biến thể dùng lại `.ui-button`, `.ui-button--message-action`, `.ui-action-strip` trong **một `web/styles.css`**; xử lý mẫu ở `web/src/action-gallery.ts`.
+
+**Phân biệt:** *Loading* là trạng thái xử lý mô phỏng, *Tải xuống* là hành động tạo file TXT cục bộ. Không sao chép/đăng tải dữ liệu khách thực; trình diễn đọc nội dung không phát tiếng hoặc gọi micro. Việc chia sẻ chỉ kích hoạt sau khi người dùng bấm và qua giao diện hệ điều hành, không tự gửi.
 
 ## Nút & biểu tượng dùng chung cho ô chat (UI-V12)
 
