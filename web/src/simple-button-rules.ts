@@ -26,7 +26,7 @@ const INNER_SPECS:readonly InnerSpec[]=[
 function innerIcon(name:string):SVGSVGElement{
  const ns="http://www.w3.org/2000/svg";
  const svg=document.createElementNS(ns,"svg");
- svg.classList.add("ui-icon","simple-button-inner-icon");if(name==="loader")svg.classList.add("ui-icon--loading");svg.setAttribute("viewBox","0 0 24 24");
+ svg.classList.add("ui-icon");if(name==="loader")svg.classList.add("ui-icon--loading");svg.setAttribute("viewBox","0 0 24 24");
  svg.setAttribute("aria-hidden","true");
  const use=document.createElementNS(ns,"use");
  use.setAttribute("href","./web/icons.svg#ui-icon-"+name);
