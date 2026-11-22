@@ -3,7 +3,7 @@
 ## Lỗi gốc và cách khắc phục
 
 1. Hàm `sampleButton()` tạo class `simple-button-<style>`, trong khi bảng CSS chỉ định nghĩa `.simple-button-demo-<style>`. Vì thế biến thể solid, soft, outline, ghost, vuông, tròn, loading, toggle hiển thị sai và dễ bị nhầm là các nút cùng kiểu. **Sửa tại TypeScript tạo class**, không thêm CSS vá.
-2. File `web/icons.svg` có một chú thích XML mở rồi lại lồng `<!--` trước khi đóng, làm file SVG không hợp lệ. **Sửa nguồn sprite**, thêm kiểm tra XML bằng Python trong CI và Pages.
+2. File `web/icons.svg` có chú thích XML lồng nhau **và một dòng `</svg>. -->` đóng root quá sớm**. Các icon plus, mic, send-up, ellipsis nằm ngoài root; trình duyệt có thể không nạp cả sprite. Đã sửa cả hai lỗi tại nguồn, thêm kiểm tra XML bằng Python trong CI và Pages.
 3. Mục 6 chưa minh họa tách biệt cỡ glyph với diện tích nút, chưa minh họa trực tiếp các cỡ. **Thêm bộ chọn xem thử 6.1**; giữ 14 mẫu nút, 10 icon, 14 cấu trúc nội dung hiện có, đổi cấu trúc cũ thành 6.2.
 4. Nút chọn mẫu 40×40 nhỏ hơn quy ước vùng chạm 44px của dự án. **Nâng nút chọn lên 44×44** trong cả hai danh sách.
 
