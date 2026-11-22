@@ -2507,6 +2507,16 @@ body.simple-first .topbar-end{gap:0}
  .ui-motion-dots>span{opacity:.75}
 }
 
+/* UI-V35 · Direct sample anchor. The data gallery is still owned by its original category. */
+.ui-sample-direct-link{
+ display:inline-flex;align-items:center;min-height:36px;
+ color:var(--ui-text);font-weight:650;text-underline-offset:3px;
+ text-decoration:underline
+}
+.ui-sample-direct-link:focus-visible{outline:2px solid var(--ui-focus-color,#597bda);outline-offset:2px}
+#tableColumnMatrixCard{scroll-margin-top:105px}
+@media(max-width:760px){#tableColumnMatrixCard{scroll-margin-top:22px}}
+
 /* UI-V34 · RULE 09: schema-driven ds-table projection; geometry shared by th and td. */
 .ui-column-matrix-card .studio-component-content{min-width:0}
 .ui-column-matrix-toolbar{display:flex;flex-wrap:wrap;align-items:flex-end;gap:9px;margin:14px 0}

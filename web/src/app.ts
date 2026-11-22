@@ -433,7 +433,24 @@ function galleryCategoryFromHash():GalleryCategory|null{
  if(hash==="components")return "all";
  if(hash==="overlays")return "overlays"; // Maintain old links to the menu example.
  const key=hash.startsWith("sample-")?hash.slice("sample-".length):"";
- return galleryCategories.includes(key as GalleryCategory)?key as GalleryCategory:null;
+ if(galleryCategories.includes(key as GalleryCategory))return key as GalleryCategory;
+ // Deep links to a sample (for example #tableColumnMatrixCard) must reveal
+ // their containing gallery category BEFORE attempting to scroll to the sample.
+ const target=document.getElementById(hash);
+ const ancestor=target?.closest<HTMLElement>("[data-gallery-category]");
+ const category=ancestor?.dataset.galleryCategory as GalleryCategory|undefined;
+ return category&&galleryCategories.includes(category)?category:null;
+}
+function scrollToGalleryAnchor():void{
+ const id=window.location.hash.slice(1);
+ if(!id||id==="components")return;
+ const target=document.getElementById(id);
+ if(target&&target.closest("[data-gallery-category]")){
+  requestAnimationFrame(()=>{
+   // At this point any old simple-first page mode and gallery filters have lifted.
+   if(!target.hidden)target.scrollIntoView({block:"start",behavior:"auto"});
+  });
+ }
 }
 function updateGallery():void{
  const search=normalizeGalleryText(gallerySearch.value);
@@ -495,7 +512,7 @@ for(const link of Array.from(document.querySelectorAll<HTMLAnchorElement>(".stud
 }
 window.addEventListener("hashchange",()=>{
  const category=galleryCategoryFromHash();
- if(category)chooseGallery(category,false);
+ if(category){chooseGallery(category,false);scrollToGalleryAnchor();}
 });
 const initialGalleryCategory=galleryCategoryFromHash();
 if(initialGalleryCategory)activeGalleryCategory=initialGalleryCategory;
@@ -537,7 +554,5 @@ render();
 // When a user opens #sample-inputs directly, filtering hides preceding sections.
 // Reposition the anchor once the visible layout has settled.
 if(initialGalleryCategory&&initialGalleryCategory!=="all"){
- requestAnimationFrame(()=>{
-  document.getElementById("sample-"+initialGalleryCategory)?.scrollIntoView({block:"start"});
- });
+ scrollToGalleryAnchor();
 }
