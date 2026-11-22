@@ -2571,6 +2571,12 @@ body.simple-first .topbar-end{gap:0}
  padding:8px 2px;font-weight:inherit;font-size:11px;
  color:inherit;text-align:inherit;white-space:nowrap
 }
+.ds-table.ds-table--schema th[data-col-role="money"] .ui-column-sort{justify-content:flex-end;text-align:right}
+.ds-table.ds-table--schema th[data-col-role="quantity"] .ui-column-sort,
+.ds-table.ds-table--schema th[data-col-role="date"] .ui-column-sort,
+.ds-table.ds-table--schema th[data-col-role="status"] .ui-column-sort{justify-content:center;text-align:center}
+.ds-table.ds-table--schema th[data-col-role="text"] .ui-column-sort,
+.ds-table.ds-table--schema th[data-col-role="note"] .ui-column-sort{justify-content:flex-start;text-align:left}
 .ds-table.ds-table--schema th[aria-sort="ascending"] .ui-column-sort,
 .ds-table.ds-table--schema th[aria-sort="descending"] .ui-column-sort{
  font-weight:750;text-decoration:underline;text-underline-offset:3px
