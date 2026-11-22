@@ -838,7 +838,7 @@ test("V22 preserves multiline examples and expands all ChatGPT text styles",()=>
  assert.ok(src.includes('line1=document.createElement("strong")'),"mixed weight example");
  assert.ok(src.includes('selectedMultiId=item.id'),"tap selection");
  assert.ok(src.includes('multilineChosen.hidden=false'),"selection confirmation");
- assert.ok(src.includes('hash!=="#simpleMultiline"'),"direct link opens simple section");
+ assert.ok(src.includes('document.body.classList.add("simple-first")'),"direct link opens simple section");
  for(const selector of [".simple-multi-preview",".simple-multi-bold",".simple-multi-italic",
    ".simple-multi-underline",".simple-multi-strike",".simple-multi-mixed",".simple-multi-muted"]){
   assert.ok(css.includes(selector),selector);
@@ -907,7 +907,7 @@ test("V24 shows 12 independent underline and link treatments beneath typography"
  assert.ok(src.includes('row.className="simple-font-row simple-underline-row"'));
  assert.ok(src.includes('pickedUnderline=item.id'));
  assert.ok(src.includes('underlineChosen.hidden=false'));
- assert.ok(src.includes('hash!=="#simpleUnderline"'),"direct anchor stays on the simple view");
+ assert.ok(src.includes('document.body.classList.add("simple-first")'),"direct anchor stays on the simple view");
  assert.ok(css.includes("text-decoration-style:dotted"),"dotted reference link");
  assert.ok(css.includes("text-decoration-style:dashed"),"dashed reference link");
  assert.ok(css.includes("text-decoration-color:color-mix(in oklab,currentColor 70%,transparent)"),
@@ -942,7 +942,7 @@ test("V25 adds 24 bordered text and bubble variants without extra controls",()=>
  assert.ok(src.includes('source:"SDK · CodeBlock"'),"CodeBlock attribution");
  assert.ok(src.includes('source:"assistant-ui"'),"bubble community attribution");
  assert.ok(src.includes("heading.textContent=index===0"),"two readable sample groups");
- assert.ok(src.includes('hash!=="#simpleFrames"'),"simple section remains visible on hash navigation");
+ assert.ok(src.includes('document.body.classList.add("simple-first")'),"simple section remains visible on hash navigation");
  assert.ok(src.includes('framesChosen.hidden=false'),"tap to pick");
  assert.ok(src.includes('preview.textContent=item.lines.join'),"safe static content");
  assert.ok(!src.includes("innerHTML"),"no HTML injection in samples");
@@ -992,7 +992,7 @@ test("V26 adds 12 usable form input specimens on the simple screen",()=>{
  assert.ok(!src.includes("fetch(")&&!src.includes("WebSocket(")&&!src.includes("supabase"),"no service calls");
  assert.ok(app.includes('import { initSimpleFields } from "./simple-fields.js";'));
  assert.ok(app.includes("initSimpleFields();"));
- assert.ok(gallery.includes('hash!=="#simpleFields"'));
+ assert.ok(gallery.includes('document.body.classList.add("simple-first")'));
  assert.ok(html.includes('src="./web/dist-v37/app.js"'));
  assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v37"));
  assert.ok(html.includes('id="simpleItems"')&&html.includes('id="simpleMultilineItems"')
@@ -1042,7 +1042,7 @@ test("V27 adds a standalone catalogue of 14 buttons and 10 shared SVG icons",()=
  assert.ok(css.includes("prefers-reduced-motion"),"spinner motion accessibility");
  assert.ok(app.includes('import { initSimpleButtons } from "./simple-buttons.js";'));
  assert.ok(app.includes("initSimpleButtons();"));
- assert.ok(gallery.includes('hash!=="#simpleButtons"'));
+ assert.ok(gallery.includes('document.body.classList.add("simple-first")'));
  assert.ok(html.includes('src="./web/dist-v37/app.js"'));
  assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v37"));
  for(const id of ["simpleItems","simpleMultilineItems","simpleUnderlineItems","simpleFramesItems","simpleFieldsItems"])
@@ -1087,7 +1087,7 @@ test("V28 defines 14 accurate button-content layouts for icons, images, glyphs a
  assert.ok(!src.includes("fetch(")&&!src.includes("WebSocket(")&&!src.includes("supabase"),"no backend");
  assert.ok(app.includes('import { initSimpleButtonRules } from "./simple-button-rules.js";'));
  assert.ok(app.includes("initSimpleButtonRules();"));
- assert.ok(gal.includes('hash!=="#simpleButtonRules"'),"direct anchor works");
+ assert.ok(gal.includes('document.body.classList.add("simple-first")'),"direct anchor works");
  assert.ok(html.includes('src="./web/dist-v37/app.js"')&&html.includes('2027-UI-V37'));
  assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v37"),"versioned ES module graph");
  for(const id of ["simpleItems","simpleMultilineItems","simpleUnderlineItems","simpleFramesItems",
