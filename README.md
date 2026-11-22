@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Hiện có ba trang Web:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V11**: một văn bản chỉnh font/nền như trước, bên dưới là **15 bộ mẫu được chia vào 7 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V12**: một văn bản chỉnh font/nền như trước, bên dưới là **16 bộ mẫu được chia vào 7 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
 
@@ -18,6 +18,15 @@
 - Danh mục [**nguồn gốc Drive + mốc phục hồi**](./references/ORIGINAL_UI_SOURCES_AND_BASELINE_2026-11-22.md). Không sao chép trọn CSS/HTML nhúng từ Save Page hoặc thay đổi các tệp nguồn trong Drive.
 
 **Ranh giới:** mẫu UI chỉ chạy tại máy người xem, chưa kết nối CHAT/TAPHOA, không gửi tin nhắn hoặc làm phát sinh khoản thu/đơn hàng thật. Bản V08 đang có ở trang chính được giữ nguyên; V09 là một trang mới.
+
+## Nút & biểu tượng dùng chung cho ô chat (UI-V12)
+
+**Đã đưa nút +, chữ Cao/chevron, mic và mũi tên gửi về đúng nhóm [Nút & biểu tượng](https://1sl2tp.github.io/2027/#sample-actions)** thành một bộ mẫu chủ. Cả 4 ô gõ chat tại [Ô nhập & gõ chat](https://1sl2tp.github.io/2027/#sample-inputs) dùng lại chính các class `.ui-button`, `.ui-icon` và cùng sprite SVG.
+
+- **Một nguồn kích cỡ:** `web/styles.css` sở hữu hệ `--ui-control-*`: nút chạm 44px, vòng tròn gửi 36px, mũi tên 20px, plus 22px, mic 19px, chữ Cao 14px, chevron 13px. Không định nghĩa cỡ nút lại bên trong `.composer-*`.
+- **Một nguồn hình dạng icon:** `web/icons.svg` có các symbol dùng chung, được Pages đóng gói; các nút không dùng chữ “↑”, “⌄” tự vẽ rời. `web/src/composer-gallery.ts` chỉ đổi trạng thái icon send/voice/stop; không thao tác mạng.
+- **Phân loại trước khi bổ sung:** [danh mục component kỹ thuật](./references/UI_COMPONENT_CATALOG_2026-11-22.md) ánh xạ từ token → icon → button → thành phần ghép → luồng. **RULE 06** ở `RULES.md` yêu cầu mẫu mới vào đúng danh mục và kế thừa từ component chủ.
+- **Phạm vi:** trang thư viện chính đã đồng bộ hệ nút (cả popup/menu), nhưng hai khung lịch sử `base.html` V09 và `flows.html` V04 chưa di chuyển hoàn toàn sang bộ primitive mới. Chưa kiểm chứng pixel trên Safari/Chrome thiết bị thật.
 
 ## Bốn mẫu ô gõ chat có media (UI-V11)
 
@@ -104,7 +113,9 @@ index.html               ← Văn bản mẫu + thành phần (V06)
 flows.html               ← Trang xem ba khung (V04)
 base.html                ← Mẫu gốc 2027 (V09)
 web/src/design.ts        ← Nguồn token màu/chữ, công thức tương phản, xuất CSS
-web/src/app.ts           ← Điều khiển từng vùng văn bản và 8 mẫu thành phần
+web/src/app.ts           ← Điều khiển gallery, văn bản và mẫu thành phần
+web/src/composer-gallery.ts ← Bộ điều khiển 4 ô chat mẫu (chỉ local)
+web/icons.svg            ← Một nguồn icon SVG của thư viện
 web/src/base.ts          ← Điều khiển mẫu gốc và 4 preset
 web/src/flows.ts         ← Một state mẫu chung cho ba mô-đun
 web/dist/*.js            ← Đầu ra TypeScript khi chạy npm run build
@@ -142,7 +153,7 @@ python3 -m http.server 8000
 
 Mở `http://localhost:8000/` (thư viện font) hoặc `http://localhost:8000/flows.html` (ba khung). `npm run verify` chạy kiểm thử Node rồi biên dịch TypeScript từ `web/src/*.ts` sang `web/dist/*.js`.
 
-Workflow `.github/workflows/pages.yml` kiểm thử và đóng gói cả hai trang, **chỉ một stylesheet** và toàn bộ JS đã biên dịch (bao gồm `base.html`). URL trên chỉ được coi là bản mới sau khi Pages deploy thành công.
+Workflow `.github/workflows/pages.yml` kiểm thử và đóng gói cả ba trang, **chỉ một stylesheet và một tệp icon SVG** và toàn bộ JS đã biên dịch (bao gồm `base.html`). URL trên chỉ được coi là bản mới sau khi Pages deploy thành công.
 
 ## Android (khung từ các vòng trước)
 
@@ -155,4 +166,4 @@ Yêu cầu JDK 17, Android SDK 35, Gradle 8.11.1. V04 là cập nhật Web Libra
 
 ## Ghi chú thiết kế
 
-[**RULES.md**](./RULES.md) chứa nguyên tắc UI/UX R01–R05. V04 đang minh họa các nguyên tắc đó; không tạo một hệ rule song song. Việc xem/nghiệm thu trên thiết bị iOS/Android thật khác với việc CI compile thành công.
+[**RULES.md**](./RULES.md) chứa nguyên tắc UI/UX R01–R06. V04 đang minh họa các nguyên tắc đó; không tạo một hệ rule song song. Việc xem/nghiệm thu trên thiết bị iOS/Android thật khác với việc CI compile thành công.
