@@ -12,7 +12,7 @@ html{scroll-behavior:smooth}
 html,body{margin:0;min-height:100%;background:var(--page);color:var(--ink)}
 button,input{font:inherit}
 button{cursor:pointer;-webkit-tap-highlight-color:transparent}
-button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #597bda;outline-offset:3px}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--ui-focus-color,#597bda);outline-offset:2px}
 a{color:inherit;text-decoration:none}
 button{border:0}
 button:disabled{opacity:.45;cursor:default}
@@ -162,7 +162,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid #fff
  --ui-text:#171717;--ui-text-muted:#646464;--ui-muted:#646464;--ui-border:#E0E0E0;
  --ui-font-size:16px;--ui-line-height:1.50;--ui-font-weight:400;
  --ui-font-style:normal;--ui-letter-spacing:0em;
- --ui-strong:#212121;--ui-gap:12px;--ui-radius:12px;--ui-hit:44px
+ --ui-strong:#212121;--ui-gap:12px;--ui-radius:12px;--ui-hit:44px;--ui-focus-color:#597bda
 }
 .flow-page{background:#fff;color:var(--ui-text);font-family:var(--ui-font)}
 .flow-page .topbar{position:relative}
@@ -649,7 +649,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid #fff
 .studio-demo-label{display:block;font-size:12px;font-weight:650;margin-bottom:9px}
 .studio-qty{display:flex;align-items:stretch;max-width:240px;width:100%;border-radius:9px;overflow:hidden;border:1px solid var(--ui-border)}
 .studio-qty button{display:grid;place-items:center;flex:none;width:44px;min-height:44px;color:var(--ui-text);background:var(--ui-surface);font-size:21px}
-.studio-qty input{width:100%;min-width:0;min-height:44px;border:0;border-inline:1px solid var(--ui-border);background:var(--ui-bg);color:var(--ui-text);text-align:center;font-size:16px;appearance:textfield}
+.studio-qty input{width:100%;min-width:0;min-height:44px;border:0;border-inline:1px solid var(--ui-border);border-radius:0;background:var(--ui-bg);color:var(--ui-text);text-align:center;font-size:16px;appearance:textfield;-webkit-appearance:textfield}
 .studio-qty input::-webkit-inner-spin-button,.studio-qty input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .studio-search-field{display:flex;align-items:center;gap:9px;min-height:46px;padding:0 12px;max-width:100%;border-radius:10px;border:1px solid var(--ui-border);background:var(--ui-surface);color:var(--ui-text-muted)}
 .studio-search-field input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--ui-text);font-size:16px;height:44px}
@@ -779,7 +779,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid #fff
 .quantity-variant-grid .variant-sample{justify-content:space-between;min-height:127px}
 .qty-variant{display:flex;align-items:center;min-height:44px;max-width:100%;width:max-content;color:var(--ui-text)}
 .qty-variant button{min-width:44px;height:44px;display:grid;place-items:center;flex:none;background:var(--ui-surface);color:var(--ui-text);font-size:21px;line-height:1;cursor:pointer}
-.qty-variant input{min-width:0;max-width:72px;width:62px;height:44px;text-align:center;background:var(--ui-bg);color:var(--ui-text);border:0;font-size:16px;font-variant-numeric:tabular-nums;appearance:textfield}
+.qty-variant input{min-width:0;max-width:72px;width:62px;height:44px;text-align:center;background:var(--ui-bg);color:var(--ui-text);border:0;border-radius:0;font-size:16px;font-variant-numeric:tabular-nums;appearance:textfield;-webkit-appearance:textfield}
 .qty-variant input::-webkit-inner-spin-button,.qty-variant input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .qty-joined{border:1px solid var(--ui-border);border-radius:10px;overflow:hidden}
 .qty-joined button:first-child{border-right:1px solid var(--ui-border)}
@@ -805,7 +805,20 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid #fff
 .input-pill{border-radius:999px}
 .input-underline{border:0;border-bottom:1px solid var(--ui-text-muted);border-radius:0;padding-inline:0}
 .input-filled{border:1px solid transparent;border-radius:10px;background:var(--ui-surface)}
-.input-variant:focus-visible,.input-variant-shell:focus-within{outline:2px solid #5f84ca;outline-offset:2px}
+/* Grouped inputs: focus the OUTER component, never the inner number/text field.
+   One ring works for mouse, touch and keyboard while keeping dividers stationary. */
+:is(.studio-qty,.qty-joined,.qty-pill,.qty-inline,.input-variant-shell,.studio-search-field):focus-within,
+.input-variant:focus-visible,
+.qty-separated input:focus-visible,.qty-minimal input:focus-visible{
+ border-color:var(--ui-focus-color,#597bda);
+ outline:2px solid var(--ui-focus-color,#597bda);
+ outline-offset:2px;
+}
+:is(.studio-qty,.qty-joined,.qty-pill,.qty-inline,.input-variant-shell,.studio-search-field) input:focus,
+:is(.studio-qty,.qty-joined,.qty-pill,.qty-inline) button:focus-visible{
+ outline:none;
+ box-shadow:none;
+}
 .input-variant-shell{display:flex;align-items:center;width:100%;min-height:45px;gap:8px;padding:0 4px 0 12px;border:1px solid var(--ui-border);border-radius:10px;background:var(--ui-bg);color:var(--ui-text-muted)}
 .input-variant-shell>span{font-size:21px}
 .input-variant-shell input{flex:1;min-width:0;font-family:var(--ui-font);font-size:16px;min-height:42px;border:0;background:transparent;color:var(--ui-text);outline:0}
