@@ -56,6 +56,23 @@ Tìm kiếm, ô nhập dạng chữ, ô chat và bốn mẫu Composer. **Compose
 ```
 `web/icons.svg` phải được đóng gói cùng `web/styles.css` trong GitHub Pages và dùng đường dẫn tương ứng ở từng trang.
 
+### Thanh thao tác nội dung (UI-V13)
+
+Bộ mới nằm trong nhóm **05 — Nút & biểu tượng**, mẫu ứng dụng nằm trong **06 — Hàng & bố cục**. Cả hai sử dụng lại icon/primitive và không sở hữu bộ nút mới:
+
+| Hành động/trạng thái | Icon chung `web/icons.svg` | Xử lý mẫu |
+|---|---|---|
+| Sao chép | `ui-icon-copy` | Clipboard API, thông báo nếu trình duyệt chặn |
+| Thích / Không thích | `ui-icon-thumbs-up`, `ui-icon-thumbs-down` | `aria-pressed`, lựa chọn loại trừ nhau |
+| Đọc nội dung | `ui-icon-volume` | Chỉ trạng thái; không thu âm hoặc phát âm thanh |
+| Chia sẻ | `ui-icon-share` | Bảng chia sẻ hệ điều hành nếu hỗ trợ, không tự gửi |
+| Menu phụ | `ui-icon-ellipsis` | Mở/đóng menu, Escape và click ngoài |
+| Tải xuống | `ui-icon-download` | Tạo tệp TXT nội dung mẫu tại trình duyệt |
+| Loading / làm mới | `ui-icon-loader`, `ui-icon-refresh` | Vòng quay 900ms, không dùng mạng |
+| Hoàn tất | `ui-icon-check` | Trạng thái kết thúc mô phỏng |
+
+Các modifier gốc trong CSS: `.ui-button--message-action`, `.ui-button--message-labeled`, `.ui-icon--action`, `.ui-icon--loading`; bố cục lắp ghép `.ui-action-strip`. Vùng nhấn thiết kế 44×44px, icon 17px. Chỉ hỗ trợ trình diễn cục bộ, sử dụng cùng RULE 06.
+
 ### 06. Hàng & bố cục
 
 Icon + chữ + 1–2 dòng phụ + vùng cuối chứa số, trạng thái, mũi tên hoặc nút. Chỉ cấp `row` quản lý phân chia không gian; không định nghĩa lại màu và cỡ của `.ui-button` ở row.
