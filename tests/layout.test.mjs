@@ -67,3 +67,48 @@ test("R03 keeps attributed UX principles and accessibility checks in one rule fi
   assert.match(rules,/4\.5:1/);
   assert.match(rules,/không tự động cấp phép sửa CHAT production/);
 });
+
+test("V04 keeps original typography library and links three interactive frames",()=>{
+  const index=read("index.html");
+  const flows=read("flows.html");
+  assert.match(index,/<h1>Chữ & màu nền<\/h1>/);
+  assert.ok(index.includes('href="./flows.html#chat/contacts"'));
+  assert.ok(index.includes('href="./flows.html#work/summary"'));
+  assert.ok(index.includes('href="./flows.html#sales/products"'));
+  assert.match(flows,/data-ui-version="2027-UI-V04"/);
+  for(const module of ["chat","work","sales"]) assert.ok(flows.includes('data-module="'+module+'"'));
+  for(const id of ["flowApp","flowStatus"]) assert.ok(flows.includes('id="'+id+'"'));
+  assert.ok(flows.includes("./web/styles.css?v=2027-UI-V04"));
+  assert.ok(flows.includes("./web/dist/flows.js?v=2027-UI-V04"));
+  assert.doesNotMatch(flows,/<script[^>]+src="https?:\/\//);
+});
+
+test("V04 one CSS owner and linked data model for Chat Work Sales",()=>{
+  const css=read("web/styles.css");
+  const flow=read("web/src/flows.ts");
+  for(const token of ["--ui-font","--ui-bg","--ui-soft","--ui-border","--ui-radius","--ui-hit"]){
+    assert.ok(css.includes(token),token);
+  }
+  for(const component of [".flow-app-shell",".flow-app-head",".flow-app-side",".flow-app-content",".flow-compose",".flow-order-card",".flow-receipt",".flow-stat"]){
+    assert.ok(css.includes(component),component);
+  }
+  for(const feature of ["renderAuth","renderChat","renderPayments","renderSummary","renderInvoice","renderDebts","renderQuotes","renderProducts","renderDrafts","renderDelivered","renderSettings","shareInvoice","shareQuote","makeDraft","addProduct","deliveredTotal","paidTotal","debt"]){
+    assert.ok(flow.includes(feature),feature);
+  }
+  assert.match(flow,/newState\(\):UiState/);
+  assert.match(flow,/state\.orders\.push\(draft\)/);
+  assert.match(flow,/state\.payments\.push/);
+  assert.match(flow,/canvas\.toDataURL\("image\/png"\)/);
+  assert.doesNotMatch(flow,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:/i);
+});
+
+test("V04 Pages bundles every frame with one stylesheet",()=>{
+  const yaml=read(".github/workflows/pages.yml");
+  assert.ok(yaml.includes('"flows.html"'));
+  assert.ok(yaml.includes("cp index.html flows.html _site/"));
+  assert.ok(yaml.includes("cp web/styles.css _site/web/"));
+  assert.ok(yaml.includes("cp -R web/dist _site/web/"));
+  const links=[read("index.html"),read("flows.html")];
+  for(const doc of links)assert.ok(doc.includes("./web/styles.css?v="));
+  assert.equal(links.reduce((n,doc)=>n+(doc.match(/<link rel="stylesheet"/g)||[]).length,0),2);
+});

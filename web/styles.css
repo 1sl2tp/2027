@@ -150,3 +150,267 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:2px solid #fff
 @media(max-width:760px){.topbar{height:57px;padding:0 17px}.top-hint{display:none}.workspace{display:block;min-height:calc(100dvh - 57px)}.sidebar{display:none}.main{padding:31px 18px 0}.page-heading{padding-bottom:28px}.page-heading h1{font-size:29px}.section-heading{padding-top:22px}.palette-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.settings-grid{grid-template-columns:1fr}.font-list{grid-template-columns:1fr 1fr}.font-choice{flex-direction:row;align-items:center;min-height:70px}.preview-stage{padding:16px 10px 22px}.demo-body{grid-template-columns:1fr;padding:20px;gap:25px}.component-specimens{border-left:0;border-top:1px solid var(--sample-line);padding:20px 0 0}.preview-toolbar{flex-wrap:wrap;gap:7px}.preview-toolbar .toolbar-fill{display:none}.minor-btn,.major-btn{padding-inline:12px}.section{padding-bottom:28px}.setting-card{padding:16px}.demo-top{padding-inline:18px}.demo-bottom{padding-inline:18px}}
 @media(max-width:390px){.palette-preview{height:76px}.font-choice>strong{font-size:23px;width:27px;flex-basis:27px}.font-choice{gap:7px;padding-inline:8px}.font-choice small{font-size:9px}.demo-body{padding:18px 15px;gap:20px}.demo-top,.demo-bottom{padding-inline:15px}.preview-stage{padding-inline:6px}.segmented button{padding:4px 10px}.toolbar-fill{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.demo-canvas{transition:none}}
+
+
+/* ─── V04 Unified frame system ───────────────────────────────────────────
+   One CSS owner for UI Library and Chat / Work / Sales.
+   Flow components inherit the same typography, colors and spacing tokens.
+   No per-module stylesheet. */
+:root{
+ --ui-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+ --ui-bg:#ffffff;--ui-panel:#fafaf9;--ui-soft:#f5f5f4;
+ --ui-text:#191919;--ui-muted:#737373;--ui-border:#e7e7e5;
+ --ui-strong:#212121;--ui-gap:12px;--ui-radius:12px;--ui-hit:44px
+}
+.flow-page{background:#fff;color:var(--ui-text);font-family:var(--ui-font)}
+.flow-page .topbar{position:relative}
+.flow-return{font-size:12px;color:#656565;padding:9px 12px;border-radius:8px}
+.flow-return:hover{background:#f4f4f3;color:#111}
+.flow-library{width:min(100%,1410px);padding:37px clamp(16px,4vw,54px) 55px;margin:auto}
+.flow-intro{display:flex;justify-content:space-between;align-items:end;gap:20px;padding-bottom:27px}
+.flow-intro h1{font-size:clamp(27px,3vw,39px);line-height:1.2;letter-spacing:-1.15px;margin:10px 0 9px}
+.flow-intro p{font-size:14px;max-width:720px;color:#777;line-height:1.65;margin:0}
+.flow-intro-tag{font-size:11px;color:#737373;white-space:nowrap;border:1px solid #e5e5e5;border-radius:8px;padding:9px 11px}
+.flow-intro-tag span{color:#aaa;margin:0 4px}
+.flow-route-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.flow-route-card{display:flex;flex-direction:column;gap:9px;text-align:left;padding:18px 19px 20px;min-height:150px;border:1px solid #e7e7e7;border-radius:13px;background:#fff;color:#1e1e1e;transition:border-color .15s,background .15s}
+.flow-route-card:hover{border-color:#aaa}
+.flow-route-card.is-active{border-color:#343434;box-shadow:0 0 0 1px #343434;background:#fcfcfb}
+.flow-route-top{display:flex;justify-content:space-between;align-items:center;color:#8a8a8a}
+.flow-route-number{font-size:11px;letter-spacing:.09em;font-weight:800}
+.flow-route-arrow{font-size:19px;font-weight:300}
+.flow-route-card strong{font-size:18px;font-weight:710;letter-spacing:-.35px}
+.flow-route-card>span:last-child{font-size:12px;line-height:1.5;color:#808080}
+.flow-stage-title{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:37px 0 15px}
+.flow-stage-title h2,.flow-architecture h2{font-size:20px;font-weight:720;margin:6px 0 0;letter-spacing:-.4px}
+.flow-toolbar{display:flex;align-items:center;gap:5px;background:#f4f4f3;border:1px solid #e5e5e5;padding:4px;border-radius:10px}
+.flow-toolbar button{height:34px;padding:0 13px;border-radius:7px;font-size:12px;color:#656565;background:transparent;white-space:nowrap}
+.flow-toolbar button.is-selected{background:#fff;color:#222;box-shadow:0 1px 3px #0001;font-weight:650}
+.flow-toolbar .flow-reset{margin-left:7px;border-left:1px solid #ddd;border-radius:0 6px 6px 0}
+.flow-preview-stage{display:flex;align-items:flex-start;justify-content:center;padding:24px 20px;min-height:748px;background:#f0f0ee;border:1px solid #e7e7e7;border-radius:15px;overflow:hidden}
+.flow-app{
+ --app-bg:var(--ui-bg);--app-soft:var(--ui-soft);--app-text:var(--ui-text);
+ --app-muted:var(--ui-muted);--app-border:var(--ui-border);
+ width:min(100%,1160px);height:700px;max-height:calc(100dvh - 50px);
+ border-radius:14px;border:1px solid #dcdcd9;overflow:hidden;
+ background:var(--app-bg);color:var(--app-text);font-family:var(--ui-font);
+ box-shadow:0 17px 45px #0000000c;flex:none
+}
+.flow-app[data-device=phone]{width:min(100%,390px);height:700px;max-height:calc(100dvh - 45px)}
+.flow-loading{padding:90px 20px;text-align:center;color:var(--app-muted);font-size:14px}
+.flow-app-shell{height:100%;display:flex;flex-direction:column;min-height:0}
+.flow-app button,.flow-app select,.flow-app input,.flow-app textarea{font:inherit}
+.flow-app button{transition:background .13s ease;max-width:100%;color:inherit}
+.flow-app-head{height:58px;flex:0 0 58px;border-bottom:1px solid var(--app-border);padding:0 16px;display:flex;align-items:center;gap:21px;min-width:0}
+.flow-app-brand{display:flex;align-items:center;gap:8px;white-space:nowrap;flex:none;font-size:13px}
+.flow-app-logo,.flow-auth-mark{display:grid;place-items:center;background:#252525;color:#fff;border-radius:9px;font-size:12px;font-weight:780;letter-spacing:-.8px}
+.flow-app-logo{width:30px;height:30px}
+.flow-module-nav{display:flex;align-items:center;gap:4px;min-width:0;margin:auto}
+.flow-module-nav button{display:flex;gap:6px;align-items:center;padding:8px 12px;font-size:12px;color:#777;border-radius:9px;background:transparent;white-space:nowrap}
+.flow-module-nav button.active{background:#ececea;color:#191919;font-weight:680}
+.flow-module-nav button b{color:#a4a4a4;font-size:10px;font-weight:690}
+.flow-signout{background:transparent;font-size:12px;color:#777!important;white-space:nowrap;padding:9px 10px;border-radius:8px}
+.flow-signout:hover{background:#f2f2f2}
+.flow-app-context{min-height:43px;flex:0 0 auto;padding:5px 19px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fbfbfa;border-bottom:1px solid var(--app-border);font-size:11px;color:#797979}
+.flow-app-context>span{display:flex;align-items:center;gap:8px}
+.flow-context-dot,.flow-live-dot{width:7px;height:7px;background:#8b8b8b;border-radius:50%;display:inline-block;flex:none}
+.flow-app-context label{display:flex;align-items:center;gap:9px;font-size:11px;white-space:nowrap}
+.flow-app-context select{color:#252525;border:1px solid var(--app-border);background:#fff;border-radius:7px;padding:5px 7px;font-size:11px;max-width:150px}
+.flow-app-body{display:flex;flex:1;min-height:0;min-width:0}
+.flow-app-side{width:178px;flex:0 0 178px;display:flex;flex-direction:column;min-width:0;padding:20px 9px 10px;background:#fafaf9;border-right:1px solid var(--app-border)}
+.flow-side-label{font-size:10px;color:#929292;letter-spacing:.075em;font-weight:750;padding:0 12px;margin-bottom:12px}
+.flow-app-side nav{display:flex;flex-direction:column;gap:3px}
+.flow-app-side nav button{min-height:38px;text-align:left;padding:7px 11px;background:transparent;border-radius:8px;color:#696969;font-size:12px}
+.flow-app-side nav button.active{background:#e9e9e6;color:#222;font-weight:700}
+.flow-app-side nav button:hover{background:#ededeb}
+.flow-side-foot{margin-top:auto;font-size:10px;color:#aaa;line-height:1.6;padding:0 11px}
+.flow-app-content{flex:1;min-width:0;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:25px clamp(16px,4vw,44px) 30px;scrollbar-gutter:stable}
+.flow-app-content.is-thread{padding:0;display:flex;flex-direction:column;overflow:hidden}
+.flow-app-footer{height:32px;flex:0 0 32px;border-top:1px solid var(--app-border);padding:0 16px;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#999;gap:10px}
+.flow-panel-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding:0 0 18px;border-bottom:1px solid var(--app-border);margin-bottom:18px}
+.flow-panel-heading h3{font-size:21px;line-height:1.25;letter-spacing:-.55px;margin:0 0 5px}
+.flow-panel-heading p{font-size:12px;line-height:1.55;color:#888;margin:0;max-width:570px}
+.flow-context-tag{background:#f3f3f1;border:1px solid var(--app-border);padding:7px 10px;border-radius:7px;color:#777;font-size:11px;white-space:nowrap}
+.flow-primary,.flow-secondary,.flow-quiet,.flow-text-btn,.flow-media-picker{font-size:12px!important;min-height:36px;border-radius:9px;padding:8px 13px;white-space:normal;font-weight:650}
+.flow-app .flow-primary{background:#242424;color:#fff}
+.flow-app .flow-primary:hover{background:#474747}
+.flow-app .flow-secondary{background:#fff;color:#333;border:1px solid #dedede}
+.flow-app .flow-secondary:hover{background:#f4f4f4}
+.flow-app .flow-quiet,.flow-app .flow-text-btn{background:transparent;color:#626262}
+.flow-app .flow-text-btn{text-decoration:underline;text-underline-offset:3px;padding:5px}
+.flow-inline-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:18px}
+.flow-small-note{display:block;margin-top:14px;color:#999;font-size:11px;line-height:1.6}
+.flow-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:22px}
+.flow-stat{display:flex;flex-direction:column;gap:9px;min-height:96px;border:1px solid var(--app-border);border-radius:11px;padding:15px;background:#fdfdfc}
+.flow-stat small{font-size:11px;color:#888}
+.flow-stat strong{font-size:clamp(16px,2.1vw,22px);letter-spacing:-.5px;font-weight:740;white-space:nowrap}
+.flow-panel-subheading{font-size:12px;color:#777;font-weight:700;margin:21px 0 10px}
+.flow-form-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:18px;border:1px solid var(--app-border);border-radius:12px;background:#fafaf9;max-width:550px}
+.flow-form-card h4{font-size:14px;margin:0 0 5px}.flow-form-card label,.flow-field-label,.flow-search-label{font-size:12px;font-weight:650;color:#555}
+.flow-form-card input,.flow-select,.flow-search{width:100%;min-height:43px;border:1px solid #dfdfdf;background:#fff;border-radius:9px;padding:9px 11px;font-size:14px;color:#222}
+.flow-form-card input{max-width:300px}
+.flow-form-card p,.flow-helper{font-size:11px;line-height:1.55;color:#888;margin:0}
+.flow-row{min-height:45px;display:flex;justify-content:space-between;align-items:center;gap:13px;border-bottom:1px solid var(--app-border);font-size:13px}
+.flow-row span{min-width:0}.flow-row small{font-size:10px;color:#9b9b9b}
+.flow-row strong{font-weight:650;white-space:nowrap;font-variant-numeric:tabular-nums}
+.flow-row-strong{font-weight:750;border-top:1px solid var(--app-border)}
+.flow-order-card{border:1px solid var(--app-border);border-radius:12px;margin-bottom:12px;padding:15px 18px}
+.flow-order-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;font-size:13px}
+.flow-chip{display:inline-block;font-size:10px;color:#515151;padding:5px 8px;border-radius:6px;background:#efefed;white-space:nowrap;font-weight:600}
+.flow-chip.draft{background:#f6f5f2;color:#817d73}
+.flow-line{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #f0f0f0;min-height:38px;font-size:12px}
+.flow-line span{min-width:0}.flow-line small{font-size:11px;color:#989898}
+.flow-line strong{font-size:12px;white-space:nowrap;font-weight:630;font-variant-numeric:tabular-nums}
+.flow-order-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px}
+.flow-order-bottom>b{font-size:14px}
+.flow-empty{border:1px dashed #dedede;border-radius:10px;padding:28px 18px;background:#fcfcfb;color:#888;font-size:13px;text-align:center;margin:12px 0}
+.flow-product-table{max-width:760px}
+.flow-product-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--app-border)}
+.flow-product-symbol{width:42px;height:42px;flex:none;background:#f2f2f1;border-radius:10px;display:grid;place-items:center;color:#9d9d9d}
+.flow-product-item>div{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.flow-product-item strong{font-size:13px}.flow-product-item small{font-size:11px;color:#888}
+.flow-line-qty{gap:10px}
+.flow-line-qty span{flex:1}
+.flow-stepper{display:flex;align-items:center;gap:8px;flex:none}
+.flow-stepper b{font-size:12px;min-width:16px;text-align:center}
+.flow-stepper button{width:28px;height:28px;display:grid;place-items:center;background:#f1f1ef;color:#222;border-radius:7px;font-size:18px}
+.flow-receipt{max-width:510px;margin-top:17px;padding:20px;border:1px solid #dddddd;background:#fff;border-radius:3px;box-shadow:0 5px 18px #00000008;color:#161616}
+.flow-receipt-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:17px;border-bottom:2px solid #333}
+.flow-receipt-top b{font-size:18px;letter-spacing:-.4px}
+.flow-receipt-top small{font-size:10px;color:#666}
+.flow-receipt-meta{display:flex;gap:12px;justify-content:space-between;padding:14px 0;font-size:12px;color:#555}
+.flow-receipt-total{display:flex;align-items:center;justify-content:space-between;padding:15px 0;font-size:14px}
+.flow-receipt>small{font-size:10px;color:#999}
+.flow-debt-total{padding:24px 21px;display:flex;flex-direction:column;gap:7px;background:#f3f3f2;border-radius:13px}
+.flow-debt-total small{font-size:12px;color:#777}
+.flow-debt-total strong{font-size:31px;letter-spacing:-.8px}
+.flow-debt-total span{font-size:11px;color:#818181;line-height:1.55}
+.flow-setting-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 0;border-bottom:1px solid var(--app-border)}
+.flow-setting-row>span:first-child{display:flex;flex-direction:column;gap:5px;min-width:0}
+.flow-setting-row strong{font-size:13px}
+.flow-setting-row small{font-size:11px;color:#888;line-height:1.5}
+.flow-app-shell.compact .flow-row,.flow-app-shell.compact .flow-line{min-height:29px}
+.flow-app-shell.compact .flow-order-card{padding:10px 12px}
+.flow-auth{display:flex;align-items:center;justify-content:center;min-height:100%;padding:22px;background:#f7f7f6}
+.flow-auth-card{width:min(100%,392px);padding:31px;border:1px solid #e6e6e6;background:#fff;border-radius:17px}
+.flow-auth-mark{width:40px;height:40px;margin-bottom:24px;font-size:14px}
+.flow-eyebrow{font-size:10px;font-weight:700;color:#999;letter-spacing:.1em}
+.flow-auth h2{font-size:25px;line-height:1.2;letter-spacing:-.8px;margin:10px 0}
+.flow-auth p{font-size:13px;line-height:1.6;color:#888;margin:0 0 19px}
+.flow-auth form{display:flex;flex-direction:column;gap:9px}
+.flow-auth label{font-size:12px;font-weight:650}
+.flow-auth input{width:100%;height:46px;border:1px solid #dfdfdf;border-radius:10px;padding:0 12px;background:#fff;color:#222;font-size:16px}
+.flow-app .flow-fill{min-height:44px;margin-top:6px}
+.flow-auth-note{font-size:11px;color:#aaa;text-align:center;margin-top:19px}
+.flow-search-label{display:block;margin:15px 0 7px}.flow-search{max-width:500px;margin-bottom:14px}
+.flow-contact-list{display:flex;flex-direction:column;gap:0}
+.flow-contact{display:flex;gap:12px;align-items:center;min-height:74px;border-bottom:1px solid var(--app-border);background:transparent;text-align:left;padding:11px 4px}
+.flow-contact:hover{background:#fafafa}
+.flow-avatar{width:38px;height:38px;border-radius:50%;background:#ededeb;color:#5a5a5a;display:grid;place-items:center;flex:none;font-size:13px;font-weight:730}
+.flow-contact-detail{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}
+.flow-contact-detail strong{font-size:13px}.flow-contact-detail small{font-size:11px;color:#999}
+.flow-contact-debt{font-size:12px;color:#525252;display:flex;flex-direction:column;gap:4px;align-items:end;white-space:nowrap}
+.flow-contact-debt small{font-size:10px;color:#aaa}
+.flow-chat-screen{display:flex;flex-direction:column;flex:1;min-height:0;width:100%}
+.flow-thread-header{height:63px;min-height:63px;border-bottom:1px solid var(--app-border);display:flex;align-items:center;gap:9px;padding:0 15px}
+.flow-thread-header>div{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.flow-thread-header strong{font-size:13px}
+.flow-thread-header small{font-size:10px;color:#999}
+.flow-icon-action{width:38px;height:38px;flex:none;border-radius:50%;background:transparent;font-size:27px;color:#555!important;line-height:1}
+.flow-thread-header .flow-avatar{width:34px;height:34px}
+.flow-messages{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:13px;padding:20px 22px}
+.flow-bubble-wrap{width:100%;display:flex;align-items:flex-start}
+.flow-bubble-wrap.incoming{justify-content:flex-start}
+.flow-bubble-wrap.outgoing{justify-content:flex-end}
+.flow-message-text{max-width:min(84%,520px);white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.6;color:#1d1d1d}
+.flow-bubble-wrap.outgoing .flow-message-text{background:#f0f0ee;padding:11px 14px;border-radius:17px 17px 5px 17px}
+.flow-bubble-wrap.incoming .flow-message-text{padding:6px 0}
+.flow-image-msg{display:flex;flex-direction:column;gap:7px;max-width:260px;padding:7px;border:1px solid #e7e7e7;border-radius:12px}
+.flow-image-msg img{display:block;width:100%;max-height:200px;object-fit:contain;border-radius:6px;background:#f5f5f5}
+.flow-image-msg small{font-size:10px;color:#8b8b8b;line-height:1.5;overflow-wrap:anywhere}
+.flow-empty-chat{margin:auto;text-align:center;color:#aaa;font-size:12px}
+.flow-compose{flex:none;display:flex;align-items:end;gap:8px;padding:10px 13px 12px;border-top:1px solid var(--app-border);background:#fff}
+.flow-media-picker{display:grid;place-items:center;flex:none;min-width:44px;height:44px;border:1px solid var(--app-border);border-radius:12px;background:#fafafa;color:#555;font-size:12px;font-weight:650;cursor:pointer}
+.flow-compose textarea{display:block;resize:none;min-height:44px;max-height:110px;flex:1;min-width:0;background:#f8f8f8;border:1px solid #e4e4e4;border-radius:13px;padding:11px 12px;font-size:16px;line-height:22px;color:#222}
+.flow-compose .flow-primary{min-height:44px}
+.flow-visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.flow-legend{display:flex;align-items:center;gap:9px;font-size:11px;color:#8a8a8a;line-height:1.65;padding:13px 1px}
+.flow-architecture{margin-top:35px;padding-top:28px;border-top:1px solid #ededed}
+.flow-architecture-head{margin-bottom:20px}
+.flow-architecture-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.flow-architecture-track>div{min-height:110px;padding:15px 14px;border:1px solid #e7e7e7;border-radius:12px;display:flex;flex-direction:column;gap:10px}
+.flow-architecture-track strong{font-size:13px}.flow-architecture-track span{font-size:11px;color:#898989;line-height:1.55}
+.flow-architecture>p{font-size:12px;color:#8a8a8a;line-height:1.75;margin:18px 0 0}
+.flow-architecture code{font-size:11px;border:1px solid #e9e9e9;border-radius:4px;padding:2px 5px;background:#fafafa}
+.flow-app[data-device=phone] .flow-app-head{padding:0 8px;gap:5px}
+.flow-app[data-device=phone] .flow-app-brand{gap:0}
+.flow-app[data-device=phone] .flow-app-brand strong{display:none}
+.flow-app[data-device=phone] .flow-module-nav{gap:1px}
+.flow-app[data-device=phone] .flow-module-nav button{font-size:11px;padding:8px 7px}
+.flow-app[data-device=phone] .flow-module-nav button b{display:none}
+.flow-app[data-device=phone] .flow-signout{padding:8px 4px}
+.flow-app[data-device=phone] .flow-app-context{padding:6px 11px;font-size:10px}
+.flow-app[data-device=phone] .flow-app-context select{max-width:120px}
+.flow-app[data-device=phone] .flow-app-body{flex-direction:column}
+.flow-app[data-device=phone] .flow-app-side{width:100%;flex:0 0 51px;padding:5px 8px;border-right:none;border-bottom:1px solid var(--app-border);overflow:hidden}
+.flow-app[data-device=phone] .flow-side-label,.flow-app[data-device=phone] .flow-side-foot{display:none}
+.flow-app[data-device=phone] .flow-app-side nav{flex-direction:row;gap:2px;overflow-x:auto;scrollbar-width:none}
+.flow-app[data-device=phone] .flow-app-side nav button{flex:none;white-space:nowrap;padding:5px 10px;min-height:38px;font-size:11px}
+.flow-app[data-device=phone] .flow-app-content{padding:17px 14px 20px;scrollbar-gutter:auto}
+.flow-app[data-device=phone] .flow-app-content.is-thread{padding:0}
+.flow-app[data-device=phone] .flow-panel-heading{gap:8px}
+.flow-app[data-device=phone] .flow-panel-heading h3{font-size:19px}
+.flow-app[data-device=phone] .flow-context-tag{display:none}
+.flow-app[data-device=phone] .flow-stat{min-height:83px;padding:10px 7px}
+.flow-app[data-device=phone] .flow-stat strong{font-size:13px;letter-spacing:-.25px}
+.flow-app[data-device=phone] .flow-stat small{font-size:10px}
+.flow-app[data-device=phone] .flow-stats{gap:5px}
+.flow-app[data-device=phone] .flow-contact-debt{font-size:10px}
+.flow-app[data-device=phone] .flow-contact-debt small{display:none}
+.flow-app[data-device=phone] .flow-order-card{padding:12px}
+.flow-app[data-device=phone] .flow-line-qty{flex-wrap:wrap;padding:6px 0}
+.flow-app[data-device=phone] .flow-app-footer{padding:0 9px;font-size:9px}
+.flow-app[data-device=phone] .flow-messages{padding:15px 12px}
+.flow-app[data-device=phone] .flow-compose{padding:8px;gap:5px}
+.flow-app[data-device=phone] .flow-compose .flow-primary{padding:8px 10px}
+@media(max-width:770px){
+ .flow-page .topbar{padding:0 16px}
+ .flow-return{font-size:11px;padding:9px 5px}
+ .flow-intro{display:block}
+ .flow-intro-tag{display:inline-block;margin-top:15px}
+ .flow-route-grid{grid-template-columns:1fr;gap:9px}
+ .flow-route-card{min-height:105px;padding:13px 15px;gap:5px}
+ .flow-route-card strong{font-size:16px}
+ .flow-stage-title{align-items:start;flex-direction:column;margin-top:29px}
+ .flow-preview-stage{padding:14px 7px;min-height:650px}
+ .flow-architecture-track{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .flow-app[data-device=desktop] .flow-app-head{padding:0 8px;gap:5px}
+ .flow-app[data-device=desktop] .flow-app-brand strong{display:none}
+ .flow-app[data-device=desktop] .flow-module-nav{gap:1px}
+ .flow-app[data-device=desktop] .flow-module-nav button{font-size:11px;padding:8px 7px}
+ .flow-app[data-device=desktop] .flow-module-nav button b{display:none}
+ .flow-app[data-device=desktop] .flow-signout{padding:8px 4px}
+ .flow-app[data-device=desktop] .flow-app-context{padding:6px 11px;font-size:10px}
+ .flow-app[data-device=desktop] .flow-app-context select{max-width:120px}
+ .flow-app[data-device=desktop] .flow-app-body{flex-direction:column}
+ .flow-app[data-device=desktop] .flow-app-side{width:100%;flex:0 0 51px;padding:5px 8px;border-right:none;border-bottom:1px solid var(--app-border);overflow:hidden}
+ .flow-app[data-device=desktop] .flow-side-label,.flow-app[data-device=desktop] .flow-side-foot{display:none}
+ .flow-app[data-device=desktop] .flow-app-side nav{flex-direction:row;gap:2px;overflow-x:auto;scrollbar-width:none}
+ .flow-app[data-device=desktop] .flow-app-side nav button{flex:none;white-space:nowrap;padding:5px 10px;min-height:38px;font-size:11px}
+ .flow-app[data-device=desktop] .flow-app-content{padding:17px 14px 20px}
+ .flow-app[data-device=desktop] .flow-app-content.is-thread{padding:0}
+ .flow-app[data-device=desktop] .flow-context-tag{display:none}
+ .flow-app[data-device=desktop] .flow-stat{padding:10px 7px}
+ .flow-app[data-device=desktop] .flow-stat strong{font-size:13px}
+ .flow-app[data-device=desktop] .flow-stats{gap:5px}
+ .flow-app[data-device=desktop] .flow-line-qty{flex-wrap:wrap;padding:6px 0}
+}
+@media(max-width:420px){
+ .flow-library{padding:27px 11px 35px}
+ .flow-route-card{min-height:103px}
+ .flow-toolbar button{padding:0 9px}
+ .flow-app{max-height:680px}
+ .flow-intro p{font-size:13px}
+ .flow-architecture-track{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){.flow-route-card,.flow-app button{transition:none}}
