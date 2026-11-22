@@ -415,6 +415,7 @@ for(const b of Array.from(document.querySelectorAll<HTMLButtonElement>("[data-la
 type GalleryCategory = "all"|"typography"|"tables"|"invoices"|"quantity"|"inputs"|"actions"|"layouts"|"overlays";
 const galleryCategories:GalleryCategory[]=["all","typography","tables","invoices","quantity","inputs","actions","layouts","overlays"];
 const gallerySearch=get<HTMLInputElement>("gallerySearch");
+const galleryMobileFilter=get<HTMLSelectElement>("galleryMobileFilter");
 const gallerySections=Array.from(document.querySelectorAll<HTMLElement>("[data-gallery-category]"));
 const galleryFilterButtons=Array.from(document.querySelectorAll<HTMLButtonElement>("[data-gallery-filter]"));
 let activeGalleryCategory:GalleryCategory="all";
@@ -448,6 +449,7 @@ function updateGallery():void{
   button.classList.toggle("selected",on);
   button.setAttribute("aria-pressed",String(on));
  }
+ galleryMobileFilter.value=activeGalleryCategory;
  get<HTMLElement>("galleryCount").textContent=count+" bộ mẫu · "+visibleGroups+" nhóm";
  get<HTMLElement>("galleryEmpty").hidden=count>0;
 }
@@ -457,6 +459,10 @@ function chooseGallery(category:GalleryCategory,scroll:boolean):void{
  updateGallery();
  if(scroll)get<HTMLElement>("components").scrollIntoView({block:"start",behavior:"smooth"});
 }
+galleryMobileFilter.addEventListener("change",()=>{
+ const category=galleryMobileFilter.value as GalleryCategory;
+ if(galleryCategories.includes(category))chooseGallery(category,false);
+});
 for(const button of galleryFilterButtons){
  button.addEventListener("click",()=>{
   const category=button.dataset.galleryFilter as GalleryCategory;
