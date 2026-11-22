@@ -296,3 +296,43 @@ export function initColumnMatrix():void{
  });
  render();
 }
+
+/** UI-V37: simple numbered specimens using the SAME schema and ds-table renderer.
+ * No filter panels, selectors or 360px preview frames; match the typography list.
+ */
+export function initSimpleTableList():void {
+ const root=document.getElementById("simpleTableItems");
+ if(!root)return;
+ const fragment=document.createDocumentFragment();
+ for(let count=1;count<=COLUMN_SCHEMA.length;count++){
+  const columns=COLUMN_SCHEMA.slice(0,count);
+  const details=node("details","simple-table-row");
+  details.dataset.colCount=String(count);
+  details.id="simpleTable-"+String(count).padStart(2,"0");
+  const summary=node("summary","simple-table-summary");
+  const index=node("span","simple-font-number",String(count).padStart(2,"0"));
+  const label=node("span","simple-font-content");
+  const title=node("strong","simple-table-title","Bảng "+count+" cột");
+  const description=node("span","simple-font-meta",columns.map(c=>c.label).join(" · "));
+  const marker=node("span","simple-table-chevron");
+  marker.setAttribute("aria-hidden","true");
+  label.append(title,description);
+  summary.append(index,label,marker);
+  const stage=node("div","ds-table-scroll simple-table-preview");
+  stage.tabIndex=0;
+  stage.setAttribute("role","region");
+  stage.setAttribute("aria-label","Xem bảng "+count+" cột và cuộn ngang nếu bảng rộng");
+  const state:TableState={count,mode:"scroll",width:"desktop",borders:"rows",density:"standard",
+    sortKey:null,descending:false,headerNames:{}};
+  const render=()=>{
+   const offset=stage.scrollLeft;
+   stage.replaceChildren(buildTable(columns,sortedRows(SAMPLE_ROWS,state),state,render));
+   stage.scrollLeft=offset;
+  };
+  details.append(summary,stage);
+  details.addEventListener("toggle",()=>{if(details.open&&stage.childElementCount===0)render();});
+  if(count===6){details.open=true;render();}
+  fragment.append(details);
+ }
+ root.append(fragment);
+}

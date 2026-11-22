@@ -15,7 +15,7 @@ import { initSimpleFields } from "./simple-fields.js";
 import { initSimpleButtons } from "./simple-buttons.js";
 import { initSimpleButtonRules } from "./simple-button-rules.js";
 import { initTextMotionGallery } from "./text-motion.js";
-import { initColumnMatrix } from "./column-matrix.js";
+import { initColumnMatrix, initSimpleTableList } from "./column-matrix.js";
 import { initScrollAnchorLab } from "./scroll-anchor.js";
 
 type BlockId="title"|"body"|"section"|"description"|"list"|"table"|"number"|"money"|"note"|"caption";
@@ -522,6 +522,7 @@ initSimpleButtons();
 initSimpleButtonRules();
 initTextMotionGallery();
 initColumnMatrix();
+initSimpleTableList();
 initScrollAnchorLab();
 initPatternKit();
 initInvoiceGallery();

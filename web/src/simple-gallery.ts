@@ -148,14 +148,17 @@ export function initSimpleGallery():void {
  const list=document.getElementById("simpleItems");
  const chosen=document.getElementById("simpleChosen");
  if(!root||!list||!chosen)return;
- // Older deep links still open the pre-existing advanced gallery.
- const showOriginal=():void=>{
+ // UI-V37: only the simple numbered view is public, including old deep links.
+ const showSimple=():void=>{
+   document.body.classList.add("simple-first");
    const hash=window.location.hash;
-   const useOriginal=hash!==""&&hash!=="#simpleKit"&&hash!=="#simple-gallery"&&hash!=="#simpleMultiline"&&hash!=="#simpleUnderline"&&hash!=="#simpleFrames"&&hash!=="#simpleFields"&&hash!=="#simpleButtons"&&hash!=="#simpleButtonRules";
-   document.body.classList.toggle("simple-first",!useOriginal);
+   if(hash==="#tableColumnMatrixCard"||hash==="#sample-tables"){
+     window.history.replaceState(null,"",window.location.pathname+window.location.search+"#simpleTables");
+     requestAnimationFrame(()=>document.getElementById("simpleTables")?.scrollIntoView({block:"start",behavior:"auto"}));
+   }
  };
- window.addEventListener("hashchange",showOriginal);
- showOriginal();
+ window.addEventListener("hashchange",showSimple);
+ showSimple();
  let selectedId:string|null=null;
  for(const [index,item] of FONT_SAMPLES.entries()){
    const button=document.createElement("button");

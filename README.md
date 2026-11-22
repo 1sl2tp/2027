@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Có ba trang chính và một phòng thử nguồn GitHub:
 
-- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V17**: một văn bản chỉnh font/nền như trước, bên dưới là **22 bộ mẫu được chia vào 9 nhóm** có thanh lọc, tìm kiếm tiếng Việt và điều hướng trực tiếp. Các mẫu cũ vẫn tương tác bình thường.
+- **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V37**: thư viện dạng danh sách tối giản như các mẫu font. Bảng 1–20 cột hiển thị theo dòng đánh số và mở bảng ngay bên dưới; các bộ mẫu giao diện nâng cao không còn được hiển thị công khai.
 - **[Nguồn GitHub & phòng thử Chat UI](https://1sl2tp.github.io/2027/github-sources.html)** — `github-sources.html`, SOURCE-V01: đối chiếu 8 repo mở và thử khung chat, input, bàn phím giả lập, bảng, danh bạ 1–4 dòng, media 1–4 ảnh, menu/popup. [Audit và ranh giới áp dụng](./references/GITHUB_CHAT_UI_SOURCE_LAB_2026-11-22.md).
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
 - **[Ba bộ khung liên thông](https://1sl2tp.github.io/2027/flows.html)** — `flows.html`: Đăng nhập mẫu → Chat / Công việc / Bán hàng. Chọn **Rộng/Mobile** và thử các thao tác.
@@ -11,7 +11,16 @@
 
 
 
-## Bảng chính duy nhất 1–20 cột (UI-V36)
+## Giao diện thư viện tối giản theo danh sách (UI-V37)
+
+**[Xem trực tiếp 20 mẫu bảng](https://1sl2tp.github.io/2027/#simpleTables)**. Giao diện chính giữ **kiểu trình bày như danh sách mẫu cỡ chữ**: mỗi dòng có STT, tên mẫu và mô tả; bấm mở bảng thật ngay dưới dòng. Bảng 6 cột mở sẵn; 10, 15 và 20 cột vẫn xem trên cùng trang với cuộn ngang.
+
+- Dùng lại **một** `COLUMN_SCHEMA`, `SAMPLE_ROWS`, `ds-table ds-table--schema` và căn lề theo tên tiêu đề từ RULE 09; không tạo bộ table CSS khác.
+- Không trình bày kiểu dashboard nhiều bộ lọc, dropdown và khung giả lập 360px như V36 nữa. Chế độ đơn giản `body.simple-first` luôn bật, các link cũ `#tableColumnMatrixCard` và `#sample-tables` chuyển đến `#simpleTables`.
+- Header/dữ liệu chung `colgroup`, padding 10px; tên/ghi chú trái, STT/SL giữa, tiền phải; bảng rộng cuộn ngang không bóp nhỏ chữ.
+- Đã ghi rõ quy tắc trong **RULE 09 §9.8** và thêm kiểm thử tránh tái xuất hiện dashboard cũ. Đây là bản demo 2027, không đổi CHAT/TAPHOA production.
+
+## Lịch sử V36: Bảng chính duy nhất 1–20 cột (UI-V36)
 
 **[Xem bảng chính và các lựa chọn 6 / 10 / 15 / 20 cột](https://1sl2tp.github.io/2027/#tableColumnMatrixCard)**. Thay vì ba card bảng tách biệt, nhóm Bảng & dữ liệu nay chỉ còn một mẫu bảng dùng chung `ds-table ds-table--schema`. Sáu kiểu trang trí lịch sử vẫn có thể xem trong phần tham khảo thu gọn, không coi là bảng khác.
 

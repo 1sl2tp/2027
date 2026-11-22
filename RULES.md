@@ -486,6 +486,16 @@ Bổ sung **vào RULE 09 đã có**, không tạo bộ CSS bảng khác. Mẫu `
 - **Giới hạn:** bảng chỉ minh họa 4 hàng có 20 trường, thử đổi nhãn không biến đổi dữ liệu hoặc công thức; phần bảng trong CHAT/TAPHOA và hóa đơn INV-xx chưa được đổi. E4/E5 kiểm thử thực tế cuộn 20 cột Safari/Chrome, sticky, thanh cuộn, zoom, người dùng di chuyển bàn phím.
 
 ---
+### 9.8. V37: Danh sách mẫu bảng tối giản, **không dùng bảng điều khiển kiểu cũ**
+
+- **Ảnh duyệt:** người dùng đã chọn giao diện giống ảnh danh sách cỡ chữ: trang trắng, tiêu đề, mỗi dòng có STT 01–20, tên và mô tả nhỏ. Không dùng dashboard có sidebar, thanh tìm kiếm, chip vai trò, các ô select/preset và khung mobile 360px như bản V36.
+- **Một bảng thực sự:** bộ `COLUMN_SCHEMA`, `SAMPLE_ROWS`, `roleFromHeader`, `buildTable`, `ds-table ds-table--schema` trong R09 vẫn là nguồn duy nhất. Danh sách 01–20 chỉ là các phép chiếu 1–20 trường từ cùng một schema, **không phải 20 framework bảng**. Bấm vào một dòng để mở dữ liệu bảng; dòng 06 mở sẵn để nhìn thấy kết quả ngay.
+- **Đúng trục:** bảng hiện ở chiều rộng vùng nội dung thực, cuộn ngang nếu nhiều trường; không ép width giả lập 360px khi người dùng đang xem desktop. Tên/ghi chú trái, STT/số/SL giữa, tiền phải; header/row chia chung colgroup, padding mặc định 10px. Không bỏ tên cột hay ẩn giá/SL.
+- **Khả năng truy cập:** mỗi dòng là `<details><summary>` có thể mở bằng bàn phím, tiêu đề và mô tả kiểu font list; khi mở, bảng có table/caption/th(scope=col), vùng cuộn có `tabIndex=0`. Tôn trọng giảm chuyển động; không có network hoặc dữ liệu đơn hàng thật.
+- **Duy nhất một kiểu giao diện công khai:** `body.simple-first` luôn bật, các liên kết `#tableColumnMatrixCard` và `#sample-tables` cũ chuyển tới `#simpleTables`. DOM nâng cao cũ có thể vẫn tồn tại để giữ các kiểm thử/nhóm di sản, nhưng **không hiện lại** như ảnh 1. Không tạo hệ UI, stylesheet hoặc rule độc lập.
+- **Bằng chứng:** CI `npm run verify`, URL cache-safe V37 và Pages. E4/E5 xem thực tế Safari/Chrome trên desktop/mobile, mở 1/6/10/15/20 cột, kiểm cuộn ngang và scroll link trực tiếp vẫn cần nghiệm thu.
+
+---
 ## RULE 10 — ĐẶT TÊN NÚT THEO ĐÚNG VAI TRÒ, KHÔNG ĐÁNH TRÁO KIỂU VÀ BỐ CỤC
 
 **Mã:** `2027-R10` · **Ngày:** 22/11/2026 (VN) · **Phạm vi:** mục 6 / 6.1 của UI Library Web. **Trạng thái:** E0–E1; E2, E3 và nghiệm thu thiết bị E4/E5 phải xác nhận bằng CI/deploy/bằng chứng riêng.
