@@ -4,15 +4,15 @@
 import { ROOT_BUTTON_SPECS,ROOT_BUTTON_FAMILIES,
   type RootButtonSpec,type ButtonOrigin } from "./root-button-data.js";
 export function initRootButtonCatalog():void {
- const root=document.getElementById("rootButtonGroups");
- const select=document.getElementById("rootButtonFamily") as HTMLSelectElement|null;
- const search=document.getElementById("rootButtonQuery") as HTMLInputElement|null;
- const reset=document.getElementById("rootButtonReset") as HTMLButtonElement|null;
- const count=document.getElementById("rootButtonCount");
- const empty=document.getElementById("rootButtonEmpty");
- const detail=document.getElementById("rootButtonDetail");
- const stateFeedback=document.getElementById("rootStateFeedback");
- const comboFeedback=document.getElementById("rootComboFeedback");
+ const root=document.getElementById("rootButtonGroups") as HTMLElement;
+ const select=document.getElementById("rootButtonFamily") as HTMLSelectElement;
+ const search=document.getElementById("rootButtonQuery") as HTMLInputElement;
+ const reset=document.getElementById("rootButtonReset") as HTMLButtonElement;
+ const count=document.getElementById("rootButtonCount") as HTMLElement;
+ const empty=document.getElementById("rootButtonEmpty") as HTMLElement;
+ const detail=document.getElementById("rootButtonDetail") as HTMLElement;
+ const stateFeedback=document.getElementById("rootStateFeedback") as HTMLElement;
+ const comboFeedback=document.getElementById("rootComboFeedback") as HTMLElement;
  if(!root||!select||!search||!reset||!count||!empty||!detail||!stateFeedback||!comboFeedback)return;
  type OriginFilter="ALL"|ButtonOrigin;
  let origin:OriginFilter="ALL";
