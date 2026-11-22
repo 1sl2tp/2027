@@ -44,7 +44,7 @@ test("V41: shared DATA-TABLE may have two hosts but remains ONE definition",asyn
  assert.ok(auditComponentPlacements(COMPONENT_CONTRACTS,[{...base,host:"MISSING"}]).some(x=>x.includes("thiếu host")));
  assert.ok(auditComponentPlacements(COMPONENT_CONTRACTS,[{...base,child:"MISSING"}]).some(x=>x.includes("thiếu child")));
  assert.ok(auditComponentPlacements(COMPONENT_CONTRACTS,[{...base,host:"TABLE-COLUMN",child:"DATA-TABLE"}]).some(x=>x.includes("host không là container")));
- assert.ok(auditComponentPlacements(COMPONENT_CONTRACTS,[{...base,host:"TABLE-COLUMN",child:"CHAT-SCREEN"}]).some(x=>x.includes("Chu trình placement")));
+ assert.ok(auditComponentPlacements(COMPONENT_CONTRACTS,[{...base,host:"TABLE-COLUMN",child:"UI-LIBRARY"}]).some(x=>x.includes("Chu trình placement")));
 });
 
 test("V41: main message sample uses COLUMN_SCHEMA, ds-table, and the existing ui-button",()=>{

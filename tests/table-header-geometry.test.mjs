@@ -68,7 +68,7 @@ test("V39 has one canonical table rule with the screenshot-derived regression co
  assert.ok(rules.includes("STT"));
  assert.ok(rules.includes("64 / 198 / 72 / 102 / 124 / 142"));
  assert.ok(html.includes('data-ui-version="2027-UI-V46"'));
- assert.ok(html.includes('<span class="version">V45</span>'));
+ assert.ok(html.includes('<span class="version">V46</span>'));
  assert.ok(html.includes('src="./web/dist-v46/app.js"'));
  assert.ok(pages.includes("cp -R web/dist _site/web/dist-v46"));
 });
