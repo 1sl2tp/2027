@@ -13,7 +13,7 @@ Trang thử: [github-sources.html](../github-sources.html). Trang chính có li�
 | [Floating UI](https://github.com/floating-ui/floating-ui) | MIT | Định vị menu tránh tràn cạnh | Đánh giá nếu popup thực có lỗi |
 | [TanStack Virtual](https://github.com/TanStack/virtual) | MIT | Danh sách rất dài | Chỉ cài nếu có số đo nghẽn render |
 | [Lucide](https://github.com/lucide-icons/lucide) | ISC | Icon SVG có hình học nhất quán | Tái dựng icon cần dùng trong web/icons.svg |
-| [react-textarea-autosize](https://github.com/Andarist/react-textarea-autosize) | Chưa xác minh vòng này | Ô gõ tự tăng cao | Chưa cài, kiểm tra license khi tích hợp |
+| [react-textarea-autosize](https://github.com/Andarist/react-textarea-autosize) | MIT (metadata GitHub) | Ô gõ tự tăng cao | Chưa cài; chỉ học cơ chế khi cần |
 
 Giấy phép MIT/ISC/Apache-2.0 ở trên được đối chiếu qua LICENSE hoặc metadata repo; không sao chép code nào từ các thư viện vào 2027 trong vòng này.
 
