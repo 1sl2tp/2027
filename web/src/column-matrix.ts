@@ -52,7 +52,10 @@ function sortRows(rows:readonly SampleRow[],state:TableState):SampleRow[]{
   const left=a[key],right=b[key];
   let comparison:number;
   if(typeof left==="number"&&typeof right==="number")comparison=left-right;
-  else comparison=String(left).localeCompare(String(right),"vi",{numeric:true,sensitivity:"base"});
+  else if(col.role==="date"){
+   const dateKey=(value:string)=>value.split("/").reverse().join("-");
+   comparison=dateKey(String(left)).localeCompare(dateKey(String(right)));
+  }else comparison=String(left).localeCompare(String(right),"vi",{numeric:true,sensitivity:"base"});
   return state.descending?-comparison:comparison;
  });
  return items;
