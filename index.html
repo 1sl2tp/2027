@@ -5,15 +5,23 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện mẫu theo nhóm · V11</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V11">
-  <script type="module" src="./web/dist/app.js?v=2027-UI-V11"></script>
+  <title>2027 · Thư viện mẫu theo nhóm · V12</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V12">
+  <script type="module" src="./web/dist/app.js?v=2027-UI-V12"></script>
 </head>
-<body data-ui-version="2027-UI-V11" class="studio-page">
+<body data-ui-version="2027-UI-V12" class="studio-page">
+<svg class="ui-icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <symbol id="ui-icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 4.5v15M4.5 12h15"/></symbol>
+  <symbol id="ui-icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="ui-icon-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="12" rx="3"/><path d="M6 10.5v2a6 6 0 0 0 12 0v-2M12 18.5v3m-4 0h8"/></symbol>
+  <symbol id="ui-icon-send-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V4M5 11l7-7 7 7"/></symbol>
+  <symbol id="ui-icon-voice" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></symbol>
+  <symbol id="ui-icon-stop" viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="7" width="10" height="10" rx="2"/></symbol>
+</svg>
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><span class="version">V11</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><span class="version">V12</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
@@ -35,11 +43,11 @@
       <a class="nav-link" href="./flows.html#chat/contacts"><span class="nav-numeral">11</span><span>Trò chuyện</span><small>↗</small></a>
       <a class="nav-link" href="./flows.html#work/summary"><span class="nav-numeral">12</span><span>Công việc</span><small>↗</small></a>
       <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">13</span><span>Bán hàng</span><small>↗</small></a>
-      <div class="sidebar-footer">UI-V11 · RULE 03<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
+      <div class="sidebar-footer">UI-V12 · RULE 03<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
     </aside>
     <main class="main studio-main" id="main">
       <div class="studio-heading">
-        <div class="eyebrow">THƯ VIỆN THIẾT KẾ / V11</div>
+        <div class="eyebrow">THƯ VIỆN THIẾT KẾ / V12</div>
         <h1>Chỉnh ngay trên một văn bản mẫu</h1>
         <p>Giống cách ChatGPT sắp xếp nội dung: tiêu đề, đoạn văn, danh sách, bảng, số tiền và ghi chú. Chạm vào phần muốn chỉnh rồi đổi font, cỡ chữ, đậm, nghiêng, gạch chân hoặc nền.</p>
       </div>
@@ -128,15 +136,15 @@
   <div class="gallery-browser" aria-label="Tìm và lọc thư viện">
     <div class="gallery-browser-tools">
       <label class="gallery-search-box" for="gallerySearch"><span aria-hidden="true">⌕</span><input id="gallerySearch" type="search" placeholder="Tìm mẫu: bảng, input, icon…" autocomplete="off"><button type="button" id="galleryClearSearch" aria-label="Xóa từ khóa tìm mẫu">×</button></label>
-      <div class="gallery-view-count" id="galleryCount" aria-live="polite">15 bộ mẫu · 7 nhóm</div>
+      <div class="gallery-view-count" id="galleryCount" aria-live="polite">16 bộ mẫu · 7 nhóm</div>
     </div>
     <div class="gallery-filter-nav" role="group" aria-label="Lọc các loại mẫu">
-      <button type="button" class="selected" aria-pressed="true" data-gallery-filter="all">Tất cả <span>15</span></button>
+      <button type="button" class="selected" aria-pressed="true" data-gallery-filter="all">Tất cả <span>16</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="typography">Chữ & nhiều dòng <span>1</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="tables">Bảng & dữ liệu <span>2</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="quantity">Số lượng − / + <span>2</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="inputs">Ô nhập & gõ chat <span>4</span></button>
-      <button type="button" aria-pressed="false" data-gallery-filter="actions">Nút & biểu tượng <span>2</span></button>
+      <button type="button" aria-pressed="false" data-gallery-filter="actions">Nút & biểu tượng <span>3</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="layouts">Hàng & bố cục <span>2</span></button>
       <button type="button" aria-pressed="false" data-gallery-filter="overlays">Menu & popup <span>2</span></button>
     </div>
@@ -313,13 +321,13 @@
                 </div>
                 <div class="composer-bottom">
                   <div class="composer-left">
-                    <button class="composer-icon-button composer-add" data-composer-add type="button" aria-label="Thêm ảnh từ thiết bị" title="Thêm ảnh từ thiết bị">+</button>
+                    <button class="ui-button ui-button--icon composer-add" data-composer-add type="button" aria-label="Thêm ảnh từ thiết bị" title="Thêm ảnh từ thiết bị"><svg class="ui-icon ui-icon--plus" aria-hidden="true"><use href="#ui-icon-plus"/></svg></button>
                     <input class="studio-visually-hidden" type="file" data-composer-file accept="image/*"  aria-label="Chọn ảnh từ thiết bị" tabindex="-1">
                   </div>
                   <div class="composer-right">
-                    <button class="composer-mode" data-composer-mode type="button" aria-label="Đổi chế độ mẫu" title="Đổi chế độ mẫu">Cao <span aria-hidden="true">⌄</span></button>
-                    <button class="composer-icon-button composer-mic" data-composer-mic type="button" aria-label="Thử trạng thái ghi âm" aria-pressed="false" title="Mô phỏng ghi âm"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="12" rx="3"></rect><path d="M6 10.5v2a6 6 0 0 0 12 0v-2M12 18.5v3m-4 0h8"></path></svg></button>
-                    <button class="composer-send" data-composer-send type="submit" aria-label="Thử nút gửi mẫu" title="Thử nút gửi mẫu"><span data-composer-send-symbol>↑</span></button>
+                    <button class="ui-button ui-button--mode composer-mode" data-composer-mode type="button" aria-label="Đổi chế độ mẫu" title="Đổi chế độ mẫu"><span class="ui-mode-label" data-composer-mode-label>Cao</span><svg class="ui-icon ui-icon--chevron" aria-hidden="true"><use href="#ui-icon-chevron"/></svg></button>
+                    <button class="ui-button ui-button--icon composer-mic" data-composer-mic type="button" aria-label="Thử trạng thái ghi âm" aria-pressed="false" title="Mô phỏng ghi âm"><svg class="ui-icon ui-icon--mic" aria-hidden="true"><use href="#ui-icon-mic"/></svg></button>
+                    <button class="ui-button ui-button--send composer-send" data-composer-send type="submit" aria-label="Thử nút gửi mẫu" title="Thử nút gửi mẫu"><span class="ui-send-disc"><svg class="ui-icon ui-icon--send" aria-hidden="true"><use data-composer-send-icon href="#ui-icon-send-up"/></svg></span></button>
                   </div>
                 </div>
               </form>
@@ -345,13 +353,13 @@
                 </div>
                 <div class="composer-bottom">
                   <div class="composer-left">
-                    <button class="composer-icon-button composer-add" data-composer-add type="button" aria-label="Thêm ảnh từ thiết bị" title="Thêm ảnh từ thiết bị">+</button>
+                    <button class="ui-button ui-button--icon composer-add" data-composer-add type="button" aria-label="Thêm ảnh từ thiết bị" title="Thêm ảnh từ thiết bị"><svg class="ui-icon ui-icon--plus" aria-hidden="true"><use href="#ui-icon-plus"/></svg></button>
                     <input class="studio-visually-hidden" type="file" data-composer-file accept="image/*"  aria-label="Chọn ảnh từ thiết bị" tabindex="-1">
                   </div>
                   <div class="composer-right">
-                    <button class="composer-mode" data-composer-mode type="button" aria-label="Đổi chế độ mẫu" title="Đổi chế độ mẫu">Cao <span aria-hidden="true">⌄</span></button>
-                    <button class="composer-icon-button composer-mic" data-composer-mic type="button" aria-label="Thử trạng thái ghi âm" aria-pressed="false" title="Mô phỏng ghi âm"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="12" rx="3"></rect><path d="M6 10.5v2a6 6 0 0 0 12 0v-2M12 18.5v3m-4 0h8"></path></svg></button>
-                    <button class="composer-send" data-composer-send type="submit" aria-label="Thử nút gửi mẫu" title="Thử nút gửi mẫu"><span data-composer-send-symbol>↑</span></button>
+                    <button class="ui-button ui-button--mode composer-mode" data-composer-mode type="button" aria-label="Đổi chế độ mẫu" title="Đổi chế độ mẫu"><span class="ui-mode-label" data-composer-mode-label>Cao</span><svg class="ui-icon ui-icon--chevron" aria-hidden="true"><use href="#ui-icon-chevron"/></svg></button>
+                    <button class="ui-button ui-button--icon composer-mic" data-composer-mic type="button" aria-label="Thử trạng thái ghi âm" aria-pressed="false" title="Mô phỏng ghi âm"><svg class="ui-icon ui-icon--mic" aria-hidden="true"><use href="#ui-icon-mic"/></svg></button>
+                    <button class="ui-button ui-button--send composer-send" data-composer-send type="submit" aria-label="Thử nút gửi mẫu" title="Thử nút gửi mẫu"><span class="ui-send-disc"><svg class="ui-icon ui-icon--send" aria-hidden="true"><use data-composer-send-icon href="#ui-icon-send-up"/></svg></span></button>
                   </div>
                 </div>
               </form>
@@ -387,13 +395,13 @@
                 </div>
                 <div class="composer-bottom">
                   <div class="composer-left">
-                    <button class="composer-icon-button composer-add" data-composer-add type="button" aria-label="Thêm ảnh từ thiết bị" title="Thêm ảnh từ thiết bị">+</button>
+                    <button class="ui-button ui-button--icon composer-add" data-composer-add type="button" aria-label="Thêm ảnh từ thiết bị" title="Thêm ảnh từ thiết bị"><svg class="ui-icon ui-icon--plus" aria-hidden="true"><use href="#ui-icon-plus"/></svg></button>
                     <input class="studio-visually-hidden" type="file" data-composer-file accept="image/*" multiple aria-label="Chọn ảnh từ thiết bị" tabindex="-1">
                   </div>
                   <div class="composer-right">
-                    <button class="composer-mode" data-composer-mode type="button" aria-label="Đổi chế độ mẫu" title="Đổi chế độ mẫu">Cao <span aria-hidden="true">⌄</span></button>
-                    <button class="composer-icon-button composer-mic" data-composer-mic type="button" aria-label="Thử trạng thái ghi âm" aria-pressed="false" title="Mô phỏng ghi âm"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="12" rx="3"></rect><path d="M6 10.5v2a6 6 0 0 0 12 0v-2M12 18.5v3m-4 0h8"></path></svg></button>
-                    <button class="composer-send" data-composer-send type="submit" aria-label="Thử nút gửi mẫu" title="Thử nút gửi mẫu"><span data-composer-send-symbol>↑</span></button>
+                    <button class="ui-button ui-button--mode composer-mode" data-composer-mode type="button" aria-label="Đổi chế độ mẫu" title="Đổi chế độ mẫu"><span class="ui-mode-label" data-composer-mode-label>Cao</span><svg class="ui-icon ui-icon--chevron" aria-hidden="true"><use href="#ui-icon-chevron"/></svg></button>
+                    <button class="ui-button ui-button--icon composer-mic" data-composer-mic type="button" aria-label="Thử trạng thái ghi âm" aria-pressed="false" title="Mô phỏng ghi âm"><svg class="ui-icon ui-icon--mic" aria-hidden="true"><use href="#ui-icon-mic"/></svg></button>
+                    <button class="ui-button ui-button--send composer-send" data-composer-send type="submit" aria-label="Thử nút gửi mẫu" title="Thử nút gửi mẫu"><span class="ui-send-disc"><svg class="ui-icon ui-icon--send" aria-hidden="true"><use data-composer-send-icon href="#ui-icon-send-up"/></svg></span></button>
                   </div>
                 </div>
               </form>
@@ -415,13 +423,13 @@
                 </div>
                 <div class="composer-bottom">
                   <div class="composer-left">
-                    <button class="composer-icon-button composer-add" data-composer-add type="button" aria-label="Thêm ảnh từ thiết bị" title="Thêm ảnh từ thiết bị">+</button>
+                    <button class="ui-button ui-button--icon composer-add" data-composer-add type="button" aria-label="Thêm ảnh từ thiết bị" title="Thêm ảnh từ thiết bị"><svg class="ui-icon ui-icon--plus" aria-hidden="true"><use href="#ui-icon-plus"/></svg></button>
                     <input class="studio-visually-hidden" type="file" data-composer-file accept="image/*"  aria-label="Chọn ảnh từ thiết bị" tabindex="-1">
                   </div>
                   <div class="composer-right">
-                    <button class="composer-mode" data-composer-mode type="button" aria-label="Đổi chế độ mẫu" title="Đổi chế độ mẫu">Cao <span aria-hidden="true">⌄</span></button>
-                    <button class="composer-icon-button composer-mic" data-composer-mic type="button" aria-label="Thử trạng thái ghi âm" aria-pressed="false" title="Mô phỏng ghi âm"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="12" rx="3"></rect><path d="M6 10.5v2a6 6 0 0 0 12 0v-2M12 18.5v3m-4 0h8"></path></svg></button>
-                    <button class="composer-send" data-composer-send type="submit" aria-label="Thử nút gửi mẫu" title="Thử nút gửi mẫu"><span data-composer-send-symbol>↑</span></button>
+                    <button class="ui-button ui-button--mode composer-mode" data-composer-mode type="button" aria-label="Đổi chế độ mẫu" title="Đổi chế độ mẫu"><span class="ui-mode-label" data-composer-mode-label>Cao</span><svg class="ui-icon ui-icon--chevron" aria-hidden="true"><use href="#ui-icon-chevron"/></svg></button>
+                    <button class="ui-button ui-button--icon composer-mic" data-composer-mic type="button" aria-label="Thử trạng thái ghi âm" aria-pressed="false" title="Mô phỏng ghi âm"><svg class="ui-icon ui-icon--mic" aria-hidden="true"><use href="#ui-icon-mic"/></svg></button>
+                    <button class="ui-button ui-button--send composer-send" data-composer-send type="submit" aria-label="Thử nút gửi mẫu" title="Thử nút gửi mẫu"><span class="ui-send-disc"><svg class="ui-icon ui-icon--send" aria-hidden="true"><use data-composer-send-icon href="#ui-icon-send-up"/></svg></span></button>
                   </div>
                 </div>
               </form>
@@ -438,18 +446,18 @@
     <section class="gallery-category" data-gallery-category="actions" id="sample-actions" aria-labelledby="galleryTitle-actions">
       <div class="gallery-category-heading">
         <div class="gallery-category-index">05</div>
-        <div class="gallery-category-intro"><h3 id="galleryTitle-actions">Nút & biểu tượng</h3><p>Nút chính/phụ, dạng chữ và icon vuông, tròn, có nền hoặc viền.</p></div>
-        <span class="gallery-category-count">2 bộ mẫu</span>
+        <div class="gallery-category-intro"><h3 id="galleryTitle-actions">Nút & biểu tượng</h3><p>Nút chính/phụ, icon vuông/tròn và bộ nút dùng chung cho ô gõ chat.</p></div>
+        <span class="gallery-category-count">3 bộ mẫu</span>
       </div>
       <div class="studio-component-grid">
         <div class="studio-component-card">
                     <div class="studio-component-label"><strong>Mẫu nút</strong><span>Chính, phụ, văn bản</span></div>
                     <div class="studio-component-content">
                       <div class="studio-example-buttons">
-                        <button type="button" class="studio-action-primary" data-demo="primary">Nút chính</button>
-                        <button type="button" class="studio-action-secondary" data-demo="secondary">Nút phụ</button>
-                        <button type="button" class="studio-action-text" data-demo="text">Dạng chữ</button>
-                        <button type="button" class="studio-action-secondary" disabled>Không hoạt động</button>
+                        <button type="button" class="ui-button ui-button--primary" data-demo="primary">Nút chính</button>
+                        <button type="button" class="ui-button ui-button--secondary" data-demo="secondary">Nút phụ</button>
+                        <button type="button" class="ui-button ui-button--text" data-demo="text">Dạng chữ</button>
+                        <button type="button" class="ui-button ui-button--secondary" disabled>Không hoạt động</button>
                       </div>
                       <p class="studio-component-feedback" id="buttonFeedback" role="status" aria-live="polite">Chọn một nút để thử phản hồi.</p>
                     </div>
@@ -458,14 +466,40 @@
                     <div class="studio-component-label"><strong>Icon vuông và tròn</strong><span>Chung hệ kích thước chạm</span></div>
                     <div class="studio-component-content">
                       <div class="studio-icon-examples">
-                        <button type="button" class="studio-icon-button square" data-icon="Tìm kiếm" aria-label="Icon tìm kiếm vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg></button>
-                        <button type="button" class="studio-icon-button round" data-icon="Thêm" aria-label="Icon thêm tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
-                        <button type="button" class="studio-icon-button square filled" data-icon="Gửi" aria-label="Icon gửi vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-5 16-3.5-6.5L4 12Z"></path><path d="m20 4-8.5 9.5"></path></svg></button>
-                        <button type="button" class="studio-icon-button round outline" data-icon="Menu" aria-label="Icon menu tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle></svg></button>
+                        <button type="button" class="ui-button ui-button--icon ui-button--square" data-icon="Tìm kiếm" aria-label="Icon tìm kiếm vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg></button>
+                        <button type="button" class="ui-button ui-button--icon ui-button--round" data-icon="Thêm" aria-label="Icon thêm tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+                        <button type="button" class="ui-button ui-button--icon ui-button--square ui-button--filled" data-icon="Gửi" aria-label="Icon gửi vuông"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-5 16-3.5-6.5L4 12Z"></path><path d="m20 4-8.5 9.5"></path></svg></button>
+                        <button type="button" class="ui-button ui-button--icon ui-button--round ui-button--outline" data-icon="Menu" aria-label="Icon menu tròn"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle></svg></button>
                       </div>
                       <p class="studio-component-feedback" id="iconFeedback" role="status" aria-live="polite">Vùng chạm minh họa 44 × 44 px.</p>
                     </div>
                   </div>
+      <section class="studio-component-card variant-wide ui-action-library" aria-labelledby="sharedActionsTitle" data-ui-library="buttons-icons">
+  <div class="studio-component-label"><strong id="sharedActionsTitle">Bộ nút và icon chuẩn dùng chung</strong><span>Nguồn duy nhất cho mọi ô gõ chat</span></div>
+  <div class="studio-component-content">
+    <p class="ui-action-library-description">Các nút bên dưới dùng chính xác <code>ui-button</code>, <code>ui-icon</code> và token kích thước đã áp vào cả bốn mẫu chat. Không vẽ icon chữ “↑”, “+”, “⌄” riêng cho từng ô.</p>
+    <div class="ui-action-specimens">
+      <div class="ui-action-specimen"><span>01 · Thêm media</span>
+        <button type="button" class="ui-button ui-button--icon" data-ui-control-preview="plus" aria-label="Thử nút thêm"><svg class="ui-icon ui-icon--plus" aria-hidden="true"><use href="#ui-icon-plus"/></svg></button>
+        <small>Icon 22px · vùng chạm 40px</small>
+      </div>
+      <div class="ui-action-specimen"><span>02 · Chọn chế độ</span>
+        <button type="button" class="ui-button ui-button--mode" data-ui-control-preview="mode"><span class="ui-mode-label" data-ui-demo-mode>Cao</span><svg class="ui-icon ui-icon--chevron" aria-hidden="true"><use href="#ui-icon-chevron"/></svg></button>
+        <small>Chữ 14px · chevron 13px</small>
+      </div>
+      <div class="ui-action-specimen"><span>03 · Micro</span>
+        <button type="button" class="ui-button ui-button--icon" data-ui-control-preview="mic" aria-label="Thử trạng thái mic" aria-pressed="false"><svg class="ui-icon ui-icon--mic" aria-hidden="true"><use href="#ui-icon-mic"/></svg></button>
+        <small>Icon 19px · vùng chạm 40px</small>
+      </div>
+      <div class="ui-action-specimen"><span>04 · Gửi</span>
+        <button type="button" class="ui-button ui-button--send" data-ui-control-preview="send" aria-label="Thử nút gửi"><span class="ui-send-disc"><svg class="ui-icon ui-icon--send" aria-hidden="true"><use href="#ui-icon-send-up"/></svg></span></button>
+        <small>Mũi tên 20px · vòng tròn 36px</small>
+      </div>
+    </div>
+    <div class="ui-action-token-strip"><span>Vùng chạm <strong>40px</strong></span><span>Vòng tròn gửi <strong>36px</strong></span><span>Cỡ chữ <strong>14px</strong></span><span>Icon <strong>13–22px</strong></span></div>
+    <p id="sharedActionFeedback" class="studio-component-feedback" role="status" aria-live="polite">Bấm các nút để xem trạng thái tương tác. Các khung gõ chat kế thừa trực tiếp bộ mẫu này.</p>
+  </div>
+</section>
       </div>
     </section>
     <section class="gallery-category" data-gallery-category="layouts" id="sample-layouts" aria-labelledby="galleryTitle-layouts">
