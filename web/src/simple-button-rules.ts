@@ -8,20 +8,20 @@ interface InnerSpec {
  id:string;name:string;kind:InnerKind;rule:string;
 }
 const INNER_SPECS:readonly InnerSpec[]=[
- {id:"INNER-01",name:"Chỉ chữ",kind:"text",rule:"Nội dung một dòng · căn giữa cả khối"},
- {id:"INNER-02",name:"Chỉ icon",kind:"icon",rule:"Khung 44×44 · icon 20×20"},
- {id:"INNER-03",name:"Icon trái + chữ",kind:"leading",rule:"Icon 20 · gap 8 · chữ 14"},
- {id:"INNER-04",name:"Chữ + icon phải",kind:"trailing",rule:"Chữ 14 · gap 8 · icon 20"},
- {id:"INNER-05",name:"Ảnh trái + chữ",kind:"photo-leading",rule:"Ảnh 28×28 · gap 8 · chữ 14"},
- {id:"INNER-06",name:"Chữ + ảnh phải",kind:"photo-trailing",rule:"Chữ 14 · gap 8 · ảnh 28×28"},
- {id:"INNER-07",name:"Một ký tự",kind:"letter",rule:"Khung 44×44 · ký tự đúng tâm"},
- {id:"INNER-08",name:"Nút số",kind:"number",rule:"Số tabular · cân giữa theo khung"},
- {id:"INNER-09",name:"Chữ hai dòng",kind:"two-line",rule:"Cao 56 · mỗi dòng 18 · giữa dọc"},
- {id:"INNER-10",name:"Icon + chữ + số",kind:"count",rule:"Ba vùng cân đối 24 / giữa / 24"},
- {id:"INNER-11",name:"Ảnh + chữ + mũi tên",kind:"identity",rule:"Ba vùng cân đối 32 / giữa / 32"},
- {id:"INNER-12",name:"Chữ rất dài",kind:"truncate",rule:"Co chữ bằng min-width:0 + dấu …"},
- {id:"INNER-13",name:"Mũi tên có bù thị giác",kind:"arrow",rule:"Icon 20 · bù hình học +1px"},
- {id:"INNER-14",name:"Đang xử lý + chữ",kind:"loading",rule:"Giữ chữ và khoảng cách khi tải"}
+ {id:"INNER-01",name:"Chỉ chữ",kind:"text",rule:"Một dòng · cụm nội dung căn giữa theo ui-button"},
+ {id:"INNER-02",name:"Chỉ icon",kind:"icon",rule:"ui-button--icon · vùng chạm 44 · icon chung 20"},
+ {id:"INNER-03",name:"Icon trái + chữ",kind:"leading",rule:"ui-icon 20 · gap --ui-button-gap · nhãn theo ui-button"},
+ {id:"INNER-04",name:"Chữ + icon phải",kind:"trailing",rule:"Nhãn theo ui-button · gap --ui-button-gap · ui-icon 20"},
+ {id:"INNER-05",name:"Ảnh trái + chữ",kind:"photo-leading",rule:"Ảnh 28×28 · gap --ui-button-gap · nhãn theo ui-button"},
+ {id:"INNER-06",name:"Chữ + ảnh phải",kind:"photo-trailing",rule:"Nhãn theo ui-button · gap --ui-button-gap · ảnh 28×28"},
+ {id:"INNER-07",name:"Một ký tự",kind:"letter",rule:"ui-button--uniform · 44×44 · ký tự đúng tâm"},
+ {id:"INNER-08",name:"Nút số",kind:"number",rule:"ui-button--uniform · số tabular đặt giữa"},
+ {id:"INNER-09",name:"Chữ hai dòng",kind:"two-line",rule:"Cao ít nhất 56 · chữ hai dòng căn giữa"},
+ {id:"INNER-10",name:"Icon + chữ + số",kind:"count",rule:"Ba vùng cân đối 24 / giữa / 24 · gap token"},
+ {id:"INNER-11",name:"Ảnh + chữ + mũi tên",kind:"identity",rule:"Ba vùng cân đối 32 / giữa / 32 · gap token"},
+ {id:"INNER-12",name:"Chữ rất dài",kind:"truncate",rule:"min-width:0 + text-overflow:ellipsis"},
+ {id:"INNER-13",name:"Mũi tên có bù thị giác",kind:"arrow",rule:"ui-icon 20 · bù thị giác +1px có kiểm soát"},
+ {id:"INNER-14",name:"Đang xử lý + chữ",kind:"loading",rule:"ui-icon--loading · aria-busy · không đổi bố cục"}
 ];
 function innerIcon(name:string):SVGSVGElement{
  const ns="http://www.w3.org/2000/svg";
