@@ -5,14 +5,14 @@ const read = (file) => readFileSync(new URL("../"+file, import.meta.url),"utf8")
 
 test("V08 retains one interactive ChatGPT-like document and shared CSS",()=>{
   const html=read("index.html");
-  assert.match(html,/data-ui-version="2027-UI-V10"/);
+  assert.match(html,/data-ui-version="2027-UI-V11"/);
   assert.match(html,/<h1>Chỉnh ngay trên một văn bản mẫu<\/h1>/);
   for(const id of ["document","controls","components","overlays","demoCanvas","fontSelect","sizeRange","sizeOutput","weightOutput","leadingRange","trackingRange","cssPreview","resetButton","copyButton"])
     assert.ok(html.includes('id="'+id+'"'),id);
   for(const block of ["title","body","section","description","list","table","number","money","note","caption"])
     assert.ok(html.includes('data-block="'+block+'"'),block);
-  assert.ok(html.includes("./web/styles.css?v=2027-UI-V10"));
-  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V10"));
+  assert.ok(html.includes("./web/styles.css?v=2027-UI-V11"));
+  assert.ok(html.includes("./web/dist/app.js?v=2027-UI-V11"));
   assert.doesNotMatch(html,/<script[^>]+src="https?:\/\//);
 });
 
@@ -51,8 +51,8 @@ test("Pages still builds the exact versioned assets shipped in HTML",()=>{
   const html=read("index.html");
   const config=JSON.parse(read("tsconfig.json"));
   const out=config.compilerOptions.outDir.replace(/^\.\//,"").replace(/\/$/,"");
-  assert.ok(html.includes("web/styles.css?v=2027-UI-V10"));
-  assert.ok(html.includes(out+"/app.js?v=2027-UI-V10"));
+  assert.ok(html.includes("web/styles.css?v=2027-UI-V11"));
+  assert.ok(html.includes(out+"/app.js?v=2027-UI-V11"));
   const workflow=read(".github/workflows/pages.yml");
   assert.ok(workflow.includes("npm run verify"));
   assert.ok(workflow.includes("cp -R "+out+" _site/web/"));
@@ -151,7 +151,7 @@ test("V08 keeps the library font/color and three-flow screens on one CSS file",(
   const index=read("index.html"),flows=read("flows.html"),css=read("web/styles.css");
   assert.ok(index.includes('href="./flows.html"'));
   assert.ok(flows.includes('./web/styles.css?v=2027-UI-V04'));
-  assert.ok(index.includes('./web/styles.css?v=2027-UI-V10'));
+  assert.ok(index.includes('./web/styles.css?v=2027-UI-V11'));
   assert.equal((index.match(/<link rel="stylesheet"/g)||[]).length,1);
   assert.equal((flows.match(/<link rel="stylesheet"/g)||[]).length,1);
   assert.ok(css.includes(".flow-app-shell"));
@@ -192,7 +192,7 @@ test("V07 five independent quantity variants, six inputs, line clamps and compos
 test("V08 gives grouped quantity and text inputs a single outer focus ring",()=>{
   const css=read("web/styles.css");
   const html=read("index.html");
-  assert.match(html,/data-ui-version="2027-UI-V10"/);
+  assert.match(html,/data-ui-version="2027-UI-V11"/);
   for(const grouped of [".studio-qty",".qty-joined",".qty-pill",".qty-inline",".input-variant-shell",".studio-search-field"])
     assert.ok(css.includes(grouped),grouped);
   assert.ok(css.includes(":focus-within"));
@@ -266,7 +266,7 @@ test("V09 base template ships four source-inspired modes on one CSS",()=>{
 
 test("V09 Pages bundles base.html and TS output without replacing original pages",()=>{
   const index=read("index.html"),flows=read("flows.html"),base=read("base.html");
-  assert.ok(index.includes('data-ui-version="2027-UI-V10"'));
+  assert.ok(index.includes('data-ui-version="2027-UI-V11"'));
   assert.ok(flows.includes('data-ui-version="2027-UI-V04"'));
   assert.ok(index.includes('href="./base.html"'));
   assert.ok(base.includes("Mẫu gốc 2027"));
@@ -278,11 +278,11 @@ test("V09 Pages bundles base.html and TS output without replacing original pages
   assert.ok(yaml.includes("npm run verify"));
 });
 
-test("V10 categorizes 14 existing component samples into seven clear groups",()=>{
+test("V11 categorizes 15 component sets into seven clear groups",()=>{
   const html=read("index.html");
   const css=read("web/styles.css");
-  const expected={typography:1,tables:2,quantity:2,inputs:3,actions:2,layouts:2,overlays:2};
-  assert.match(html,/data-ui-version="2027-UI-V10"/);
+  const expected={typography:1,tables:2,quantity:2,inputs:4,actions:2,layouts:2,overlays:2};
+  assert.match(html,/data-ui-version="2027-UI-V11"/);
   assert.ok(html.includes("Chọn loại mẫu cần xem"));
   assert.ok(html.includes('id="componentTheme"'));
   for(const [category,count] of Object.entries(expected)){
@@ -295,14 +295,14 @@ test("V10 categorizes 14 existing component samples into seven clear groups",()=
     const slice=html.slice(a,z<0?html.indexOf('  </div>\n  <div class="gallery-empty"',a):z);
     assert.equal((slice.match(/class="studio-component-card/g)||[]).length,count,category);
   }
-  assert.equal((html.match(/class="studio-component-card/g)||[]).length,14);
+  assert.equal((html.match(/class="studio-component-card/g)||[]).length,15);
   assert.ok(css.includes(".gallery-filter-nav"));
   assert.ok(css.includes(".gallery-category-heading"));
   assert.ok(css.includes(".gallery-browser"));
   assert.ok(css.includes("@media(max-width:760px)"));
 });
 
-test("V10 searches and filters the same DOM without altering component event bindings",()=>{
+test("V11 searches and filters the same DOM without altering component event bindings",()=>{
  const html=read("index.html"),ts=read("web/src/app.ts"),css=read("web/styles.css");
  for(const id of ["gallerySearch","galleryClearSearch","galleryCount","galleryEmpty","galleryShowAll"])
    assert.ok(html.includes('id="'+id+'"'),id);
@@ -318,4 +318,52 @@ test("V10 searches and filters the same DOM without altering component event bin
  assert.ok(html.includes('href="./base.html"'));
  assert.ok(html.includes('href="./flows.html"'));
  assert.doesNotMatch(ts,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:/i);
+});
+
+test("V11 adds four distinct composers inside the existing input gallery",()=>{
+ const html=read("index.html"),css=read("web/styles.css");
+ assert.match(html,/data-ui-version="2027-UI-V11"/);
+ const inputs=html.slice(html.indexOf('id="sample-inputs"'),html.indexOf('id="sample-actions"'));
+ assert.ok(inputs.includes('id="composerGalleryTitle"'));
+ assert.ok(inputs.includes("Bốn trạng thái ô gõ chat"));
+ assert.ok(inputs.includes("4 bộ mẫu"));
+ assert.ok(html.includes('data-gallery-filter="inputs"'));
+ assert.ok(html.includes('href="#sample-inputs"'));
+ for(const kind of ["compact","single","multi","sending"]){
+   assert.ok(inputs.includes('data-composer-sample="'+kind+'"'),kind);
+   assert.ok(inputs.includes('id="composerText-'+kind+'"'),kind);
+ }
+ assert.equal((inputs.match(/data-composer-sample="/g)||[]).length,4);
+ for(const hook of ["data-composer-form","data-composer-text","data-composer-add","data-composer-file",
+   "data-composer-previews","data-composer-send","data-composer-mic","data-composer-mode",
+   "data-composer-status","data-composer-log"]){
+   assert.equal((inputs.split(hook).length-1),4,hook);
+ }
+ assert.ok(inputs.includes("Ảnh mẫu 1"));
+ assert.ok(inputs.includes("Ảnh mẫu 3"));
+ for(const selector of [".composer-variant-grid",".composer-variant--compact",".composer-attachment-list",
+     ".composer-preview",".composer-surface:focus-within",".composer-local-feedback",".composer-send[data-composer-busy=true]"])
+   assert.ok(css.includes(selector),selector);
+ assert.ok(css.includes("@media(max-width:760px)"));
+});
+
+test("V11 composer demos use browser-only image previews and local simulated send",()=>{
+ const app=read("web/src/app.ts"),source=read("web/src/composer-gallery.ts"),html=read("index.html");
+ assert.ok(app.includes('from "./composer-gallery.js"'));
+ assert.ok(app.includes("initComposerGallery();"));
+ for(const marker of ["URL.createObjectURL","URL.revokeObjectURL","accept="]){
+   if(marker==="accept=")assert.ok(html.includes('accept="image/*"'));
+   else assert.ok(source.includes(marker),marker);
+ }
+ for(const marker of ["data-composer-remove-demo","data-composer-remove-file","filePicker.addEventListener(\"change\"",
+  "text.addEventListener(\"input\"","mode.addEventListener(\"click\"","mic.addEventListener(\"click\"",
+  "form.addEventListener(\"submit\"","window.setTimeout","pagehide","maximum=kind===\"single\"?1:4"]){
+   assert.ok(source.includes(marker),marker);
+ }
+ assert.ok(source.includes("Không gửi tin nhắn hoặc ảnh thật")||
+           source.includes("không gửi tin nhắn hoặc ảnh thật"));
+ assert.doesNotMatch(source,/\bfetch\s*\(|\bWebSocket\s*\(|\bXMLHttpRequest\b|supabase|Authorization:|getUserMedia\s*\(/i);
+ const workflow=read(".github/workflows/pages.yml");
+ assert.ok(workflow.includes("cp -R web/dist _site/web/"));
+ assert.equal((html.match(/<link rel="stylesheet"/g)||[]).length,1);
 });
