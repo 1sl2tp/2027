@@ -464,6 +464,17 @@ Bổ sung **vào RULE 09 đã có**, không tạo bộ CSS bảng khác. Mẫu `
 
 ---
 
+### 9.6. V34: căn trục, lề và gap cho bảng dùng chung
+
+- **Dữ liệu đo chuẩn:** STT | Tên hàng | Số | Số lượng | Đơn giá | Thành tiền. Mặc định sáu cột, mobile 360px hiển thị bảng cuộn ngang. **Số** là mã/số hàng giả định (101, 205...), không phải Số lượng. Cột 7/8 mở rộng Trạng thái, Ghi chú. Tất cả số tiền mẫu có SL × Đơn giá = Thành tiền.
+- **Một trục bảng:** COLUMN_SCHEMA là nguồn duy nhất cho key/label/role/priority/minPx, sinh colgroup cùng col khi render; table-layout:fixed. Header và body cùng padding ngang --ds-table-cell-pad-x và chiều cao 44px, không căn bù theo từng dòng.
+- **Căn theo vai trò:** STT/Số/SL giữa; Tên/Ghi chú trái; Đơn giá/Thành tiền phải/tabular-nums. Không dùng nth-child để căn vị trí thay đổi. Tên dài xuống dòng không được đẩy trục giá.
+- **Mẫu độ rộng tối thiểu:** 52 / 186 / 70 / 88 / 128 / 140px (6 cột); đây là lựa chọn 2027, không phải CSS nội bộ ChatGPT.
+- **Kiểm tra viền/gap:** trong cùng ds-table ds-table--schema, hỗ trợ data-borders=grid/rows/plain (kẻ ô, ngang, không kẻ) và data-density=compact/standard/comfortable (padding ngang 6/10/14px). Áp dụng đồng thời cho th và td; không tạo stylesheet hay mẫu bảng khác.
+- **Responsive:** mặc định scroll cho bảng sáu cột; auto dưới 480px với 4+ cột chuyển thẻ, hoặc cards thủ công. Thẻ giữ đủ trường bằng dl/dt/dd. Không tự giấu đơn giá/SL.
+- **Kiểm thử:** colgroup và 8 trường đúng thứ tự, scope=col, aria-sort, tất cả hàng đủ ô, tiền đúng, chung padding/width. E2/E3 qua CI/Pages; E4/E5 cần ảnh Safari/Chrome 320/360/390px, focus và zoom thực tế.
+
+---
 ## RULE 10 — ĐẶT TÊN NÚT THEO ĐÚNG VAI TRÒ, KHÔNG ĐÁNH TRÁO KIỂU VÀ BỐ CỤC
 
 **Mã:** `2027-R10` · **Ngày:** 22/11/2026 (VN) · **Phạm vi:** mục 6 / 6.1 của UI Library Web. **Trạng thái:** E0–E1; E2, E3 và nghiệm thu thiết bị E4/E5 phải xác nhận bằng CI/deploy/bằng chứng riêng.
@@ -554,3 +565,12 @@ Bổ sung cho thư viện giao diện ChatGPT-*like* những trạng thái chữ
 - **Streamdown (Vercel):** Markdown GFM/partial fences/tables và điều khiển copy/download bảng. Streamdown (LobeHub) còn có smooth reveal per-character/per-word. Những nguồn này là **hai repo khác nhau**.
 - **Thứ tự ưu tiên kế tiếp của CHAT:** (1) scroll anchor đúng hành vi đang đọc; (2) Markdown, code/table copy và bảng linh hoạt; (3) kết quả công cụ + source citations; (4) chuyển vùng/accordion ổn định và hiệu ứng giảm chuyển động; (5) ticker/chart/file-tree khi có mục đích. Không tự động triển khai ồ ạt mọi UI mẫu.
 - **Bằng chứng và phạm vi:** `references/GITHUB_COMPONENT_TABLE_EFFECT_AUDIT_V33.md` là tài liệu kiểm kê, không phải file rule riêng. V33 chỉ bổ sung bảng 1–8 cột; những thành phần còn lại là backlog có nguồn, **chưa được khẳng định đã thực hiện**.
+
+### 11.6. V34: ScrollAnchor không giật khi đang đọc
+
+- Thêm ScrollAnchor trong đúng mục 7 và dùng ui-button hiện có; tham khảo [assistant-ui ScrollAnchor](https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/scroll-anchor.mdx) công khai, không sao chép React.
+- Khi ở cuối, nội dung mẫu mới có thể tiếp tục theo xuống. Khi người đọc cuộn khỏi cuối quá 32px: pinned=false, thêm tin phải giữ nguyên scrollTop và tăng unseen, không tự kéo xuống.
+- Nút Về tin mới chỉ xuất hiện khi có tin chưa xem; bấm nút hoặc người xem tự cuộn về cuối mới reset unseen và cho phép theo tin mới.
+- Vùng cuộn role=log aria-live=off; chỉ một dòng trạng thái role=status. Không phát live từng ký tự/đoạn cho screen reader.
+- Mô phỏng tối đa ba đoạn cố định, chỉ hoạt động sau khi người dùng nhấn, dừng timer khi reset, trang ẩn hoặc pagehide; không tạo tin nhắn thật hay truy cập backend.
+- E2/E3: npm verify, PR CI, Pages. E4/E5: cần kiểm tra iOS Safari/PWA, Android Chrome/PWA, bàn phím, text selection, menu và cuộn khi streaming bằng ảnh/video thực tế.

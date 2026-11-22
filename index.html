@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện quy tắc nội dung nút · V33</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V33">
-  <script type="module" src="./web/dist-v33/app.js"></script>
+  <title>2027 · Thư viện quy tắc nội dung nút · V34</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V34">
+  <script type="module" src="./web/dist-v34/app.js"></script>
 </head>
-<body data-ui-version="2027-UI-V33" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V34" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
@@ -117,6 +117,22 @@
           <span>Chờ nội dung</span><span aria-hidden="true">→</span><span>Đang nhận chữ</span><span aria-hidden="true">→</span><span>Hoàn tất / Dừng</span>
         </div>
         <div class="ui-motion-list" id="uiMotionItems" aria-label="Sáu kiểu hiệu ứng text và loading"></div>
+        <section class="ui-scroll-anchor-lab" id="scrollAnchorLab" aria-labelledby="scrollAnchorTitle">
+          <h3 id="scrollAnchorTitle">7.1. Giữ vị trí khi có nội dung mới · ScrollAnchor</h3>
+          <p class="ui-motion-desc">Cuộn lên đọc đoạn cũ, sau đó bấm “Thêm tin mẫu” hoặc “Mô phỏng streaming”. Nội dung mới không được kéo bạn xuống; nút “Về tin mới” chỉ xuất hiện khi cần. Dữ liệu chỉ là ví dụ, không gửi tin thật.</p>
+          <div class="ui-scroll-anchor-shell">
+            <div id="scrollAnchorViewport" class="ui-scroll-anchor-viewport" tabindex="0" role="log" aria-label="Hội thoại mẫu có thể cuộn" aria-live="off"></div>
+            <button type="button" class="ui-button ui-button--secondary ui-scroll-anchor-jump" id="scrollAnchorJump" hidden>Về tin mới</button>
+          </div>
+          <div class="ui-scroll-anchor-actions">
+            <button type="button" class="ui-button ui-button--secondary" id="scrollAnchorAdd">Thêm tin mẫu</button>
+            <button type="button" class="ui-button ui-button--outline" id="scrollAnchorStream">Mô phỏng streaming</button>
+            <button type="button" class="ui-button ui-button--quiet" id="scrollAnchorOld">Xem đoạn cũ</button>
+            <button type="button" class="ui-button ui-button--quiet" id="scrollAnchorReset">Đặt lại</button>
+          </div>
+          <p id="scrollAnchorStatus" class="ui-motion-status" role="status" aria-live="polite" aria-atomic="true">Sẵn sàng thử cuộn.</p>
+          <p class="ui-motion-source">Nguồn đối chiếu: <a href="https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/scroll-anchor.mdx" target="_blank" rel="noopener noreferrer">assistant-ui · ScrollAnchor</a> (MIT). Mẫu triển khai riêng bằng TypeScript, dùng nút gốc 2027.</p>
+        </section>
         <p class="ui-motion-disclaimer">Lưu ý: Chữ xuất hiện từng từ ở đây chỉ là mô phỏng trình bày. Streaming thật phải sử dụng dữ liệu đã nhận từ máy chủ; Markdown chưa hoàn tất cần bộ render riêng, không xử lý bằng regex. Tự động giảm hiệu ứng khi thiết bị bật <code>prefers-reduced-motion</code>.</p>
         <details class="ui-motion-sources">
           <summary>Nguồn GitHub đã đối chiếu và giấy phép</summary>
@@ -360,7 +376,7 @@
             <span>Cùng schema · bảng cuộn ngang / thẻ mobile / sắp xếp</span>
           </div>
           <div class="studio-component-content" id="columnMatrix">
-            <p class="variant-intro">Không dựa vào vị trí cột thứ 1, 2, 3 để quyết định căn chữ. Mỗi cột có vai trò (tên, số lượng, tiền, ngày, trạng thái…), độ ưu tiên và nhãn. Chuyển số cột để quan sát trên khung rộng hoặc mobile.</p>
+            <p class="variant-intro">Mẫu kiểm trục: <strong>STT · Tên hàng · Số · Số lượng · Đơn giá · Thành tiền</strong> (mặc định 6 cột). “Số” là mã/số hàng giả định, không phải số lượng. Tiêu đề và dữ liệu phải chung mép, chung padding theo vai trò; thử viền và mật độ để thấy gap rõ ràng.</p>
             <div class="ui-column-matrix-toolbar">
               <label for="columnMatrixCount">Số cột<select id="columnMatrixCount" aria-label="Số cột của bảng"></select></label>
               <label for="columnMatrixMode">Kiểu hiển thị<select id="columnMatrixMode" aria-label="Kiểu hiển thị bảng">
@@ -372,11 +388,21 @@
                 <option value="mobile">Mobile 360px</option>
                 <option value="desktop">Rộng</option>
               </select></label>
+              <label for="columnMatrixBorders">Đường kẻ<select id="columnMatrixBorders" aria-label="Chọn đường kẻ bảng">
+                <option value="grid">Kẻ ngang và dọc</option>
+                <option value="rows">Chỉ kẻ ngang</option>
+                <option value="plain">Không đường kẻ</option>
+              </select></label>
+              <label for="columnMatrixDensity">Padding ngang<select id="columnMatrixDensity" aria-label="Khoảng đệm bên trong ô bảng">
+                <option value="compact">Gọn · 6px</option>
+                <option value="standard">Chuẩn · 10px</option>
+                <option value="comfortable">Thoáng · 14px</option>
+              </select></label>
               <button type="button" id="columnMatrixCopy" class="ui-button ui-button--secondary"><svg class="ui-icon" aria-hidden="true"><use href="./web/icons.svg#ui-icon-copy"/></svg>Sao chép HTML</button>
             </div>
             <div class="ui-column-matrix-preview" id="columnMatrixPreview" aria-label="Bảng linh hoạt minh họa"></div>
             <p class="studio-component-feedback" id="columnMatrixStatus" role="status" aria-live="polite" aria-atomic="true"></p>
-            <p class="ui-column-matrix-hint">Thử 7–8 cột trên mobile: bảng sẽ ưu tiên cuộn ngang hoặc chuyển thành thẻ, vẫn giữ toàn bộ trường dữ liệu. Cột nhận diện giữ bên trái khi cuộn bảng rộng; bấm tên cột để thử sắp xếp. Dữ liệu chỉ là minh họa.</p>
+            <p class="ui-column-matrix-hint">Bản 6 cột ưu tiên giữ bảng cuộn ngang trên mobile để so sánh trục STT/Tên/Số/SL/Giá/Tiền; tùy chọn “Tự động” mới đổi sang thẻ khi hẹp. Chọn Kẻ ô, Kẻ ngang hoặc Không viền; padding 6/10/14px áp dụng đồng nhất cho cả tiêu đề lẫn từng hàng. “Số” là mã hàng mẫu, không trùng “Số lượng”.</p>
             <details class="ui-column-matrix-reference">
               <summary>Đối chiếu nguồn và cách chọn quy tắc</summary>
               <p><a href="https://github.com/assistant-ui/assistant-ui/blob/main/apps/docs/content/elements/data-table.mdx" target="_blank" rel="noopener noreferrer">assistant-ui DataTable</a> có schema columns/rows, sorting và card view theo container;
