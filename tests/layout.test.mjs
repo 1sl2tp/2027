@@ -20,7 +20,7 @@ test("V08 retains working controls for tables, icons, numeric input, search, cha
   const html=read("index.html"),ts=read("web/src/app.ts");
   for(const id of ["quantityInput","qtyMinus","qtyPlus","searchInput","searchResults","chatDemoForm","chatInput","menuButton","sampleMenu","demoDialog","openPopupButton","dialogConfirmButton"])
     assert.ok(html.includes('id="'+id+'"'),id);
-  for(const cssClass of ["studio-data-table","studio-icon-button square","studio-icon-button round","studio-action-primary","studio-action-secondary"])
+  for(const cssClass of ["studio-data-table","ui-button--icon ui-button--square","ui-button--icon ui-button--round","ui-button--primary","ui-button--secondary"])
     assert.ok(html.includes(cssClass),cssClass);
   for(const method of ["setQty","setMenu","showModal","dialog.close","get<HTMLFormElement>(\"chatDemoForm\")","get<HTMLInputElement>(\"searchInput\")"])
     assert.ok(ts.includes(method),method);
@@ -278,7 +278,7 @@ test("V09 Pages bundles base.html and TS output without replacing original pages
   assert.ok(yaml.includes("npm run verify"));
 });
 
-test("V12 categorizes 15 component sets into seven clear groups",()=>{
+test("V12 categorizes 16 component sets into seven clear groups",()=>{
   const html=read("index.html");
   const css=read("web/styles.css");
   const expected={typography:1,tables:2,quantity:2,inputs:4,actions:3,layouts:2,overlays:2};
@@ -379,7 +379,7 @@ test("V12 puts the canonical composer controls inside Buttons & Icons category",
  for(const shared of ["ui-button--icon","ui-button--mode","ui-button--send","ui-icon--plus","ui-icon--mic","ui-icon--send","ui-icon--chevron"])
    assert.ok(actions.includes(shared),shared);
  for(const symbol of ["ui-icon-plus","ui-icon-chevron","ui-icon-mic","ui-icon-send-up","ui-icon-voice","ui-icon-stop"])
-   assert.ok(html.includes('id="'+symbol+'"'),symbol);
+   assert.ok(read("web/icons.svg").includes('id="'+symbol+'"'),symbol);
  for(const token of ["--ui-control-hit:44px","--ui-control-plus:22px","--ui-control-mic:19px",
   "--ui-control-chevron:13px","--ui-control-send-glyph:20px","--ui-control-send-disc:36px",
   "--ui-control-label:14px","--ui-control-gap:2px"]){
@@ -401,14 +401,14 @@ test("V12 all chat input variants consume canonical action/icon markup and prese
   'class="ui-button ui-button--mode composer-mode"',
   'class="ui-button ui-button--icon composer-mic"',
   'class="ui-button ui-button--send composer-send"',
-  'data-composer-send-icon href="#ui-icon-send-up"',
+  'data-composer-send-icon href="./web/icons.svg#ui-icon-send-up"',
   'data-composer-mode-label>Cao'
  ])assert.equal((input.split(fragment).length-1),4,fragment);
  assert.ok(ts.includes('querySelector<SVGUseElement>("[data-composer-send-icon]")'));
  assert.ok(ts.includes('sendIcon.setAttribute("href"'));
- assert.ok(ts.includes('"#ui-icon-voice"'));
- assert.ok(ts.includes('"#ui-icon-send-up"'));
- assert.ok(ts.includes('"#ui-icon-stop"'));
+ assert.ok(ts.includes('"./web/icons.svg#ui-icon-voice"'));
+ assert.ok(ts.includes('"./web/icons.svg#ui-icon-send-up"'));
+ assert.ok(ts.includes('"./web/icons.svg#ui-icon-stop"'));
  assert.ok(ts.includes("modeLabel.textContent"));
  assert.ok(!ts.includes("sendSymbol.textContent"));
  // No separate sizes for plus/mic/send/mode inside the consumer's CSS.
@@ -418,4 +418,40 @@ test("V12 all chat input variants consume canonical action/icon markup and prese
  assert.doesNotMatch(consumerCss,/\.composer-mode\s*\{/);
  assert.ok(consumerCss.includes("grid-template-columns:var(--ui-control-hit)"));
  assert.equal((html.match(/<link rel="stylesheet"/g)||[]).length,1);
+});
+
+test("R06 classifies future components under the shared Button and Icon library",()=>{
+ const rules=read("RULES.md"),catalog=read("references/UI_COMPONENT_CATALOG_2026-11-22.md");
+ const svg=read("web/icons.svg"),workflow=read(".github/workflows/pages.yml");
+ assert.ok(rules.includes("## RULE 06"));
+ assert.ok(rules.includes("2027-R06"));
+ assert.ok(rules.includes("web/icons.svg"));
+ assert.ok(rules.includes("index.html#sample-actions"));
+ assert.ok(catalog.includes("Cấp | Vai trò"));
+ for(const group of ["Chữ","Bảng","Số lượng","Ô nhập","Nút","Hàng","Menu"])
+   assert.ok(catalog.includes(group),group);
+ for(const item of ["token","Icon","Button","Mẫu ghép","Luồng"])
+   assert.ok(catalog.toLowerCase().includes(item.toLowerCase()),item);
+ for(const icon of ["ui-icon-plus","ui-icon-chevron","ui-icon-mic","ui-icon-send-up","ui-icon-voice","ui-icon-stop","ui-icon-ellipsis"])
+   assert.ok(svg.includes('id="'+icon+'"'),icon);
+ assert.ok(workflow.includes("cp web/icons.svg _site/web/"));
+ assert.ok(read("README.md").includes("UI_COMPONENT_CATALOG_2026-11-22.md"));
+});
+
+test("V12 library all uses the single external SVG registry and no old button classes",()=>{
+ const html=read("index.html"),ts=read("web/src/composer-gallery.ts"),css=read("web/styles.css");
+ const actions=html.slice(html.indexOf('id="sample-actions"'),html.indexOf('id="sample-layouts"'));
+ const inputs=html.slice(html.indexOf('id="sample-inputs"'),html.indexOf('id="sample-actions"'));
+ for(const content of [actions,inputs]){
+  assert.ok(content.includes("./web/icons.svg#ui-icon-plus"));
+  assert.ok(content.includes("./web/icons.svg#ui-icon-mic"));
+  assert.ok(content.includes("./web/icons.svg#ui-icon-send-up"));
+ }
+ assert.ok(!html.includes('class="studio-icon-button'));
+ assert.ok(!html.includes('class="studio-action-'));
+ assert.ok(!html.includes('class="ui-icon-sprite"'));
+ assert.ok(ts.includes('sendIcon.setAttribute("href"'));
+ assert.ok(css.includes(".ui-button--icon"));
+ assert.ok(css.includes(".ui-button--send"));
+ assert.ok(css.includes(".ui-icon--send"));
 });
