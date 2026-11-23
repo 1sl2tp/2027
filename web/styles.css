@@ -3389,9 +3389,9 @@ body.simple-first .topbar-end{gap:0}
 .cg2-list-title{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 5px}
 .cg2-list-title small,.cg2-work-heading small{font-size:9px;letter-spacing:.08em;color:#aaa}
 .cg2-list-title h2{font-size:18px;letter-spacing:-.4px;font-weight:730;margin:4px 0 0}
-.cg2-directory-search .ds-field-shell{min-height:42px}
+
 .cg2-contacts{flex:1;min-height:0;overflow-y:auto;padding:0 8px;display:flex;flex-direction:column;gap:4px}
-.cg2-contacts .ds-contact{border-color:transparent;border-radius:10px;text-align:left;min-height:66px}
+
 .cg2-contacts .ds-contact[aria-pressed=true]{background:#ededeb;border-color:#ededeb}
 .cg2-contact-meta{font-size:10px;color:#aaa;align-self:flex-start;white-space:nowrap}
 .cg2-account{padding:12px 16px;border-top:1px solid #eaeae8;font-size:10px;color:#aaa}
@@ -3414,12 +3414,12 @@ body.simple-first .topbar-end{gap:0}
 .cg2-message-time{font-size:10px;color:#aaa;font-variant-numeric:tabular-nums}
 .cg2-message-actions{opacity:0;transition:opacity .15s}
 .cg2-message:hover .cg2-message-actions,.cg2-message:focus-within .cg2-message-actions{opacity:1}
-.cg2-message-actions .ui-button{min-height:32px;padding:4px 9px;font-size:11px}
+
 .cg2-table-slot{max-width:100%;width:min(100%,475px)}
-.cg2-table-slot .ds-table{min-width:390px}
+
 .cg2-media-part{max-width:100%}
 .cg2-composer{width:auto;flex:0 0 auto;margin:0 clamp(10px,4%,36px) 12px}
-.cg2-composer textarea{resize:none;min-height:36px;max-height:118px}
+
 .cg2-toolbar-spacer{flex:1}
 .cg2-keyboard{display:none;flex:0 0 auto;height:195px;background:#cfd1d7;padding:11px 8px 10px}
 .cg2-keyboard>div{min-height:35px;display:grid;place-items:center;margin:0 0 7px;border-radius:6px;background:#f9f9f9;box-shadow:0 1px 2px #0001;color:#555;font-size:12px}
