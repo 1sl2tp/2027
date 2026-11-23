@@ -12,6 +12,25 @@
 
 
 
+## Modern Web Guidance — cài trong repo 2027 (MWG-V01)
+
+**Nguồn:** [GoogleChrome/modern-web-guidance](https://github.com/GoogleChrome/modern-web-guidance) · [tài liệu chính thức](https://developer.chrome.com/docs/modern-web-guidance) · bản CLI **1.0.1** được cố định trong `devDependencies` (Node.js 22+). Skill gốc nằm ở `.agents/skills/modern-web-guidance/SKILL.md`. Chỉ thêm công cụ hỗ trợ tác vụ Web; không thay đổi UI, không nối ứng dụng CHAT/TAPHOA thật, không yêu cầu quyền API hay ghi dữ liệu người dùng.
+
+Dùng từ thư mục gốc repo:
+
+```bash
+npm install
+npm run guidance:search -- "responsive data table"
+npm run guidance:retrieve -- "<guide-id>"
+npm run guidance:scan
+```
+
+**Nguyên tắc:** Khi bổ sung/sửa một Web component, tìm bằng `guidance:search`, đọc hướng dẫn phù hợp qua `guidance:retrieve`, đối chiếu hỗ trợ Safari/Chrome và thử hồi quy. Không biến các gợi ý bên ngoài thành primitive/CSS mới; `RULES.md`, `COMPONENT_CONTRACTS`, `COMPONENT_PLACEMENTS` và `COLUMN_SCHEMA` vẫn là nguồn quy tắc/bản mẫu duy nhất. Lệnh `guidance:scan` là **chỉ đọc**, chỉ phát hiện một phần mẫu mã cũ, không tự sửa code. Không chạy quét hoặc sửa production.
+
+**Quyền riêng tư:** Modern Web Guidance có thu thập thống kê sử dụng ẩn danh theo tài liệu gốc; có thể vô hiệu hóa bằng biến môi trường `DISABLE_TELEMETRY=1` (CI của 2027 đã tắt telemetry khi kiểm tra công cụ). Hướng dẫn của skill dùng tìm kiếm trong package sau khi cài đặt; cập nhật phiên bản cần PR và thử CI trước, không tự động thay đổi dependency.
+
+**Trạng thái kiểm chứng:** GitHub Actions chạy `npm install`, `npm run guidance:search -- "responsive data table"`, `npm run verify`, rồi mới xuất bản demo. CI xanh chỉ xác nhận công cụ và Web build; không phải kiểm thử thực tế iOS Safari/PWA hoặc Android Web/APK.
+
 ## Kiểm kê GitHub mở rộng — V41 (mẫu Message đã triển khai; các phần khác là backlog)
 
 **[Xem báo cáo phân loại những mẫu còn thiếu](./references/GITHUB_UI_UX_COMPONENT_GAPS_V41.md)**: 11 nhóm nguồn/khả năng bổ sung gồm TanStack Virtual Chat Guide, React Virtuoso, assistant-ui MessageParts/Actions/DraftRestore/ConversationSearch/ImageGallery, Radix/Floating UI, react-resizable-panels, cmdk và Motion/AutoAnimate.
