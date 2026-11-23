@@ -1,7 +1,7 @@
 import {COLUMN_SCHEMA,alignmentForRole,type ColumnSpec} from "./column-matrix.js";
 import {auditComponentPlacements,auditComponentRegistry,auditMessageTree,auditComposerTree,getAllowedComponentParents,getComponentContract} from "./component-contracts.js";
 
-// CG-V02 is a compositor: it instantiates already registered 2027 primitives
+// CG-V03 is a compositor: it instantiates already registered 2027 primitives
 // in the declared host slots. It never introduces a new button/table/input primitive.
 type Layout="two"|"three"|"focus";
 type Device="desktop"|"phone"|"keyboard";
@@ -10,7 +10,7 @@ type MessagePart={kind:"text"|"table"|"media"; text?:string;rows?:Row[];count?:n
 type Row={index:number;name:string;quantity:number;price:number;total:number};
 type Message={id:string;side:"incoming"|"outgoing";time:string;parts:MessagePart[]};
 const $=<T extends HTMLElement>(id:string):T=>{
- const e=document.getElementById(id);if(!e)throw new Error("Missing CG-V02 element "+id);return e as T;
+ const e=document.getElementById(id);if(!e)throw new Error("Missing CG-V03 element "+id);return e as T;
 };
 const make=<K extends keyof HTMLElementTagNameMap>(tag:K,cls="",text=""):HTMLElementTagNameMap[K]=>{
  const e=document.createElement(tag);if(cls)e.className=cls;if(text)e.textContent=text;return e;
@@ -87,11 +87,19 @@ function renderHeader():void{
  $("cg2HeaderHint").textContent=item.subtitle;
 }
 const money=(v:number):string=>new Intl.NumberFormat("vi-VN",{maximumFractionDigits:0}).format(v)+" đ";
+let tableCounter=0;
 function buildTable(items:readonly Row[]):HTMLElement{
- const fields:ColumnSpec[]=items.some(x=>x.price>0)?COLUMN_SCHEMA.filter(x=>["index","name","quantity","total"].includes(x.key)):COLUMN_SCHEMA.filter(x=>["index","name","quantity"].includes(x.key));
+ const isOrder=items.some(x=>x.price>0);
+ const fields:ColumnSpec[]=isOrder?COLUMN_SCHEMA.filter(x=>["index","name","quantity","total"].includes(x.key)):COLUMN_SCHEMA.filter(x=>["index","name","quantity"].includes(x.key));
+ // Modern Web Guidance: accessible keyboard-scrollable region, one semantic table.
  const root=make("div","ds-table-scroll cg2-table-slot");
+ root.tabIndex=0;
+ root.setAttribute("role","region");
  const table=mark(make("table","ds-table ds-table--schema"),"DATA-TABLE");
- table.setAttribute("aria-label",items.some(x=>x.price>0)?"Đơn hàng mẫu":"Danh sách lấy hàng mẫu");
+ const caption=make("caption","cg2-sr-only",isOrder?"Đơn hàng mẫu":"Danh sách lấy hàng mẫu");
+ caption.id="cg2-table-caption-"+(++tableCounter);
+ root.setAttribute("aria-labelledby",caption.id);
+ table.append(caption);
  const colgroup=make("colgroup");
  for(const field of fields){const col=mark(make("col"),"TABLE-COLUMN");col.dataset.colKey=field.key;col.dataset.colRole=field.role;col.style.width=field.minPx+"px";colgroup.append(col);}
  table.append(colgroup);
@@ -215,6 +223,14 @@ $("cg2Attach").addEventListener("click",()=>{
 });
 $("cg2Mic").addEventListener("click",()=>feedback("Mic là nút con có sẵn của COMPOSER-TOOLBAR, demo không xin quyền micro."));
 const form=$<HTMLFormElement>("cg2Composer");
+// Modern Web Guidance: Enter submits, Shift+Enter adds a line; never submit on IME confirmation.
+// Safari may report the confirming Enter as keyCode 229 after compositionend.
+input.addEventListener("keydown",event=>{
+ if(event.key!=="Enter"||event.shiftKey)return;
+ event.preventDefault();
+ if(event.isComposing||event.keyCode===229)return;
+ form.requestSubmit();
+});
 form.addEventListener("submit",e=>{
  e.preventDefault();const value=input.value.trim();if(!value)return;
  const next=messages[contact].length+1;messages[contact].push({id:contact+"t"+next,side:"outgoing",time:"Vừa tạo",parts:[{kind:"text",text:value.slice(0,800)}]});
