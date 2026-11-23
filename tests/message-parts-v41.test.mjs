@@ -62,8 +62,8 @@ test("V41: main message sample uses COLUMN_SCHEMA, ds-table, and the existing ui
  assert.ok(html.includes('id="messageV41Preview"'));
  assert.ok(html.includes('id="simpleFrames"'));
  assert.equal((html.match(/data-message-v41-variant=/g)||[]).length,3);
- assert.ok(html.includes('data-ui-version="2027-UI-V46"'));
- assert.ok(html.includes('src="./web/dist-v46/app.js"'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V47"'));
+ assert.ok(html.includes('src="./web/dist-v47/app.js"'));
 });
 
 test("V41: source has one owner for message composition, no duplicate Button or Table CSS",()=>{
