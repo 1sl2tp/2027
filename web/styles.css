@@ -3365,3 +3365,106 @@ body.simple-first .topbar-end{gap:0}
 @media(max-width:1050px){.cg-layout-picks{grid-template-columns:1fr}.cg-layout-pick{min-height:96px}.cg-pattern-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cg-notification-lab{align-items:flex-start;flex-direction:column}}
 @media(max-width:700px){.cg-main{padding:0 14px 55px}.cg-intro{padding:31px 0 27px;display:block}.cg-intro h1{font-size:31px;letter-spacing:-1px}.cg-demo-flag{margin-top:15px;white-space:normal}.cg-section-title{align-items:flex-start;flex-direction:column;gap:7px}.cg-section-title>p{text-align:left}.cg-layout-pick{padding:12px;gap:12px}.cg-controls{gap:10px}.cg-control-set{max-width:100%;flex-wrap:wrap}.cg-control-set button{padding:0 10px;font-size:11px;min-height:33px}.cg-preview-background{border-radius:15px;padding:12px 8px;min-height:unset}.cg-device-frame[data-device=desktop]{height:622px}.cg-device-frame[data-device=desktop] .cg-app-shell{grid-template-columns:0 minmax(0,1fr)}.cg-device-frame[data-device=desktop] .cg-contact-pane{display:none}.cg-device-frame[data-device=desktop] .cg-back{display:grid}.cg-device-frame[data-device=desktop][data-view=contacts] .cg-app-shell{grid-template-columns:1fr}.cg-device-frame[data-device=desktop][data-view=contacts] .cg-contact-pane{display:flex}.cg-device-frame[data-device=desktop][data-view=contacts] .cg-thread{display:none}.cg-device-frame[data-device=desktop] .cg-thread-header{padding:0 10px}.cg-pattern-grid{grid-template-columns:1fr}.cg-toplinks a:nth-child(2){display:none}.cg-toplinks{gap:10px}.cg-topbar{padding:0 13px}}
 @media(prefers-reduced-motion:reduce){.cg-device-frame,.cg-layout-pick{transition:none}}
+
+
+/* CG-V02: slots and layout composition only. Primitives belong to the 2027 design system. */
+.cg2-page{--ui-bg:#fff;--ui-surface:#f7f7f6;--ui-text:#242424;--ui-text-muted:#737373;--ui-border:#e5e5e2;--ui-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;--ds-focus:#7a9884;background:#fafaf9;color:#242424}
+.cg2-site-actions{display:flex;align-items:center;gap:18px;font-size:12px;color:#777}
+.cg2-site-actions a:hover{text-decoration:underline}
+.cg2-main{max-width:1360px;margin:auto;padding:0 clamp(14px,4vw,52px) 55px}
+.cg2-page-title{display:flex;align-items:end;justify-content:space-between;gap:20px;padding:37px 0 27px}
+.cg2-page-title h1{font-size:clamp(27px,3.3vw,39px);font-weight:730;letter-spacing:-1px;margin:9px 0}
+.cg2-page-title p{font-size:13px;line-height:1.65;color:#777;max-width:670px;margin:0}
+.cg2-safe{font-size:11px;color:#888;border:1px solid #dededb;padding:7px 12px;border-radius:14px;white-space:nowrap}
+.cg2-board{background:#fff;border:1px solid #e5e5e3;border-radius:17px;overflow:hidden}
+.cg2-controls{display:flex;gap:15px;justify-content:space-between;align-items:end;flex-wrap:wrap;padding:15px 18px;border-bottom:1px solid #e9e9e7}
+.cg2-ctrl-group{display:flex;flex-direction:column;align-items:start;gap:8px}
+.cg2-ctrl-group>span{font-size:10px;color:#888;font-weight:650;letter-spacing:.05em}
+.cg2-assembly-stage{background:#f4f4f2;padding:24px;display:flex;justify-content:center;align-items:center;min-width:0}
+.cg2-device{width:min(100%,1090px);height:635px;overflow:hidden;background:#fff;border:1px solid #ddd;border-radius:15px;box-shadow:0 13px 36px #00000014;transition:width .2s ease}
+.cg2-shell,.cg2-screen-slot{height:100%;min-height:0}
+.cg2-screen{display:grid;grid-template-columns:265px minmax(0,1fr);grid-template-rows:64px minmax(0,1fr);height:100%;min-height:0;min-width:0;position:relative;background:#fff}
+.cg2-directory{grid-area:1/1/3/2;display:flex;flex-direction:column;min-height:0;min-width:0;border-right:1px solid #e9e9e7;background:#fafaf9}
+.cg2-directory-tools{padding:16px 12px 10px;display:flex;flex-direction:column;gap:12px}
+.cg2-list-title{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 5px}
+.cg2-list-title small,.cg2-work-heading small{font-size:9px;letter-spacing:.08em;color:#aaa}
+.cg2-list-title h2{font-size:18px;letter-spacing:-.4px;font-weight:730;margin:4px 0 0}
+.cg2-directory-search .ds-field-shell{min-height:42px}
+.cg2-contacts{flex:1;min-height:0;overflow-y:auto;padding:0 8px;display:flex;flex-direction:column;gap:4px}
+.cg2-contacts .ds-contact{border-color:transparent;border-radius:10px;text-align:left;min-height:66px}
+.cg2-contacts .ds-contact[aria-pressed=true]{background:#ededeb;border-color:#ededeb}
+.cg2-contact-meta{font-size:10px;color:#aaa;align-self:flex-start;white-space:nowrap}
+.cg2-account{padding:12px 16px;border-top:1px solid #eaeae8;font-size:10px;color:#aaa}
+.cg2-thread-header{grid-area:1/2/2/3;display:flex;align-items:center;gap:10px;min-width:0;border-bottom:1px solid #eaeae8;padding:0 14px}
+.cg2-identity{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.cg2-identity>div{min-width:0;display:flex;flex-direction:column;gap:3px}
+.cg2-identity strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cg2-identity small{font-size:10px;color:#999;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cg2-header-actions{display:flex;align-items:center}
+.cg2-back{display:none}
+.cg2-thread{grid-area:2/2/3/3;min-height:0;min-width:0;display:flex;flex-direction:column;position:relative}
+.cg2-message-list{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:17px clamp(12px,4%,36px);display:flex;flex-direction:column;gap:14px;scrollbar-color:#ddd transparent}
+.cg2-day{font-size:10px;color:#999;align-self:center;margin:2px 0 6px}
+.cg2-message{width:max-content;max-width:min(90%,590px);min-width:0;display:flex;flex-direction:column;gap:5px;flex:0 0 auto}
+.cg2-incoming{align-self:flex-start;align-items:flex-start}
+.cg2-outgoing{align-self:flex-end;align-items:flex-end}
+.cg2-content-parts{display:flex;flex-direction:column;gap:8px;min-width:0;max-width:100%}
+.cg2-text-part{margin:0;max-width:540px;white-space:pre-line;font:400 14px/1.55 var(--ui-font);color:var(--ui-text);overflow-wrap:anywhere}
+.cg2-outgoing .cg2-content-parts:has(>.cg2-text-part:first-child):not(:has(.cg2-table-part,.cg2-media-part)){padding:10px 14px;background:var(--ui-surface);border-radius:16px 16px 5px 16px}
+.cg2-message-time{font-size:10px;color:#aaa;font-variant-numeric:tabular-nums}
+.cg2-message-actions{opacity:0;transition:opacity .15s}
+.cg2-message:hover .cg2-message-actions,.cg2-message:focus-within .cg2-message-actions{opacity:1}
+.cg2-message-actions .ui-button{min-height:32px;padding:4px 9px;font-size:11px}
+.cg2-table-slot{max-width:100%;width:min(100%,475px)}
+.cg2-table-slot .ds-table{min-width:390px}
+.cg2-media-part{max-width:100%}
+.cg2-composer{width:auto;flex:0 0 auto;margin:0 clamp(10px,4%,36px) 12px}
+.cg2-composer textarea{resize:none;min-height:36px;max-height:118px}
+.cg2-toolbar-spacer{flex:1}
+.cg2-keyboard{display:none;flex:0 0 auto;height:195px;background:#cfd1d7;padding:11px 8px 10px}
+.cg2-keyboard>div{min-height:35px;display:grid;place-items:center;margin:0 0 7px;border-radius:6px;background:#f9f9f9;box-shadow:0 1px 2px #0001;color:#555;font-size:12px}
+.cg2-work{display:none;grid-area:1/3/3/4;min-width:0;padding:20px 13px;background:#fafaf9;border-left:1px solid #ededeb;flex-direction:column;gap:16px}
+.cg2-work-heading{display:flex;flex-direction:column;gap:8px}
+.cg2-work-heading strong{font-size:14px}
+.cg2-work .ds-summary{max-width:100%}
+.cg2-work p{font-size:11px;color:#888;line-height:1.6}
+.cg2-overlay-root{position:absolute;inset:0;pointer-events:none}
+.cg2-device[data-layout=three] .cg2-screen{grid-template-columns:220px minmax(0,1fr) 230px}
+.cg2-device[data-layout=three] .cg2-work{display:flex}
+.cg2-device[data-layout=focus] .cg2-screen{grid-template-columns:minmax(0,1fr)}
+.cg2-device[data-layout=focus] .cg2-directory,.cg2-device[data-layout=focus] .cg2-work{display:none}
+.cg2-device[data-layout=focus] .cg2-thread-header{grid-column:1}
+.cg2-device[data-layout=focus] .cg2-thread{grid-column:1}
+.cg2-device[data-device=phone],.cg2-device[data-device=keyboard]{width:min(390px,100%);height:690px;border:5px solid #252525;border-radius:25px}
+.cg2-device[data-device=phone] .cg2-screen,.cg2-device[data-device=keyboard] .cg2-screen{grid-template-columns:minmax(0,1fr);grid-template-rows:56px minmax(0,1fr)}
+.cg2-device[data-device=phone] .cg2-directory,.cg2-device[data-device=keyboard] .cg2-directory,.cg2-device[data-device=phone] .cg2-work,.cg2-device[data-device=keyboard] .cg2-work{display:none}
+.cg2-device[data-device=phone] .cg2-thread-header,.cg2-device[data-device=keyboard] .cg2-thread-header{grid-column:1}
+.cg2-device[data-device=phone] .cg2-thread,.cg2-device[data-device=keyboard] .cg2-thread{grid-column:1}
+.cg2-device[data-device=phone] .cg2-back,.cg2-device[data-device=keyboard] .cg2-back{display:inline-flex}
+.cg2-device[data-device=phone] .cg2-message,.cg2-device[data-device=keyboard] .cg2-message{max-width:94%}
+.cg2-device[data-device=phone] .cg2-message-list,.cg2-device[data-device=keyboard] .cg2-message-list{gap:11px;padding:13px 10px}
+.cg2-device[data-device=phone] .cg2-composer,.cg2-device[data-device=keyboard] .cg2-composer{margin:0 8px 10px}
+.cg2-device[data-device=keyboard] .cg2-keyboard{display:block}
+.cg2-device[data-mobile-view=directory][data-device=phone] .cg2-directory,.cg2-device[data-mobile-view=directory][data-device=keyboard] .cg2-directory{display:flex;grid-area:1/1/3/2;border-right:0}
+.cg2-device[data-mobile-view=directory][data-device=phone] .cg2-thread-header,.cg2-device[data-mobile-view=directory][data-device=keyboard] .cg2-thread-header,.cg2-device[data-mobile-view=directory][data-device=phone] .cg2-thread,.cg2-device[data-mobile-view=directory][data-device=keyboard] .cg2-thread{display:none}
+.cg2-below{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:15px}
+.cg2-owner-panel{padding:17px;display:flex;flex-direction:column;gap:9px;min-width:0;border:1px solid #eaeae8;background:#fafaf9;border-radius:11px}
+.cg2-owner-panel strong{font-size:13px;overflow-wrap:anywhere}
+.cg2-owner-panel div{font-size:11px;font-family:ui-monospace,monospace;color:#888;overflow-wrap:anywhere;line-height:1.65}
+.cg2-owner-panel p{font-size:11px;line-height:1.6;color:#888;margin:0}
+.cg2-owner-panel .cg2-audit-ok{color:#37735b}
+.cg2-check-note{color:#a0a0a0;font-size:10px}
+.cg2-status{padding:12px 18px;margin:0;border-top:1px solid #eee;font-size:11px;color:#888}
+.cg2-hierarchy{padding:32px 0}
+.cg2-hierarchy h2{font-size:21px;letter-spacing:-.6px;margin:9px 0 20px}
+.cg2-hierarchy-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cg2-hierarchy-grid>div{padding:17px;min-width:0;display:flex;flex-direction:column;gap:8px;border:1px solid #e9e9e6;background:#fff;border-radius:10px}
+.cg2-hierarchy-grid span{font-size:10px;color:#aaa}
+.cg2-hierarchy-grid strong{font-size:12px;overflow-wrap:anywhere}
+.cg2-hierarchy-grid small{font-size:11px;line-height:1.55;color:#888}
+.cg2-hierarchy>p{font-size:11px;line-height:1.65;color:#888;margin-top:17px}
+.cg2-selected{outline:2px dashed #81a08f;outline-offset:3px}
+.cg2-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@media(max-width:850px){.cg2-hierarchy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cg2-page-title{align-items:flex-start;flex-direction:column}.cg2-device[data-device=desktop] .cg2-screen{grid-template-columns:200px minmax(0,1fr)}.cg2-device[data-device=desktop][data-layout=three] .cg2-work{display:none}.cg2-device[data-device=desktop][data-layout=three] .cg2-screen{grid-template-columns:200px minmax(0,1fr)}}
+@media(max-width:570px){.cg2-main{padding:0 11px 40px}.cg2-site-actions a{display:none}.cg2-page-title{padding:26px 3px}.cg2-controls{padding:13px 9px}.cg2-assembly-stage{padding:13px 7px}.cg2-device[data-device=desktop] .cg2-screen{grid-template-columns:minmax(0,1fr)}.cg2-device[data-device=desktop] .cg2-directory{display:none}.cg2-device[data-device=desktop] .cg2-thread-header,.cg2-device[data-device=desktop] .cg2-thread{grid-column:1}.cg2-below{grid-template-columns:1fr;padding:10px}.cg2-hierarchy-grid{grid-template-columns:1fr 1fr;gap:7px}.cg2-hierarchy-grid>div{padding:12px}.cg2-device[data-device=desktop] .cg2-message{max-width:94%}}
+@media(prefers-reduced-motion:reduce){.cg2-device,.cg2-message-actions{transition:none}}
