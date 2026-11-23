@@ -3,6 +3,7 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - "chat-gallery.html"
       - "index.html"
       - "github-sources.html"
       - "base.html"
