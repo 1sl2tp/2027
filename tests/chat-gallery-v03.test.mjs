@@ -6,7 +6,7 @@ const read=path=>readFileSync(new URL("../"+path,import.meta.url),"utf8");
 test("CG-V03: Composer has one labeled textarea and one native submit",()=>{
  const html=read("chat-gallery.html");
  const script=read("web/src/chat-gallery.ts");
- assert.ok(html.includes('data-ui-version="2027-CG-V03"'));
+ assert.ok(html.includes('data-ui-version="2027-CG-V04"'));
  assert.ok(html.includes('<label for="cg2Input" class="cg2-sr-only">'));
  assert.equal((html.match(/id="cg2Input"/g)||[]).length,1);
  assert.equal((html.match(/data-ui-component="COMPOSER-SEND-BUTTON"/g)||[]).length,1);
