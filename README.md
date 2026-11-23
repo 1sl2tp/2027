@@ -2,7 +2,7 @@
 
 **2027 là dự án thử nghiệm giao diện**, tách biệt với CHAT/TAPHOA thật. Có ba trang chính và một phòng thử nguồn GitHub:
 
-- **[Bàn lắp ghép giao diện chat](https://1sl2tp.github.io/2027/chat-gallery.html)** — `chat-gallery.html`, **CG-V03**: Enter an toàn với bộ gõ tiếng Việt (IME, Safari), bảng trong tin nhắn có vùng cuộn bằng bàn phím và caption cho hỗ trợ tiếp cận; tiếp tục chỉ đổi cấp vùng 2/3/tập trung và mobile/bàn phím; mẫu con gọi từ các primitive và schema gốc `ui-button`, `ds-field`, `ds-composer`, `ds-table`, `ds-media-tile`; chọn từng vùng để xem cây cha–con, tự kiểm placement/runtime. Dữ liệu giả lập, không gửi tin thật, chưa nghiệm thu thiết bị thật.
+- **[Bàn lắp ghép giao diện chat](https://1sl2tp.github.io/2027/chat-gallery.html)** — `chat-gallery.html`, **CG-V04**: giữ sửa lỗi Enter/IME, bảng cuộn bàn phím và thêm bố cục phụ thuộc độ rộng vùng cha (container query), lối quay về danh bạ khi khung hẹp, bản nháp riêng từng chat, giữ vị trí đọc khi chuyển màn hình/bàn phím, ẩn vùng thao tác tin khi chưa dùng; vẫn chỉ ghép cấp vùng 2/3/tập trung và mobile/bàn phím; mẫu con gọi từ các primitive và schema gốc `ui-button`, `ds-field`, `ds-composer`, `ds-table`, `ds-media-tile`; chọn từng vùng để xem cây cha–con, tự kiểm placement/runtime. Dữ liệu giả lập, không gửi tin thật, chưa nghiệm thu thiết bị thật.
 - **[Văn bản mẫu và thành phần](https://1sl2tp.github.io/2027/)** — `index.html`, **UI-V46**: thư viện dạng danh sách tối giản như các mẫu font, bổ sung mẫu 4.1 tin nhắn đa nội dung. Bảng gốc vẫn giữ schema 20 cột; mẫu trong tin chỉ sử dụng các cột cần thiết, không tạo bảng gốc thứ hai.
 - **[Nguồn GitHub & phòng thử Chat UI](https://1sl2tp.github.io/2027/github-sources.html)** — `github-sources.html`, **SOURCE-V02**: đối chiếu 13 nguồn, phân loại đúng primitive/composition/utility và cha sở hữu; thêm một tin mẫu gồm text, bảng, media và action bar thuộc chính tin đó. [Audit V02](./references/GITHUB_SOURCE_V02_2026-11-22.md), [audit V01](./references/GITHUB_CHAT_UI_SOURCE_LAB_2026-11-22.md).
 - **[Mẫu gốc 2027](https://1sl2tp.github.io/2027/base.html)** — `base.html`, V09, so sánh bốn preset trên một khung và cùng một CSS.
@@ -11,6 +11,17 @@
 
 
 
+
+
+### CG-V04 — lắp ghép theo diện tích cha, không sửa primitive con
+
+**Nguồn kỹ thuật đã dùng:** Modern Web Guidance (`size-aware-styling`, `form-fields-automatically-fit-contents`, `form-factor-adaptation`). Tạo `container: cg2-preview / inline-size` ở khung xem để bố cục ba vùng tự hạ về hai hoặc một vùng tùy diện tích thực, kể cả khi trình duyệt desktop được kéo hẹp. Vì vậy không được chỉ dùng breakpoint theo chiều rộng màn hình. Việc đổi bố cục không copy `ui-button`, `ds-field`, `ds-composer`, `ds-table`, `ds-media-tile`.
+
+- Bản nháp tin được lưu **theo mỗi hội thoại** trong bộ nhớ trang demo; chuyển khách vẫn giữ nội dung chưa gửi, không ghi storage/backend.
+- Khi chuyển từ rộng sang mobile hoặc chế độ bàn phím, vị trí đọc gần nhất được giữ (nếu đã cuộn lên xem tin cũ), thay vì tự kéo xuống cuối vô điều kiện; gửi một tin mẫu mới vẫn đưa về cuối.
+- Các nút thao tác tin chỉ xuất hiện khi hover/focus hoặc người dùng bấm vào tin; không chiếm chiều cao trống của mỗi tin.
+- `field-sizing: content` chỉ là cải tiến trong trình duyệt có hỗ trợ; trình duyệt không hỗ trợ vẫn dùng `ds-composer textarea` gốc và cuộn trong ô, không dùng JS tự thay đổi chiều cao liên tục.
+- `CG-V04` chỉ là bản Web demo. CI có thể kiểm tra mã, TypeScript và xuất bản, **không thay thế E4/E5 trên iPhone/Android thật**.
 
 ## Modern Web Guidance — cài trong repo 2027 (MWG-V01)
 
