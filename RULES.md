@@ -756,3 +756,18 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 
 
 **V46 build isolation:** `tsconfig.json.exclude` loại bỏ ba module crosswalk cũ khỏi `web/dist` và GitHub Pages. Chúng nằm trong Git repository chỉ để lưu lịch sử, không được đóng gói vào bản sản phẩm UI 2027.
+
+
+### 12.13. V47 — Mỗi ngữ cảnh Chat có một nơi phản hồi chính (mẫu thiết kế, không Push thật)
+
+**Mã phiên bản:** `2027-UI-V47` · **Ngày:** 23/11/2026 VN · **Trạng thái:** triển khai mẫu Web và kiểm thử tự động; E4/E5 chờ nghiệm thu thiết bị thực. Đây là phần mở rộng **RULE 12**, không tạo RULE 13 hoặc một design system thứ hai.
+
+- **Nguồn đã đối chiếu:** [Meta, Designing for accessibility through design systems](https://www.meta.com/design-at-meta/blog/acessibility-and-design-systems/) nhấn mạnh tiêu chuẩn và các thành phần lặp lại có tính nhất quán; [Pint of Design / UI Battle 2025](https://www.uef.edu.vn/tin-tuc-su-kien/ui-battle-2025-ket-noi-tai-nang-thiet-ke-tre-lan-toa-tinh-than-hoc-thuat-tai-uef-31426) xác nhận có hoạt động chuyên môn tại Việt Nam. **Không suy diễn rằng các nhóm Facebook đã duyệt mẫu 2027**, vì không truy cập được toàn bộ bài đăng trong nhóm.
+- **Quyết định của chính 2027:** trước khi tạo banner/toast/badge, hỏi đang khóa máy, ở danh bạ, ở đúng hội thoại, ở hội thoại khác hay đang nhập bằng bàn phím. Không sao chép CSS/code từ Facebook, ChatGPT, CHAT/TAPHOA cũ.
+- **Một owner:** `UI-LIBRARY → UI-SHELL → UI-SCREEN-SLOT → CHAT-SCREEN → CHAT-CONTEXT-FEEDBACK`. Đây là **composition tùy chọn** của ChatScreen, không phải app-shell mới. Chỉ đưa trạng thái hiển thị vào component; không lập nút/bảng/khung độc lập cho mỗi nhánh. Kích thước nút lấy từ `ui-button`, màu/chữ/viền từ `web/styles.css`.
+- **Ma trận demo 5 trạng thái:** khóa máy → chỉ thông báo OS; danh bạ mobile → chỉ dòng xem trước + chưa đọc; đúng hội thoại → tin trong thread, không toast; hội thoại khác → toast trong ứng dụng và trạng thái chưa đọc tại danh bạ, không tự đổi thread; bàn phím mở → vùng đọc + soạn ưu tiên, điều khiển phụ thu lại. Trong thực tế cần phân biệt UI trực tiếp, tín hiệu chưa đọc và native Push; bảng này là **hướng UX**, không xác nhận iOS/Android xử lý đúng khi chạy thật.
+- **Phân biệt nội dung:** demo sử dụng khách giả A/B, không Auth, network, DB, Notification API hay gửi tin. Mọi thao tác chỉ thay `hidden`, `aria-pressed`, `textContent` trong container hiện tại.
+- **Web và APK:** Web demo tích hợp `web/src/interaction-context-v47.ts` và `web/styles.css`; APK Compose về sau ánh xạ cùng ma trận bối cảnh nhưng dùng nền tảng thông báo native, không dùng DOM/WebView.
+- **Test/E0–E5:** E0 ghi từ yêu cầu người dùng và lỗi banner chồng ở mobile. E1 xác định cha/slot/owner. E2 kiểm thử bảng quyết định, hiện/ẩn, semantic HTML, build TypeScript. E3 chỉ khi GitHub Actions Pages đạt. E4 thử iOS Safari/PWA và Android PWA/APK với màn khóa, danh bạ, A/B, bàn phím; E5 cần bằng chứng nghiệm thu. Việc PR merge/Pages xanh không được ghi thành đã kiểm thiết bị.
+- **Rollback:** hoàn tác commit V47, phục hồi version/link `dist-v46`, vẫn giữ nguyên registry V46 và mẫu đang dùng, tuyệt đối không chạm production CHAT hay dữ liệu khách.
+
