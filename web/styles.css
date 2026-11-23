@@ -3468,3 +3468,39 @@ body.simple-first .topbar-end{gap:0}
 @media(max-width:850px){.cg2-hierarchy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cg2-page-title{align-items:flex-start;flex-direction:column}.cg2-device[data-device=desktop] .cg2-screen{grid-template-columns:200px minmax(0,1fr)}.cg2-device[data-device=desktop][data-layout=three] .cg2-work{display:none}.cg2-device[data-device=desktop][data-layout=three] .cg2-screen{grid-template-columns:200px minmax(0,1fr)}}
 @media(max-width:570px){.cg2-main{padding:0 11px 40px}.cg2-site-actions a{display:none}.cg2-page-title{padding:26px 3px}.cg2-controls{padding:13px 9px}.cg2-assembly-stage{padding:13px 7px}.cg2-device[data-device=desktop] .cg2-screen{grid-template-columns:minmax(0,1fr)}.cg2-device[data-device=desktop] .cg2-directory{display:none}.cg2-device[data-device=desktop] .cg2-thread-header,.cg2-device[data-device=desktop] .cg2-thread{grid-column:1}.cg2-below{grid-template-columns:1fr;padding:10px}.cg2-hierarchy-grid{grid-template-columns:1fr 1fr;gap:7px}.cg2-hierarchy-grid>div{padding:12px}.cg2-device[data-device=desktop] .cg2-message{max-width:94%}}
 @media(prefers-reduced-motion:reduce){.cg2-device,.cg2-message-actions{transition:none}}
+
+
+/* CG-V04: only owner-level responsive composition; ui-button/ds-table/ds-composer remain canonical. */
+.cg2-device{container:cg2-preview / inline-size}
+.cg2-message-actions{display:none;opacity:1}
+.cg2-message:hover .cg2-message-actions,
+.cg2-message:focus-within .cg2-message-actions,
+.cg2-message.cg2-actions-open .cg2-message-actions{display:flex}
+.cg2-jump{position:sticky;bottom:8px;align-self:flex-end;z-index:3}
+.cg2-jump[hidden]{display:none!important}
+.cg2-composer textarea{resize:none;height:auto;overflow-y:auto}
+@supports (field-sizing:content){
+ .cg2-composer textarea{field-sizing:content;height:auto}
+}
+/* Three regions only fit when the parent preview has room, regardless of browser viewport. */
+@container cg2-preview (max-width:920px){
+ .cg2-device[data-layout=three] .cg2-screen{grid-template-columns:265px minmax(0,1fr)}
+ .cg2-device[data-layout=three] .cg2-work{display:none}
+}
+/* Even Desktop mode must provide an operable contact-return path in a narrow preview. */
+@container cg2-preview (max-width:650px){
+ .cg2-device[data-device=desktop] .cg2-screen,
+ .cg2-device[data-device=desktop][data-layout=three] .cg2-screen{
+  grid-template-columns:minmax(0,1fr);grid-template-rows:56px minmax(0,1fr)
+ }
+ .cg2-device[data-device=desktop] .cg2-directory{display:none}
+ .cg2-device[data-device=desktop] .cg2-thread-header,
+ .cg2-device[data-device=desktop] .cg2-thread{grid-column:1}
+ .cg2-device[data-device=desktop] .cg2-back{display:inline-flex}
+ .cg2-device[data-device=desktop][data-mobile-view=directory] .cg2-directory{
+  display:flex;grid-area:1/1/3/2;border-right:0
+ }
+ .cg2-device[data-device=desktop][data-mobile-view=directory] .cg2-thread-header,
+ .cg2-device[data-device=desktop][data-mobile-view=directory] .cg2-thread{display:none}
+ .cg2-device[data-layout=focus] .cg2-back{display:none}
+}
