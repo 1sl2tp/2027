@@ -3291,7 +3291,7 @@ body.simple-first .topbar-end{gap:0}
 }
 /* Three regions only fit when the parent preview has room, regardless of browser viewport. */
 @container cg2-preview (max-width:920px){
- .cg2-device[data-layout=three] .cg2-screen{grid-template-columns:265px minmax(0,1fr)}
+ .cg2-device[data-device=desktop][data-layout=three] .cg2-screen{grid-template-columns:265px minmax(0,1fr)}
  .cg2-device[data-layout=three] .cg2-work{display:none}
 }
 /* Even Desktop mode must provide an operable contact-return path in a narrow preview. */
