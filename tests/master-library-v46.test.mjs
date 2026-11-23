@@ -64,7 +64,7 @@ test("V46 only renders new parent system; old app inventories are historical evi
  assert.ok(read("web/src/root-button-data.ts").includes("ROOT_BUTTON_SPECS"));
  assert.ok(rules.includes("### 12.12. V46"));
  assert.ok(html.includes("Không tái sử dụng mã, CSS, component hay bố cục từ CHAT/TAPHOA cũ"));
- assert.ok(html.includes('data-ui-version="2027-UI-V46"'));
- assert.ok(html.includes('src="./web/dist-v46/app.js"'));
- assert.ok(read(".github/workflows/pages.yml").includes("cp -R web/dist _site/web/dist-v46"));
+ assert.ok(html.includes('data-ui-version="2027-UI-V47"'));
+ assert.ok(html.includes('src="./web/dist-v47/app.js"'));
+ assert.ok(read(".github/workflows/pages.yml").includes("cp -R web/dist _site/web/dist-v47"));
 });
