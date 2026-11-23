@@ -1,7 +1,7 @@
 import {COLUMN_SCHEMA,alignmentForRole,type ColumnSpec} from "./column-matrix.js";
 import {auditComponentPlacements,auditComponentRegistry,auditMessageTree,auditComposerTree,getAllowedComponentParents,getComponentContract} from "./component-contracts.js";
 
-// CG-V03 is a compositor: it instantiates already registered 2027 primitives
+// CG-V04 is a compositor: it instantiates already registered 2027 primitives
 // in the declared host slots. It never introduces a new button/table/input primitive.
 type Layout="two"|"three"|"focus";
 type Device="desktop"|"phone"|"keyboard";
@@ -50,6 +50,8 @@ const messages:Record<ContactId,Message[]>={
  ]
 };
 let layout:Layout="two",device:Device="desktop",contact:ContactId="a";
+const drafts:Record<ContactId,string>={a:"",b:"",group:""};
+const scrollPositions:Partial<Record<ContactId,number>>={};
 const host=$<HTMLElement>("cg2Screen");
 const messageList=$<HTMLElement>("cg2Messages");
 const frame=$<HTMLElement>("cg2Device");
@@ -69,7 +71,7 @@ function renderContacts():void{
   copy.append(mark(make("strong","",item.name),"CONTACT-NAME"),mark(make("small","",item.last),"CONTACT-PREVIEW"));
   const meta=make("span","cg2-contact-meta");meta.textContent=item.time;
   b.append(av,copy,meta);
-  b.addEventListener("click",()=>{contact=id;frame.dataset.mobileView="thread";renderContacts();renderHeader();renderMessages();feedback("Đã ghép hội thoại "+item.name+" vào cùng CHAT-THREAD.");});
+  b.addEventListener("click",()=>openContact(id));
   root.append(b);
  });
  filterContacts();
@@ -79,6 +81,21 @@ function filterContacts():void{
  document.querySelectorAll<HTMLElement>("#cg2Contacts [data-contact]").forEach(el=>{
   el.hidden=Boolean(query)&&!el.textContent?.toLocaleLowerCase("vi").includes(query);
  });
+}
+function rememberScrollPosition():void{
+ const remaining=messageList.scrollHeight-messageList.scrollTop-messageList.clientHeight;
+ if(remaining<=80)delete scrollPositions[contact];
+ else scrollPositions[contact]=messageList.scrollTop;
+}
+function openContact(id:ContactId):void{
+ if(id!==contact){
+  rememberScrollPosition();
+  contact=id;
+  input.value=drafts[id];
+ }
+ frame.dataset.mobileView="thread";
+ renderContacts();renderHeader();renderMessages();
+ feedback("Đã mở "+contactData[id].name+" trong cùng vùng CHAT-THREAD. Bản nháp và vị trí đọc được giữ riêng.");
 }
 function renderHeader():void{
  const item=contactData[contact];
@@ -140,6 +157,7 @@ function buildPart(part:MessagePart,index:number):HTMLElement{
 function buildMessage(message:Message):HTMLElement{
  const el=mark(make("article","cg2-message ds-message cg2-"+message.side),"CHAT-MESSAGE");
  el.dataset.messageId=message.id;el.tabIndex=0;
+ el.setAttribute("aria-label",(message.side==="incoming"?"Tin nhận lúc ":"Tin gửi lúc ")+message.time+". Nhấn Enter để xem thao tác của tin.");
  const parts=mark(make("div","cg2-content-parts"),"MESSAGE-CONTENT-PARTS");
  message.parts.forEach((part,i)=>parts.append(buildPart(part,i)));
  el.append(parts);
@@ -167,7 +185,13 @@ function renderMessages():void{
  const jump=mark(make("button","ui-button ui-button--secondary cg2-jump","↓ Tin cuối"),"THREAD-JUMP-TO-LATEST");
  jump.type="button";jump.id="cg2Jump";jump.addEventListener("click",()=>messageList.scrollTo({top:messageList.scrollHeight}));
  messageList.append(jump);
- requestAnimationFrame(()=>{messageList.scrollTop=messageList.scrollHeight;updateJump();});
+ const renderedContact=contact;
+ requestAnimationFrame(()=>{
+  if(contact!==renderedContact)return;
+  const saved=scrollPositions[renderedContact];
+  messageList.scrollTop=saved===undefined?messageList.scrollHeight:Math.min(saved,Math.max(0,messageList.scrollHeight-messageList.clientHeight));
+  updateJump();
+ });
  runAudit();
 }
 function updateJump():void{
@@ -208,21 +232,30 @@ function setLayout(v:Layout):void{
  runAudit();
 }
 function setDevice(v:Device):void{
+ // Keep the reading position when simulating the keyboard or changing form factor.
+ const remaining=messageList.scrollHeight-messageList.scrollTop-messageList.clientHeight;
+ const wasAtBottom=remaining<=80;
+ const before=messageList.scrollTop;
  device=v;frame.dataset.device=v;frame.dataset.mobileView="thread";setPressed("data-device",v);
- requestAnimationFrame(()=>{messageList.scrollTop=messageList.scrollHeight;updateJump();});
+ requestAnimationFrame(()=>{
+  messageList.scrollTop=wasAtBottom?messageList.scrollHeight:before;
+  updateJump();
+ });
 }
 document.querySelectorAll<HTMLButtonElement>("[data-layout]").forEach(b=>b.addEventListener("click",()=>setLayout(b.dataset.layout as Layout)));
 document.querySelectorAll<HTMLButtonElement>("[data-device]").forEach(b=>b.addEventListener("click",()=>setDevice(b.dataset.device as Device)));
 $<HTMLInputElement>("cg2Search").addEventListener("input",filterContacts);
-$("cg2New").addEventListener("click",()=>{contact="group";renderContacts();renderHeader();renderMessages();frame.dataset.mobileView="thread";});
+$("cg2New").addEventListener("click",()=>openContact("group"));
 $("cg2Back").addEventListener("click",()=>{frame.dataset.mobileView="directory";feedback("Đang xem cùng vùng Danh bạ, không tạo danh sách thứ hai.");});
 $("cg2Menu").addEventListener("click",()=>showSelection($("cg2Screen").querySelector('[data-ui-component="CHAT-REGION-TOP"]') as HTMLElement));
 $("cg2Attach").addEventListener("click",()=>{
  const next=messages[contact].length+1;messages[contact].push({id:contact+"m"+next,side:"outgoing",time:"Vừa tạo",parts:[{kind:"media",count:2}]});
+ delete scrollPositions[contact];
  renderMessages();feedback("Đã ghép hai ds-media-tile trong MESSAGE-MEDIA-PART của một tin mẫu.");
 });
 $("cg2Mic").addEventListener("click",()=>feedback("Mic là nút con có sẵn của COMPOSER-TOOLBAR, demo không xin quyền micro."));
 const form=$<HTMLFormElement>("cg2Composer");
+input.addEventListener("input",()=>{drafts[contact]=input.value;});
 // Modern Web Guidance: Enter submits, Shift+Enter adds a line; never submit on IME confirmation.
 // Safari may report the confirming Enter as keyCode 229 after compositionend.
 input.addEventListener("keydown",event=>{
@@ -234,12 +267,25 @@ input.addEventListener("keydown",event=>{
 form.addEventListener("submit",e=>{
  e.preventDefault();const value=input.value.trim();if(!value)return;
  const next=messages[contact].length+1;messages[contact].push({id:contact+"t"+next,side:"outgoing",time:"Vừa tạo",parts:[{kind:"text",text:value.slice(0,800)}]});
- input.value="";renderMessages();feedback("Đã thêm một Message với TextPart mới vào đúng MessageList (chỉ demo).");
+ input.value="";drafts[contact]="";delete scrollPositions[contact];
+ renderMessages();feedback("Đã thêm một Message với TextPart mới vào đúng MessageList (chỉ demo).");
 });
 messageList.addEventListener("scroll",updateJump,{passive:true});
+// The action bar belongs to its message and does not reserve space while closed.
+host.addEventListener("keydown",event=>{
+ const target=event.target as HTMLElement;
+ if(!target.matches(".cg2-message")||(event.key!=="Enter"&&event.key!==" "))return;
+ event.preventDefault();
+ target.classList.toggle("cg2-actions-open");
+});
 host.addEventListener("click",e=>{
  const target=e.target as HTMLElement;
  if(target.closest("button,input,textarea"))return;
+ const message=target.closest<HTMLElement>(".cg2-message");
+ if(message){
+  host.querySelectorAll<HTMLElement>(".cg2-message.cg2-actions-open").forEach(item=>{if(item!==message)item.classList.remove("cg2-actions-open");});
+  message.classList.toggle("cg2-actions-open");
+ }
  const node=target.closest<HTMLElement>("[data-ui-component]");
  if(node&&host.contains(node))showSelection(node);
 });
