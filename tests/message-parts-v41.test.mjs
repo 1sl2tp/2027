@@ -36,7 +36,8 @@ test("V41: shared DATA-TABLE may have two hosts but remains ONE definition",asyn
  assert.equal(getComponentContract("DATA-TABLE").parent,"UI-PRIMITIVES");
  assert.deepEqual(getAllowedComponentParents("DATA-TABLE"),["UI-PRIMITIVES","MESSAGE-TABLE-PART","SALES-TABLE-SLOT","REPORT-TABLE-SLOT"]);
  assert.deepEqual(auditComponentPlacements(),[]);
- assert.equal(COMPONENT_PLACEMENTS.length,12);
+ assert.ok(COMPONENT_PLACEMENTS.length>=12,"existing placements must remain registered");
+  assert.ok(COMPONENT_PLACEMENTS.some(p=>p.id==="directory-search-field"&&p.host==="DIRECTORY-TOOLS"&&p.child==="SEARCH-FIELD"),"directory reuses canonical search field");
  assert.ok(COMPONENT_PLACEMENTS.some(p=>p.id==="thread-search-input"&&p.child==="SEARCH-FIELD"));
  const base=COMPONENT_PLACEMENTS[0];
  assert.equal(base.cardinality,"one");
