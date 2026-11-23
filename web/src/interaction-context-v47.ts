@@ -44,17 +44,23 @@ export function initChatContextV47():void{
   const title=root.querySelector<HTMLElement>("#uxContextV47ThreadTitle");
   const message=root.querySelector<HTMLElement>("#uxContextV47ThreadText");
   if(!status||!title||!message)throw new Error("Thiếu phần tử trong mẫu trạng thái V47");
+  // Capture only validated DOM owners for the event callback. Strict TS
+  // cannot assume a nullable query remains narrowed inside a later closure.
+  const mountedRoot:HTMLElement=root;
+  const mountedStatus:HTMLElement=status;
+  const mountedTitle:HTMLElement=title;
+  const mountedMessage:HTMLElement=message;
   function render(context:ChatContextV47):void{
     const scenario=decideChatFeedbackV47(context);
-    root.dataset.activeContext=context;
+    mountedRoot.dataset.activeContext=context;
     for(const key of ["system","inbox","thread","toast","secondaryActions","typing"] as const){
-      const el=root.querySelector<HTMLElement>('[data-v47-surface="'+key+'"]');
+      const el=mountedRoot.querySelector<HTMLElement>('[data-v47-surface="'+key+'"]');
       if(!el)throw new Error("Thiếu slot "+key);
       el.hidden=!scenario[key];
     }
-    title.textContent=scenario.threadTitle;
-    message.textContent=scenario.threadText;
-    status.textContent=scenario.label+" · "+scenario.description;
+    mountedTitle.textContent=scenario.threadTitle;
+    mountedMessage.textContent=scenario.threadText;
+    mountedStatus.textContent=scenario.label+" · "+scenario.description;
     for(const button of controls)
       button.setAttribute("aria-pressed",String(button.dataset.chatContextV47===context));
   }
