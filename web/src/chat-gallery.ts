@@ -1,3 +1,4 @@
+export {};
 // 2027 Chat Gallery CG-V01. Independent, local-only demo; never connects to a backend.
 type Layout = 'open' | 'compact' | 'work';
 type Device = 'desktop' | 'phone' | 'keyboard';
