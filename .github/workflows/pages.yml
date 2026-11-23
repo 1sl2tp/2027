@@ -2,7 +2,7 @@ name: Preview 2027 UI Library
 on:
   push:
     branches: [main]
-    paths: ["chat-gallery.html", "index.html", "flows.html", "base.html", "github-sources.html", "web/**", "RULES.md", "package.json", "tsconfig.json", "tests/**", ".github/workflows/pages.yml"]
+    paths: [".agents/skills/**", "README.md", "chat-gallery.html", "index.html", "flows.html", "base.html", "github-sources.html", "web/**", "RULES.md", "package.json", "tsconfig.json", "tests/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,6 +20,10 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-package-lock --no-audit --no-fund
+      - name: Check installed Modern Web Guidance (offline search)
+        env:
+          DISABLE_TELEMETRY: "1"
+        run: npm run guidance:search -- "responsive data table"
       - run: npm run verify
       - name: Validate shared icon sprite XML
         run: python3 -c "import xml.etree.ElementTree as ET; ET.parse('web/icons.svg')"
