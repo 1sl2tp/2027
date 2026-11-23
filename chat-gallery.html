@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="2027 — Bộ lắp ghép Chat: một bộ mẫu con gốc, nhiều bố cục cha, kiểm tra quan hệ thành phần trực tiếp.">
-<title>2027 · Lắp ghép giao diện Chat · CG-V02</title>
-<link rel="stylesheet" href="./web/styles.css?v=2027-CG-V02">
-<script type="module" src="./web/dist/chat-gallery.js?v=2027-CG-V02"></script>
+<title>2027 · Lắp ghép giao diện Chat · CG-V03</title>
+<link rel="stylesheet" href="./web/styles.css?v=2027-CG-V03">
+<script type="module" src="./web/dist/chat-gallery.js?v=2027-CG-V03"></script>
 </head>
-<body class="cg2-page" data-ui-version="2027-CG-V02">
+<body class="cg2-page" data-ui-version="2027-CG-V03">
 <header class="topbar cg2-site-header">
  <a class="brand" href="./"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">Lắp ghép Chat</span></a>
- <div class="cg2-site-actions"><a href="./">Thư viện cha</a><a href="./flows.html">Các luồng</a><span class="version">CG-V02</span></div>
+ <div class="cg2-site-actions"><a href="./">Thư viện cha</a><a href="./flows.html">Các luồng</a><span class="version">CG-V03</span></div>
 </header>
 <main class="cg2-main" data-ui-component="UI-LIBRARY">
  <div class="cg2-page-title"><div><span class="eyebrow">MẪU CON CÓ SẴN · GHÉP THEO CẤP CHA</span><h1>Một bộ mẫu. Nhiều bố cục.</h1><p>Không tạo lại nút, input, bảng hoặc tin nhắn. Chỉ thay vùng chứa và vị trí ghép. Bấm một phần trên màn hình để xem nó thuộc cha nào.</p></div><span class="cg2-safe">Demo độc lập · Dữ liệu giả lập</span></div>
@@ -41,6 +41,7 @@
        <section class="cg2-thread" data-ui-component="CHAT-THREAD" aria-label="Vùng nội dung">
          <div class="cg2-message-list" data-ui-component="CHAT-MESSAGE-LIST" id="cg2Messages" aria-live="polite"></div>
          <form class="ds-composer cg2-composer" data-ui-component="CHAT-COMPOSER" id="cg2Composer">
+          <label for="cg2Input" class="cg2-sr-only">Soạn tin nhắn mẫu</label>
           <textarea id="cg2Input" data-ui-component="COMPOSER-INPUT" rows="1" placeholder="Nhập nội dung mẫu…" aria-label="Nội dung tin nhắn mẫu"></textarea>
           <div class="ds-composer-actions cg2-composer-actions" data-ui-component="COMPOSER-TOOLBAR">
            <button class="ui-button ui-button--icon" type="button" data-ui-component="COMPOSER-ATTACH-BUTTON" id="cg2Attach" aria-label="Chèn ảnh mẫu"><svg class="ui-icon" aria-hidden="true"><use href="./web/icons.svg#ui-icon-plus"></use></svg></button>
