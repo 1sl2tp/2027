@@ -93,8 +93,7 @@ function buildTable(items:readonly Row[]):HTMLElement{
  const table=mark(make("table","ds-table ds-table--schema"),"DATA-TABLE");
  table.setAttribute("aria-label",items.some(x=>x.price>0)?"Đơn hàng mẫu":"Danh sách lấy hàng mẫu");
  const colgroup=make("colgroup");
- const widths:Record<string,number>={index:46,name:180,quantity:74,total:116};
- for(const field of fields){const col=mark(make("col"),"TABLE-COLUMN");col.dataset.colKey=field.key;col.dataset.colRole=field.role;col.style.width=(widths[field.key]||field.minPx)+"px";colgroup.append(col);}
+ for(const field of fields){const col=mark(make("col"),"TABLE-COLUMN");col.dataset.colKey=field.key;col.dataset.colRole=field.role;col.style.width=field.minPx+"px";colgroup.append(col);}
  table.append(colgroup);
  const thead=make("thead"),tr=make("tr");
  for(const field of fields){const th=make("th","",field.key==="quantity"?"SL":field.label);th.scope="col";th.dataset.colRole=field.role;th.dataset.colKey=field.key;th.style.textAlign=alignmentForRole(field.role);tr.append(th);}
