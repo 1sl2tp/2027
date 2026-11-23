@@ -71,7 +71,7 @@ test("V46 archives legacy CHAT DOM map and mounts only the new master library",(
  assert.ok(app.includes('import { initMasterLibraryV46 } from "./master-library-v46.js";'));
  assert.ok(app.includes("initMasterLibraryV46();"));
  assert.ok(read("web/src/chat-live-map.ts").includes("CHAT_LIVE_BINDINGS"));
- assert.ok(html.includes('data-ui-version="2027-UI-V46"'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V47"'));
 });
 
 test("V44 source audit distinguishes CHAT live implementation from 2027 preview",()=>{
