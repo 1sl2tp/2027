@@ -183,7 +183,7 @@ function renderMessages():void{
  messageList.append(mark(make("div","cg2-day","Hôm nay · Nội dung mẫu"),"THREAD-DAY-MARKER"));
  messages[contact].forEach(m=>messageList.append(buildMessage(m)));
  const jump=mark(make("button","ui-button ui-button--secondary cg2-jump","↓ Tin cuối"),"THREAD-JUMP-TO-LATEST");
- jump.type="button";jump.id="cg2Jump";jump.addEventListener("click",()=>messageList.scrollTo({top:messageList.scrollHeight}));
+ jump.type="button";jump.id="cg2Jump";jump.hidden=true;jump.addEventListener("click",()=>messageList.scrollTo({top:messageList.scrollHeight}));
  messageList.append(jump);
  const renderedContact=contact;
  requestAnimationFrame(()=>{
