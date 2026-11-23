@@ -106,6 +106,7 @@ export interface ComponentPlacement {
 export const COMPONENT_PLACEMENTS:readonly ComponentPlacement[]=[
  {id:"message-table",host:"MESSAGE-TABLE-PART",child:"DATA-TABLE",cardinality:"one"},
  {id:"thread-search-input",host:"THREAD-SEARCH-OVERLAY",child:"SEARCH-FIELD",cardinality:"one"},
+ {id:"directory-search-field",host:"DIRECTORY-TOOLS",child:"SEARCH-FIELD",cardinality:"one"},
  {id:"composer-editor-input",host:"COMPOSER-EDITOR-WRAP",child:"COMPOSER-INPUT",cardinality:"one"},
  {id:"composer-surface-toolbar",host:"COMPOSER-SURFACE",child:"COMPOSER-TOOLBAR",cardinality:"one"},
  {id:"composer-surface-attachments",host:"COMPOSER-SURFACE",child:"COMPOSER-ATTACHMENTS",cardinality:"optional"},
