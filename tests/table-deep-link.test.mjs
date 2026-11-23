@@ -6,10 +6,10 @@ const read=p=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
 
 test("V40 version badge and GitHub Pages module graph agree",()=>{
  const html=read("index.html"),workflow=read(".github/workflows/pages.yml");
- assert.ok(html.includes('<span class="version">V46</span>'));
- assert.ok(html.includes('data-ui-version="2027-UI-V46"'));
- assert.ok(html.includes('./web/styles.css?v=2027-UI-V46'));
- assert.ok(html.includes('src="./web/dist-v46/app.js"'));
+ assert.ok(html.includes('<span class="version">V47</span>'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V47"'));
+ assert.ok(html.includes('./web/styles.css?v=2027-UI-V47'));
+ assert.ok(html.includes('src="./web/dist-v47/app.js"'));
  assert.ok(workflow.includes('cp -R web/dist _site/web/dist-v46'));
 });
 

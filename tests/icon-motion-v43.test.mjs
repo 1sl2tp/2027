@@ -66,8 +66,8 @@ test("V43 motion preserves canonical styles, reduced-motion and safe backend bou
  assert.ok(src.includes('demo.classList.remove("is-playing")'));
  assert.ok(src.includes('navigator.clipboard.writeText'));
  assert.doesNotMatch(src,/\bfetch\s*\(|WebSocket|XMLHttpRequest|supabase|getUserMedia/i);
- assert.ok(html.includes('data-ui-version="2027-UI-V46"'));
- assert.ok(html.includes('src="./web/dist-v46/app.js"'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V47"'));
+ assert.ok(html.includes('src="./web/dist-v47/app.js"'));
  assert.ok(ci.includes("cp -R web/dist _site/web/dist-v46"));
  assert.ok(html.indexOf('id="githubSourcesV42"')>html.indexOf('id="motionV43Gallery"'));
 });

@@ -42,7 +42,7 @@ test("V42: GitHub sources are the final content section, not inside UI samples",
  assert.ok(a>=0&&b>a&&c>b&&d>c);
  for(const n of ["architects-toolkit/chat-ui","loquix-dev/loquix","microsoft/open-kosmos","LibreChat-AI/LibreChat"])
   assert.ok(html.includes("https://github.com/"+n),n);
- assert.ok(html.includes('data-ui-version="2027-UI-V46"'));
- assert.ok(html.includes('src="./web/dist-v46/app.js"'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V47"'));
+ assert.ok(html.includes('src="./web/dist-v47/app.js"'));
  assert.ok(read(".github/workflows/pages.yml").includes("cp -R web/dist _site/web/dist-v46"));
 });

@@ -39,8 +39,8 @@ test("V45: business-flow references cannot be misrepresented as UI source of tru
  assert.ok(prev>=0&&sect>prev&&footer>sect,"GitHub sources remain at the end of the UI library");
  for(const [repo] of sources) assert.ok(html.includes("https://github.com/"+repo));
  assert.ok(html.includes("github-v45-policy"));
- assert.ok(html.includes("2027-UI-V46"));
- assert.ok(html.includes("web/dist-v46/app.js"));
+ assert.ok(html.includes("2027-UI-V47"));
+ assert.ok(html.includes("web/dist-v47/app.js"));
 });
 test("V45: no duplicated core CSS or package installs; CI packages a distinct asset path",()=>{
  const css=read("web/styles.css"),pkg=JSON.parse(read("package.json")),
@@ -50,6 +50,6 @@ test("V45: no duplicated core CSS or package installs; CI packages a distinct as
  assert.doesNotMatch(v45,/\.ui-button\s*\{|\.ds-table\s*\{|\.ds-composer\s*\{|\.ui-icon\s*\{/);
  assert.deepEqual(Object.keys(pkg.dependencies||{}),[]);
  assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v46"));
- assert.ok(html.includes('src="./web/dist-v46/app.js"'));
- assert.ok(html.includes('href="./web/styles.css?v=2027-UI-V46"'));
+ assert.ok(html.includes('src="./web/dist-v47/app.js"'));
+ assert.ok(html.includes('href="./web/styles.css?v=2027-UI-V47"'));
 });

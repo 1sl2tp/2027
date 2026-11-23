@@ -5,21 +5,22 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="2027 UI Library — xem một văn bản mẫu như ChatGPT, chỉnh kiểu chữ và thử bảng, nút, icon, input, menu, popup.">
-  <title>2027 · Thư viện UI/UX gốc độc lập · V46</title>
-  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V46">
-  <script type="module" src="./web/dist-v46/app.js"></script>
+  <title>2027 · Thư viện UI/UX gốc độc lập · V47</title>
+  <link rel="stylesheet" href="./web/styles.css?v=2027-UI-V47">
+  <script type="module" src="./web/dist-v47/app.js"></script>
 </head>
-<body data-ui-version="2027-UI-V46" class="studio-page simple-first">
+<body data-ui-version="2027-UI-V47" class="studio-page simple-first">
 
 <div class="app" id="app">
   <header class="topbar">
     <a class="brand" href="./" aria-label="2027 UI Library"><span class="brand-mark">27</span><span class="brand-name">2027</span><span class="brand-separator">/</span><span class="brand-label">UI Library</span></a>
-    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V46</span></div>
+    <div class="topbar-end"><span class="top-hint">Mẫu trình bày và thành phần</span><a href="./base.html" class="flow-return">Mẫu gốc 2027 ↗</a><a href="./flows.html" class="flow-return">Ba bộ khung ↗</a><a href="./github-sources.html" class="flow-return">Nguồn GitHub ↗</a><span class="version">V47</span></div>
   </header>
   <div class="workspace">
     <aside class="sidebar studio-sidebar" aria-label="Danh mục thư viện">
       <div class="sidebar-group-title">THƯ VIỆN MẸ</div>
       <a class="nav-link" href="#masterLibraryV46"><span class="nav-numeral">00</span><span>V46 · Mẫu mới 100%</span></a>
+      <a class="nav-link" href="#uxContextV47"><span class="nav-numeral">V47</span><span>Trạng thái chat</span></a>
       <div class="sidebar-group-title">MẪU CHỮ</div>
       <a class="nav-link active" href="#simpleKit"><span class="nav-numeral">00</span><span>1. Cỡ chữ, font</span></a>
       <a class="nav-link" href="#simpleMultiline"><span class="nav-numeral">02</span><span>2. Nhiều dòng, kiểu chữ</span></a>
@@ -50,7 +51,7 @@
       <a class="nav-link" href="./flows.html#sales/products"><span class="nav-numeral">13</span><span>Bán hàng</span><small>↗</small></a>
       <div class="sidebar-separator"></div>
       <a class="nav-link" href="#githubSourcesV42"><span class="nav-numeral">GH</span><span>Nguồn GitHub · cuối trang</span></a>
-      <div class="sidebar-footer">UI-V46 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
+      <div class="sidebar-footer">UI-V47 · RULE 12<br>Chỉ mô phỏng · Không gửi dữ liệu thật</div>
     </aside>
     <main class="main studio-main" id="main">
       <section class="master-v46" data-ui-component="UI-LIBRARY" id="masterLibraryV46" aria-labelledby="masterV46Title">
@@ -69,6 +70,61 @@
         <div id="masterV46Preview" class="master-v46-preview"></div>
         <p id="masterV46Status" class="master-v46-status" role="status" aria-live="polite"></p>
         <p class="master-v46-note">Mọi nội dung đều là dữ liệu mẫu cục bộ, không dùng tài khoản, khách hàng hoặc API của ứng dụng cũ. Bộ <code>ui-button</code>, <code>ds-composer</code>, <code>ds-qty</code>, <code>ds-table</code>, icon và schema cột đều thuộc thư viện 2027.</p>
+      </section>
+      <section class="ui-v47-lab" id="uxContextV47" aria-labelledby="uxContextV47Title">
+        <div class="ui-v47-heading">
+          <div>
+            <span class="eyebrow">V47 · TRẠNG THÁI TƯƠNG TÁC · RULE 12</span>
+            <h2 id="uxContextV47Title">Một tin mới, một cách thông báo đúng ngữ cảnh</h2>
+            <p>Mẫu độc lập của thư viện cha 2027. Chọn một tình huống để xem nơi hiển thị; không dùng mã, giao dịch hay khách hàng thực của CHAT.</p>
+          </div>
+          <span class="ui-v47-tag">Bản mẫu cục bộ</span>
+        </div>
+        <div class="ui-v47-controls" role="group" aria-label="Chọn trạng thái sử dụng Chat">
+          <button type="button" class="ui-button ui-button--secondary" data-chat-context-v47="locked" aria-pressed="false">Máy khóa</button>
+          <button type="button" class="ui-button ui-button--secondary" data-chat-context-v47="directory" aria-pressed="true">Danh bạ</button>
+          <button type="button" class="ui-button ui-button--secondary" data-chat-context-v47="same" aria-pressed="false">Đúng hội thoại</button>
+          <button type="button" class="ui-button ui-button--secondary" data-chat-context-v47="other" aria-pressed="false">Hội thoại khác</button>
+          <button type="button" class="ui-button ui-button--secondary" data-chat-context-v47="keyboard" aria-pressed="false">Bàn phím mở</button>
+        </div>
+        <div class="ui-v47-demo-shell" data-ui-component="UI-SHELL">
+          <div data-ui-component="UI-SCREEN-SLOT">
+            <div class="ui-v47-demo" data-ui-component="CHAT-SCREEN">
+              <div class="ui-v47-surface" data-ui-component="CHAT-CONTEXT-FEEDBACK">
+                <div class="ui-v47-os" data-v47-surface="system" hidden>
+                  <span class="ui-v47-surface-label">Thông báo hệ thống · máy khóa</span>
+                  <strong>Khách mẫu B</strong>
+                  <span>Có một tin nhắn mới</span>
+                </div>
+                <div class="ui-v47-inbox" data-v47-surface="inbox">
+                  <span class="ui-v47-surface-label">Danh bạ · xem trước và chưa đọc</span>
+                  <div class="ui-v47-inbox-row">
+                    <span class="ui-v47-avatar" aria-hidden="true">B</span>
+                    <span class="ui-v47-inbox-copy"><strong>Khách mẫu B</strong><small>Có một tin nhắn mới</small></span>
+                    <span class="ui-v47-unread" aria-label="Chưa đọc một tin">1</span>
+                  </div>
+                </div>
+                <div class="ui-v47-thread" data-v47-surface="thread" hidden>
+                  <span class="ui-v47-surface-label">Hội thoại đang mở</span>
+                  <strong id="uxContextV47ThreadTitle">Khách mẫu B</strong>
+                  <div class="ui-v47-message" id="uxContextV47ThreadText">Tin mới đang hiển thị trong cuộc trò chuyện</div>
+                </div>
+                <div class="ui-v47-toast" data-v47-surface="toast" hidden>
+                  <span class="ui-v47-surface-label">Thông báo nhỏ trong ứng dụng</span>
+                  <strong>Khách mẫu B</strong><span>Có một tin nhắn mới · đang ở hội thoại A</span>
+                </div>
+                <div class="ui-v47-actions" data-v47-surface="secondaryActions" hidden>
+                  <span class="ui-v47-surface-label">Thao tác phụ khi không gõ</span><span>Thông tin · Công việc · Media</span>
+                </div>
+                <div class="ui-v47-keyboard" data-v47-surface="typing" hidden>
+                  <span class="ui-v47-surface-label">Khung gõ đang được ưu tiên</span><span>Nhập tin nhắn… · mô phỏng không bật bàn phím hệ thống</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p id="uxContextV47Status" class="ui-v47-status" role="status" aria-live="polite">Danh bạ · Dòng khách nhận cập nhật xem trước và dấu chưa đọc.</p>
+        <p class="ui-v47-note"><strong>Phân cấp:</strong> UI-LIBRARY → UI-SHELL → UI-SCREEN-SLOT → CHAT-SCREEN → CHAT-CONTEXT-FEEDBACK. Không có nút gửi hoặc Push thật. <a href="https://www.meta.com/design-at-meta/blog/acessibility-and-design-systems/" target="_blank" rel="noopener noreferrer">Nguồn nguyên tắc về thiết kế hệ thống và khả năng tiếp cận (Meta)</a>.</p>
       </section>
       <section class="simple-kit" id="simpleKit" aria-labelledby="simpleKitTitle">
         <h1 id="simpleKitTitle">1. Cỡ chữ, font</h1>
@@ -1043,7 +1099,7 @@
         </details>
         <p class="github-v45-reference-links"><a href="./github-sources.html#source-map">Xem bảng 19 nguồn GitHub</a> · <a href="https://github.com/1sl2tp/2027/blob/main/references/UI_V45_GITHUB_DESIGN_INDEPENDENCE.md" target="_blank" rel="noopener noreferrer">Quyết định nguồn và thứ tự ưu tiên V45</a></p>
       </section>
-      <footer class="page-footer"><span>2027 UI Library · V46</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
+      <footer class="page-footer"><span>2027 UI Library · V47</span><span>Mẫu nội dung và thành phần · Không dữ liệu thật</span></footer>
     </main>
   </div>
 </div>
