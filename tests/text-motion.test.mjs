@@ -62,7 +62,7 @@ test("V32 distinguishes external research from the local-only demo",()=>{
    assert.ok(html.includes('https://github.com/'+ref),"visible source "+ref);
  }
  assert.ok(rules.includes("không phải thư viện giao diện ChatGPT nội bộ"));
- assert.ok(html.includes('data-ui-version="2027-UI-V46"'));
- assert.ok(html.includes('src="./web/dist-v46/app.js"'));
+ assert.ok(html.includes('data-ui-version="2027-UI-V47"'));
+ assert.ok(html.includes('src="./web/dist-v47/app.js"'));
  assert.ok(workflow.includes("cp -R web/dist _site/web/dist-v46"));
 });
