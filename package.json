@@ -6,9 +6,13 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "node --test tests/*.test.mjs",
-    "verify": "npm run test && npm run build"
+    "verify": "npm run test && npm run build",
+    "guidance:search": "modern-web-guidance search",
+    "guidance:retrieve": "modern-web-guidance retrieve",
+    "guidance:scan": "modern-web-guidance legacy-scan . --json"
   },
   "devDependencies": {
-    "typescript": "~5.9.3"
+    "typescript": "~5.9.3",
+    "modern-web-guidance": "1.0.1"
   }
 }
