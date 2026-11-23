@@ -1,7 +1,7 @@
 # 2027 — RULES.md
 
 > **Nguồn quy tắc duy nhất (Single Source of Truth)**  
-> Repo: `1sl2tp/2027` · Trạng thái: **R09 / UI-V17 — thư viện UI/UX** · Cập nhật: **22/11/2026 (giờ Việt Nam)**  
+> Repo: `1sl2tp/2027` · Trạng thái: **R10 / UI-V47 — thư viện UI/UX** · Cập nhật: **23/11/2026 (giờ Việt Nam)**  
 > Phạm vi: Web App/PWA (TypeScript + HTML + CSS) và Android APK native (Kotlin + Jetpack Compose).
 
 ## RULE 01 — MỘT FILE RULE DUY NHẤT
@@ -771,3 +771,15 @@ Bản V40 gắn metadata và kiểm định cho Composer FIELD-11, Search và Qu
 - **Test/E0–E5:** E0 ghi từ yêu cầu người dùng và lỗi banner chồng ở mobile. E1 xác định cha/slot/owner. E2 kiểm thử bảng quyết định, hiện/ẩn, semantic HTML, build TypeScript. E3 chỉ khi GitHub Actions Pages đạt. E4 thử iOS Safari/PWA và Android PWA/APK với màn khóa, danh bạ, A/B, bàn phím; E5 cần bằng chứng nghiệm thu. Việc PR merge/Pages xanh không được ghi thành đã kiểm thiết bị.
 - **Rollback:** hoàn tác commit V47, phục hồi version/link `dist-v46`, vẫn giữ nguyên registry V46 và mẫu đang dùng, tuyệt đối không chạm production CHAT hay dữ liệu khách.
 
+
+
+### 12.14. R10 — Cài Modern Web Guidance như công cụ tham khảo Web, không tạo thư viện UI thứ hai
+
+**Mã quy tắc:** `2027-R10` · **Ngày:** 23/11/2026 (VN) · **Phạm vi:** công cụ hỗ trợ phát triển Web 2027, không áp dụng trực tiếp cho Android native. **Version giao diện:** giữ UI-V47/CG-V02 vì không đổi UI. **Trạng thái:** E0–E1 hoàn thành; E2/E3 chỉ được coi là đạt với chứng cứ GitHub Actions; E4–E5 chưa nghiệm thu thiết bị thật.
+
+- **Nguồn:** `GoogleChrome/modern-web-guidance` (upstream v1.0.1, Apache-2.0; hướng dẫn có thể có giấy phép nội dung riêng). Skill chuẩn đặt tại `.agents/skills/modern-web-guidance/SKILL.md`; CLI `modern-web-guidance@1.0.1` chỉ là devDependency trong `package.json`. Không vendor hàng trăm guide vào code sản phẩm.
+- **Bất biến của 2027:** `RULES.md` là nguồn quy tắc duy nhất. Modern Web Guidance chỉ cung cấp kiến thức nền tảng HTML/CSS/JS và browser compatibility; không ghi đè `COMPONENT_CONTRACTS`, `COMPONENT_PLACEMENTS`, `COLUMN_SCHEMA` hay thêm nút/bảng/composer mới. Tư duy vẫn là ghép component con đã tồn tại vào slot thuộc cha hợp lệ.
+- **Luồng sử dụng:** Khi sửa một hành vi Web cụ thể, gọi `npm run guidance:search -- "<ngữ cảnh Web ngắn>"`, chọn hướng dẫn phù hợp, rồi `npm run guidance:retrieve -- "<guide-id>"`; đọc cả yêu cầu fallback/browser support trước khi quyết định. `npm run guidance:scan` là kiểm tra tĩnh chỉ đọc, không tự sửa hoặc deploy. Không áp dụng API mới thiếu hỗ trợ iOS Safari/Android Chrome mà không có phương án fallback phù hợp.
+- **Quyền riêng tư:** Công cụ bên ngoài có thống kê ẩn danh; CI đặt `DISABLE_TELEMETRY=1` khi chạy lệnh thử. Không gửi mã khách hàng, thông tin giao dịch, token hoặc dữ liệu chat thật làm truy vấn hướng dẫn. Không cấp đặc quyền write cho công cụ.
+- **Kiểm thử & bằng chứng:** E0 là yêu cầu cài đặt từ chủ dự án; E1 là commit skill + CLI + scripts + CI/README; E2 kiểm `npm install`, `guidance:search`, `npm run verify`; E3 chỉ khi GitHub Pages job báo success. E4 phải thử Safari iPhone/PWA, Chrome Android/PWA, bàn phím, scroll, thu phóng; E5 cần hồi quy và nghiệm thu thật. Lắp skill thành công không đồng nghĩa sửa được toàn bộ lỗi UI.
+- **Rollback:** Hoàn tác commit cài skill và `modern-web-guidance` trong package/scripts cùng các bước smoke CI; giữ nguyên toàn bộ `web/src`, `web/styles.css`, thư viện cha/con và không ảnh hưởng CHAT/TAPHOA production.
