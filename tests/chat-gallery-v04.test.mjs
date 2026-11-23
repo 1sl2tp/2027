@@ -12,6 +12,8 @@ test("CG-V04: single composed preview supports narrowing without duplicate panel
  }
  assert.ok(css.includes(".cg2-device{container:cg2-preview / inline-size;transition:none}"));
  assert.ok(css.includes("@container cg2-preview (max-width:920px)"));
+ assert.ok(css.includes(".cg2-device[data-device=desktop][data-layout=three] .cg2-screen{grid-template-columns:265px minmax(0,1fr)}"),"only desktop may use the two-column collapsed three-region layout");
+ assert.ok(css.includes(".cg2-device[data-device=phone] .cg2-screen,.cg2-device[data-device=keyboard] .cg2-screen{grid-template-columns:minmax(0,1fr)"),"phone/keyboard remain single-column");
  assert.ok(css.includes("@container cg2-preview (max-width:650px)"));
  assert.ok(css.includes('[data-device=desktop][data-mobile-view=directory] .cg2-directory'));
  assert.ok(css.includes('.cg2-device[data-layout=focus] .cg2-back{display:none}'));
