@@ -3471,7 +3471,7 @@ body.simple-first .topbar-end{gap:0}
 
 
 /* CG-V04: only owner-level responsive composition; ui-button/ds-table/ds-composer remain canonical. */
-.cg2-device{container:cg2-preview / inline-size}
+.cg2-device{container:cg2-preview / inline-size;transition:none}
 .cg2-message-actions{display:none;opacity:1}
 .cg2-message:hover .cg2-message-actions,
 .cg2-message:focus-within .cg2-message-actions,
